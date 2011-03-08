@@ -11,9 +11,9 @@ class ZkuiGrailsPlugin {
     ]
 
     // TODO Fill in these fields
-    def author = "Your name"
-    def authorEmail = ""
-    def title = "Plugin summary/headline"
+    def author = "groovyquan"
+    def authorEmail = "groovyquan@gmail.com"
+    def title = "ZK ui/headline"
     def description = '''\\
 Brief description of the plugin.
 '''
@@ -21,8 +21,24 @@ Brief description of the plugin.
     // URL to the plugin's documentation
     def documentation = "http://grails.org/plugin/zkui"
 
-    def doWithWebDescriptor = { xml ->
-        // TODO Implement additions to web.xml (optional), this event occurs before 
+    def doWithWebDescriptor = { webXml ->
+        def servletElement = webXml.'servlet'
+        def lastServlet = servletElement[servletElement.size() - 1]
+        lastServlet + {
+            'servlet' {
+                'servlet-name'("auEngine")
+                'servlet-class'("org.zkoss.zk.au.http.DHtmlUpdateServlet")
+            }
+        }
+
+        def mappingElement = webXml.'servlet-mapping'
+        def lastMapping = mappingElement[mappingElement.size() - 1]
+        lastMapping + {
+            'servlet-mapping' {
+                'servlet-name'("auEngine")
+                'url-pattern'("/zkau/*")
+            }
+        }
     }
 
     def doWithSpring = {
