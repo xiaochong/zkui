@@ -1,8 +1,8 @@
-package org.grails.plugins.zkui.container
+package org.grails.plugins.zkui.container.panel
 
 import grails.test.*
 
-class PanelTagLibTests extends TagLibUnitTestCase {
+class PanelChildrenTagLibTests extends TagLibUnitTestCase {
     protected void setUp() {
         super.setUp()
     }

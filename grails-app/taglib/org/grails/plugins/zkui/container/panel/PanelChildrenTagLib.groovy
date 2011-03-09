@@ -1,4 +1,4 @@
-package org.grails.plugins.zkui.container
+package org.grails.plugins.zkui.container.panel
 
 import org.grails.plugins.zkui.AbstractTagLib
 

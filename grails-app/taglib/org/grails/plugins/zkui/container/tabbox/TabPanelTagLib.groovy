@@ -1,17 +1,17 @@
-package org.grails.plugins.zkui.container
+package org.grails.plugins.zkui.container.tabbox
 
 import org.grails.plugins.zkui.AbstractTagLib
 
-class PanelTagLib extends AbstractTagLib {
+class TabPanelTagLib extends AbstractTagLib {
     static namespace = "z"
 
-    def panel = {attrs, b ->
+    def tabpanel = {attrs, b ->
         doTag(attrs, b, servletContext, request, response, pageScope, out)
     }
 
     @Override
     Class getComponentClass() {
-        return org.zkoss.zul.Panel
+        return org.zkoss.zul.Tabpanel
     }
 
 }
