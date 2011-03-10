@@ -1,6 +1,5 @@
 package org.grails.plugins.zkui
 
-import org.zkoss.zkplus.embed.Renders
 import org.zkoss.zk.ui.Component
 
 class BaseTagLib {
@@ -20,5 +19,18 @@ class BaseTagLib {
         }
         Component comp = attrs.comp
         Renders.render(servletContext, request, response, comp, null, out)
+    }
+
+    /**
+     * render a zk resource.
+     */
+    def resource = {attrs, b ->
+        if (request.outLangStyleSheets && request.outLangJavaScripts) {
+            out << request.outLangStyleSheets
+            out << request.outLangJavaScripts
+        } else {
+            request.outLangStyleSheetsAndLangJavaScripts = true
+        }
+
     }
 }

@@ -1,7 +1,6 @@
 package org.grails.plugins.zkui
 
 import org.zkoss.zk.ui.Component
-import org.zkoss.zkplus.embed.Renders
 import javax.servlet.ServletContext
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
