@@ -1,6 +1,8 @@
-@artifact.package@class @artifact.name@ {
+@artifact.package@import org.zkoss.zk.ui.Component
 
-    def afterCompose = { comp ->
+class @artifact.name@ {
+
+    def afterCompose = {Component comp ->
         // initialize components here
     }
 }

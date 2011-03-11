@@ -54,10 +54,7 @@ this plugin adds ZK Ajax framework (www.zkoss.org) support to Grails application
 
     def doWithSpring = {
         application.composerClasses.each { composerClass ->
-            def composerBeanName = composerClass.propertyName
-            if (composerClass.packageName) {
-                composerBeanName = composerClass.packageName + "." + composerBeanName
-            }
+            def composerBeanName = composerClass.clazz.name
             "${composerBeanName}"(composerClass.clazz) { bean ->
                 bean.scope = "prototype"
                 bean.autowire = "byName"
@@ -84,10 +81,7 @@ this plugin adds ZK Ajax framework (www.zkoss.org) support to Grails application
                 return
             }
             def composerClass = application.addArtefact(ComposerArtefactHandler.TYPE, event.source)
-            def composerBeanName = composerClass.propertyName
-            if (composerClass.packageName) {
-                composerBeanName = composerClass.packageName + "." + composerBeanName
-            }
+            def composerBeanName = composerClass.clazz.name
             def beanDefinitions = beans {
                 "${composerBeanName}"(composerClass.clazz) { bean ->
                     bean.scope = "prototype"
