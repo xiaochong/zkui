@@ -1,10 +1,21 @@
+import org.grails.plugins.zkui.artefacts.ComposerArtefactHandler
+
 class ZkuiGrailsPlugin {
     // the plugin version
     def version = "0.1"
     // the version or versions of Grails the plugin is designed for
-    def grailsVersion = "1.3.7 > *"
+    def grailsVersion = "1.2 > *"
     // the other plugins this plugin depends on
     def dependsOn = [:]
+
+    def artefacts = [
+            org.grails.plugins.zkui.artefacts.ComposerArtefactHandler
+    ]
+
+    def watchedResources = [
+            "file:./grails-app/composers/**/*Composer.groovy",
+            "file:./plugins/*/grails-app/composers/**/*Composer.groovy"]
+
     // resources that are excluded from plugin packaging
     def pluginExcludes = [
             "grails-app/views/error.gsp"
@@ -13,9 +24,9 @@ class ZkuiGrailsPlugin {
     // TODO Fill in these fields
     def author = "groovyquan"
     def authorEmail = "groovyquan@gmail.com"
-    def title = "ZK ui/headline"
+    def title = "ZK UI/ZK ui plugin for Grails"
     def description = '''\\
-Brief description of the plugin.
+this plugin adds ZK Ajax framework (www.zkoss.org) support to Grails applications seamless.
 '''
 
     // URL to the plugin's documentation
@@ -42,7 +53,16 @@ Brief description of the plugin.
     }
 
     def doWithSpring = {
-        // TODO Implement runtime spring config (optional)
+        application.composerClasses.each { composerClass ->
+            def composerBeanName = composerClass.propertyName
+            if (composerClass.packageName) {
+                composerBeanName = composerClass.packageName + "." + composerBeanName
+            }
+            "${composerBeanName}"(composerClass.clazz) { bean ->
+                bean.scope = "prototype"
+                bean.autowire = "byName"
+            }
+        }
     }
 
     def doWithDynamicMethods = { ctx ->
@@ -54,9 +74,31 @@ Brief description of the plugin.
     }
 
     def onChange = { event ->
-        // TODO Implement code that is executed when any artefact that this plugin is
         // watching is modified and reloaded. The event contains: event.source,
         // event.application, event.manager, event.ctx, and event.plugin.
+        if (application.isArtefactOfType(ComposerArtefactHandler.TYPE, event.source)) {
+            def context = event.ctx
+            if (!context) {
+                if (log.isDebugEnabled())
+                    log.debug("Application context not found. Can't reload")
+                return
+            }
+            def composerClass = application.addArtefact(ComposerArtefactHandler.TYPE, event.source)
+            def composerBeanName = composerClass.propertyName
+            if (composerClass.packageName) {
+                composerBeanName = composerClass.packageName + "." + composerBeanName
+            }
+            def beanDefinitions = beans {
+                "${composerBeanName}"(composerClass.clazz) { bean ->
+                    bean.scope = "prototype"
+                    bean.autowire = "byName"
+                }
+            }
+            // now that we have a BeanBuilder calling registerBeans and passing the app ctx will
+            // register the necessary beans with the given app ctx
+            beanDefinitions.registerBeans(event.ctx)
+        }
+
     }
 
     def onConfigChange = { event ->
