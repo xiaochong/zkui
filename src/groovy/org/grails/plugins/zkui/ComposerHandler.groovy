@@ -32,11 +32,7 @@ class ComposerHandler {
             if (o instanceof String) {
                 if (ApplicationHolder.application.isArtefactOfType(ComposerArtefactHandler.TYPE, o)) {
                     def composerBean = ApplicationHolder.application.mainContext.getBean(o)
-                    o = new Composer() {
-                        void doAfterCompose(Component component) {
-                            composerBean.afterCompose(component)
-                        }
-                    }
+                    o = new GrailsComposerWrapper(composerBean)
                 } else {
                     o = Classes.newInstanceByThread(((String) o).trim())
                 }
