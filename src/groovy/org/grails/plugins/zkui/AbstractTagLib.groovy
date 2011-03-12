@@ -17,7 +17,7 @@ abstract class AbstractTagLib {
         composeHandle.doBeforeComposeChildren(component)
         pageScope.parent.push(component)
         if (pageScope.parent.size() > 1) pageScope.parent[pageScope.parent.size() - 2].appendChild(component)
-        attrs.each {attrName, value -> Property.assign(component, attrName, value)}
+        attrs.each {attrName, value -> Property.assign(component, attrName, value.toString())}
         String content = body.call()
         if (content && !content.allWhitespace) component.appendChild(new Html(content))
         composeHandle.doAfterCompose(component)
