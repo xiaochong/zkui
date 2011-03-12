@@ -1,4 +1,11 @@
+import java.lang.reflect.Method
+import org.codehaus.groovy.grails.commons.spring.TypeSpecifyableTransactionProxyFactoryBean
+import org.codehaus.groovy.grails.orm.support.GroovyAwareNamedTransactionAttributeSource
 import org.grails.plugins.zkui.artefacts.ComposerArtefactHandler
+import org.grails.plugins.zkui.artefacts.GrailsComposerClass
+import org.springframework.beans.factory.config.MethodInvokingFactoryBean
+import org.springframework.core.annotation.AnnotationUtils
+import org.springframework.transaction.annotation.Transactional
 
 class ZkuiGrailsPlugin {
     // the plugin version
@@ -7,6 +14,8 @@ class ZkuiGrailsPlugin {
     def grailsVersion = "1.2 > *"
     // the other plugins this plugin depends on
     def dependsOn = [:]
+
+    def loadAfter = ['hibernate', 'domainClass', 'services']
 
     def artefacts = [
             org.grails.plugins.zkui.artefacts.ComposerArtefactHandler
@@ -55,10 +64,52 @@ this plugin adds ZK Ajax framework (www.zkoss.org) support to Grails application
     def doWithSpring = {
         application.composerClasses.each { composerClass ->
             def composerBeanName = composerClass.clazz.name
-            "${composerBeanName}"(composerClass.clazz) { bean ->
-                bean.scope = "prototype"
-                bean.autowire = "byName"
+            def hasDataSource = (application.config?.dataSource || application.domainClasses)
+            println "hasDataSource:${hasDataSource}"
+            println "shouldCreateTransactionalProxy(composerClass):${shouldCreateTransactionalProxy(composerClass)}"
+            if (hasDataSource && shouldCreateTransactionalProxy(composerClass)) {
+                "${composerClass.fullName}ComposerClass"(MethodInvokingFactoryBean) { bean ->
+                    bean.lazyInit = true
+                    targetObject = ref("grailsApplication", true)
+                    targetMethod = "getArtefact"
+                    arguments = [ComposerArtefactHandler.TYPE, composerClass.fullName]
+                }
+                def props = new Properties()
+                props."*" = "PROPAGATION_REQUIRED"
+                "${composerBeanName}"(TypeSpecifyableTransactionProxyFactoryBean, composerClass.clazz) { bean ->
+                    bean.scope = "prototype"
+                    bean.lazyInit = true
+                    target = { innerBean ->
+                        innerBean.lazyInit = true
+                        innerBean.factoryBean = "${composerClass.fullName}ComposerClass"
+                        innerBean.factoryMethod = "newInstance"
+                        innerBean.autowire = "byName"
+                        innerBean.scope = "prototype"
+                    }
+                    proxyTargetClass = true
+                    transactionAttributeSource = new GroovyAwareNamedTransactionAttributeSource(transactionalAttributes: props)
+                    transactionManager = ref("transactionManager")
+                }
+            } else {
+                println "composerBeanName:${composerBeanName}-${composerClass.clazz}"
+                "${composerBeanName}"(composerClass.clazz) { bean ->
+                    bean.scope = "prototype"
+                    bean.autowire = "byName"
+                }
             }
+        }
+    }
+
+    def shouldCreateTransactionalProxy(GrailsComposerClass composerClass) {
+        Class javaClass = composerClass.clazz
+
+        try {
+            composerClass.transactional &&
+                    !AnnotationUtils.findAnnotation(javaClass, Transactional) &&
+                    !javaClass.methods.any { Method m -> AnnotationUtils.findAnnotation(m, Transactional) != null }
+        } catch (e) {
+            e.printStackTrace()
+            return false
         }
     }
 
@@ -82,15 +133,44 @@ this plugin adds ZK Ajax framework (www.zkoss.org) support to Grails application
             }
             def composerClass = application.addArtefact(ComposerArtefactHandler.TYPE, event.source)
             def composerBeanName = composerClass.clazz.name
-            def beanDefinitions = beans {
-                "${composerBeanName}"(composerClass.clazz) { bean ->
-                    bean.scope = "prototype"
-                    bean.autowire = "byName"
+
+            if (shouldCreateTransactionalProxy(composerClass) && event.ctx.containsBean("transactionManager")) {
+                def beans = beans {
+                    "${composerClass.fullName}ComposerClass"(MethodInvokingFactoryBean) { bean ->
+                        bean.lazyInit = true
+                        targetObject = ref("grailsApplication", true)
+                        targetMethod = "getArtefact"
+                        arguments = [ComposerArtefactHandler.TYPE, composerClass.fullName]
+                    }
+                    def props = new Properties()
+                    props."*" = "PROPAGATION_REQUIRED"
+                    "${composerBeanName}"(TypeSpecifyableTransactionProxyFactoryBean, composerClass.clazz) { bean ->
+                        bean.scope = "prototype"
+                        bean.lazyInit = true
+                        target = { innerBean ->
+                            innerBean.lazyInit = true
+                            innerBean.factoryBean = "${composerClass.fullName}ComposerClass"
+                            innerBean.factoryMethod = "newInstance"
+                            innerBean.autowire = "byName"
+                            innerBean.scope = "prototype"
+                        }
+                        proxyTargetClass = true
+                        transactionAttributeSource = new GroovyAwareNamedTransactionAttributeSource(transactionalAttributes: props)
+                        transactionManager = ref("transactionManager")
+                    }
                 }
+                beans.registerBeans(event.ctx)
             }
-            // now that we have a BeanBuilder calling registerBeans and passing the app ctx will
-            // register the necessary beans with the given app ctx
-            beanDefinitions.registerBeans(event.ctx)
+            else {
+                def beans = beans {
+                    "${composerBeanName}"(composerClass.clazz) { bean ->
+                        bean.scope = "prototype"
+                        bean.autowire = "byName"
+                    }
+                }
+                beans.registerBeans(event.ctx)
+            }
+
         }
 
     }
