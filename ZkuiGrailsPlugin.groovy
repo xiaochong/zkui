@@ -65,8 +65,6 @@ this plugin adds ZK Ajax framework (www.zkoss.org) support to Grails application
         application.composerClasses.each { composerClass ->
             def composerBeanName = composerClass.clazz.name
             def hasDataSource = (application.config?.dataSource || application.domainClasses)
-            println "hasDataSource:${hasDataSource}"
-            println "shouldCreateTransactionalProxy(composerClass):${shouldCreateTransactionalProxy(composerClass)}"
             if (hasDataSource && shouldCreateTransactionalProxy(composerClass)) {
                 "${composerClass.fullName}ComposerClass"(MethodInvokingFactoryBean) { bean ->
                     bean.lazyInit = true
