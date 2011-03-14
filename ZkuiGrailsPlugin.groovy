@@ -15,7 +15,7 @@ class ZkuiGrailsPlugin {
     // the other plugins this plugin depends on
     def dependsOn = [:]
 
-    def loadAfter = ['hibernate', 'domainClass', 'services']
+    def loadAfter = ['core', 'hibernate']
 
     def artefacts = [
             org.grails.plugins.zkui.artefacts.ComposerArtefactHandler
@@ -33,7 +33,7 @@ class ZkuiGrailsPlugin {
     // TODO Fill in these fields
     def author = "groovyquan"
     def authorEmail = "groovyquan@gmail.com"
-    def title = "ZK UI/ZK ui plugin for Grails"
+    def title = "ZK UI Plugin for Grails"
     def description = '''\\
 this plugin adds ZK Ajax framework (www.zkoss.org) support to Grails applications seamless.
 '''
