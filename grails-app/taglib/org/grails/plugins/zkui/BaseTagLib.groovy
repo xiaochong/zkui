@@ -24,7 +24,7 @@ class BaseTagLib {
     /**
      * render a zk style sheet and javascript resource.
      */
-    def resource = {attrs, b ->
+    def resources = {attrs, b ->
         if (request.outLangStyleSheets && request.outLangJavaScripts) {
             out << request.outLangStyleSheets
             out << request.outLangJavaScripts

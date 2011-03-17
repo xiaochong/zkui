@@ -1,0 +1,67 @@
+h1. area
+
+h2. Purpose
+
+An area of a image map. Instead of the application processing the coordinates, developers can add the area components as children of a imagemap component thus defining a target. The imagemap component will translate the mouse pointer coordinates into a logical name ie. The id of the area the user clicked.
+
+h2. Examples
+
+!area.png!
+
+{code:xml}
+<z:window title="Grid Demo" border="normal" width="360px">
+    <z:grid>
+        <z:columns sizable="true">
+            <z:column label="Type" width="50px"/>
+            <z:column label="Content"/>
+        </z:columns>
+        <z:rows>
+            <z:row>
+                <z:label value="File:"/>
+                <z:textbox width="99%"/>
+            </z:row>
+            <z:row>
+                <z:label value="Type:"/>
+                <z:hbox>
+                    <z:listbox rows="1" mold="select">
+                        <z:listitem label="Java Files,(*.java)"/>
+                        <z:listitem label="All Files,(*.*)"/>
+                    </z:listbox>
+                    <z:button label="Browse..."/>
+                </z:hbox>
+            </z:row>
+            <z:row>
+                <z:label value="Options:"/>
+                <z:textbox rows="3" width="99%"/>
+            </z:row>
+        </z:rows>
+    </z:grid>
+</z:window>
+{code}
+
+h2. Description
+
+Attributes
+
+* @tooltiptext@ (optional) - Sets the text as the tooltip. [see more|http://www.zkoss.org/javadoc/latest/zk/org/zkoss/zul/Area.html#setTooltiptext(java.lang.String)]
+* @coords@ (optional) - Sets the coords of this area. Its content depends on getShape(): [see more|http://www.zkoss.org/javadoc/latest/zk/org/zkoss/zul/Area.html#setCoords(java.lang.String)]
+* @shape@ (optional) - Sets the shape of this area. [see more|http://www.zkoss.org/javadoc/latest/zk/org/zkoss/zul/Area.html#setShape(java.lang.String)]
+* @id@ (optional) - Description copied from interface: Component Sets the ID. The scope of uniqueness depends on whether this component is a root component. Refer to Component.getId() for more details. Default: "" (an empty string; it means no ID at all). [see more|http://www.zkoss.org/javadoc/latest/zk/org/zkoss/zk/ui/AbstractComponent.html#setId(java.lang.String)]
+* @mold@ (optional) - Description copied from interface: Component Sets the mold to render this component. [see more|http://www.zkoss.org/javadoc/latest/zk/org/zkoss/zk/ui/AbstractComponent.html#setMold(java.lang.String)]
+* @widgetClass@ (optional) - Description copied from interface: Component Sets the widget class (aka., the widget type). The widget class is a JavaScript class, including the package name. For example, "zul.wnd.Window". [see more|http://www.zkoss.org/javadoc/latest/zk/org/zkoss/zk/ui/AbstractComponent.html#setWidgetClass(java.lang.String)]
+* @stubonly@ (optional) - Description copied from interface: Component Sets whether this component is stub-only. By stub-only, we mean we don't need to maintain the states of the component at the server side. Default: "inherit" (i.e., the same as the parent's stub-only, and "false" is assumed if none of parents is specified with stub-only). If a component is set to stub-only, the application running at the server shall not access it anymore after renderred to the client. The ZK loader will try to minimize the memory footprint by merging stub-only components and replacing with light-weight components. However, the event listeners and handlers are preserved, so they will be invoked if the corresponding event is received. Since the original component is gone, the event is the more generic format: an instance of Event (rather than MouseEvent or others). If a component is stub-only, the application usually access it only at the client since all widgets are preserved at the client (so are events). This method is available only for ZK EE. [see more|http://www.zkoss.org/javadoc/latest/zk/org/zkoss/zk/ui/AbstractComponent.html#setStubonly(java.lang.String)]
+* @definition@ (optional) - Description copied from interface: ComponentCtrl Sets the component definition by specifing the name. [see more|http://www.zkoss.org/javadoc/latest/zk/org/zkoss/zk/ui/AbstractComponent.html#setDefinition(java.lang.String)]
+* @visible@ (optional) - Description copied from interface: Component Sets whether this component is visible. [see more|http://www.zkoss.org/javadoc/latest/zk/org/zkoss/zk/ui/AbstractComponent.html#setVisible(boolean)]
+
+
+
+h1. ZK Official Reference
+
+h2. Component Reference
+
+[Show area Component Reference|http://books.zkoss.org/wiki/ZK Component Reference/Essential Components/Imagemap/Area]
+
+h2. Java API
+
+[Show area Java API|http://www.zkoss.org/javadoc/latest/zk/org/zkoss/zul/Area.html]
+

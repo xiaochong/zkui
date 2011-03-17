@@ -22,3 +22,8 @@ log4j = {
 
     warn 'org.mortbay.log'
 }
+
+grails.doc.authors = "xiaochong"
+grails.doc.license = "LGPL"
+grails.doc.copyright = "copyright"
+grails.doc.footer = "footer"

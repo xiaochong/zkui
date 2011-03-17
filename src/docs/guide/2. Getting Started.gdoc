@@ -1,0 +1,1 @@
+Add the tag <z:resources/> to the head of the layout/main.gsp or any page that you want to use zkui in.

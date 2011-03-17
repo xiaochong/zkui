@@ -1,0 +1,25 @@
+h1. create-composer
+
+h2. Purpose
+
+The @create-composer@ command will create a composer and associated integration test for the given base name.
+
+h2. Examples
+
+bc.
+grails create-composer window
+
+h2. Description
+
+Creates a composer for the given base name. For example for a base name "window" a composer called @WindowComposer@ will be created in the @grails-app/composers@ directory.
+
+A composer is responsible to initialize a component (or a component of tree) when ZK loader is composing a component. It is the controller in the MVC pattern, while the component is the view.. For more information on composers refer to the section on [Composers|guide:composers]
+
+Note that this command is merely for convenience and you can also create composers in your favourite text editor or IDE if you choose.
+
+Usage:
+{code:java}
+grails create-composer [name]
+{code}
+
+
