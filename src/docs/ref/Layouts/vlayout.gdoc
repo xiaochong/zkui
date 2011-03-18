@@ -2,7 +2,7 @@ h1. vlayout
 
 h2. Purpose
 
-The vlayout component is a simple vertical oriented layout. Added components will be placed underneath each other in a column.Notice that hlayout and vlayout do not support splitter, alignment and packing. If you need them, please use <a href="/wiki/ZK_Component_Reference/Layouts/Hbox" title="ZK Component Reference/Layouts/Hbox">ZK Component Reference/Layouts/Hbox</a> and <a href="/wiki/ZK_Component_Reference/Layouts/Vbox" title="ZK Component Reference/Layouts/Vbox">ZK Component Reference/Layouts/Vbox</a> instead.
+The vlayout component is a simple vertical oriented layout. Added components will be placed underneath each other in a column.Notice that hlayout and vlayout do not support splitter, alignment and packing. If you need them, please use [ZK Component Reference/Layouts/Hbox|http://books.zkoss.org/wiki/ZK_Component_Reference/Layouts/Hbox] and [ZK Component Reference/Layouts/Vbox|http://books.zkoss.org/wiki/ZK_Component_Reference/Layouts/Vbox] instead.
 
 h2. Examples
 

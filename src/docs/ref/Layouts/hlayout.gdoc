@@ -2,7 +2,7 @@ h1. hlayout
 
 h2. Purpose
 
-The hlayout component is a simple horizontal oriented layout. Each component placed in the hlayout will be placed horizontally in a row.Notice that hlayout and vlayout do not support splitter. If you need it, please use <a href="/wiki/ZK_Component_Reference/Layouts/Hbox" title="ZK Component Reference/Layouts/Hbox"> Hbox</a> and <a href="/wiki/ZK_Component_Reference/Layouts/Vbox" title="ZK Component Reference/Layouts/Vbox"> Vbox</a> instead.
+The hlayout component is a simple horizontal oriented layout. Each component placed in the hlayout will be placed horizontally in a row.Notice that hlayout and vlayout do not support splitter. If you need it, please use [Hbox|http://books.zkoss.org/wiki/ZK_Component_Reference/Layouts/Hbox] and [Vbox|http://books.zkoss.org/wiki/ZK_Component_Reference/Layouts/Vbox] instead.
 
 h2. Examples
 
