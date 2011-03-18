@@ -2,7 +2,7 @@ h1. script
 
 h2. Purpose
 
-The script component is used to specify the script codes running at the browser. Notice that, unlike zscript, the script codes are running at the browser. They are usually written in JavaScript which is supported by the most of browsers. The simplest format is as follows.<span class="mw-headline" id="Alternatives">Alternatives</span>
+The script component is used to specify the script codes running at the browser. Notice that, unlike zscript, the script codes are running at the browser. They are usually written in JavaScript which is supported by the most of browsers. The simplest format is as follows.
 
 h2. Examples
 

@@ -2,7 +2,7 @@ h1. applet
 
 h2. Purpose
 
-A generic applet component.If the properties are not enough, you can use <a href="/wiki/ZUML_Reference/ZUML/Namespaces/Client_Attribute" title="ZUML Reference/ZUML/Namespaces/Client Attribute"> the Client-Attribute namespace</a> to specify them.
+A generic applet component.If the properties are not enough, you can use [the Client-Attribute namespace|http://books.zkoss.org/wiki/ZUML_Reference/ZUML/Namespaces/Client_Attribute] to specify them.
 
 h2. Examples
 
