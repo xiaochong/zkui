@@ -6,7 +6,7 @@ A single row in a Rows element. Each child of the Row element is placed in each 
 
 h2. Examples
 
-!row.png!
+!grid.png!
 
 {code:xml}
 <z:window title="Grid Demo" border="normal" width="360px">

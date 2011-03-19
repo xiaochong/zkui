@@ -6,37 +6,35 @@ A column of the footer of a grid [Grid|http://books.zkoss.org/wiki/ZK_Component_
 
 h2. Examples
 
-!footer.png!
+!foot.png!
 
 {code:xml}
-<z:window title="Grid Demo" border="normal" width="360px">
-    <z:grid>
-        <z:columns sizable="true">
-            <z:column label="Type" width="50px"/>
-            <z:column label="Content"/>
-        </z:columns>
-        <z:rows>
-            <z:row>
-                <z:label value="File:"/>
-                <z:textbox width="99%"/>
-            </z:row>
-            <z:row>
-                <z:label value="Type:"/>
-                <z:hbox>
-                    <z:listbox rows="1" mold="select">
-                        <z:listitem label="Java Files,(*.java)"/>
-                        <z:listitem label="All Files,(*.*)"/>
-                    </z:listbox>
-                    <z:button label="Browse..."/>
-                </z:hbox>
-            </z:row>
-            <z:row>
-                <z:label value="Options:"/>
-                <z:textbox rows="3" width="99%"/>
-            </z:row>
-        </z:rows>
-    </z:grid>
-</z:window>
+<z:grid width="300px">
+    <z:columns>
+        <z:column label="Type" width="50px"/>
+        <z:column label="Content"/>
+    </z:columns>
+    <z:rows>
+        <z:row>
+            <z:label value="File:"/>
+            <z:textbox width="99%"/>
+        </z:row>
+        <z:row>
+            <z:label value="Type:"/>
+            <z:hbox>
+                <z:listbox rows="1" mold="select">
+                    <z:listitem label="Java Files,(*.java)"/>
+                    <z:listitem label="All Files,(*.*)"/>
+                </z:listbox>
+                <z:button label="Browse..."/>
+            </z:hbox>
+        </z:row>
+    </z:rows>
+    <z:foot>
+        <z:footer>footer1</z:footer>
+        <z:footer>footer2</z:footer>
+    </z:foot>
+</z:grid>
 {code}
 
 h2. Description

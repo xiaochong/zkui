@@ -9,34 +9,28 @@ h2. Examples
 !menubar.png!
 
 {code:xml}
-<z:window title="Grid Demo" border="normal" width="360px">
-    <z:grid>
-        <z:columns sizable="true">
-            <z:column label="Type" width="50px"/>
-            <z:column label="Content"/>
-        </z:columns>
-        <z:rows>
-            <z:row>
-                <z:label value="File:"/>
-                <z:textbox width="99%"/>
-            </z:row>
-            <z:row>
-                <z:label value="Type:"/>
-                <z:hbox>
-                    <z:listbox rows="1" mold="select">
-                        <z:listitem label="Java Files,(*.java)"/>
-                        <z:listitem label="All Files,(*.*)"/>
-                    </z:listbox>
-                    <z:button label="Browse..."/>
-                </z:hbox>
-            </z:row>
-            <z:row>
-                <z:label value="Options:"/>
-                <z:textbox rows="3" width="99%"/>
-            </z:row>
-        </z:rows>
-    </z:grid>
-</z:window>
+<z:menubar id="menubar">
+    <z:menu label="File">
+        <z:menupopup>
+            <z:menuitem label="New"/>
+            <z:menuitem label="Open"/>
+            <z:menuitem label="Save"/>
+            <z:menuseparator/>
+            <z:menuitem label="Exit"/>
+        </z:menupopup>
+    </z:menu>
+    <z:menu label="Help">
+        <z:menupopup>
+            <z:menuitem label="Index"/>
+            <z:menu label="About">
+                <z:menupopup>
+                    <z:menuitem label="About ZK"/>
+                    <z:menuitem label="About Potix"/>
+                </z:menupopup>
+            </z:menu>
+        </z:menupopup>
+    </z:menu>
+</z:menubar>
 {code}
 
 h2. Description

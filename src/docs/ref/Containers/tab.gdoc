@@ -9,34 +9,16 @@ h2. Examples
 !tab.png!
 
 {code:xml}
-<z:window title="Grid Demo" border="normal" width="360px">
-    <z:grid>
-        <z:columns sizable="true">
-            <z:column label="Type" width="50px"/>
-            <z:column label="Content"/>
-        </z:columns>
-        <z:rows>
-            <z:row>
-                <z:label value="File:"/>
-                <z:textbox width="99%"/>
-            </z:row>
-            <z:row>
-                <z:label value="Type:"/>
-                <z:hbox>
-                    <z:listbox rows="1" mold="select">
-                        <z:listitem label="Java Files,(*.java)"/>
-                        <z:listitem label="All Files,(*.*)"/>
-                    </z:listbox>
-                    <z:button label="Browse..."/>
-                </z:hbox>
-            </z:row>
-            <z:row>
-                <z:label value="Options:"/>
-                <z:textbox rows="3" width="99%"/>
-            </z:row>
-        </z:rows>
-    </z:grid>
-</z:window>
+<z:tabbox width="400px" height="150px">
+    <z:tabs>
+        <z:tab label="Tab 1"/>
+        <z:tab label="Tab 2" closable="true" />
+    </z:tabs>
+    <z:tabpanels>
+        <z:tabpanel>This is panel 1</z:tabpanel>
+        <z:tabpanel>This is panel 2</z:tabpanel>
+    </z:tabpanels>
+</z:tabbox>
 {code}
 
 h2. Description

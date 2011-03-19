@@ -9,34 +9,14 @@ h2. Examples
 !box.png!
 
 {code:xml}
-<z:window title="Grid Demo" border="normal" width="360px">
-    <z:grid>
-        <z:columns sizable="true">
-            <z:column label="Type" width="50px"/>
-            <z:column label="Content"/>
-        </z:columns>
-        <z:rows>
-            <z:row>
-                <z:label value="File:"/>
-                <z:textbox width="99%"/>
-            </z:row>
-            <z:row>
-                <z:label value="Type:"/>
-                <z:hbox>
-                    <z:listbox rows="1" mold="select">
-                        <z:listitem label="Java Files,(*.java)"/>
-                        <z:listitem label="All Files,(*.*)"/>
-                    </z:listbox>
-                    <z:button label="Browse..."/>
-                </z:hbox>
-            </z:row>
-            <z:row>
-                <z:label value="Options:"/>
-                <z:textbox rows="3" width="99%"/>
-            </z:row>
-        </z:rows>
-    </z:grid>
-</z:window>
+<z:box orient="vertical">
+    <z:button label="Button 1"/>
+    <z:button label="Button 2"/>
+</z:box>
+<z:box orient="horizontal">
+    <z:button label="Button 3"/>
+    <z:button label="Button 4"/>
+</z:box>
 {code}
 
 h2. Description

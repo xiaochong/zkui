@@ -9,33 +9,17 @@ h2. Examples
 !label.png!
 
 {code:xml}
-<z:window title="Grid Demo" border="normal" width="360px">
-    <z:grid>
-        <z:columns sizable="true">
-            <z:column label="Type" width="50px"/>
-            <z:column label="Content"/>
-        </z:columns>
-        <z:rows>
-            <z:row>
-                <z:label value="File:"/>
-                <z:textbox width="99%"/>
-            </z:row>
-            <z:row>
-                <z:label value="Type:"/>
-                <z:hbox>
-                    <z:listbox rows="1" mold="select">
-                        <z:listitem label="Java Files,(*.java)"/>
-                        <z:listitem label="All Files,(*.*)"/>
-                    </z:listbox>
-                    <z:button label="Browse..."/>
-                </z:hbox>
-            </z:row>
-            <z:row>
-                <z:label value="Options:"/>
-                <z:textbox rows="3" width="99%"/>
-            </z:row>
-        </z:rows>
-    </z:grid>
+<z:window title="Label Demo" width="400px">
+<z:grid>
+    <z:rows>
+        <z:row><z:label value="Label(normal):"/><z:label id="lb1" value="Hello World"/></z:row>
+        <z:row><z:label value="Label(color): "/><z:label id="lb2" value="Hello World" style="color:red"/></z:row>
+        <z:row><z:label value="Label(font): "/><z:label id="lb3" value="Hello World" style="font-weight:bold"/></z:row>
+        <z:row><z:label value="Label(size): "/><z:label id="lb4" value="Hello World" style="font-size:14pt"/></z:row>
+        <z:row><z:label value="Label(maxlength): "/><z:label value="Hello World" id="lb5" maxlength="5"/></z:row>
+        <z:row><z:label value="Label(pre): "/><z:label value="Hello World" id="lb6" pre="true"/></z:row>
+    </z:rows>
+</z:grid>
 </z:window>
 {code}
 

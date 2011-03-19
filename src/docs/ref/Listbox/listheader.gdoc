@@ -6,36 +6,40 @@ The list header which defines the attributes and header of a columen of a list b
 
 h2. Examples
 
-!listheader.png!
+!listbox.png!
 
 {code:xml}
-<z:window title="Grid Demo" border="normal" width="360px">
-    <z:grid>
-        <z:columns sizable="true">
-            <z:column label="Type" width="50px"/>
-            <z:column label="Content"/>
-        </z:columns>
-        <z:rows>
-            <z:row>
-                <z:label value="File:"/>
-                <z:textbox width="99%"/>
-            </z:row>
-            <z:row>
-                <z:label value="Type:"/>
-                <z:hbox>
-                    <z:listbox rows="1" mold="select">
-                        <z:listitem label="Java Files,(*.java)"/>
-                        <z:listitem label="All Files,(*.*)"/>
-                    </z:listbox>
-                    <z:button label="Browse..."/>
-                </z:hbox>
-            </z:row>
-            <z:row>
-                <z:label value="Options:"/>
-                <z:textbox rows="3" width="99%"/>
-            </z:row>
-        </z:rows>
-    </z:grid>
+<z:window title="listbox demo" border="normal" width="250px">
+    <z:listbox id="box">
+        <z:listhead sizable="true">
+            <z:listheader label="name" sort="auto"/>
+            <z:listheader label="gender" sort="auto"/>
+        </z:listhead>
+        <z:listitem>
+            <z:listcell label="Mary"/>
+            <z:listcell label="FEMALE"/>
+        </z:listitem>
+        <z:listitem>
+            <z:listcell label="John"/>
+            <z:listcell label="MALE"/>
+        </z:listitem>
+        <z:listitem>
+            <z:listcell label="Jane"/>
+            <z:listcell label="FEMALE"/>
+        </z:listitem>
+        <z:listitem>
+            <z:listcell label="Henry"/>
+            <z:listcell label="MALE"/>
+        </z:listitem>
+        <z:listfoot>
+            <z:listfooter>
+                <z:label value="This is footer1"/>
+            </z:listfooter>
+            <z:listfooter>
+                <z:label value="This is footer2"/>
+            </z:listfooter>
+        </z:listfoot>
+    </z:listbox>
 </z:window>
 {code}
 

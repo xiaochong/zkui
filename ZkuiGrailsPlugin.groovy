@@ -91,7 +91,6 @@ this plugin adds ZK Ajax framework (www.zkoss.org) support to Grails application
                     transactionManager = ref("transactionManager")
                 }
             } else {
-                println "composerBeanName:${composerBeanName}-${composerClass.clazz}"
                 "${composerBeanName}"(composerClass.clazz) { bean ->
                     bean.scope = "prototype"
                     bean.autowire = "byName"

@@ -9,34 +9,15 @@ h2. Examples
 !splitter.png!
 
 {code:xml}
-<z:window title="Grid Demo" border="normal" width="360px">
-    <z:grid>
-        <z:columns sizable="true">
-            <z:column label="Type" width="50px"/>
-            <z:column label="Content"/>
-        </z:columns>
-        <z:rows>
-            <z:row>
-                <z:label value="File:"/>
-                <z:textbox width="99%"/>
-            </z:row>
-            <z:row>
-                <z:label value="Type:"/>
-                <z:hbox>
-                    <z:listbox rows="1" mold="select">
-                        <z:listitem label="Java Files,(*.java)"/>
-                        <z:listitem label="All Files,(*.*)"/>
-                    </z:listbox>
-                    <z:button label="Browse..."/>
-                </z:hbox>
-            </z:row>
-            <z:row>
-                <z:label value="Options:"/>
-                <z:textbox rows="3" width="99%"/>
-            </z:row>
-        </z:rows>
-    </z:grid>
-</z:window>
+<z:hbox spacing="0" width="100%">
+    <z:vbox height="200px">
+        <z:label value="Column 1-1: The left-top box. To know whether a splitter is collapsed,you can listen to the onOpen event."/>
+        <z:splitter collapse="after" />
+        <z:label value="Column 1-2: You can enforce to open or collapse programming by calling setOpen method."/>
+    </z:vbox>
+    <z:splitter collapse="before" />
+    <z:label value="Column 2: Whether a splitter allows users to open or collapse depending on the collapse attribue."/>
+</z:hbox>
 {code}
 
 h2. Description

@@ -6,37 +6,37 @@ The popup that belongs to a @Bandbox@ instance.Developer usually listen to the @
 
 h2. Examples
 
-!bandpopup.png!
+!bandbox.png!
 
 {code:xml}
-<z:window title="Grid Demo" border="normal" width="360px">
-    <z:grid>
-        <z:columns sizable="true">
-            <z:column label="Type" width="50px"/>
-            <z:column label="Content"/>
-        </z:columns>
-        <z:rows>
-            <z:row>
-                <z:label value="File:"/>
-                <z:textbox width="99%"/>
-            </z:row>
-            <z:row>
-                <z:label value="Type:"/>
-                <z:hbox>
-                    <z:listbox rows="1" mold="select">
-                        <z:listitem label="Java Files,(*.java)"/>
-                        <z:listitem label="All Files,(*.*)"/>
-                    </z:listbox>
-                    <z:button label="Browse..."/>
-                </z:hbox>
-            </z:row>
-            <z:row>
-                <z:label value="Options:"/>
-                <z:textbox rows="3" width="99%"/>
-            </z:row>
-        </z:rows>
-    </z:grid>
-</z:window>
+<z:bandbox>
+    <z:bandpopup>
+        <z:vbox>
+            <z:hbox>
+                <z:label value="Search"/>
+                <z:textbox/>
+            </z:hbox>
+            <z:listbox width="200px">
+                <z:listhead>
+                    <z:listheader label="Name"/>
+                    <z:listheader label="Description"/>
+                </z:listhead>
+                <z:listitem>
+                    <z:listcell label="John"/>
+                    <z:listcell label="CEO"/>
+                </z:listitem>
+                <z:listitem>
+                    <z:listcell label="Joe"/>
+                    <z:listcell label="Engineer"/>
+                </z:listitem>
+                <z:listitem>
+                    <z:listcell label="Mary"/>
+                    <z:listcell label="Supervisor"/>
+                </z:listitem>
+            </z:listbox>
+        </z:vbox>
+    </z:bandpopup>
+</z:bandbox>
 {code}
 
 h2. Description

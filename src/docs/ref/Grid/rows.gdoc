@@ -6,7 +6,7 @@ Defines the rows of a grid. Each child of a rows element should be a [Row|http:/
 
 h2. Examples
 
-!rows.png!
+!grid.png!
 
 {code:xml}
 <z:window title="Grid Demo" border="normal" width="360px">

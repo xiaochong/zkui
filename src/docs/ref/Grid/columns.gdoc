@@ -6,7 +6,7 @@ Defines the columns of a grid.Each child of a columns element should be a org.zk
 
 h2. Examples
 
-!columns.png!
+!grid.png!
 
 {code:xml}
 <z:window title="Grid Demo" border="normal" width="360px">

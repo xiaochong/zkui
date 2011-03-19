@@ -9,33 +9,45 @@ h2. Examples
 !tree.png!
 
 {code:xml}
-<z:window title="Grid Demo" border="normal" width="360px">
-    <z:grid>
-        <z:columns sizable="true">
-            <z:column label="Type" width="50px"/>
-            <z:column label="Content"/>
-        </z:columns>
-        <z:rows>
-            <z:row>
-                <z:label value="File:"/>
-                <z:textbox width="99%"/>
-            </z:row>
-            <z:row>
-                <z:label value="Type:"/>
-                <z:hbox>
-                    <z:listbox rows="1" mold="select">
-                        <z:listitem label="Java Files,(*.java)"/>
-                        <z:listitem label="All Files,(*.*)"/>
-                    </z:listbox>
-                    <z:button label="Browse..."/>
-                </z:hbox>
-            </z:row>
-            <z:row>
-                <z:label value="Options:"/>
-                <z:textbox rows="3" width="99%"/>
-            </z:row>
-        </z:rows>
-    </z:grid>
+<z:window title="tree demo" border="normal" width="400px">
+    <z:tree id="tree" rows="5">
+        <z:treecols sizable="true">
+            <z:treecol label="Name"/>
+            <z:treecol label="Description"/>
+        </z:treecols>
+        <z:treechildren>
+            <z:treeitem>
+                <z:treerow>
+                    <z:treecell label="Item 1"/>
+                    <z:treecell label="Item 1 description"/>
+                </z:treerow>
+            </z:treeitem>
+            <z:treeitem>
+                <z:treerow>
+                    <z:treecell label="Item 2"/>
+                    <z:treecell label="Item 2 description"/>
+                </z:treerow>
+                <z:treechildren>
+                    <z:treeitem>
+                        <z:treerow>
+                            <z:treecell label="Item 2.1"/>
+                        </z:treerow>
+                    </z:treeitem>
+                    <z:treeitem>
+                        <z:treerow>
+                            <z:treecell label="Item 2.2"/>
+                            <z:treecell label="Item 2.2 is something who cares"/>
+                        </z:treerow>
+                    </z:treeitem>
+                </z:treechildren>
+            </z:treeitem>
+            <z:treeitem label="Item 3"/>
+        </z:treechildren>
+        <z:treefoot>
+            <z:treefooter label="Count"/>
+            <z:treefooter label="Summary"/>
+        </z:treefoot>
+    </z:tree>
 </z:window>
 {code}
 

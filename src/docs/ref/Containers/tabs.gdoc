@@ -6,37 +6,30 @@ A @tabs@ is the container for the @tab@ components.
 
 h2. Examples
 
-!tabs.png!
+!tabbox.png!
 
 {code:xml}
-<z:window title="Grid Demo" border="normal" width="360px">
-    <z:grid>
-        <z:columns sizable="true">
-            <z:column label="Type" width="50px"/>
-            <z:column label="Content"/>
-        </z:columns>
-        <z:rows>
-            <z:row>
-                <z:label value="File:"/>
-                <z:textbox width="99%"/>
-            </z:row>
-            <z:row>
-                <z:label value="Type:"/>
-                <z:hbox>
-                    <z:listbox rows="1" mold="select">
-                        <z:listitem label="Java Files,(*.java)"/>
-                        <z:listitem label="All Files,(*.*)"/>
-                    </z:listbox>
-                    <z:button label="Browse..."/>
-                </z:hbox>
-            </z:row>
-            <z:row>
-                <z:label value="Options:"/>
-                <z:textbox rows="3" width="99%"/>
-            </z:row>
-        </z:rows>
-    </z:grid>
-</z:window>
+<z:tabbox width="400px" height="100px">
+    <z:tabs>
+        <z:tab label="Tab 1"/>
+        <z:tab label="Tab 2"/>
+    </z:tabs>
+    <z:tabpanels>
+        <z:tabpanel>This is panel 1</z:tabpanel>
+        <z:tabpanel>This is panel 2</z:tabpanel>
+    </z:tabpanels>
+</z:tabbox>
+<z:space/>
+<z:tabbox width="400px" mold="accordion">
+    <z:tabs>
+        <z:tab label="Tab 3"/>
+        <z:tab label="Tab 4"/>
+    </z:tabs>
+    <z:tabpanels>
+        <z:tabpanel>This is panel 3</z:tabpanel>
+        <z:tabpanel>This is panel 4</z:tabpanel>
+    </z:tabpanels>
+</z:tabbox>
 {code}
 
 h2. Description

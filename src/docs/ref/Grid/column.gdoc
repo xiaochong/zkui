@@ -6,7 +6,7 @@ A single column in a Columns element. Each child of the Column element is placed
 
 h2. Examples
 
-!column.png!
+!grid.png!
 
 {code:xml}
 <z:window title="Grid Demo" border="normal" width="360px">
