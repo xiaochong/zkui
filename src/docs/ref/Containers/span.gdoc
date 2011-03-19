@@ -10,7 +10,7 @@ h2. Examples
 
 {code:xml}
 <z:span>
-    Name:
+    <z:label value="Name:"/>
     <z:textbox/>
 </z:span>
 {code}
