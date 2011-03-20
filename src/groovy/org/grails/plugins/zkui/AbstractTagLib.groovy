@@ -1,10 +1,13 @@
 package org.grails.plugins.zkui
 
-import org.zkoss.zk.ui.Component
 import javax.servlet.ServletContext
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
+import org.zkoss.zk.ui.Component
+import org.zkoss.zk.ui.metainfo.EventHandler
 import org.zkoss.zk.ui.metainfo.Property
+import org.zkoss.zk.ui.metainfo.ZScript
+import org.zkoss.zk.ui.sys.ComponentCtrl
 import org.zkoss.zul.Html
 
 abstract class AbstractTagLib {
@@ -17,7 +20,15 @@ abstract class AbstractTagLib {
         composeHandle.doBeforeComposeChildren(component)
         pageScope.parent.push(component)
         if (pageScope.parent.size() > 1) pageScope.parent[pageScope.parent.size() - 2].appendChild(component)
-        attrs.each {attrName, value -> Property.assign(component, attrName, value.toString())}
+        attrs.each {attrName, value ->
+            if (attrName.startsWith("on")) {
+                final ZScript zScript = ZScript.parseContent(value.toString())
+                zScript.language="groovy"
+                ((ComponentCtrl) component).addEventHandler(attrName, new EventHandler(zScript, null))
+            } else {
+                Property.assign(component, attrName, value.toString())
+            }
+        }
         String content = body.call()
         if (content && !content.allWhitespace) component.appendChild(new Html(content))
         composeHandle.doAfterCompose(component)
