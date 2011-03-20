@@ -23,14 +23,21 @@ abstract class AbstractTagLib {
         attrs.each {attrName, value ->
             if (attrName.startsWith("on")) {
                 final ZScript zScript = ZScript.parseContent(value.toString())
-                zScript.language="groovy"
+                zScript.language = "groovy"
                 ((ComponentCtrl) component).addEventHandler(attrName, new EventHandler(zScript, null))
             } else {
                 Property.assign(component, attrName, value.toString())
             }
         }
         String content = body.call()
-        if (content && !content.allWhitespace) component.appendChild(new Html(content))
+        if (content && !content.allWhitespace) {
+            def bodyHandle = bodyHandleMap.get(getComponentClass().name)
+            if (bodyHandle) {
+                bodyHandle(component, content)
+            } else {
+                component.appendChild(new Html(content))
+            }
+        }
         composeHandle.doAfterCompose(component)
         if (pageScope.parent.size() == 1) {
             Renders.render(servletContext, request, response, (Component) pageScope.parent.remove(), null, out)
@@ -40,4 +47,13 @@ abstract class AbstractTagLib {
     }
 
     abstract Class getComponentClass()
+
+    private final static bodyHandleMap = [
+            "org.zkoss.zul.Style": {component, body ->
+                component.content = body
+            },
+            "org.zkoss.zul.Script": {component, body ->
+                component.content = body
+            }
+    ].asImmutable()
 }

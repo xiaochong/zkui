@@ -10,7 +10,7 @@ h2. Examples
 
 {code:xml}
 <z:window id="win">
-    <z:button label="change color"/>
+    <z:button label="change color" onClick="Clients.evalJavaScript('myfunc()');"/>
 </z:window>
 <z:script type="text/javascript">
     function myfunc() {

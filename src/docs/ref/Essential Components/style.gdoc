@@ -9,7 +9,7 @@ h2. Examples
 !style.png!
 
 {code:xml}
-
+<z:style>a{ color:red; }</z:style>
 {code}
 
 h2. Description
