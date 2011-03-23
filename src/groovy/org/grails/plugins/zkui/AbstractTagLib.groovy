@@ -56,6 +56,9 @@ abstract class AbstractTagLib {
             },
             "org.zkoss.zul.Script": {component, body ->
                 component.content = body
+            },
+            "org.zkoss.zul.Html": {component, body ->
+                component.content = body
             }
     ].asImmutable()
 }

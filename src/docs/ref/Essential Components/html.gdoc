@@ -2,40 +2,20 @@ h1. html
 
 h2. Purpose
 
-The simplest way is to use a XUL component called @html @to embed whatever HTML tags you want to send directly to the browser. To avoid ZK from interpreting the HTML tags, you usually enclose them with @&lt;![CDATA[ @and @]]&gt;@. In other words, they are not the child component. Rather, they are stored in the @content @property. Notice you can use EL expressions in it.
+The simplest way is to use a XUL component called @html@ to embed whatever HTML tags you want to send directly to the browser. To avoid ZK from interpreting the HTML tags, you usually enclose them with <![CDATA[ @and@ ]]>. In other words, they are not the child component. Rather, they are stored in the @content@ property. Notice you can use EL expressions in it.
 
 h2. Examples
 
 !html.png!
 
 {code:xml}
-<z:window title="Grid Demo" border="normal" width="360px">
-    <z:grid>
-        <z:columns sizable="true">
-            <z:column label="Type" width="50px"/>
-            <z:column label="Content"/>
-        </z:columns>
-        <z:rows>
-            <z:row>
-                <z:label value="File:"/>
-                <z:textbox width="99%"/>
-            </z:row>
-            <z:row>
-                <z:label value="Type:"/>
-                <z:hbox>
-                    <z:listbox rows="1" mold="select">
-                        <z:listitem label="Java Files,(*.java)"/>
-                        <z:listitem label="All Files,(*.*)"/>
-                    </z:listbox>
-                    <z:button label="Browse..."/>
-                </z:hbox>
-            </z:row>
-            <z:row>
-                <z:label value="Options:"/>
-                <z:textbox rows="3" width="99%"/>
-            </z:row>
-        </z:rows>
-    </z:grid>
+<z:window id="win" title="Html Demo" border="normal" width="300px">
+    <z:html>
+        <span id=”...”>
+            <h4>Hi, Html Demo</h4>
+            <p>It is the content of the html component.</p>
+        </span>
+    </z:html>
 </z:window>
 {code}
 
