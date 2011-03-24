@@ -2,7 +2,7 @@ h1. html
 
 h2. Purpose
 
-The simplest way is to use a XUL component called @html@ to embed whatever HTML tags you want to send directly to the browser. To avoid ZK from interpreting the HTML tags, you usually enclose them with <![CDATA[ @and@ ]]>. In other words, they are not the child component. Rather, they are stored in the @content@ property. Notice you can use EL expressions in it.
+The simplest way is to use a XUL component called @html@ to embed whatever HTML tags you want to send directly to the browser.  Rather, they are stored in the @content@ property. Notice you can use EL expressions in it.
 
 h2. Examples
 
@@ -11,7 +11,7 @@ h2. Examples
 {code:xml}
 <z:window id="win" title="Html Demo" border="normal" width="300px">
     <z:html>
-        <span id=”...”>
+        <span id="...">
             <h4>Hi, Html Demo</h4>
             <p>It is the content of the html component.</p>
         </span>
@@ -64,4 +64,3 @@ h2. Component Reference
 h2. Java API
 
 [Show html Java API|http://www.zkoss.org/javadoc/latest/zk/org/zkoss/zul/Html.html]
-
