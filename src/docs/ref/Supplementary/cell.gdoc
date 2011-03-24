@@ -2,40 +2,57 @@ h1. cell
 
 h2. Purpose
 
-The generic cell component to be embedded into <a href="/wiki/ZK_Component_Reference/Data/Grid/Row" title="ZK Component Reference/Data/Grid/Row"> Row</a> or <a href="/wiki/ZK_Component_Reference/Layouts/Hbox" title="ZK Component Reference/Layouts/Hbox"> Hbox</a> or <a href="/wiki/ZK_Component_Reference/Layouts/Vbox" title="ZK Component Reference/Layouts/Vbox"> Vbox</a> for fully control style and layout.
+The generic cell component to be embedded into [Row|http://books.zkoss.org/wiki/ZK_Component_Reference/Data/Grid/Row] or [Hbox|http://books.zkoss.org/wiki/ZK_Component_Reference/Layouts/Hbox] or [Vbox|http://books.zkoss.org/wiki/ZK_Component_Reference/Layouts/Vbox] for fully control style and layout.
 
 h2. Examples
 
 !cell.png!
 
 {code:xml}
-<z:window title="Grid Demo" border="normal" width="360px">
-    <z:grid>
-        <z:columns sizable="true">
-            <z:column label="Type" width="50px"/>
-            <z:column label="Content"/>
-        </z:columns>
-        <z:rows>
-            <z:row>
-                <z:label value="File:"/>
-                <z:textbox width="99%"/>
-            </z:row>
-            <z:row>
-                <z:label value="Type:"/>
-                <z:hbox>
-                    <z:listbox rows="1" mold="select">
-                        <z:listitem label="Java Files,(*.java)"/>
-                        <z:listitem label="All Files,(*.*)"/>
-                    </z:listbox>
-                    <z:button label="Browse..."/>
-                </z:hbox>
-            </z:row>
-            <z:row>
-                <z:label value="Options:"/>
-                <z:textbox rows="3" width="99%"/>
-            </z:row>
-        </z:rows>
-    </z:grid>
+<z:grid>
+    <z:columns>
+        <z:column label="A"/>
+        <z:column label="B"/>
+        <z:column label="C"/>
+        <z:column label="D"/>
+    </z:columns>
+    <z:rows>
+        <z:row>
+            <z:cell rowspan="4" align="center" valign="bottom">
+                <z:label value="item 1"/>
+            </z:cell>
+            <z:cell colspan="3">
+                <z:label value="item 2"/>
+            </z:cell>
+        </z:row>
+        <z:row>
+            <z:cell colspan="2" align="center">
+                <z:label value="item 3"/>
+            </z:cell>
+            <z:label value="item 4"/>
+        </z:row>
+        <z:row>
+            <z:label value="item 5"/>
+            <z:label value="item 6"/>
+            <z:label value="item 7"/>
+        </z:row>
+        <z:row>
+            <z:label value="item 8"/>
+            <z:label value="item 9"/>
+            <z:label value="item 10"/>
+        </z:row>
+    </z:rows>
+</z:grid>
+<z:space/>
+<z:window title="hbox" border="normal" width="320px">
+    <z:hbox width="300px" pack="center">
+        <z:cell hflex="1" align="center">
+            <z:label value="item 1"/>
+        </z:cell>
+        <z:cell hflex="1" align="center">
+            <z:label value="item 2"/>
+        </z:cell>
+    </z:hbox>
 </z:window>
 {code}
 

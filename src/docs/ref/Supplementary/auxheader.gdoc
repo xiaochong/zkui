@@ -6,37 +6,51 @@ The auxiliary headers support the colspan and rowspan properties which allows it
 
 h2. Examples
 
-!auxheader.png!
+!auxhead.png!
 
 {code:xml}
-<z:window title="Grid Demo" border="normal" width="360px">
-    <z:grid>
-        <z:columns sizable="true">
-            <z:column label="Type" width="50px"/>
-            <z:column label="Content"/>
-        </z:columns>
-        <z:rows>
-            <z:row>
-                <z:label value="File:"/>
-                <z:textbox width="99%"/>
-            </z:row>
-            <z:row>
-                <z:label value="Type:"/>
-                <z:hbox>
-                    <z:listbox rows="1" mold="select">
-                        <z:listitem label="Java Files,(*.java)"/>
-                        <z:listitem label="All Files,(*.*)"/>
-                    </z:listbox>
-                    <z:button label="Browse..."/>
-                </z:hbox>
-            </z:row>
-            <z:row>
-                <z:label value="Options:"/>
-                <z:textbox rows="3" width="99%"/>
-            </z:row>
-        </z:rows>
-    </z:grid>
-</z:window>
+<z:grid>
+    <z:auxhead>
+        <z:auxheader label="H1'07" colspan="6"/>
+        <z:auxheader label="H2'07" colspan="6"/>
+    </z:auxhead>
+    <z:auxhead>
+        <z:auxheader label="Q1" colspan="3"/>
+        <z:auxheader label="Q2" colspan="3"/>
+        <z:auxheader label="Q3" colspan="3"/>
+        <z:auxheader label="Q4" colspan="3"/>
+    </z:auxhead>
+    <z:columns>
+        <z:column label="Jan"/>
+        <z:column label="Feb"/>
+        <z:column label="Mar"/>
+        <z:column label="Apr"/>
+        <z:column label="May"/>
+        <z:column label="Jun"/>
+        <z:column label="Jul"/>
+        <z:column label="Aug"/>
+        <z:column label="Sep"/>
+        <z:column label="Oct"/>
+        <z:column label="Nov"/>
+        <z:column label="Dec"/>
+    </z:columns>
+    <z:rows>
+        <z:row>
+            <z:label value="1,000"/>
+            <z:label value="1,100"/>
+            <z:label value="1,200"/>
+            <z:label value="1,300"/>
+            <z:label value="1,400"/>
+            <z:label value="1,500"/>
+            <z:label value="1,600"/>
+            <z:label value="1,700"/>
+            <z:label value="1,800"/>
+            <z:label value="1,900"/>
+            <z:label value="2,000"/>
+            <z:label value="2,100"/>
+        </z:row>
+    </z:rows>
+</z:grid>
 {code}
 
 h2. Description

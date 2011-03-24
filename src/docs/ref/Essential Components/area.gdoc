@@ -6,10 +6,8 @@ An area of a image map. Instead of the application processing the coordinates, d
 
 h2. Examples
 
-!area.png!
-
 {code:xml}
-<z:imagemap src="/img/sun.jpg">
+<z:imagemap src="/img/earth.jpg" onClick="alert(event.area)">
     <z:area id="First" coords="0, 0, 100, 100"/>
     <z:area id="Second" shape="circle" coords="200, 200, 100"/>
 </z:imagemap>

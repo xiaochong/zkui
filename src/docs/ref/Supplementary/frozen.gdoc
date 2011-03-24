@@ -9,34 +9,47 @@ h2. Examples
 !frozen.png!
 
 {code:xml}
-<z:window title="Grid Demo" border="normal" width="360px">
-    <z:grid>
-        <z:columns sizable="true">
-            <z:column label="Type" width="50px"/>
-            <z:column label="Content"/>
-        </z:columns>
-        <z:rows>
-            <z:row>
-                <z:label value="File:"/>
-                <z:textbox width="99%"/>
-            </z:row>
-            <z:row>
-                <z:label value="Type:"/>
-                <z:hbox>
-                    <z:listbox rows="1" mold="select">
-                        <z:listitem label="Java Files,(*.java)"/>
-                        <z:listitem label="All Files,(*.*)"/>
-                    </z:listbox>
-                    <z:button label="Browse..."/>
-                </z:hbox>
-            </z:row>
-            <z:row>
-                <z:label value="Options:"/>
-                <z:textbox rows="3" width="99%"/>
-            </z:row>
-        </z:rows>
-    </z:grid>
-</z:window>
+<z:grid width="600px">
+    <z:frozen columns="2"/>
+    <z:columns>
+        <z:column width="50px">ID</z:column>
+        <z:column width="50px">Priority</z:column>
+        <z:column width="50px">Status</z:column>
+        <z:column width="150px">Summary</z:column>
+        <z:column width="250px">Detail</z:column>
+        <z:column width="100px">Group</z:column>
+        <z:column width="50px">Assign</z:column>
+    </z:columns>
+    <z:rows>
+        <z:row>
+            <z:cell>0001</z:cell>
+            <z:cell>1</z:cell>
+            <z:cell>closed</z:cell>
+            <z:cell>Fix login issue</z:cell>
+            <z:cell>Login does not work at all</z:cell>
+            <z:cell>Account</z:cell>
+            <z:cell>Bob</z:cell>
+        </z:row>
+        <z:row>
+            <z:cell>0002</z:cell>
+            <z:cell>3</z:cell>
+            <z:cell>open</z:cell>
+            <z:cell>Button style broken</z:cell>
+            <z:cell>Check main.css</z:cell>
+            <z:cell>Styling</z:cell>
+            <z:cell>Alice</z:cell>
+        </z:row>
+        <z:row>
+            <z:cell>0003</z:cell>
+            <z:cell>2</z:cell>
+            <z:cell>open</z:cell>
+            <z:cell>Client search result</z:cell>
+            <z:cell>Search service returns incomplete result</z:cell>
+            <z:cell>Service</z:cell>
+            <z:cell>Bob</z:cell>
+        </z:row>
+    </z:rows>
+</z:grid>
 {code}
 
 h2. Description

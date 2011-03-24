@@ -6,8 +6,6 @@ An @image@ component is used to display an image at the browser. There are two w
 
 h2. Examples
 
-!image.png!
-
 {code:xml}
 <z:image src="/img/computer.png"/>
 {code}

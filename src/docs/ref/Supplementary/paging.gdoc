@@ -2,41 +2,16 @@ h1. paging
 
 h2. Purpose
 
-A @paging@ component is used with another component to separate long content into multiple pages. If a component has long content to display, you could separate them into pages, and then use a paging component as a controller to allow the user decide which page to display.The <a href="/wiki/ZK_Component_Reference/Data/Listbox" title="ZK Component Reference/Data/Listbox">listbox</a>, <a href="/wiki/ZK_Component_Reference/Data/Grid" title="ZK Component Reference/Data/Grid">grid</a> and <a href="/wiki/ZK_Component_Reference/Data/Tree" title="ZK Component Reference/Data/Tree">tree</a> components support the paging intrinsically, so you don't need to specify a paging component explicitly. In other words, they will instantiate and manage a paging component automatically if the paging mold is specified. Of course, you could specify an external paging component, if you want to have different visual layout, or to control multiple listboxes, grids and/or trees with one single paging component.
+A @paging@ component is used with another component to separate long content into multiple pages. If a component has long content to display, you could separate them into pages, and then use a paging component as a controller to allow the user decide which page to display.The [listbox|http://books.zkoss.org/wiki/ZK_Component_Reference/Data/Listbox], [grid|http://books.zkoss.org/wiki/ZK_Component_Reference/Data/Grid] and [tree|http://books.zkoss.org/wiki/ZK_Component_Reference/Data/Tree] components support the paging intrinsically, so you don't need to specify a paging component explicitly. In other words, they will instantiate and manage a paging component automatically if the paging mold is specified. Of course, you could specify an external paging component, if you want to have different visual layout, or to control multiple listboxes, grids and/or trees with one single paging component.
 
 h2. Examples
 
 !paging.png!
 
 {code:xml}
-<z:window title="Grid Demo" border="normal" width="360px">
-    <z:grid>
-        <z:columns sizable="true">
-            <z:column label="Type" width="50px"/>
-            <z:column label="Content"/>
-        </z:columns>
-        <z:rows>
-            <z:row>
-                <z:label value="File:"/>
-                <z:textbox width="99%"/>
-            </z:row>
-            <z:row>
-                <z:label value="Type:"/>
-                <z:hbox>
-                    <z:listbox rows="1" mold="select">
-                        <z:listitem label="Java Files,(*.java)"/>
-                        <z:listitem label="All Files,(*.*)"/>
-                    </z:listbox>
-                    <z:button label="Browse..."/>
-                </z:hbox>
-            </z:row>
-            <z:row>
-                <z:label value="Options:"/>
-                <z:textbox rows="3" width="99%"/>
-            </z:row>
-        </z:rows>
-    </z:grid>
-</z:window>
+<z:vbox>
+    <z:paging totalSize="100" pageSize="20"/>
+</z:vbox>
 {code}
 
 h2. Description
