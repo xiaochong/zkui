@@ -51,14 +51,8 @@ abstract class AbstractTagLib {
     abstract Class getComponentClass()
 
     private final static bodyHandleMap = [
-            "org.zkoss.zul.Style": {component, body ->
-                component.content = body
-            },
-            "org.zkoss.zul.Script": {component, body ->
-                component.content = body
-            },
-            "org.zkoss.zul.Html": {component, body ->
-                component.content = body
-            }
+            "org.zkoss.zul.Style": {component, body -> component.content = body},
+            "org.zkoss.zul.Script": {component, body -> component.content = body},
+            "org.zkoss.zul.Html": {component, body -> component.content = body}
     ].asImmutable()
 }
