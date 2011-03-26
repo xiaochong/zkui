@@ -31,5 +31,6 @@ grails.project.dependency.resolution = {
         runtime 'org.zkoss.zk:zk:5.0.6'
         runtime 'org.zkoss.zk:zul:5.0.6'
         runtime 'org.zkoss.zk:zkplus:5.0.6'
+        runtime 'org.zkoss.zk:zhtml:5.0.6'
     }
 }
