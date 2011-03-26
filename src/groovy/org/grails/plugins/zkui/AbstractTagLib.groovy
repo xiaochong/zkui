@@ -20,15 +20,15 @@ abstract class AbstractTagLib {
         composeHandle.doBeforeComposeChildren(component)
         pageScope.parent.push(component)
         if (pageScope.parent.size() > 1) pageScope.parent[pageScope.parent.size() - 2].appendChild(component)
-        attrs.each {String attrName, String value ->
+        attrs.each {String attrName, value ->
             if (attrName.startsWith("on")) {
-                final ZScript zScript = ZScript.parseContent(value)
+                final ZScript zScript = ZScript.parseContent(value.toString())
                 zScript.language = "groovy"
                 ((ComponentCtrl) component).addEventHandler(attrName, new EventHandler(zScript, null))
             } else if (attrName.startsWith("client_")) {
-                component.setWidgetListener(attrName.toString().replace("client_", ''), value)
+                component.setWidgetListener(attrName.toString().replace("client_", ''), value.toString())
             } else {
-                Property.assign(component, attrName, value)
+                Property.assign(component, attrName, value.toString())
             }
         }
         String content = body.call()
