@@ -47,6 +47,7 @@ class ZkComponentBuilder extends BuilderSupport {
             if (!pageDefinition) pageDefinition = new PageDefinition(languageDefinition, Locators.default)
             compDefinition = pageDefinition.getComponentDefinition(name, true)
         }
+        if (!compDefinition) throw new MissingPropertyException(name, parentComponent.class)
         Class cls = compDefinition.resolveImplementationClass(null, null)
         Component instance = (Component) cls.newInstance()
         attributes.each {String attrName, Object value ->

@@ -4,10 +4,10 @@ import org.codehaus.groovy.grails.orm.support.GroovyAwareNamedTransactionAttribu
 import org.grails.plugins.zkui.ZkComponentBuilder
 import org.grails.plugins.zkui.artefacts.ComposerArtefactHandler
 import org.grails.plugins.zkui.artefacts.GrailsComposerClass
+import org.grails.plugins.zkui.jsoup.select.Selector
 import org.springframework.beans.factory.config.MethodInvokingFactoryBean
 import org.springframework.core.annotation.AnnotationUtils
 import org.springframework.transaction.annotation.Transactional
-import org.zkoss.zk.ui.Component
 
 class ZkuiGrailsPlugin {
     // the plugin version
@@ -116,9 +116,12 @@ this plugin adds ZK Ajax framework (www.zkoss.org) support to Grails application
 
     def doWithDynamicMethods = { ctx ->
         org.zkoss.zk.ui.Component.metaClass.appendChild = {Closure closure ->
-            def builder = new ZkComponentBuilder((Component) delegate)
+            def builder = new ZkComponentBuilder(delegate)
             closure.resolveStrategy = Closure.DELEGATE_FIRST
             builder.build(closure)
+        }
+        org.zkoss.zk.ui.Component.metaClass.select = {String query ->
+            return Selector.select(query, delegate)
         }
     }
 
