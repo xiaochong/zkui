@@ -1,11 +1,13 @@
 import java.lang.reflect.Method
 import org.codehaus.groovy.grails.commons.spring.TypeSpecifyableTransactionProxyFactoryBean
 import org.codehaus.groovy.grails.orm.support.GroovyAwareNamedTransactionAttributeSource
+import org.grails.plugins.zkui.ZkComponentBuilder
 import org.grails.plugins.zkui.artefacts.ComposerArtefactHandler
 import org.grails.plugins.zkui.artefacts.GrailsComposerClass
 import org.springframework.beans.factory.config.MethodInvokingFactoryBean
 import org.springframework.core.annotation.AnnotationUtils
 import org.springframework.transaction.annotation.Transactional
+import org.zkoss.zk.ui.Component
 
 class ZkuiGrailsPlugin {
     // the plugin version
@@ -113,7 +115,11 @@ this plugin adds ZK Ajax framework (www.zkoss.org) support to Grails application
     }
 
     def doWithDynamicMethods = { ctx ->
-        // TODO Implement registering dynamic methods to classes (optional)
+        org.zkoss.zk.ui.Component.metaClass.appendChild = {Closure closure ->
+            def builder = new ZkComponentBuilder((Component) delegate)
+            closure.resolveStrategy = Closure.DELEGATE_FIRST
+            builder.build(closure)
+        }
     }
 
     def doWithApplicationContext = { applicationContext ->
