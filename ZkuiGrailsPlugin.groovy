@@ -120,6 +120,9 @@ this plugin adds ZK Ajax framework (www.zkoss.org) support to Grails application
             closure.resolveStrategy = Closure.DELEGATE_FIRST
             builder.build(closure)
         }
+        org.zkoss.zk.ui.Component.metaClass.leftShift = {Object value ->
+            delegate.appendChild(value)
+        }
         org.zkoss.zk.ui.Component.metaClass.select = {String query ->
             return Selector.select(query, delegate)
         }
