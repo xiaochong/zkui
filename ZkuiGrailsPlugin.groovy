@@ -1,6 +1,8 @@
 import java.lang.reflect.Method
+import org.codehaus.groovy.grails.commons.GrailsClassUtils
 import org.codehaus.groovy.grails.commons.spring.TypeSpecifyableTransactionProxyFactoryBean
 import org.codehaus.groovy.grails.orm.support.GroovyAwareNamedTransactionAttributeSource
+import org.codehaus.groovy.grails.web.pages.TagLibraryLookup
 import org.grails.plugins.zkui.ZkComponentBuilder
 import org.grails.plugins.zkui.artefacts.ComposerArtefactHandler
 import org.grails.plugins.zkui.artefacts.GrailsComposerClass
@@ -17,7 +19,7 @@ class ZkuiGrailsPlugin {
     // the other plugins this plugin depends on
     def dependsOn = [:]
 
-    def loadAfter = ['core', 'hibernate']
+    def loadAfter = ['core', 'hibernate', 'controllers']
 
     def artefacts = [
             org.grails.plugins.zkui.artefacts.ComposerArtefactHandler
@@ -36,7 +38,7 @@ class ZkuiGrailsPlugin {
 
     // TODO Fill in these fields
     def author = "groovyquan"
-    def authorEmail = "groovyquan@gmail.com"
+    def authorEmail = "groovyquan[at]gmail[dot]com"
     def title = "ZK UI Plugin for Grails"
     def description = '''\\
 this plugin adds ZK Ajax framework (www.zkoss.org) support to Grails applications seamless.
@@ -126,6 +128,23 @@ this plugin adds ZK Ajax framework (www.zkoss.org) support to Grails application
         org.zkoss.zk.ui.Component.metaClass.select = {String query ->
             return Selector.select(query, delegate)
         }
+
+        //Inject taglib namespace to Composer
+        TagLibraryLookup gspTagLibraryLookup = ctx.getBean("gspTagLibraryLookup")
+
+        if (manager?.hasGrailsPlugin("controllers")) {
+            for (namespace in gspTagLibraryLookup.availableNamespaces) {
+                def propName = GrailsClassUtils.getGetterName(namespace)
+                def namespaceDispatcher = gspTagLibraryLookup.lookupNamespaceDispatcher(namespace)
+                def composerClasses = application.composerClasses*.clazz
+                for (Class composerClass in composerClasses) {
+                    MetaClass mc = composerClass.metaClass
+                    if (!mc.getMetaProperty(namespace)) {
+                        mc."$propName" = { namespaceDispatcher }
+                    }
+                }
+            }
+        }
     }
 
     def doWithApplicationContext = { applicationContext ->
@@ -183,6 +202,8 @@ this plugin adds ZK Ajax framework (www.zkoss.org) support to Grails application
             }
 
         }
+
+        event.manager?.getGrailsPlugin("zkui")?.doWithDynamicMethods(event.ctx)
 
     }
 
