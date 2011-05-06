@@ -15,11 +15,11 @@ class ZkComponentBuilder extends BuilderSupport {
         this.parentComponent = parent
     }
 
-    @Override protected void setParent(Object parent, Object child) {
+    protected void setParent(Object parent, Object child) {
         child.parent = parent
     }
 
-    @Override protected Object createNode(Object name) {
+    protected Object createNode(Object name) {
         if (name == 'build') {
             return parentComponent
         } else {
@@ -27,15 +27,15 @@ class ZkComponentBuilder extends BuilderSupport {
         }
     }
 
-    @Override protected Object createNode(Object name, Object value) {
+    protected Object createNode(Object name, Object value) {
         return handle(name.toString(), [:])
     }
 
-    @Override protected Object createNode(Object name, Map attributes) {
+    protected Object createNode(Object name, Map attributes) {
         return handle(name.toString(), attributes)
     }
 
-    @Override protected Object createNode(Object name, Map attributes, Object value) {
+    protected Object createNode(Object name, Map attributes, Object value) {
         return handle(name.toString(), attributes)
     }
 
