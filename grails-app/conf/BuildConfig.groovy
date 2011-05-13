@@ -13,8 +13,8 @@ grails.project.dependency.resolution = {
         grailsPlugins()
         grailsHome()
         grailsCentral()
+        mavenCentral()
         mavenRepo "http://mavensync.zkoss.org/maven2/"
-        mavenRepo "http://repository.jboss.com/maven2/"
         // uncomment the below to enable remote dependency resolution
         // from public Maven repositories
         //mavenLocal()
@@ -28,9 +28,9 @@ grails.project.dependency.resolution = {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
 
         // runtime 'mysql:mysql-connector-java:5.1.13'
-        runtime 'org.zkoss.zk:zk:5.0.6'
-        runtime 'org.zkoss.zk:zul:5.0.6'
-        runtime 'org.zkoss.zk:zkplus:5.0.6'
-        runtime 'org.zkoss.zk:zhtml:5.0.6'
+        runtime 'org.zkoss.zk:zk:5.0.7.FL.20110510'
+        runtime 'org.zkoss.zk:zul:5.0.7.FL.20110510'
+        runtime 'org.zkoss.zk:zkplus:5.0.7.FL.20110510'
+        runtime 'org.zkoss.zk:zhtml:5.0.7.FL.20110510'
     }
 }

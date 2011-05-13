@@ -33,7 +33,8 @@ class ZkuiGrailsPlugin {
     def pluginExcludes = [
             "grails-app/views/error.gsp",
             "src/docs/**",
-            "scripts/_Events.groovy"
+            "scripts/_Events.groovy",
+            "web-app/**"
     ]
 
     // TODO Fill in these fields
