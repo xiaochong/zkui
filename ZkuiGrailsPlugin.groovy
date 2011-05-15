@@ -10,6 +10,7 @@ import org.grails.plugins.zkui.jsoup.select.Selector
 import org.springframework.beans.factory.config.MethodInvokingFactoryBean
 import org.springframework.core.annotation.AnnotationUtils
 import org.springframework.transaction.annotation.Transactional
+import org.zkoss.zk.ui.Executions
 
 class ZkuiGrailsPlugin {
     // the plugin version
@@ -142,6 +143,9 @@ this plugin adds ZK Ajax framework (www.zkoss.org) support to Grails application
                     MetaClass mc = composerClass.metaClass
                     if (!mc.getMetaProperty(namespace)) {
                         mc."$propName" = { namespaceDispatcher }
+                    }
+                    mc.redirect = {String uri ->
+                        Executions.current.sendRedirect(uri)
                     }
                 }
             }

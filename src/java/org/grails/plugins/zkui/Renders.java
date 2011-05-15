@@ -12,38 +12,24 @@ Copyright (C) 2010 Potix Corporation. All Rights Reserved.
 */
 package org.grails.plugins.zkui;
 
-import java.io.Writer;
-import java.io.IOException;
+import org.zkoss.lang.Library;
+import org.zkoss.web.servlet.http.Https;
+import org.zkoss.zk.ui.*;
+import org.zkoss.zk.ui.http.ExecutionImpl;
+import org.zkoss.zk.ui.http.I18Ns;
+import org.zkoss.zk.ui.http.Utils;
+import org.zkoss.zk.ui.http.WebManager;
+import org.zkoss.zk.ui.impl.Attributes;
+import org.zkoss.zk.ui.impl.RequestInfoImpl;
+import org.zkoss.zk.ui.metainfo.PageDefinitions;
+import org.zkoss.zk.ui.sys.*;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.zkoss.lang.Library;
-import org.zkoss.web.servlet.http.Https;
-
-import org.zkoss.zk.ui.WebApp;
-import org.zkoss.zk.ui.Session;
-import org.zkoss.zk.ui.Execution;
-import org.zkoss.zk.ui.Executions;
-import org.zkoss.zk.ui.Desktop;
-import org.zkoss.zk.ui.Page;
-import org.zkoss.zk.ui.Component;
-import org.zkoss.zk.ui.Richlet;
-import org.zkoss.zk.ui.GenericRichlet;
-import org.zkoss.zk.ui.metainfo.PageDefinitions;
-import org.zkoss.zk.ui.sys.HtmlPageRenders;
-import org.zkoss.zk.ui.sys.WebAppCtrl;
-import org.zkoss.zk.ui.sys.UiFactory;
-import org.zkoss.zk.ui.sys.SessionCtrl;
-import org.zkoss.zk.ui.sys.RequestInfo;
-import org.zkoss.zk.ui.impl.Attributes;
-import org.zkoss.zk.ui.impl.RequestInfoImpl;
-import org.zkoss.zk.ui.http.WebManager;
-import org.zkoss.zk.ui.http.ExecutionImpl;
-import org.zkoss.zk.ui.http.I18Ns;
-import org.zkoss.zk.ui.http.Utils;
+import java.io.IOException;
+import java.io.Writer;
 
 /**
  * Utilities to embed ZK component(s) as a native JSF component, a JSP tag, Zimlet or others.
@@ -136,7 +122,7 @@ public class Renders {
             final Page page = WebManager.newPage(uf, ri, richlet, response, path);
             exec = new ExecutionImpl(ctx, request, response, desktop, page);
             exec.setAttribute(Attributes.PAGE_REDRAW_CONTROL, "page");
-            exec.setAttribute(Attributes.PAGE_RENDERER, new PageRenderer(exec, request));
+            exec.setAttribute(Attributes.PAGE_RENDERER, new PageRenderer(exec));
 
             wappc.getUiEngine().execNewPage(exec, richlet, page, out);
             //no need to set device type here, since UiEngine will do it later
@@ -173,33 +159,19 @@ public class Renders {
      */
     public static class PageRenderer implements org.zkoss.zk.ui.sys.PageRenderer {
         private final Execution _exec;
-        private final HttpServletRequest _request;
 
         /**
          * Default constructor.
          * It is the same as <code>PageRenderer(Executions.getCurrent())</code>.
          */
 
-        public PageRenderer(Execution exec, HttpServletRequest request) {
+        public PageRenderer(Execution exec) {
             _exec = exec;
-            _request = request;
         }
 
         //@Override
         public void render(Page page, Writer out) throws IOException {
             final Desktop desktop = _exec.getDesktop();
-
-            String outLangStyleSheets = HtmlPageRenders.outLangStyleSheets(_exec, null, null);
-            String outLangJavaScripts = HtmlPageRenders.outLangJavaScripts(_exec, null, null);
-
-            if (_request.getAttribute("outLangStyleSheetsAndLangJavaScripts") != null) {
-                out.write(outLangStyleSheets);
-                out.write(outLangJavaScripts);
-            } else if (_request.getAttribute("outLangStyleSheets") == null &&
-                    _request.getAttribute("outLangJavaScripts") == null) {
-                _request.setAttribute("outLangStyleSheets", outLangStyleSheets);
-                _request.setAttribute("outLangJavaScripts", outLangJavaScripts);
-            }
 
             out.write("<script type=\"text/javascript\">zkpb('");
             out.write(page.getUuid());
