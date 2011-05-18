@@ -12,6 +12,7 @@ import org.springframework.beans.factory.config.MethodInvokingFactoryBean
 import org.springframework.core.annotation.AnnotationUtils
 import org.springframework.transaction.annotation.Transactional
 import org.zkoss.zk.ui.Executions
+import org.zkoss.zk.ui.event.Event
 
 class ZkuiGrailsPlugin {
     // the plugin version
@@ -131,9 +132,19 @@ this plugin adds ZK Ajax framework (www.zkoss.org) support to Grails application
         org.zkoss.zk.ui.Component.metaClass.select = {String query ->
             return Selector.select(query, delegate)
         }
+        org.zkoss.zk.ui.Component.metaClass.addEventListener = {String eventName, Closure listenerClosure ->
+            return delegate.addEventListener(eventName, listenerClosure as org.zkoss.zk.ui.event.EventListener)
+        }
         org.zkoss.zk.ui.Component.metaClass.getParams = {
             return delegate.select("[name]").inject([:]) {s, c ->
-                s.put(c.name, c.value)
+                def e = s.get(c.name)
+                if (e == null) {
+                    s.put(c.name, c.value)
+                } else if (e instanceof Collection) {
+                    e << c.value
+                } else {
+                    s.put(c.name, [s.remove(c.name), c.value])
+                }
                 return s
             }
         }

@@ -28,7 +28,11 @@ abstract class AbstractTagLib {
             } else if (attrName.startsWith("client_")) {
                 component.setWidgetListener(attrName.toString().replace("client_", ''), value.toString())
             } else {
-                Property.assign(component, attrName, value.toString())
+                if (component.metaClass.getMetaProperty(attrName)?.type?.isPrimitive()) {
+                    Property.assign(component, attrName, value.toString())
+                } else {
+                    component[attrName] = value
+                }
             }
         }
         String content = body.call()
