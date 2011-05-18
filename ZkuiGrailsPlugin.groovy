@@ -131,6 +131,12 @@ this plugin adds ZK Ajax framework (www.zkoss.org) support to Grails application
         org.zkoss.zk.ui.Component.metaClass.select = {String query ->
             return Selector.select(query, delegate)
         }
+        org.zkoss.zk.ui.Component.metaClass.getParams = {
+            return delegate.select("[name]").inject([:]) {s, c ->
+                s.put(c.name, c.value)
+                return s
+            }
+        }
 
         org.zkoss.zk.ui.Session.metaClass.getAt = { String name ->
             delegate.getAttribute(name)
