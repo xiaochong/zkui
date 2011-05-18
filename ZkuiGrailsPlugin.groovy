@@ -10,6 +10,7 @@ import org.grails.plugins.zkui.jsoup.select.Selector
 import org.springframework.beans.factory.config.MethodInvokingFactoryBean
 import org.springframework.core.annotation.AnnotationUtils
 import org.springframework.transaction.annotation.Transactional
+import org.grails.plugins.zkui.metaclass.ZkRedirectDynamicMethod
 import org.zkoss.zk.ui.Executions
 
 class ZkuiGrailsPlugin {
@@ -131,9 +132,25 @@ this plugin adds ZK Ajax framework (www.zkoss.org) support to Grails application
             return Selector.select(query, delegate)
         }
 
+        org.zkoss.zk.ui.Session.metaClass.getAt = { String name ->
+            delegate.getAttribute(name)
+        }
+
+        org.zkoss.zk.ui.Session.metaClass.putAt = { String name, value ->
+            delegate.setAttribute(name, value)
+        }
+
+        org.zkoss.zk.ui.Execution.metaClass.getAt = { String name ->
+            delegate.getAttribute(name)
+        }
+
+        org.zkoss.zk.ui.Execution.metaClass.putAt = { String name, value ->
+            delegate.setAttribute(name, value)
+        }
+
         //Inject taglib namespace to Composer
         TagLibraryLookup gspTagLibraryLookup = ctx.getBean("gspTagLibraryLookup")
-
+        def redirect = new ZkRedirectDynamicMethod(ctx)
         if (manager?.hasGrailsPlugin("controllers")) {
             for (namespace in gspTagLibraryLookup.availableNamespaces) {
                 def propName = GrailsClassUtils.getGetterName(namespace)
@@ -144,9 +161,11 @@ this plugin adds ZK Ajax framework (www.zkoss.org) support to Grails application
                     if (!mc.getMetaProperty(namespace)) {
                         mc."$propName" = { namespaceDispatcher }
                     }
-                    mc.redirect = {String uri ->
-                        Executions.current.sendRedirect(uri)
+                    mc.redirect = {Map args ->
+                        redirect.invoke(delegate, "redirect", args)
                     }
+                    mc.getSession = {-> Executions.current.session }
+                    mc.getExecution = {-> Executions.current }
                 }
             }
         }
