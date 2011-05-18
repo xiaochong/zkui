@@ -7,10 +7,10 @@ import org.grails.plugins.zkui.ZkComponentBuilder
 import org.grails.plugins.zkui.artefacts.ComposerArtefactHandler
 import org.grails.plugins.zkui.artefacts.GrailsComposerClass
 import org.grails.plugins.zkui.jsoup.select.Selector
+import org.grails.plugins.zkui.metaclass.ZkRedirectDynamicMethod
 import org.springframework.beans.factory.config.MethodInvokingFactoryBean
 import org.springframework.core.annotation.AnnotationUtils
 import org.springframework.transaction.annotation.Transactional
-import org.grails.plugins.zkui.metaclass.ZkRedirectDynamicMethod
 import org.zkoss.zk.ui.Executions
 
 class ZkuiGrailsPlugin {
