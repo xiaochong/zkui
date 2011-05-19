@@ -1,6 +1,7 @@
 package org.grails.plugins.zkui.essential
 
 import org.grails.plugins.zkui.AbstractTagLib
+import org.grails.plugins.zkui.util.UriUtil
 
 class ButtonTagLib extends AbstractTagLib {
     static namespace = "z"
@@ -54,6 +55,12 @@ class ButtonTagLib extends AbstractTagLib {
     def button = {attrs, b ->
         //just for Intellij IDEA coding assistance
         true || attrs.apply || attrs.dir || attrs.disabled || attrs.orient || attrs.tabindex || attrs.href || attrs.autodisable || attrs.upload || attrs.type || attrs.target || attrs.src || attrs.hoverImage || attrs.image || attrs.label || attrs.context || attrs.popup || attrs.ctrlKeys || attrs.tooltip || attrs.class || attrs.left || attrs.top || attrs.zIndex || attrs.zindex || attrs.height || attrs.tooltiptext || attrs.zclass || attrs.sclass || attrs.draggable || attrs.droppable || attrs.focus || attrs.renderdefer || attrs.vflex || attrs.hflex || attrs.width || attrs.style || attrs.action || attrs.id || attrs.mold || attrs.widgetClass || attrs.stubonly || attrs.definition || attrs.visible
+        if (attrs.href) {
+            attrs.href = UriUtil.fixToZk(attrs.href, request.getContextPath())
+        }
+        if (attrs.image) {
+            attrs.image = UriUtil.fixToZk(attrs.image, request.getContextPath())
+        }
         doTag(attrs, b, servletContext, request, response, pageScope, out)
     }
 

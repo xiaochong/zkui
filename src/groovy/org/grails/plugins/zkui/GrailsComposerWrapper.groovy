@@ -1,15 +1,15 @@
 package org.grails.plugins.zkui
 
-import org.zkoss.zk.ui.event.EventListener
-import org.zkoss.zk.ui.event.Event
-import org.zkoss.zk.ui.sys.ComponentsCtrl
 import java.lang.reflect.Method
 import org.codehaus.groovy.runtime.InvokerHelper
-import org.zkoss.zk.ui.event.ForwardEvent
 import org.zkoss.zk.ui.Component
-import org.zkoss.zk.ui.event.Events
-import org.zkoss.zk.ui.util.Composer
 import org.zkoss.zk.ui.Components
+import org.zkoss.zk.ui.event.Event
+import org.zkoss.zk.ui.event.EventListener
+import org.zkoss.zk.ui.event.Events
+import org.zkoss.zk.ui.event.ForwardEvent
+import org.zkoss.zk.ui.sys.ComponentsCtrl
+import org.zkoss.zk.ui.util.Composer
 
 class GrailsComposerWrapper implements Composer, EventListener {
     public static final char SEPARATOR = '_' as char
