@@ -2,17 +2,17 @@ import java.lang.reflect.Method
 import org.codehaus.groovy.grails.commons.GrailsClassUtils
 import org.codehaus.groovy.grails.commons.spring.TypeSpecifyableTransactionProxyFactoryBean
 import org.codehaus.groovy.grails.orm.support.GroovyAwareNamedTransactionAttributeSource
+import org.codehaus.groovy.grails.web.metaclass.BindDynamicMethod
 import org.codehaus.groovy.grails.web.pages.TagLibraryLookup
 import org.grails.plugins.zkui.ZkComponentBuilder
 import org.grails.plugins.zkui.artefacts.ComposerArtefactHandler
 import org.grails.plugins.zkui.artefacts.GrailsComposerClass
 import org.grails.plugins.zkui.jsoup.select.Selector
-import org.grails.plugins.zkui.metaclass.ZkRedirectDynamicMethod
+import org.grails.plugins.zkui.metaclass.RedirectDynamicMethod
 import org.springframework.beans.factory.config.MethodInvokingFactoryBean
 import org.springframework.core.annotation.AnnotationUtils
 import org.springframework.transaction.annotation.Transactional
 import org.zkoss.zk.ui.Executions
-import org.zkoss.zk.ui.event.Event
 
 class ZkuiGrailsPlugin {
     // the plugin version
@@ -167,7 +167,8 @@ this plugin adds ZK Ajax framework (www.zkoss.org) support to Grails application
 
         //Inject taglib namespace to Composer
         TagLibraryLookup gspTagLibraryLookup = ctx.getBean("gspTagLibraryLookup")
-        def redirect = new ZkRedirectDynamicMethod(ctx)
+        def redirect = new RedirectDynamicMethod(ctx)
+        def bind = new BindDynamicMethod()
         if (manager?.hasGrailsPlugin("controllers")) {
             for (namespace in gspTagLibraryLookup.availableNamespaces) {
                 def propName = GrailsClassUtils.getGetterName(namespace)
@@ -183,6 +184,25 @@ this plugin adds ZK Ajax framework (www.zkoss.org) support to Grails application
                     }
                     mc.getSession = {-> Executions.current.session }
                     mc.getExecution = {-> Executions.current }
+                    // the bindData method
+                    mc.bindData = {Object target, Object args ->
+                        bind.invoke(delegate, BindDynamicMethod.METHOD_SIGNATURE, [target, args] as Object[])
+                    }
+                    mc.bindData = {Object target, Object args, List disallowed ->
+                        bind.invoke(delegate, BindDynamicMethod.METHOD_SIGNATURE, [target, args, [exclude: disallowed]] as Object[])
+                    }
+                    mc.bindData = {Object target, Object args, List disallowed, String filter ->
+                        bind.invoke(delegate, BindDynamicMethod.METHOD_SIGNATURE, [target, args, [exclude: disallowed], filter] as Object[])
+                    }
+                    mc.bindData = {Object target, Object args, Map includeExclude ->
+                        bind.invoke(delegate, BindDynamicMethod.METHOD_SIGNATURE, [target, args, includeExclude] as Object[])
+                    }
+                    mc.bindData = {Object target, Object args, Map includeExclude, String filter ->
+                        bind.invoke(delegate, BindDynamicMethod.METHOD_SIGNATURE, [target, args, includeExclude, filter] as Object[])
+                    }
+                    mc.bindData = {Object target, Object args, String filter ->
+                        bind.invoke(delegate, BindDynamicMethod.METHOD_SIGNATURE, [target, args, filter] as Object[])
+                    }
                 }
             }
         }

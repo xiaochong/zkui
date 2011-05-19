@@ -28,7 +28,8 @@ abstract class AbstractTagLib {
             } else if (attrName.startsWith("client_")) {
                 component.setWidgetListener(attrName.toString().replace("client_", ''), value.toString())
             } else {
-                if (component.metaClass.getMetaProperty(attrName)?.type?.isPrimitive()) {
+                def attrType = component.metaClass.getMetaProperty(attrName)?.type
+                if (attrType?.isPrimitive() || attrType in String || attrType in Number || attrType in Boolean || attrType in Character || attrType in org.zkoss.zul.Constraint || attrType == null) {
                     Property.assign(component, attrName, value.toString())
                 } else {
                     component[attrName] = value

@@ -47,7 +47,7 @@ import java.util.regex.Pattern;
  *        <p/>
  *        Created Oct 27, 2005
  */
-public class ZkRedirectDynamicMethod extends AbstractDynamicMethodInvocation {
+public class RedirectDynamicMethod extends AbstractDynamicMethodInvocation {
 
     public static final String METHOD_SIGNATURE = "redirect";
     public static final Pattern METHOD_PATTERN = Pattern.compile('^' + METHOD_SIGNATURE + '$');
@@ -63,7 +63,7 @@ public class ZkRedirectDynamicMethod extends AbstractDynamicMethodInvocation {
     private static final String ARGUMENT_FRAGMENT = "fragment";
     public static final String ARGUMENT_ERRORS = "errors";
 
-    private static final Log LOG = LogFactory.getLog(ZkRedirectDynamicMethod.class);
+    private static final Log LOG = LogFactory.getLog(RedirectDynamicMethod.class);
     private UrlMappingsHolder urlMappingsHolder;
     private boolean useJessionId = false;
     private ApplicationContext applicationContext;
@@ -73,7 +73,7 @@ public class ZkRedirectDynamicMethod extends AbstractDynamicMethodInvocation {
      *
      * @param applicationContext
      */
-    public ZkRedirectDynamicMethod(ApplicationContext applicationContext) {
+    public RedirectDynamicMethod(ApplicationContext applicationContext) {
         super(METHOD_PATTERN);
 
         if (applicationContext.containsBean(UrlMappingsHolder.BEAN_ID)) {
