@@ -13,6 +13,7 @@ import org.springframework.beans.factory.config.MethodInvokingFactoryBean
 import org.springframework.core.annotation.AnnotationUtils
 import org.springframework.transaction.annotation.Transactional
 import org.zkoss.zk.ui.Executions
+import org.grails.plugins.zkui.util.UriUtil
 
 class ZkuiGrailsPlugin {
     // the plugin version
@@ -121,6 +122,10 @@ this plugin adds ZK Ajax framework (www.zkoss.org) support to Grails application
     }
 
     def doWithDynamicMethods = { ctx ->
+        CharSequence.metaClass.fixToZkUri = {String contextPath ->
+            return UriUtil.fixToZk(delegate?.toString(), contextPath)
+        }
+
         org.zkoss.zk.ui.Component.metaClass.appendChild = {Closure closure ->
             def builder = new ZkComponentBuilder(delegate)
             closure.resolveStrategy = Closure.DELEGATE_FIRST

@@ -1,7 +1,6 @@
 package org.grails.plugins.zkui.multimedia
 
 import org.grails.plugins.zkui.AbstractTagLib
-import org.grails.plugins.zkui.util.UriUtil
 
 class AudioTagLib extends AbstractTagLib {
     static namespace = "z"
@@ -47,7 +46,7 @@ class AudioTagLib extends AbstractTagLib {
     def audio = {attrs, b ->
         //just for Intellij IDEA coding assistance
         true || attrs.apply || attrs.src || attrs.align || attrs.autostart || attrs.loop || attrs.border || attrs.context || attrs.popup || attrs.ctrlKeys || attrs.tooltip || attrs.class || attrs.left || attrs.top || attrs.zIndex || attrs.zindex || attrs.height || attrs.tooltiptext || attrs.zclass || attrs.sclass || attrs.draggable || attrs.droppable || attrs.focus || attrs.renderdefer || attrs.vflex || attrs.hflex || attrs.width || attrs.style || attrs.action || attrs.id || attrs.mold || attrs.widgetClass || attrs.stubonly || attrs.definition || attrs.visible
-        attrs.src = UriUtil.fixToZk(attrs.src, request.getContextPath())
+        attrs.src = attrs.src?.fixToZkUri(request.getContextPath())
         doTag(attrs, b, servletContext, request, response, pageScope, out)
     }
 
