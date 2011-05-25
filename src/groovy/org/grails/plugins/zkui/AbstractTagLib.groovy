@@ -26,7 +26,7 @@ abstract class AbstractTagLib {
                 zScript.language = "groovy"
                 ((ComponentCtrl) component).addEventHandler(attrName, new EventHandler(zScript, null))
             } else if (attrName.startsWith("client_")) {
-                component.setWidgetListener(attrName.toString().replace("client_", ''), value.toString())
+                component.setWidgetListener(attrName.toString().replaceFirst("client_", ''), value.toString())
             } else {
                 def attrType = component.metaClass.getMetaProperty(attrName)?.type
                 if (attrType?.isPrimitive() || attrType in String || attrType in Number || attrType in Boolean || attrType in Character || attrType in org.zkoss.zul.Constraint || attrType == null) {
