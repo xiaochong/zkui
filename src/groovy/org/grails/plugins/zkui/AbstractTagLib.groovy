@@ -38,9 +38,8 @@ abstract class AbstractTagLib {
         }
         String content = body.call()
         if (content && !content.allWhitespace) {
-            def bodyHandle = bodyHandleMap.get(getComponentClass().name)
-            if (bodyHandle) {
-                bodyHandle(component, content)
+            if (component.metaClass.respondsTo(component, 'setContent', String)) {
+                component.content = content
             } else {
                 component.appendChild(new Html(content))
             }
@@ -54,10 +53,4 @@ abstract class AbstractTagLib {
     }
 
     abstract Class getComponentClass()
-
-    private final static bodyHandleMap = [
-            "org.zkoss.zul.Style": {component, body -> component.content = body},
-            "org.zkoss.zul.Script": {component, body -> component.content = body},
-            "org.zkoss.zul.Html": {component, body -> component.content = body}
-    ].asImmutable()
 }
