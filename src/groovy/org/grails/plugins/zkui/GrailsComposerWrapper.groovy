@@ -31,10 +31,7 @@ class GrailsComposerWrapper implements Composer, EventListener {
                         || Event.class.equals(paramCls)) {
                     InvokerHelper.invokeMethod(controller, mtd.getName(), [evt] as Object[])
                 } else {
-                    evt = ((ForwardEvent) evt).getOrigin()
-                    while (evt instanceof ForwardEvent) {
-                        evt = ((ForwardEvent) evt).getOrigin()
-                    }
+                    evt = Events.getRealOrigin((ForwardEvent) evt)
                     InvokerHelper.invokeMethod(controller, mtd.getName(), [evt] as Object[])
                 }
             } else {
