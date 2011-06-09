@@ -3,6 +3,7 @@ package org.grails.plugins.zkui
 import javax.servlet.ServletContext
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
+import org.grails.plugins.zkui.util.AttrUriValueHandler
 import org.zkoss.zk.ui.Component
 import org.zkoss.zk.ui.metainfo.EventHandler
 import org.zkoss.zk.ui.metainfo.Property
@@ -30,6 +31,7 @@ abstract class AbstractTagLib {
             } else {
                 def attrType = component.metaClass.getMetaProperty(attrName)?.type
                 if (attrType?.isPrimitive() || attrType in String || attrType in Number || attrType in Boolean || attrType in Character || attrType in org.zkoss.zul.Constraint || attrType == null) {
+                    value = AttrUriValueHandler.handle(component, attrName, value, servletContext.contextPath)
                     Property.assign(component, attrName, value.toString())
                 } else {
                     component[attrName] = value

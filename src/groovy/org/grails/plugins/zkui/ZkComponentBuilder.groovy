@@ -7,6 +7,7 @@ import org.zkoss.zk.ui.Component
 import org.zkoss.zk.ui.event.EventListener
 import org.zkoss.zk.ui.metainfo.LanguageDefinition
 import org.zkoss.zk.ui.metainfo.PageDefinition
+import org.grails.plugins.zkui.util.AttrUriValueHandler
 
 class ZkComponentBuilder extends BuilderSupport implements ServletContextAware {
     ServletContext servletContext
@@ -61,6 +62,7 @@ class ZkComponentBuilder extends BuilderSupport implements ServletContextAware {
                     instance.setWidgetListener(attrName, value)
                 }
             } else {
+                value = AttrUriValueHandler.handle(instance, attrName, value, servletContext.contextPath)
                 instance[attrName] = value
             }
         }

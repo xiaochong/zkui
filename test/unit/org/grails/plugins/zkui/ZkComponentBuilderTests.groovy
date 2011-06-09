@@ -16,7 +16,9 @@ class ZkComponentBuilderTests extends GrailsUnitTestCase {
     void testBuild() {
         Div div = new Div()
         def builder = new ZkComponentBuilder()
-        builder.servletContext = mockFor(ServletContext).createMock()
+        def servletContextMock = mockFor(ServletContext)
+        servletContextMock.demand.getContextPath(2..2) {return "/"}
+        builder.servletContext = servletContextMock.createMock()
         builder.build(div){
             span(id: 'test') {
                 button(id: 'button',onClick:{})
