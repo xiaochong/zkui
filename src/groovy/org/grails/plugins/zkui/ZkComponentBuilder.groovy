@@ -1,34 +1,34 @@
 package org.grails.plugins.zkui
 
+import javax.servlet.ServletContext
+import org.springframework.web.context.ServletContextAware
 import org.zkoss.util.resource.Locators
 import org.zkoss.zk.ui.Component
 import org.zkoss.zk.ui.event.EventListener
 import org.zkoss.zk.ui.metainfo.LanguageDefinition
 import org.zkoss.zk.ui.metainfo.PageDefinition
 
-class ZkComponentBuilder extends BuilderSupport {
+class ZkComponentBuilder extends BuilderSupport implements ServletContextAware {
+    ServletContext servletContext
     Component parentComponent
     PageDefinition pageDefinition
     LanguageDefinition languageDefinition
-
-    ZkComponentBuilder(Component parent) {
-        this.parentComponent = parent
-    }
 
     protected void setParent(Object parent, Object child) {
         child.parent = parent
     }
 
     protected Object createNode(Object name) {
-        if (name == 'build') {
-            return parentComponent
-        } else {
-            return handle(name.toString(), [:])
-        }
+        return handle(name.toString(), [:])
     }
 
     protected Object createNode(Object name, Object value) {
-        return handle(name.toString(), [:])
+        if (name == 'build' && value instanceof Component) {
+            this.parentComponent = value
+            return value
+        } else {
+            return handle(name.toString(), [:])
+        }
     }
 
     protected Object createNode(Object name, Map attributes) {
@@ -38,7 +38,6 @@ class ZkComponentBuilder extends BuilderSupport {
     protected Object createNode(Object name, Map attributes, Object value) {
         return handle(name.toString(), attributes)
     }
-
 
     private Component handle(String name, Map attributes) {
         if (!languageDefinition) languageDefinition = LanguageDefinition.lookup(null)
@@ -68,4 +67,7 @@ class ZkComponentBuilder extends BuilderSupport {
         return instance
     }
 
+    void setServletContext(ServletContext servletContext) {
+        this.servletContext = servletContext
+    }
 }

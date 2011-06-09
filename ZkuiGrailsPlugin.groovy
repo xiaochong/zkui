@@ -4,16 +4,15 @@ import org.codehaus.groovy.grails.commons.spring.TypeSpecifyableTransactionProxy
 import org.codehaus.groovy.grails.orm.support.GroovyAwareNamedTransactionAttributeSource
 import org.codehaus.groovy.grails.web.metaclass.BindDynamicMethod
 import org.codehaus.groovy.grails.web.pages.TagLibraryLookup
-import org.grails.plugins.zkui.ZkComponentBuilder
 import org.grails.plugins.zkui.artefacts.ComposerArtefactHandler
 import org.grails.plugins.zkui.artefacts.GrailsComposerClass
 import org.grails.plugins.zkui.jsoup.select.Selector
 import org.grails.plugins.zkui.metaclass.RedirectDynamicMethod
+import org.grails.plugins.zkui.util.UriUtil
 import org.springframework.beans.factory.config.MethodInvokingFactoryBean
 import org.springframework.core.annotation.AnnotationUtils
 import org.springframework.transaction.annotation.Transactional
 import org.zkoss.zk.ui.Executions
-import org.grails.plugins.zkui.util.UriUtil
 
 class ZkuiGrailsPlugin {
     // the plugin version
@@ -73,6 +72,9 @@ this plugin adds ZK Ajax framework (www.zkoss.org) support to Grails application
     }
 
     def doWithSpring = {
+        "zkComponentBuilder"(org.grails.plugins.zkui.ZkComponentBuilder) { bean ->
+            bean.scope = "prototype"
+        }
         application.composerClasses.each { composerClass ->
             def composerBeanName = composerClass.clazz.name
             def hasDataSource = (application.config?.dataSource || application.domainClasses)
@@ -127,9 +129,9 @@ this plugin adds ZK Ajax framework (www.zkoss.org) support to Grails application
         }
 
         org.zkoss.zk.ui.Component.metaClass.appendChild = {Closure closure ->
-            def builder = new ZkComponentBuilder(delegate)
+            def builder = ctx.getBean('zkComponentBuilder')
             closure.resolveStrategy = Closure.DELEGATE_FIRST
-            builder.build(closure)
+            builder.build(delegate, closure)
         }
         org.zkoss.zk.ui.Component.metaClass.leftShift = {Object value ->
             delegate.appendChild(value)
