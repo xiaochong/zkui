@@ -2,6 +2,7 @@ package org.grails.plugins.zkui
 
 import grails.test.GrailsUnitTestCase
 import org.zkoss.zul.Div
+import javax.servlet.ServletContext
 
 class ZkComponentBuilderTests extends GrailsUnitTestCase {
     protected void setUp() {
@@ -14,8 +15,9 @@ class ZkComponentBuilderTests extends GrailsUnitTestCase {
 
     void testBuild() {
         Div div = new Div()
-        def builder = new ZkComponentBuilder(div)
-        builder.build {
+        def builder = new ZkComponentBuilder()
+        builder.servletContext = mockFor(ServletContext).createMock()
+        builder.build(div){
             span(id: 'test') {
                 button(id: 'button',onClick:{})
             }
