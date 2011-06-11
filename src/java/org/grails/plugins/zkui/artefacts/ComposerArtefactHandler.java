@@ -1,6 +1,7 @@
 package org.grails.plugins.zkui.artefacts;
 
-import org.codehaus.groovy.grails.commons.*;
+import org.codehaus.groovy.grails.commons.ArtefactHandlerAdapter;
+import org.codehaus.groovy.grails.commons.DomainClassArtefactHandler;
 
 
 public class ComposerArtefactHandler extends ArtefactHandlerAdapter {

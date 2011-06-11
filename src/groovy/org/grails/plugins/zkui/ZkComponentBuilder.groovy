@@ -1,13 +1,13 @@
 package org.grails.plugins.zkui
 
 import javax.servlet.ServletContext
+import org.grails.plugins.zkui.util.ZkUriHandler
 import org.springframework.web.context.ServletContextAware
 import org.zkoss.util.resource.Locators
 import org.zkoss.zk.ui.Component
 import org.zkoss.zk.ui.event.EventListener
 import org.zkoss.zk.ui.metainfo.LanguageDefinition
 import org.zkoss.zk.ui.metainfo.PageDefinition
-import org.grails.plugins.zkui.util.AttrUriValueHandler
 
 class ZkComponentBuilder extends BuilderSupport implements ServletContextAware {
     ServletContext servletContext
@@ -62,7 +62,7 @@ class ZkComponentBuilder extends BuilderSupport implements ServletContextAware {
                     instance.setWidgetListener(attrName, value)
                 }
             } else {
-                value = AttrUriValueHandler.handle(instance, attrName, value, servletContext.contextPath)
+                value = ZkUriHandler.handle(instance, attrName, value, servletContext.contextPath)
                 instance[attrName] = value
             }
         }

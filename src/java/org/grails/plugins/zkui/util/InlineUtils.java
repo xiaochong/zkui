@@ -18,7 +18,7 @@ Copyright (C) 2007 Potix Corporation. All Rights Reserved.
 */
 package org.grails.plugins.zkui.util;
 
-import org.grails.plugins.zkui.Inline;
+import org.grails.plugins.zkui.zul.Inline;
 import org.zkoss.lang.Objects;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Page;

@@ -4,7 +4,8 @@ import javax.servlet.ServletContext
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 import org.grails.plugins.zkui.PageRenderer
-import org.grails.plugins.zkui.util.AttrUriValueHandler
+import org.grails.plugins.zkui.util.InlineUtils
+import org.grails.plugins.zkui.util.ZkUriHandler
 import org.zkoss.web.servlet.http.Https
 import org.zkoss.zk.ui.http.ExecutionImpl
 import org.zkoss.zk.ui.http.I18Ns
@@ -16,10 +17,8 @@ import org.zkoss.zk.ui.metainfo.PageDefinitions
 import org.zkoss.zk.ui.metainfo.Property
 import org.zkoss.zk.ui.metainfo.ZScript
 import org.zkoss.zul.Constraint
-import org.zkoss.zul.Html
 import org.zkoss.zk.ui.*
 import org.zkoss.zk.ui.sys.*
-import org.grails.plugins.zkui.util.InlineUtils
 
 abstract class AbstractTagLib {
 
@@ -35,15 +34,15 @@ abstract class AbstractTagLib {
             pageScope.parents.push(component)
             doRender(servletContext, request, response, body, pageScope, out, composeHandle, component, attrs)
         } else {
-            doChildComponent(servletContext, pageScope, component, attrs, body, composeHandle,out)
+            doChildComponent(servletContext, pageScope, component, attrs, body, composeHandle, out)
         }
     }
 
-    private def doChildComponent(ServletContext servletContext, Binding pageScope, Component component, attrs, body, ComposerHandler composeHandle,out) {
+    private def doChildComponent(ServletContext servletContext, Binding pageScope, Component component, attrs, body, ComposerHandler composeHandle, out) {
         pageScope.parents.last.appendChild(component)
         pageScope.parents.push(component)
         setAttrs(attrs, component, servletContext)
-        bodyCall(body, component,out)
+        bodyCall(body, component, out)
         composeHandle.doAfterCompose(component)
         pageScope.parents.pop()
     }
@@ -58,7 +57,7 @@ abstract class AbstractTagLib {
             } else {
                 def attrType = component.metaClass.getMetaProperty(attrName)?.type
                 if (attrType?.isPrimitive() || attrType in String || attrType in Number || attrType in Boolean || attrType in Character || attrType in Constraint || attrType == null) {
-                    value = AttrUriValueHandler.handle(component, attrName, value, servletContext.contextPath)
+                    value = ZkUriHandler.handle(component, attrName, value, servletContext.contextPath)
                     Property.assign(component, attrName, value.toString())
                 } else {
                     component[attrName] = value
@@ -73,7 +72,6 @@ abstract class AbstractTagLib {
             if (component.metaClass.respondsTo(component, 'setContent', String)) {
                 component.content = content
             } else {
-//                component.appendChild(new Html(content))
                 InlineUtils.adjustChildren(null, component, component.getChildren(), content)
             }
         }
@@ -100,7 +98,7 @@ abstract class AbstractTagLib {
             ((SessionCtrl) sess).notifyClientRequest(true)
 
             final UiFactory uf = wappc.getUiFactory()
-            final Richlet richlet = new EmbedRichlet(body, pageScope, composeHandle, rootComponent, attrs, servletContext,out)
+            final Richlet richlet = new EmbedRichlet(body, pageScope, composeHandle, rootComponent, attrs, servletContext, out)
             page = uf.newPage(ri, richlet, path)
             page.setZScriptLanguage("groovy")
 
@@ -141,20 +139,20 @@ abstract class AbstractTagLib {
         def servletContext
         def out
 
-        EmbedRichlet(body, pageScope, composeHandle, rootComp, attrs, servletContext,out) {
+        EmbedRichlet(body, pageScope, composeHandle, rootComp, attrs, servletContext, out) {
             this.body = body
             this.pageScope = pageScope
             this.composeHandle = composeHandle
             this.rootComp = rootComp
             this.attrs = attrs
             this.servletContext = servletContext
-            this.out=out
+            this.out = out
         }
 
         void service(Page page) {
             rootComp.setPage(page)
             setAttrs(attrs, rootComp, servletContext)
-            bodyCall(body, rootComp,out)
+            bodyCall(body, rootComp, out)
             composeHandle.doAfterCompose(rootComp)
         }
     }

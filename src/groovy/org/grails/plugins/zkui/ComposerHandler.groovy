@@ -1,12 +1,12 @@
 package org.grails.plugins.zkui
 
-import org.zkoss.zk.ui.Component
-import org.zkoss.zk.ui.util.Composer
-import org.zkoss.lang.Classes
-import org.zkoss.zk.ui.UiException
-import org.zkoss.zk.ui.util.ComposerExt
 import org.codehaus.groovy.grails.commons.ApplicationHolder
 import org.grails.plugins.zkui.artefacts.ComposerArtefactHandler
+import org.zkoss.lang.Classes
+import org.zkoss.zk.ui.Component
+import org.zkoss.zk.ui.UiException
+import org.zkoss.zk.ui.util.Composer
+import org.zkoss.zk.ui.util.ComposerExt
 
 class ComposerHandler {
     Composer composer

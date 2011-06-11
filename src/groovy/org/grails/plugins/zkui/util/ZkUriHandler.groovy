@@ -2,7 +2,7 @@ package org.grails.plugins.zkui.util
 
 import org.zkoss.zk.ui.Component
 
-class AttrUriValueHandler {
+class ZkUriHandler {
     /**
      *
      * @param component the zk Component

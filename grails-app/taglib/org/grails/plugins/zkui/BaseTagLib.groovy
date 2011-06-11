@@ -32,4 +32,12 @@ class BaseTagLib {
         out << JspFns.outZkHtmlTags(servletContext, request, response, null)
     }
 
+
+//    def attribute = {attrs, b ->
+//        if (!attrs.name) {
+//            throwTagError("Attribute [name] must not be null")
+//        }
+//        String content = b.call()
+//        AbstractTagLib.applyAttrs([name: content], pageScope.parents.last, servletContext)
+//    }
 }

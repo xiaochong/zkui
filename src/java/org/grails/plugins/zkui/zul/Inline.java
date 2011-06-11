@@ -1,4 +1,4 @@
-package org.grails.plugins.zkui;
+package org.grails.plugins.zkui.zul;
 
 import org.zkoss.zk.ui.AbstractComponent;
 

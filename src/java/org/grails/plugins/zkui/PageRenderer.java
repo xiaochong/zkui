@@ -1,5 +1,6 @@
 package org.grails.plugins.zkui;
 
+import org.grails.plugins.zkui.zul.Inline;
 import org.zkoss.xml.XMLs;
 import org.zkoss.zk.ui.*;
 import org.zkoss.zk.ui.sys.ComponentCtrl;
@@ -14,11 +15,6 @@ class PageRenderer implements org.zkoss.zk.ui.sys.PageRenderer {
     public void render(Page page, Writer out) throws IOException {
         final Execution exec = Executions.getCurrent();
         final Desktop desktop = exec.getDesktop();
-
-//        out.write(HtmlPageRenders.outHeaders(exec, page, true));
-//        out.write(HtmlPageRenders.outLangStyleSheets(exec, null, null));
-//        out.write(HtmlPageRenders.outLangJavaScripts(exec, null, null));
-//        out.write(HtmlPageRenders.outHeaders(exec, page, false));
 
         out.write("<script type=\"text/javascript\">zkpb('");
         out.write(page.getUuid());
