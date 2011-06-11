@@ -47,7 +47,7 @@ abstract class AbstractTagLib {
         pageScope.parents.pop()
     }
 
-    private def setAttrs(attrs, Component component, servletContext) {
+    static def setAttrs(attrs, Component component, servletContext) {
         attrs.each {String attrName, value ->
             if (attrName.startsWith("on")) {
                 final ZScript zScript = ZScript.parseContent(value.toString())

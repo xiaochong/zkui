@@ -1,8 +1,8 @@
 package org.grails.plugins.zkui
 
+import org.grails.plugins.zkui.util.Renders
 import org.zkoss.zk.fn.JspFns
 import org.zkoss.zk.ui.Component
-import org.grails.plugins.zkui.util.Renders
 
 class BaseTagLib {
     static namespace = "z"
@@ -33,11 +33,14 @@ class BaseTagLib {
     }
 
 
-//    def attribute = {attrs, b ->
-//        if (!attrs.name) {
-//            throwTagError("Attribute [name] must not be null")
-//        }
-//        String content = b.call()
-//        AbstractTagLib.applyAttrs([name: content], pageScope.parents.last, servletContext)
-//    }
+    def attribute = {attrs, b ->
+        if (!attrs.name) {
+            throwTagError("Attribute [name] must not be null")
+        }
+        String content = b.call()
+        if (content) {
+            if ("true".equalsIgnoreCase(attrs.trim)) content = content.trim()
+            AbstractTagLib.setAttrs([(attrs.name): content], pageScope.parents.last, servletContext)
+        }
+    }
 }
