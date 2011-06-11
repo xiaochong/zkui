@@ -9,25 +9,31 @@ public class Inline extends AbstractComponent {
     private String _content = "";
     private transient boolean _inRedraw;
 
-    /** Contructs a {@link Inline} component to embed HTML tags.
+    /**
+     * Contructs a {@link Inline} component to embed HTML tags.
      */
     public Inline() {
     }
-    /** Contructs a {@link Inline} component to embed HTML tags
+
+    /**
+     * Contructs a {@link Inline} component to embed HTML tags
      * with the specified content.
      */
     public Inline(String content) {
         _content = content != null ? content : "";
     }
 
-    /** Returns the embedded content (i.e., HTML tags).
+    /**
+     * Returns the embedded content (i.e., HTML tags).
      * <p>Default: empty ("").
      */
     public String getContent() {
         return _content;
     }
-    /** Sets the embedded content (i.e., HTML tags).
-     *
+
+    /**
+     * Sets the embedded content (i.e., HTML tags).
+     * <p/>
      * <p>Note: Unlike {@link org.zkoss.zul.Html}, the content of {@link Inline}
      * cannot be changed dynamically.
      * In other words, once the output of
@@ -41,7 +47,9 @@ public class Inline extends AbstractComponent {
     }
 
     //-- Component --//
-    /** Default: not childable.
+
+    /**
+     * Default: not childable.
      */
     public boolean isChildable() {
         return false;
@@ -65,7 +73,7 @@ public class Inline extends AbstractComponent {
     }
 
     protected void renderProperties(org.zkoss.zk.ui.sys.ContentRenderer renderer)
-    throws java.io.IOException { //ZK 5.0
+            throws java.io.IOException { //ZK 5.0
         super.renderProperties(renderer);
         render(renderer, "prolog", getContent());
     }
