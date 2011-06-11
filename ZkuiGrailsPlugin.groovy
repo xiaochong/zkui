@@ -52,6 +52,15 @@ this plugin adds ZK Ajax framework (www.zkoss.org) support to Grails application
     def documentation = "http://grails.org/plugin/zkui"
 
     def doWithWebDescriptor = { webXml ->
+        def listenerElement = webXml.'listener'
+        def lastListener = listenerElement[listenerElement.size() - 1]
+        lastListener + {
+            'listener' {
+                'description'("ZK listener for cleanup when a session is destroyed")
+                'listener-class'("org.zkoss.zk.ui.http.HttpSessionListener")
+            }
+        }
+
         def servletElement = webXml.'servlet'
         def lastServlet = servletElement[servletElement.size() - 1]
         lastServlet + {
@@ -72,6 +81,7 @@ this plugin adds ZK Ajax framework (www.zkoss.org) support to Grails application
     }
 
     def doWithSpring = {
+        "webManagerInit"(org.grails.plugins.zkui.WebManagerInit)
         "zkComponentBuilder"(org.grails.plugins.zkui.ZkComponentBuilder) { bean ->
             bean.scope = "prototype"
         }

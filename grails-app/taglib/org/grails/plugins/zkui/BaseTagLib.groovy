@@ -2,6 +2,7 @@ package org.grails.plugins.zkui
 
 import org.zkoss.zk.fn.JspFns
 import org.zkoss.zk.ui.Component
+import org.grails.plugins.zkui.util.Renders
 
 class BaseTagLib {
     static namespace = "z"
@@ -26,6 +27,9 @@ class BaseTagLib {
      * render a zk style sheet and javascript resource.
      */
     def resources = {attrs, b ->
+        out << '<meta http-equiv="Pragma" content="no-cache"/>'
+        out << '<meta http-equiv="Expires" content="-1"/>'
         out << JspFns.outZkHtmlTags(servletContext, request, response, null)
     }
+
 }

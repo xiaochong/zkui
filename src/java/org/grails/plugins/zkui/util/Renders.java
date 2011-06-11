@@ -10,7 +10,7 @@
 Copyright (C) 2010 Potix Corporation. All Rights Reserved.
 
 */
-package org.grails.plugins.zkui;
+package org.grails.plugins.zkui.util;
 
 import org.zkoss.lang.Library;
 import org.zkoss.web.servlet.http.Https;
