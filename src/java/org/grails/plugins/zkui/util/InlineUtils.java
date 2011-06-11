@@ -45,10 +45,10 @@ public class InlineUtils {
      * @param parent the parent component. If null, page must be specified.
      */
     public static void adjustChildren(Page page, Component parent,
-                                      Collection children, String body) {
+                                      Collection<Component> children, String body) {
 
 
-        Iterator it = new ArrayList(children).iterator();
+        Iterator it = new ArrayList<Component>(children).iterator();
 
         for (int j = 0, len = body != null ? body.length() : 0; j < len; ) {
             int k = body.indexOf(MARK_PREFIX, j);
