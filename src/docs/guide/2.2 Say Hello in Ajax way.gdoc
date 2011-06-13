@@ -1,0 +1,15 @@
+Let us put some interactivity into it.
+{code:xml}
+<z:button label="Say Hello" onClick="Messagebox.show('Hello World! Time now is:'+new Date())"/>
+{code}
+Then, when you click the button, you'll see the following:
+
+!2.2 Say Hello in Ajax way.png!
+
+The onClick attribute is a special attribute used to add an event listener to the component such that it is invoked when an end user clicks the component. The attribute value could be any legal groovy code.
+
+Here we invoke [Messagebox.show(String)|http://www.zkoss.org/javadoc/latest/zk/org/zkoss/zul/Messagebox.html#show(java.lang.String)] to show a message box as depicted above.
+
+{note}
+Notice that it is not JavaScript,It is Groovy and runs at the server
+{note}

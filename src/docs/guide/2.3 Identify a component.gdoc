@@ -1,0 +1,10 @@
+A component is a POJO, so you can reference it any way you like. However, ZK provides a convenient way to identify and to retrieve a component: identifier. For example, we named the textbox as input by assigning id to it, as follows.
+
+{code:xml}
+<z:window title="Property Retrieval" border="normal">
+    Enter a property name: <z:textbox id="input"/>
+    <z:button label="Retrieve" onClick="Messagebox.show(System.getProperty(input.getValue()))"/>
+</z:window>
+{code}
+
+!2.3 Identify a component.png!

@@ -1,0 +1,20 @@
+A component is a POJO. You could instantiate and manipulate directly. For example, we could generate the result by instantiating a component to represent it, and then append it to another component (an instance of [vlayout|http://books.zkoss.org/wiki/ZK_Component_Reference/Layouts/Vlayout]).
+
+{code:xml}
+<z:window title="Property Retrieval" border="normal">
+    Enter a property name: <z:textbox id="input"/>
+    <z:button label="Retrieve" onClick="result.appendChild(new Label(System.getProperty(input.getValue())))"/>
+    <z:vlayout id="result"/>
+</z:window>
+{code}
+
+Similarly you could change the state of a component directly. All modifications will be synchronized back to the client automatically.
+
+{code:xml}
+<z:window title="Property Retrieval" border="normal">
+    Enter a property name: <z:textbox id="input"/>
+    <z:button label="Retrieve" onClick="result.setValue(System.getProperty(input.getValue()))"/>
+    <z:separator/>
+    <z:label id="result"/>
+</z:window>
+{code}

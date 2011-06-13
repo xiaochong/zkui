@@ -1,0 +1,64 @@
+Embedding Groovy code in a gsp page is straightforward and easy to read. However, in a production environment, it is usually better to separate the code from the user interfaces. In additions, the compiled Groovy code runs much faster than the embedded code which is interpreted at the run time.
+
+To separate code from UI, we could implement a Composer
+
+use create-composer command
+
+{code:java}
+grails create-composer zkuidemo.PropertyRetriever
+{code}
+
+A composer called PropertyRetrieverComposer will be created in the grails-app/composers directory
+
+Modify the generated PropertyRetrieverComposer as follows
+
+{code:java}
+package zkuidemo
+
+import org.zkoss.zk.ui.Component
+import org.zkoss.zk.ui.event.Event
+import org.zkoss.zul.Label
+
+class PropertyRetrieverComposer {
+    static transactional = false
+    def afterCompose = {Component target ->
+        target.addEventListener("onClick", new org.zkoss.zk.ui.event.EventListener() { //add a event listener in Groovy
+            public void onEvent(Event event) {
+                String prop = System.getProperty(target.getFellow("input").getValue())
+                target.getFellow("result").appendChild(new Label(prop))
+            }
+        });
+    }
+}
+{code}
+
+
+The above code can be simplified as follows
+
+{code:java}
+package zkuidemo
+
+import org.zkoss.zk.ui.Component
+import org.zkoss.zk.ui.event.Event
+import org.zkoss.zul.Label
+
+class PropertyRetrieverComposer {
+    static transactional = false
+    def afterCompose = {Component target ->
+        target.addEventListener("onClick") {Event event ->
+            String prop = System.getProperty(target.getFellow("input").value)
+            target.getFellow("result").appendChild(new Label(prop))
+        }
+    }
+}
+{code}
+
+Then, we could associate the Composer (zkuidemo.PropertyRetrieverComposer) with a component by use of the apply attribute as shown below.
+{code:xml}
+<z:window title="Property Retrieval" border="normal">
+    Enter a property name: <z:textbox id="input"/>
+    <z:button label="Retrieve" apply="zkuidemo.PropertyRetrieverComposer"/>
+    <z:separator/>
+    <z:vlayout id="result"/>
+</z:window>
+{code}
