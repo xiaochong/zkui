@@ -6,7 +6,7 @@ A column of the footer of a grid [Grid|http://books.zkoss.org/wiki/ZK_Component_
 
 h2. Examples
 
-!foot.png!
+!footer.png!
 
 {code:xml}
 <z:grid width="300px">

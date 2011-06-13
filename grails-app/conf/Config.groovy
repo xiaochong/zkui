@@ -23,7 +23,8 @@ log4j = {
     warn 'org.mortbay.log'
 }
 
-grails.doc.authors = "xiaochong"
-grails.doc.license = "LGPL"
-grails.doc.copyright = "copyright"
+grails.doc.title = "ZK UI Plugin for Grails"
+grails.doc.authors = "groovyquan"
+grails.doc.license = "GNU Free Documentation License"
+grails.doc.copyright = "This document is licensed under GNU Free Documentation License"
 grails.doc.footer = "footer"

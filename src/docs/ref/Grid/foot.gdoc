@@ -6,7 +6,7 @@ Defines a set of footers [Footer|http://books.zkoss.org/wiki/ZK_Component_Refere
 
 h2. Examples
 
-!foot.png!
+!footer.png!
 
 {code:xml}
 <z:grid width="300px">

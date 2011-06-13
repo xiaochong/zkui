@@ -6,41 +6,7 @@ GroupFooter serves as a summary listitem of listgroup.
 
 h2. Examples
 
-!listgroupfoot.png!
-
 {code:xml}
-<z:window title="listbox demo" border="normal" width="250px">
-    <z:listbox id="box">
-        <z:listhead sizable="true">
-            <z:listheader label="name" sort="auto"/>
-            <z:listheader label="gender" sort="auto"/>
-        </z:listhead>
-        <z:listitem>
-            <z:listcell label="Mary"/>
-            <z:listcell label="FEMALE"/>
-        </z:listitem>
-        <z:listitem>
-            <z:listcell label="John"/>
-            <z:listcell label="MALE"/>
-        </z:listitem>
-        <z:listitem>
-            <z:listcell label="Jane"/>
-            <z:listcell label="FEMALE"/>
-        </z:listitem>
-        <z:listitem>
-            <z:listcell label="Henry"/>
-            <z:listcell label="MALE"/>
-        </z:listitem>
-        <z:listfoot>
-            <z:listfooter>
-                <z:label value="This is footer1"/>
-            </z:listfooter>
-            <z:listfooter>
-                <z:label value="This is footer2"/>
-            </z:listfooter>
-        </z:listfoot>
-    </z:listbox>
-</z:window>
 {code}
 
 h2. Description
