@@ -26,5 +26,5 @@ log4j = {
 grails.doc.title = "ZK UI Plugin for Grails"
 grails.doc.authors = "groovyquan"
 grails.doc.license = "GNU Free Documentation License"
-grails.doc.copyright = "This document is licensed under GNU Free Documentation License"
+grails.doc.copyright = "This document is licensed under GNU Free Documentation License,ZK UI Plugin for Grails is released under LGPL"
 grails.doc.footer = "footer"

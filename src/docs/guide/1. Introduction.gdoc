@@ -1,6 +1,94 @@
-What is it?
-Not Just a Grid is a flexible and modular css framework that is designed to assist in the rapid prototyping and development of websites. It has been designed for the future with larger screen sizes and the use of CSS3 for progressive enhancement and richer user experiences.
-Another framework?
-Just as not all of us drive the same car or use the same cellphone, there's no reason why a CSS frameworks should be a one size fits all approach. After working with multiple frameworks and tweaking them to my own needs I decided to start from scratch and that's when Not Just a Grid was born.
-What's Included?
-Not Just a Grid includes separate stylesheets covering multi-column layouts, typography, forms, tables and user experience enhancement. Also included is a range of common images that are used for both visual styling and user interface enhancement. These images can easily be changed to suit your needs.
+ZK UI plugin,the same as the ZKGrails plugin, seamlessly integrates ZK with Grails' infrastructures.
+
+The different is it more likely to use the Grails' infrastructures, such as gsp, controllers rather than zk's zul.
+
+ZK UI Grails plug-ins brings powerful features as follows
+
+h3. Taglib
+Use Tag Libraries
+{code:xml}
+<z:window title="My First ZK UI Application" border="normal">
+    Hello World!
+</z:window>
+{code}
+!2.1 Hello World.png!
+
+h3. Composer
+Provides a Composer Artefacts simplify the integration between grails and zk
+
+Usage:
+{code:java}
+grails create-composer [name]
+{code}
+
+h3. Builder
+
+A groovy way to create zk components, following groovy Builder paradigm
+
+@Controller@
+{code:groovy}
+def index = {
+    def window = new Window(title: "listbox demo", border: "normal")
+    window << {
+        listbox {
+            listhead(sizable: true) {
+                listheader(label: "name", sort: "auto")
+                listheader(label: "gender", sort: "auto")
+            }
+            listitem {
+                listcell(label: "Mary")
+                listcell(label: "FEMALE")
+            }
+            listitem {
+                listcell(label: "John")
+                listcell(label: "MALE")
+            }
+            listitem {
+                listcell(label: "Jane")
+                listcell(label: "FEMALE")
+            }
+            listitem {
+                listcell(label: "Henry")
+                listcell(label: "MALE")
+            }
+            listfoot {
+                listfooter {
+                    label(value: "This is footer1")
+                }
+                listfooter {
+                    label(value: "This is footer1")
+                }
+            }
+        }
+    }
+    [window:window]
+}
+{code}
+
+@View@
+{code:xml}
+<z:render comp="${window}"/>
+{code}
+!listbox.png!
+
+h3. Selector
+
+Provides a very convenient API for extracting and manipulating zk component, using the jquery-like methods.
+
+View
+{code:xml}
+<z:window id="window">
+    <z:textbox name="t1" value="value1"/>
+    <z:textbox id="t2" value="value2"/>
+    <z:textbox value="value3"/>
+</z:window>
+{code}
+
+Selector code
+{code}
+assert 3, window.select("textbox").size()
+assert "value2", window.select("#t2")[0].value
+assert "value1", window.select("textbox[name=t1]")[0].value
+{code}
+
+
