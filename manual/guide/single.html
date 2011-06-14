@@ -1,0 +1,155 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>ZK UI Plugin for Grails 0.3 - Reference Documentation</title>
+        <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen" title="Style" charset="utf-8"/>
+        <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8" />
+    </head>
+    <body class="body">
+        <div id="header">
+            <div class="images"><br/><br/>
+                <a href="http://grails.org" target="_blank"><img alt="ZK UI Logo" title="ZK UI Plugin for Grails Framework" src="../img/zkui_logo.png" border="0"/></a>
+                <span style="right:30px; top:20px; position:absolute;">
+                    <a href="../index.html" target="_top">Frames</a> | <a href="index.html" target="_top">No Frames</a><br/><br/>
+                    <a href="http://springsource.com" target="_blank"></a>
+                </span>
+            </div>
+            <div class="message">zkui</div>
+            <h1>ZK UI Plugin for Grails - Reference Documentation</h1>
+            <p><strong>Authors:</strong> groovyquan</p>
+            <p><strong>Version:</strong> 0.3</p>
+            <em>This document is licensed under GNU Free Documentation License,ZK UI Plugin for Grails is released under LGPL</em>
+        </div>
+
+        <div id="toc">
+            <h2>Table of Contents</h2>
+            <div class="tocItem" style="margin-left:0px"><a href="#1. Introduction">1. Introduction</a></div><div class="tocItem" style="margin-left:0px"><a href="#2. Getting Started">2. Getting Started</a></div><div class="tocItem" style="margin-left:10px"><a href="#2.1 Hello World">2.1 Hello World</a></div><div class="tocItem" style="margin-left:10px"><a href="#2.2 Say Hello in Ajax way">2.2 Say Hello in Ajax way</a></div><div class="tocItem" style="margin-left:10px"><a href="#2.3 Identify a component">2.3 Identify a component</a></div><div class="tocItem" style="margin-left:10px"><a href="#2.4 A component is a POJO">2.4 A component is a POJO</a></div><div class="tocItem" style="margin-left:10px"><a href="#2.5 Separating code from user interface">2.5 Separating code from user interface</a></div><div class="tocItem" style="margin-left:0px"><a href="#3. Composer">3. Composer</a></div><div class="tocItem" style="margin-left:0px"><a href="#4. Builder">4. Builder</a></div><div class="tocItem" style="margin-left:0px"><a href="#5. Selector">5. Selector</a></div><div class="tocItem" style="margin-left:0px"><a href="#6. Event Handling">6. Event Handling</a></div><div class="tocItem" style="margin-left:10px"><a href="#6.1 Event Listening">6.1 Event Listening</a></div><div class="tocItem" style="margin-left:10px"><a href="#6.2 Client-side Event Listening">6.2 Client-side Event Listening</a></div>
+        </div>
+        <div id="content">
+            <h1><a name="1. Introduction">1. Introduction</a></h1>ZK UI plugin,the same as the ZKGrails plugin, seamlessly integrates ZK with Grails' infrastructures.<p class="paragraph"/>The different is it more likely to use the Grails' infrastructures, such as gsp, controllers rather than zk's zul.<p class="paragraph"/>ZK UI Grails plug-ins brings powerful features as follows<p class="paragraph"/><h3>Taglib</h3>
+Use Tag Libraries
+<div class="code"><pre><span class="xml&#45;tag">&#60;z:window title=<span class="xml&#45;quote">"My First ZK UI Application"</span> border=<span class="xml&#45;quote">"normal"</span>&#62;</span>
+    Hello World!
+<span class="xml&#45;tag">&#60;/z:window&#62;</span></pre></div>
+<img border="0" class="center" src="../img/2.1 Hello World.png"></img><p class="paragraph"/><h3>Composer</h3>
+Provides a Composer Artefacts simplify the integration between grails and zk<p class="paragraph"/>Usage:
+<div class="code"><pre>grails create&#45;composer &#91;name&#93;</pre></div><p class="paragraph"/><h3>Builder</h3><p class="paragraph"/>A groovy way to create zk components, following groovy Builder paradigm<p class="paragraph"/><code>Controller</code>
+<div class="code"><pre>def index = &#123;
+    def window = <span class="java&#45;keyword">new</span> Window(title: <span class="java&#45;quote">"listbox demo"</span>, border: <span class="java&#45;quote">"normal"</span>)
+    window &#60;&#60; &#123;
+        listbox &#123;
+            listhead(sizable: <span class="java&#45;keyword">true</span>) &#123;
+                listheader(label: <span class="java&#45;quote">"name"</span>, sort: <span class="java&#45;quote">"auto"</span>)
+                listheader(label: <span class="java&#45;quote">"gender"</span>, sort: <span class="java&#45;quote">"auto"</span>)
+            &#125;
+            listitem &#123;
+                listcell(label: <span class="java&#45;quote">"Mary"</span>)
+                listcell(label: <span class="java&#45;quote">"FEMALE"</span>)
+            &#125;
+            listitem &#123;
+                listcell(label: <span class="java&#45;quote">"John"</span>)
+                listcell(label: <span class="java&#45;quote">"MALE"</span>)
+            &#125;
+            listitem &#123;
+                listcell(label: <span class="java&#45;quote">"Jane"</span>)
+                listcell(label: <span class="java&#45;quote">"FEMALE"</span>)
+            &#125;
+            listitem &#123;
+                listcell(label: <span class="java&#45;quote">"Henry"</span>)
+                listcell(label: <span class="java&#45;quote">"MALE"</span>)
+            &#125;
+            listfoot &#123;
+                listfooter &#123;
+                    label(value: <span class="java&#45;quote">"This is footer1"</span>)
+                &#125;
+                listfooter &#123;
+                    label(value: <span class="java&#45;quote">"This is footer1"</span>)
+                &#125;
+            &#125;
+        &#125;
+    &#125;
+    &#91;window:window&#93;
+&#125;</pre></div><p class="paragraph"/><code>View</code>
+<div class="code"><pre><span class="xml&#45;tag">&#60;z:render comp=<span class="xml&#45;quote">"$&#123;window&#125;"</span>/&#62;</span></pre></div>
+<img border="0" class="center" src="../img/listbox.png"></img><p class="paragraph"/><h3>Selector</h3><p class="paragraph"/>Provides a very convenient API for extracting and manipulating zk component, using the jquery-like methods.<p class="paragraph"/>View
+<div class="code"><pre><span class="xml&#45;tag">&#60;z:window id=<span class="xml&#45;quote">"window"</span>&#62;</span>
+    <span class="xml&#45;tag">&#60;z:textbox name=<span class="xml&#45;quote">"t1"</span> value=<span class="xml&#45;quote">"value1"</span>/&#62;</span>
+    <span class="xml&#45;tag">&#60;z:textbox id=<span class="xml&#45;quote">"t2"</span> value=<span class="xml&#45;quote">"value2"</span>/&#62;</span>
+    <span class="xml&#45;tag">&#60;z:textbox value=<span class="xml&#45;quote">"value3"</span>/&#62;</span>
+<span class="xml&#45;tag">&#60;/z:window&#62;</span></pre></div><p class="paragraph"/>Selector code
+<div class="code"><pre>assert 3, window.select(<span class="java&#45;quote">"textbox"</span>).size()
+assert <span class="java&#45;quote">"value2"</span>, window.select(<span class="java&#45;quote">"&#35;t2"</span>)&#91;0&#93;.value
+assert <span class="java&#45;quote">"value1"</span>, window.select(<span class="java&#45;quote">"textbox&#91;name=t1&#93;"</span>)&#91;0&#93;.value</pre></div><p class="paragraph"/>
+<h1><a name="2. Getting Started">2. Getting Started</a></h1>
+<h2><a name="2.1 Hello World">2.1 Hello World</a></h2><h3>DOCTYPE</h3>
+The html pages generated by gsp must generate the doc type as follows.
+<div class="code"><pre>&#60;!DOCTYPE html PUBLIC <span class="xml&#45;quote">"&#45;//W3C//DTD XHTML 1.0 Transitional//EN"</span>
+ <span class="xml&#45;quote">"http://www.w3.org/TR/xhtml1/DTD/xhtml1&#45;transitional.dtd"</span>&#62;</pre></div><p class="paragraph"/><h3>Importing resources</h3>
+Add the tag &#60;z:resources/&#62; to the head of the layout/main.gsp or any page that you want to use ZK UI Grails plug-ins.
+<div class="code"><pre><span class="xml&#45;tag">&#60;html xmlns=<span class="xml&#45;quote">"http://www.w3.org/1999/xhtml"</span>&#62;</span>
+  <span class="xml&#45;tag">&#60;head&#62;</span>
+  <span class="xml&#45;tag">&#60;z:resources/&#62;</span></pre></div><p class="paragraph"/><h3>Hello World!</h3>
+<div class="code"><pre>&#60;!DOCTYPE html PUBLIC <span class="xml&#45;quote">"&#45;//W3C//DTD XHTML 1.0 Transitional//EN"</span>
+ <span class="xml&#45;quote">"http://www.w3.org/TR/xhtml1/DTD/xhtml1&#45;transitional.dtd"</span>&#62;
+<span class="xml&#45;tag">&#60;html xmlns=<span class="xml&#45;quote">"http://www.w3.org/1999/xhtml"</span>&#62;</span>
+<span class="xml&#45;tag">&#60;head&#62;</span>
+    <span class="xml&#45;tag">&#60;title&#62;</span>Hello World Demo<span class="xml&#45;tag">&#60;/title&#62;</span>
+    <span class="xml&#45;tag">&#60;z:resources/&#62;</span>
+<span class="xml&#45;tag">&#60;/head&#62;</span><p class="paragraph"/><span class="xml&#45;tag">&#60;body&#62;</span>
+<span class="xml&#45;tag">&#60;z:window title=<span class="xml&#45;quote">"My First ZK UI Application"</span> border=<span class="xml&#45;quote">"normal"</span>&#62;</span>
+    Hello World!
+<span class="xml&#45;tag">&#60;/z:window&#62;</span>
+<span class="xml&#45;tag">&#60;/body&#62;</span>
+<span class="xml&#45;tag">&#60;/html&#62;</span></pre></div><p class="paragraph"/><img border="0" class="center" src="../img/2.1 Hello World.png"></img><h2><a name="2.2 Say Hello in Ajax way">2.2 Say Hello in Ajax way</a></h2>Let us put some interactivity into it.
+<div class="code"><pre><span class="xml&#45;tag">&#60;z:button label=<span class="xml&#45;quote">"Say Hello"</span> onClick=<span class="xml&#45;quote">"Messagebox.show('Hello World! Time now is:'+new Date())"</span>/&#62;</span></pre></div>
+Then, when you click the button, you'll see the following:<p class="paragraph"/><img border="0" class="center" src="../img/2.2 Say Hello in Ajax way.png"></img><p class="paragraph"/>The onClick attribute is a special attribute used to add an event listener to the component such that it is invoked when an end user clicks the component. The attribute value could be any legal groovy code.<p class="paragraph"/>Here we invoke <a href="http://www.zkoss.org/javadoc/latest/zk/org/zkoss/zul/Messagebox.html#show(java.lang.String)" target="blank">Messagebox.show(String)</a> to show a message box as depicted above.<p class="paragraph"/><blockquote class="note">
+Notice that it is not JavaScript,It is Groovy and runs at the server
+</blockquote><h2><a name="2.3 Identify a component">2.3 Identify a component</a></h2>A component is a POJO, so you can reference it any way you like. However, ZK provides a convenient way to identify and to retrieve a component: identifier. For example, we named the textbox as input by assigning id to it, as follows.<p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;z:window title=<span class="xml&#45;quote">"Property Retrieval"</span> border=<span class="xml&#45;quote">"normal"</span>&#62;</span>
+    Enter a property name: <span class="xml&#45;tag">&#60;z:textbox id=<span class="xml&#45;quote">"input"</span>/&#62;</span>
+    <span class="xml&#45;tag">&#60;z:button label=<span class="xml&#45;quote">"Retrieve"</span> onClick=<span class="xml&#45;quote">"Messagebox.show(System.getProperty(input.getValue()))"</span>/&#62;</span>
+<span class="xml&#45;tag">&#60;/z:window&#62;</span></pre></div><p class="paragraph"/><img border="0" class="center" src="../img/2.3 Identify a component.png"></img><h2><a name="2.4 A component is a POJO">2.4 A component is a POJO</a></h2>A component is a POJO. You could instantiate and manipulate directly. For example, we could generate the result by instantiating a component to represent it, and then append it to another component (an instance of <a href="http://books.zkoss.org/wiki/ZK_Component_Reference/Layouts/Vlayout" target="blank">vlayout</a>).<p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;z:window title=<span class="xml&#45;quote">"Property Retrieval"</span> border=<span class="xml&#45;quote">"normal"</span>&#62;</span>
+    Enter a property name: <span class="xml&#45;tag">&#60;z:textbox id=<span class="xml&#45;quote">"input"</span>/&#62;</span>
+    <span class="xml&#45;tag">&#60;z:button label=<span class="xml&#45;quote">"Retrieve"</span> onClick=<span class="xml&#45;quote">"result.appendChild(new Label(System.getProperty(input.getValue())))"</span>/&#62;</span>
+    <span class="xml&#45;tag">&#60;z:vlayout id=<span class="xml&#45;quote">"result"</span>/&#62;</span>
+<span class="xml&#45;tag">&#60;/z:window&#62;</span></pre></div><p class="paragraph"/>Similarly you could change the state of a component directly. All modifications will be synchronized back to the client automatically.<p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;z:window title=<span class="xml&#45;quote">"Property Retrieval"</span> border=<span class="xml&#45;quote">"normal"</span>&#62;</span>
+    Enter a property name: <span class="xml&#45;tag">&#60;z:textbox id=<span class="xml&#45;quote">"input"</span>/&#62;</span>
+    <span class="xml&#45;tag">&#60;z:button label=<span class="xml&#45;quote">"Retrieve"</span> onClick=<span class="xml&#45;quote">"result.setValue(System.getProperty(input.getValue()))"</span>/&#62;</span>
+    <span class="xml&#45;tag">&#60;z:separator/&#62;</span>
+    <span class="xml&#45;tag">&#60;z:label id=<span class="xml&#45;quote">"result"</span>/&#62;</span>
+<span class="xml&#45;tag">&#60;/z:window&#62;</span></pre></div><h2><a name="2.5 Separating code from user interface">2.5 Separating code from user interface</a></h2>Embedding Groovy code in a gsp page is straightforward and easy to read. However, in a production environment, it is usually better to separate the code from the user interfaces. In additions, the compiled Groovy code runs much faster than the embedded code which is interpreted at the run time.<p class="paragraph"/>To separate code from UI, we could implement a Composer<p class="paragraph"/>use create-composer command<p class="paragraph"/><div class="code"><pre>grails create&#45;composer zkuidemo.PropertyRetriever</pre></div><p class="paragraph"/>A composer called PropertyRetrieverComposer will be created in the grails-app/composers directory<p class="paragraph"/>Modify the generated PropertyRetrieverComposer as follows<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">package</span> zkuidemo<p class="paragraph"/><span class="java&#45;keyword">import</span> org.zkoss.zk.ui.Component
+<span class="java&#45;keyword">import</span> org.zkoss.zk.ui.event.Event
+<span class="java&#45;keyword">import</span> org.zkoss.zul.Label<p class="paragraph"/>class PropertyRetrieverComposer &#123;
+    <span class="java&#45;keyword">static</span> transactional = <span class="java&#45;keyword">false</span>
+    def afterCompose = &#123;Component target &#45;&#62;
+        target.addEventListener(<span class="java&#45;quote">"onClick"</span>, <span class="java&#45;keyword">new</span> org.zkoss.zk.ui.event.EventListener() &#123; //add a event listener in Groovy
+            <span class="java&#45;keyword">public</span> void onEvent(Event event) &#123;
+                <span class="java&#45;object">String</span> prop = <span class="java&#45;object">System</span>.getProperty(target.getFellow(<span class="java&#45;quote">"input"</span>).getValue())
+                target.getFellow(<span class="java&#45;quote">"result"</span>).appendChild(<span class="java&#45;keyword">new</span> Label(prop))
+            &#125;
+        &#125;);
+    &#125;
+&#125;</pre></div><p class="paragraph"/>
+The above code can be simplified as follows<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">package</span> zkuidemo<p class="paragraph"/><span class="java&#45;keyword">import</span> org.zkoss.zk.ui.Component
+<span class="java&#45;keyword">import</span> org.zkoss.zk.ui.event.Event
+<span class="java&#45;keyword">import</span> org.zkoss.zul.Label<p class="paragraph"/>class PropertyRetrieverComposer &#123;
+    <span class="java&#45;keyword">static</span> transactional = <span class="java&#45;keyword">false</span>
+    def afterCompose = &#123;Component target &#45;&#62;
+        target.addEventListener(<span class="java&#45;quote">"onClick"</span>) &#123;Event event &#45;&#62;
+            <span class="java&#45;object">String</span> prop = <span class="java&#45;object">System</span>.getProperty(target.getFellow(<span class="java&#45;quote">"input"</span>).value)
+            target.getFellow(<span class="java&#45;quote">"result"</span>).appendChild(<span class="java&#45;keyword">new</span> Label(prop))
+        &#125;
+    &#125;
+&#125;</pre></div><p class="paragraph"/>Then, we could associate the Composer (zkuidemo.PropertyRetrieverComposer) with a component by use of the apply attribute as shown below.
+<div class="code"><pre><span class="xml&#45;tag">&#60;z:window title=<span class="xml&#45;quote">"Property Retrieval"</span> border=<span class="xml&#45;quote">"normal"</span>&#62;</span>
+    Enter a property name: <span class="xml&#45;tag">&#60;z:textbox id=<span class="xml&#45;quote">"input"</span>/&#62;</span>
+    <span class="xml&#45;tag">&#60;z:button label=<span class="xml&#45;quote">"Retrieve"</span> apply=<span class="xml&#45;quote">"zkuidemo.PropertyRetrieverComposer"</span>/&#62;</span>
+    <span class="xml&#45;tag">&#60;z:separator/&#62;</span>
+    <span class="xml&#45;tag">&#60;z:vlayout id=<span class="xml&#45;quote">"result"</span>/&#62;</span>
+<span class="xml&#45;tag">&#60;/z:window&#62;</span></pre></div>
+<h1><a name="3. Composer">3. Composer</a></h1>todo<h1><a name="4. Builder">4. Builder</a></h1>todo<h1><a name="5. Selector">5. Selector</a></h1>todo<h1><a name="6. Event Handling">6. Event Handling</a></h1>todo<h2><a name="6.1 Event Listening">6.1 Event Listening</a></h2>todo<h2><a name="6.2 Client-side Event Listening">6.2 Client-side Event Listening</a></h2>todo
+        </div>
+        <div id="footer">
+             ZK UI Plugin Project
+        </div>
+    </body>
+</html>

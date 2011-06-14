@@ -1,0 +1,19 @@
+<html>
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+        <title>2.4 A component is a POJO</title>
+        <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen" title="Ref" charset="utf-8"/>
+    </head>
+    <body class="body">
+    A component is a POJO. You could instantiate and manipulate directly. For example, we could generate the result by instantiating a component to represent it, and then append it to another component (an instance of <a href="http://books.zkoss.org/wiki/ZK_Component_Reference/Layouts/Vlayout" target="blank">vlayout</a>).<p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;z:window title=<span class="xml&#45;quote">"Property Retrieval"</span> border=<span class="xml&#45;quote">"normal"</span>&#62;</span>
+    Enter a property name: <span class="xml&#45;tag">&#60;z:textbox id=<span class="xml&#45;quote">"input"</span>/&#62;</span>
+    <span class="xml&#45;tag">&#60;z:button label=<span class="xml&#45;quote">"Retrieve"</span> onClick=<span class="xml&#45;quote">"result.appendChild(new Label(System.getProperty(input.getValue())))"</span>/&#62;</span>
+    <span class="xml&#45;tag">&#60;z:vlayout id=<span class="xml&#45;quote">"result"</span>/&#62;</span>
+<span class="xml&#45;tag">&#60;/z:window&#62;</span></pre></div><p class="paragraph"/>Similarly you could change the state of a component directly. All modifications will be synchronized back to the client automatically.<p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;z:window title=<span class="xml&#45;quote">"Property Retrieval"</span> border=<span class="xml&#45;quote">"normal"</span>&#62;</span>
+    Enter a property name: <span class="xml&#45;tag">&#60;z:textbox id=<span class="xml&#45;quote">"input"</span>/&#62;</span>
+    <span class="xml&#45;tag">&#60;z:button label=<span class="xml&#45;quote">"Retrieve"</span> onClick=<span class="xml&#45;quote">"result.setValue(System.getProperty(input.getValue()))"</span>/&#62;</span>
+    <span class="xml&#45;tag">&#60;z:separator/&#62;</span>
+    <span class="xml&#45;tag">&#60;z:label id=<span class="xml&#45;quote">"result"</span>/&#62;</span>
+<span class="xml&#45;tag">&#60;/z:window&#62;</span></pre></div>
+    </body>
+</html>
