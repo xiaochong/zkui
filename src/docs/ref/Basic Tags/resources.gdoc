@@ -1,0 +1,13 @@
+h1. resources
+
+h2. Purpose
+
+Importing zk's javascript and css resources.
+
+h2. Examples
+{code:xml}
+<z:resources/>
+{code}
+
+h2. Description
+Add the tag <z:resources/> to the head of the layout/main.gsp or any page that you want to use ZK UI Grails plug-ins.

@@ -1,0 +1,31 @@
+h1. render
+
+h2. Purpose
+
+To render a zk component.
+
+h2. Examples
+
+@View@
+{code:xml}
+<z:render comp="${window}"/>
+{code}
+
+@Controller@
+{code:groovy}
+def index = {
+    def window = new Window(title: "My First ZK UI Application", border: "normal")
+    window << {
+        label(value:"Hello World!")
+    }
+    [window:window]
+}
+{code}
+
+!2.1 Hello World.png!
+
+h2. Description
+
+Attributes
+
+* @comp@ - zk Component, a instance of org.zkoss.zk.ui.Component
