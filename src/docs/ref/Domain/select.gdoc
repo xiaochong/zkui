@@ -1,0 +1,21 @@
+
+h1. select
+
+h2. Purpose
+
+
+
+h2. Examples
+
+{code:java}
+foo.select(string)
+{code}
+
+h2. Description
+
+
+
+Arguments:
+
+[* @string@
+]

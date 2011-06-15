@@ -1,0 +1,21 @@
+
+h1. getAt
+
+h2. Purpose
+
+
+
+h2. Examples
+
+{code:java}
+foo.getAt(string)
+{code}
+
+h2. Description
+
+
+
+Arguments:
+
+[* @string@
+]

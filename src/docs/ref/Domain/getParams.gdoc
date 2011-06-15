@@ -1,0 +1,20 @@
+
+h1. getParams
+
+h2. Purpose
+
+
+
+h2. Examples
+
+{code:java}
+foo.getParams()
+{code}
+
+h2. Description
+
+
+
+Arguments:
+
+[]

@@ -1,0 +1,22 @@
+
+h1. addEventListener
+
+h2. Purpose
+
+
+
+h2. Examples
+
+{code:java}
+foo.addEventListener(string,closure)
+{code}
+
+h2. Description
+
+
+
+Arguments:
+
+[* @string@
+, * @closure@
+]

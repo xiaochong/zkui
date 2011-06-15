@@ -1,0 +1,21 @@
+
+h1. appendChild
+
+h2. Purpose
+
+
+
+h2. Examples
+
+{code:java}
+foo.appendChild(closure)
+{code}
+
+h2. Description
+
+
+
+Arguments:
+
+[* @closure@
+]
