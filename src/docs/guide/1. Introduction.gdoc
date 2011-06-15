@@ -1,6 +1,6 @@
 ZK UI plugin,the same as the ZKGrails plugin, seamlessly integrates ZK with Grails' infrastructures.
 
-The different is it more likely to use the Grails' infrastructures, such as gsp, controllers rather than zk's zul.
+The difference is it uses the Grails' infrastructures more, such as gsp, controllers rather than zk's zul.
 
 ZK UI Grails plug-ins brings powerful features as follows
 
