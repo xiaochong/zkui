@@ -56,7 +56,7 @@ def index = {
                     label(value: "This is footer1")
                 }
                 listfooter {
-                    label(value: "This is footer1")
+                    label(value: "This is footer2")
                 }
             }
         }

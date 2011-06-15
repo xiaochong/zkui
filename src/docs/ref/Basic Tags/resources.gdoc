@@ -10,4 +10,5 @@ h2. Examples
 {code}
 
 h2. Description
+
 Add the tag <z:resources/> to the head of the layout/main.gsp or any page that you want to use ZK UI Grails plug-ins.

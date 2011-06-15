@@ -1,1 +1,74 @@
-todo
+Builders are internal DSLs that provide ease in working with certain types of problems.It is very useful for work with nested,hierarchical structures, such as tree structures, XML representations,or HTML representations.
+
+Let’s take a look at an example of one way to create zk component in Groovy—using a builder:
+
+h3. appendChild
+@appendChild@  is dynamic method that _ZKUI_ injection to zk [Component|http://www.zkoss.org/javadoc/latest/zk/org/zkoss/zk/ui/Component.html] to begin builder,which accepts a Closure parameter.
+{code:groovy}
+def window = new Window(title: "listbox demo", border: "normal")
+window.appendChild {
+    listbox {
+        listhead(sizable: true) {
+            listheader(label: "name", sort: "auto")
+            listheader(label: "gender", sort: "auto")
+        }
+        listitem {
+            listcell(label: "Mary")
+            listcell(label: "FEMALE")
+        }
+        listitem {
+            listcell(label: "John")
+            listcell(label: "MALE")
+        }
+        listitem {
+            listcell(label: "Jane")
+            listcell(label: "FEMALE")
+        }
+        listitem {
+            listcell(label: "Henry")
+            listcell(label: "MALE")
+        }
+        listfoot {
+            listfooter {
+                label(value: "This is footer1")
+            }
+            listfooter {
+                label(value: "This is footer2")
+            }
+        }
+    }
+}
+{code}
+
+h3. leftShift ( << )
+
+_ZKUI_ also provides a convenient method @leftShift@,so you can modify the above code like:
+{code:groovy}
+def window = new Window(title: "listbox demo", border: "normal")
+window << {
+    listbox {
+       ...
+    }
+}
+{code}
+
+h3. Event listening
+
+If the parameter on onEvent it's a Closure, then it's a server side event
+{code:groovy}
+window << {
+    button(label: 'button', onClick: {
+        Messagebox.show("hello word! from Server")
+    })
+}
+{code}
+
+h4. Client-side event listening
+
+If the parameter on onEvent it's a String, that is a client side event
+{code:groovy}
+window << {
+    button(label: 'buutton', onClick: "alert('Say hello word! from JS')")
+}
+{code}
+
