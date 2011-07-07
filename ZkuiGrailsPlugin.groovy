@@ -1,8 +1,12 @@
+import org.springframework.web.context.request.RequestContextHolder as RCH
+
 import java.lang.reflect.Method
+import org.codehaus.groovy.grails.commons.DomainClassArtefactHandler
 import org.codehaus.groovy.grails.commons.GrailsClassUtils
 import org.codehaus.groovy.grails.commons.spring.TypeSpecifyableTransactionProxyFactoryBean
 import org.codehaus.groovy.grails.orm.support.GroovyAwareNamedTransactionAttributeSource
 import org.codehaus.groovy.grails.web.metaclass.BindDynamicMethod
+import org.codehaus.groovy.grails.web.pages.GroovyPage
 import org.codehaus.groovy.grails.web.pages.TagLibraryLookup
 import org.grails.plugins.zkui.artefacts.ComposerArtefactHandler
 import org.grails.plugins.zkui.artefacts.GrailsComposerClass
@@ -13,10 +17,11 @@ import org.springframework.beans.factory.config.MethodInvokingFactoryBean
 import org.springframework.core.annotation.AnnotationUtils
 import org.springframework.transaction.annotation.Transactional
 import org.zkoss.zk.ui.Executions
+import org.zkoss.zul.impl.InputElement
 
 class ZkuiGrailsPlugin {
     // the plugin version
-    def version = "0.3"
+    def version = "0.3.1"
     // the version or versions of Grails the plugin is designed for
     def grailsVersion = "1.2 > *"
     // the other plugins this plugin depends on
@@ -135,6 +140,9 @@ The different is it more likely to use the Grails' infrastructures such as gsp, 
     }
 
     def doWithDynamicMethods = { ctx ->
+        //Inject taglib namespace to Composer
+        TagLibraryLookup gspTagLibraryLookup = ctx.getBean("gspTagLibraryLookup")
+
         CharSequence.metaClass.fixToZkUri = {String contextPath ->
             return UriUtil.fixToZk(delegate?.toString(), contextPath)
         }
@@ -156,14 +164,39 @@ The different is it more likely to use the Grails' infrastructures such as gsp, 
         org.zkoss.zk.ui.Component.metaClass.getParams = {
             return delegate.select("[name]").inject([:]) {s, c ->
                 def e = s.get(c.name)
-                if (e == null) {
-                    s.put(c.name, c.value)
-                } else if (e instanceof Collection) {
-                    e << c.value
+                def value
+                if (c instanceof org.zkoss.zul.Combobox) {
+                    value = c.selectedItem?.value
                 } else {
-                    s.put(c.name, [s.remove(c.name), c.value])
+                    value = c.value
+                }
+                if (e == null) {
+                    s.put(c.name, value)
+                } else if (e instanceof Collection) {
+                    e << value
+                } else {
+                    s.put(c.name, [s.remove(c.name), value])
                 }
                 return s
+            }
+        }
+
+        def gDispatcher = gspTagLibraryLookup.lookupNamespaceDispatcher(GroovyPage.DEFAULT_NAMESPACE)
+        org.zkoss.zk.ui.Component.metaClass.renderErrors = {Map args ->
+            if (!args.bean) {
+                throw new IllegalArgumentException("[bean] attribute must be specified!")
+            }
+            if (!application.isArtefactOfType(DomainClassArtefactHandler.TYPE, args.bean.class)) {
+                throw new IllegalArgumentException("[bean] attribute must be Domain class!")
+            }
+            args.bean.errors.fieldErrors.each {
+                def selectedComponentList = delegate.select("[name=${it.field}]")
+                String errorMessage = gDispatcher.message(error: it)
+                if (selectedComponentList.size() > 0 && selectedComponentList[0] instanceof InputElement) {
+                    selectedComponentList[0].setErrorMessage(errorMessage)
+                } else {
+                    log.info(errorMessage)
+                }
             }
         }
 
@@ -183,10 +216,12 @@ The different is it more likely to use the Grails' infrastructures such as gsp, 
             delegate.setAttribute(name, value)
         }
 
-        //Inject taglib namespace to Composer
-        TagLibraryLookup gspTagLibraryLookup = ctx.getBean("gspTagLibraryLookup")
+
         def redirect = new RedirectDynamicMethod(ctx)
         def bind = new BindDynamicMethod()
+        def paramsObject = {-> RCH.currentRequestAttributes().params }
+        def executionObject = {-> Executions.current }
+        def sessionObject = {-> Executions.current.session }
         if (manager?.hasGrailsPlugin("controllers")) {
             for (namespace in gspTagLibraryLookup.availableNamespaces) {
                 def propName = GrailsClassUtils.getGetterName(namespace)
@@ -200,8 +235,9 @@ The different is it more likely to use the Grails' infrastructures such as gsp, 
                     mc.redirect = {Map args ->
                         redirect.invoke(delegate, "redirect", args)
                     }
-                    mc.getSession = {-> Executions.current.session }
-                    mc.getExecution = {-> Executions.current }
+                    mc.getSession = sessionObject
+                    mc.getExecution = executionObject
+                    mc.getParams = paramsObject
                     // the bindData method
                     mc.bindData = {Object target, Object args ->
                         bind.invoke(delegate, BindDynamicMethod.METHOD_SIGNATURE, [target, args] as Object[])
