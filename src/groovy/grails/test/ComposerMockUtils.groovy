@@ -32,12 +32,18 @@ class ComposerMockUtils {
         org.zkoss.zk.ui.Component.metaClass.getParams = {
             return delegate.select("[name]").inject([:]) {s, c ->
                 def e = s.get(c.name)
-                if (e == null) {
-                    s.put(c.name, c.value)
-                } else if (e instanceof Collection) {
-                    e << c.value
+                def value
+                if (c instanceof org.zkoss.zul.Combobox) {
+                    value = c.selectedItem?.value
                 } else {
-                    s.put(c.name, [s.remove(c.name), c.value])
+                    value = c.value
+                }
+                if (e == null) {
+                    s.put(c.name, value)
+                } else if (e instanceof Collection) {
+                    e << value
+                } else {
+                    s.put(c.name, [s.remove(c.name), value])
                 }
                 return s
             }

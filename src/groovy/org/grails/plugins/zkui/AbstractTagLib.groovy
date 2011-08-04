@@ -48,7 +48,9 @@ abstract class AbstractTagLib {
     }
 
     static def setAttrs(attrs, Component component, servletContext) {
-        attrs.each {String attrName, value ->
+        attrs.findAll {
+            it.value != null
+        }.each {String attrName, value ->
             if (attrName.startsWith("on")) {
                 final ZScript zScript = ZScript.parseContent(value.toString())
                 ((ComponentCtrl) component).addEventHandler(attrName, new EventHandler(zScript, null))

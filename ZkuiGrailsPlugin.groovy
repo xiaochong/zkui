@@ -167,6 +167,8 @@ The different is it more likely to use the Grails' infrastructures such as gsp, 
                 def value
                 if (c instanceof org.zkoss.zul.Combobox) {
                     value = c.selectedItem?.value
+                }else if(c instanceof org.zkoss.zul.Checkbox){
+                    value = c.value ?: c.isChecked()
                 } else {
                     value = c.value
                 }
@@ -216,8 +218,10 @@ The different is it more likely to use the Grails' infrastructures such as gsp, 
             delegate.setAttribute(name, value)
         }
 
-
         def redirect = new RedirectDynamicMethod(ctx)
+        def redirectObject = {Map args ->
+            redirect.invoke(delegate, "redirect", args)
+        }
         def bind = new BindDynamicMethod()
         def paramsObject = {-> RCH.currentRequestAttributes().params }
         def executionObject = {-> Executions.current }
@@ -232,31 +236,33 @@ The different is it more likely to use the Grails' infrastructures such as gsp, 
                     if (!mc.getMetaProperty(namespace)) {
                         mc."$propName" = { namespaceDispatcher }
                     }
-                    mc.redirect = {Map args ->
-                        redirect.invoke(delegate, "redirect", args)
-                    }
-                    mc.getSession = sessionObject
-                    mc.getExecution = executionObject
-                    mc.getParams = paramsObject
-                    // the bindData method
-                    mc.bindData = {Object target, Object args ->
-                        bind.invoke(delegate, BindDynamicMethod.METHOD_SIGNATURE, [target, args] as Object[])
-                    }
-                    mc.bindData = {Object target, Object args, List disallowed ->
-                        bind.invoke(delegate, BindDynamicMethod.METHOD_SIGNATURE, [target, args, [exclude: disallowed]] as Object[])
-                    }
-                    mc.bindData = {Object target, Object args, List disallowed, String filter ->
-                        bind.invoke(delegate, BindDynamicMethod.METHOD_SIGNATURE, [target, args, [exclude: disallowed], filter] as Object[])
-                    }
-                    mc.bindData = {Object target, Object args, Map includeExclude ->
-                        bind.invoke(delegate, BindDynamicMethod.METHOD_SIGNATURE, [target, args, includeExclude] as Object[])
-                    }
-                    mc.bindData = {Object target, Object args, Map includeExclude, String filter ->
-                        bind.invoke(delegate, BindDynamicMethod.METHOD_SIGNATURE, [target, args, includeExclude, filter] as Object[])
-                    }
-                    mc.bindData = {Object target, Object args, String filter ->
-                        bind.invoke(delegate, BindDynamicMethod.METHOD_SIGNATURE, [target, args, filter] as Object[])
-                    }
+                }
+            }
+            def composerClasses = application.composerClasses*.clazz
+            for (Class composerClass in composerClasses) {
+                MetaClass mc = composerClass.metaClass
+                mc.redirect = redirectObject
+                mc.getSession = sessionObject
+                mc.getExecution = executionObject
+                mc.getParams = paramsObject
+                // the bindData method
+                mc.bindData = {Object target, Object args ->
+                    bind.invoke(delegate, BindDynamicMethod.METHOD_SIGNATURE, [target, args] as Object[])
+                }
+                mc.bindData = {Object target, Object args, List disallowed ->
+                    bind.invoke(delegate, BindDynamicMethod.METHOD_SIGNATURE, [target, args, [exclude: disallowed]] as Object[])
+                }
+                mc.bindData = {Object target, Object args, List disallowed, String filter ->
+                    bind.invoke(delegate, BindDynamicMethod.METHOD_SIGNATURE, [target, args, [exclude: disallowed], filter] as Object[])
+                }
+                mc.bindData = {Object target, Object args, Map includeExclude ->
+                    bind.invoke(delegate, BindDynamicMethod.METHOD_SIGNATURE, [target, args, includeExclude] as Object[])
+                }
+                mc.bindData = {Object target, Object args, Map includeExclude, String filter ->
+                    bind.invoke(delegate, BindDynamicMethod.METHOD_SIGNATURE, [target, args, includeExclude, filter] as Object[])
+                }
+                mc.bindData = {Object target, Object args, String filter ->
+                    bind.invoke(delegate, BindDynamicMethod.METHOD_SIGNATURE, [target, args, filter] as Object[])
                 }
             }
         }
