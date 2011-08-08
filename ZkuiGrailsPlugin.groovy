@@ -57,6 +57,9 @@ The different is it more likely to use the Grails' infrastructures such as gsp, 
     // URL to the plugin's documentation
     def documentation = "http://grails.org/plugin/zkui"
 
+    static final String GOSIV_CLASS =
+        "org.grails.plugins.zkui.ZkuiGrailsOpenSessionInViewFilter"
+
     def doWithWebDescriptor = { webXml ->
         def listenerElement = webXml.'listener'
         def lastListener = listenerElement[listenerElement.size() - 1]
@@ -82,6 +85,25 @@ The different is it more likely to use the Grails' infrastructures such as gsp, 
             'servlet-mapping' {
                 'servlet-name'("auEngine")
                 'url-pattern'("/zkau/*")
+            }
+        }
+
+       // adding GrailsOpenSessionInView
+        if (manager?.hasGrailsPlugin("hibernate")) {
+            def filterElement = webXml.'filter'[0]
+            filterElement + {
+                'filter' {
+                    'filter-name'("GOSIVFilter")
+                    'filter-class'(GOSIV_CLASS)
+                }
+            }
+            // filter for each ZK urls
+            def filterMappingElement = webXml.'filter-mapping'[0]
+            filterMappingElement + {
+                'filter-mapping' {
+                    'filter-name'("GOSIVFilter")
+                    'url-pattern'("/zkau")
+                }
             }
         }
     }
