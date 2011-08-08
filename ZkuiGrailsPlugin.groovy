@@ -1,21 +1,14 @@
 import org.springframework.web.context.request.RequestContextHolder as RCH
 
-import java.lang.reflect.Method
 import org.codehaus.groovy.grails.commons.DomainClassArtefactHandler
 import org.codehaus.groovy.grails.commons.GrailsClassUtils
-import org.codehaus.groovy.grails.commons.spring.TypeSpecifyableTransactionProxyFactoryBean
-import org.codehaus.groovy.grails.orm.support.GroovyAwareNamedTransactionAttributeSource
 import org.codehaus.groovy.grails.web.metaclass.BindDynamicMethod
 import org.codehaus.groovy.grails.web.pages.GroovyPage
 import org.codehaus.groovy.grails.web.pages.TagLibraryLookup
 import org.grails.plugins.zkui.artefacts.ComposerArtefactHandler
-import org.grails.plugins.zkui.artefacts.GrailsComposerClass
 import org.grails.plugins.zkui.jsoup.select.Selector
 import org.grails.plugins.zkui.metaclass.RedirectDynamicMethod
 import org.grails.plugins.zkui.util.UriUtil
-import org.springframework.beans.factory.config.MethodInvokingFactoryBean
-import org.springframework.core.annotation.AnnotationUtils
-import org.springframework.transaction.annotation.Transactional
 import org.zkoss.zk.ui.Executions
 import org.zkoss.zul.impl.InputElement
 
@@ -58,7 +51,7 @@ The different is it more likely to use the Grails' infrastructures such as gsp, 
     def documentation = "http://grails.org/plugin/zkui"
 
     static final String GOSIV_CLASS =
-        "org.grails.plugins.zkui.ZkuiGrailsOpenSessionInViewFilter"
+    "org.grails.plugins.zkui.ZkuiGrailsOpenSessionInViewFilter"
 
     def doWithWebDescriptor = { webXml ->
         def listenerElement = webXml.'listener'
@@ -88,7 +81,7 @@ The different is it more likely to use the Grails' infrastructures such as gsp, 
             }
         }
 
-       // adding GrailsOpenSessionInView
+        // adding GrailsOpenSessionInView
         if (manager?.hasGrailsPlugin("hibernate")) {
             def filterElement = webXml.'filter'[0]
             filterElement + {
@@ -114,52 +107,13 @@ The different is it more likely to use the Grails' infrastructures such as gsp, 
             bean.scope = "prototype"
         }
         application.composerClasses.each { composerClass ->
-            def composerBeanName = composerClass.clazz.name
-            def hasDataSource = (application.config?.dataSource || application.domainClasses)
-            if (hasDataSource && shouldCreateTransactionalProxy(composerClass)) {
-                "${composerClass.fullName}ComposerClass"(MethodInvokingFactoryBean) { bean ->
-                    bean.lazyInit = true
-                    targetObject = ref("grailsApplication", true)
-                    targetMethod = "getArtefact"
-                    arguments = [ComposerArtefactHandler.TYPE, composerClass.fullName]
-                }
-                def props = new Properties()
-                props."*" = "PROPAGATION_REQUIRED"
-                "${composerBeanName}"(TypeSpecifyableTransactionProxyFactoryBean, composerClass.clazz) { bean ->
-                    bean.scope = "prototype"
-                    bean.lazyInit = true
-                    target = { innerBean ->
-                        innerBean.lazyInit = true
-                        innerBean.factoryBean = "${composerClass.fullName}ComposerClass"
-                        innerBean.factoryMethod = "newInstance"
-                        innerBean.autowire = "byName"
-                        innerBean.scope = "prototype"
-                    }
-                    proxyTargetClass = true
-                    transactionAttributeSource = new GroovyAwareNamedTransactionAttributeSource(transactionalAttributes: props)
-                    transactionManager = ref("transactionManager")
-                }
-            } else {
-                "${composerBeanName}"(composerClass.clazz) { bean ->
-                    bean.scope = "prototype"
-                    bean.autowire = "byName"
-                }
+            "${composerClass.clazz.name}"(composerClass.clazz) { bean ->
+                bean.scope = "prototype"
+                bean.autowire = "byName"
             }
         }
     }
 
-    def shouldCreateTransactionalProxy(GrailsComposerClass composerClass) {
-        Class javaClass = composerClass.clazz
-
-        try {
-            composerClass.transactional &&
-                    !AnnotationUtils.findAnnotation(javaClass, Transactional) &&
-                    !javaClass.methods.any { Method m -> AnnotationUtils.findAnnotation(m, Transactional) != null }
-        } catch (e) {
-            e.printStackTrace()
-            return false
-        }
-    }
 
     def doWithDynamicMethods = { ctx ->
         //Inject taglib namespace to Composer
@@ -189,7 +143,7 @@ The different is it more likely to use the Grails' infrastructures such as gsp, 
                 def value
                 if (c instanceof org.zkoss.zul.Combobox) {
                     value = c.selectedItem?.value
-                }else if(c instanceof org.zkoss.zul.Checkbox){
+                } else if (c instanceof org.zkoss.zul.Checkbox) {
                     value = c.value ?: c.isChecked()
                 } else {
                     value = c.value
@@ -307,43 +261,13 @@ The different is it more likely to use the Grails' infrastructures such as gsp, 
             def composerClass = application.addArtefact(ComposerArtefactHandler.TYPE, event.source)
             def composerBeanName = composerClass.clazz.name
 
-            if (shouldCreateTransactionalProxy(composerClass) && event.ctx.containsBean("transactionManager")) {
-                def beans = beans {
-                    "${composerClass.fullName}ComposerClass"(MethodInvokingFactoryBean) { bean ->
-                        bean.lazyInit = true
-                        targetObject = ref("grailsApplication", true)
-                        targetMethod = "getArtefact"
-                        arguments = [ComposerArtefactHandler.TYPE, composerClass.fullName]
-                    }
-                    def props = new Properties()
-                    props."*" = "PROPAGATION_REQUIRED"
-                    "${composerBeanName}"(TypeSpecifyableTransactionProxyFactoryBean, composerClass.clazz) { bean ->
-                        bean.scope = "prototype"
-                        bean.lazyInit = true
-                        target = { innerBean ->
-                            innerBean.lazyInit = true
-                            innerBean.factoryBean = "${composerClass.fullName}ComposerClass"
-                            innerBean.factoryMethod = "newInstance"
-                            innerBean.autowire = "byName"
-                            innerBean.scope = "prototype"
-                        }
-                        proxyTargetClass = true
-                        transactionAttributeSource = new GroovyAwareNamedTransactionAttributeSource(transactionalAttributes: props)
-                        transactionManager = ref("transactionManager")
-                    }
+            def beans = beans {
+                "${composerBeanName}"(composerClass.clazz) { bean ->
+                    bean.scope = "prototype"
+                    bean.autowire = "byName"
                 }
-                beans.registerBeans(event.ctx)
             }
-            else {
-                def beans = beans {
-                    "${composerBeanName}"(composerClass.clazz) { bean ->
-                        bean.scope = "prototype"
-                        bean.autowire = "byName"
-                    }
-                }
-                beans.registerBeans(event.ctx)
-            }
-
+            beans.registerBeans(event.ctx)
         }
 
         event.manager?.getGrailsPlugin("zkui")?.doWithDynamicMethods(event.ctx)

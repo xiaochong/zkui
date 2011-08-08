@@ -4,7 +4,6 @@ import org.zkoss.zul.*
 import ${domainClass.fullName}
 
 class EditComposer {
-    static transactional = true
     Window self
     def afterCompose = {Component comp ->
         //todo initialize components here

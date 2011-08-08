@@ -4,7 +4,6 @@ import org.zkoss.zk.ui.event.*
 import ${domainClass.fullName}
 
 class ListComposer {
-    static transactional = false
     Grid grid
     ListModelList listModel = new ListModelList()
     Paging paging
