@@ -1,6 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" %>
-<% import grails.persistence.Event %>
-<%=packageName%>
+<%@ page contentType="text/html;charset=UTF-8" %><% import grails.persistence.Event %><%=packageName%>
 <html>
     <head>
         <meta name="layout" content="main" />
