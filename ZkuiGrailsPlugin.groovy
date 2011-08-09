@@ -5,6 +5,7 @@ import org.codehaus.groovy.grails.commons.GrailsClassUtils
 import org.codehaus.groovy.grails.web.metaclass.BindDynamicMethod
 import org.codehaus.groovy.grails.web.pages.GroovyPage
 import org.codehaus.groovy.grails.web.pages.TagLibraryLookup
+import org.codehaus.groovy.grails.web.util.TypeConvertingMap
 import org.grails.plugins.zkui.artefacts.ComposerArtefactHandler
 import org.grails.plugins.zkui.jsoup.select.Selector
 import org.grails.plugins.zkui.metaclass.RedirectDynamicMethod
@@ -138,13 +139,15 @@ The different is it more likely to use the Grails' infrastructures such as gsp, 
             return delegate.addEventListener(eventName, listenerClosure as org.zkoss.zk.ui.event.EventListener)
         }
         org.zkoss.zk.ui.Component.metaClass.getParams = {
-            return delegate.select("[name]").inject([:]) {s, c ->
+            return delegate.select("[name]").inject(new TypeConvertingMap()) {s, c ->
                 def e = s.get(c.name)
                 def value
                 if (c instanceof org.zkoss.zul.Combobox) {
                     value = c.selectedItem?.value
                 } else if (c instanceof org.zkoss.zul.Checkbox) {
                     value = c.value ?: c.isChecked()
+                } else if (c instanceof org.zkoss.zul.Listbox) {
+                    value = c.getSelectedItems()?.value as String[]
                 } else {
                     value = c.value
                 }

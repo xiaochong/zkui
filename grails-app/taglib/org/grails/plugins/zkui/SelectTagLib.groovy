@@ -6,9 +6,7 @@ import org.codehaus.groovy.grails.commons.DomainClassArtefactHandler
 import org.codehaus.groovy.grails.web.util.StreamCharBuffer
 import org.springframework.beans.SimpleTypeConverter
 import org.springframework.context.MessageSourceResolvable
-import org.zkoss.zul.Comboitem
-import org.zkoss.zul.ComboitemRenderer
-import org.zkoss.zul.ListModelList
+import org.zkoss.zul.*
 
 class SelectTagLib {
     static namespace = "zkui"
@@ -23,10 +21,7 @@ class SelectTagLib {
         def optionValue = attrs.remove('optionValue')
         def value = attrs.remove('value')
         if (value instanceof Collection && attrs.multiple == null) {
-            attrs.multiline = true
-        }
-        if (attrs.multiple) {
-            attrs.multiline = attrs.remove("multiple")
+            attrs.multiple = true
         }
         if (value instanceof StreamCharBuffer) {
             value = value.toString()
@@ -41,13 +36,15 @@ class SelectTagLib {
             attrs.disabled = 'disabled'
         }
         if (from) {
-            List<ComboitemValue> modelList = []
+            List<ItemObject> modelList = []
             Integer selectedIndex
             from.eachWithIndex {el, i ->
+                Boolean selected
                 def keyValue = null
                 if (keys) {
                     keyValue = keys[i]
-                    if (!selectedIndex && isSelected(keyValue, value, null)) {
+                    selected = isSelected(keyValue, value, null)
+                    if (!selectedIndex && selected) {
                         selectedIndex = i
                     }
                 } else if (optionKey) {
@@ -58,12 +55,14 @@ class SelectTagLib {
                     } else {
                         keyValue = el[optionKey]
                     }
-                    if (!selectedIndex && isSelected(keyValue, value, el)) {
+                    selected = isSelected(keyValue, value, el)
+                    if (!selectedIndex && selected) {
                         selectedIndex = i
                     }
                 } else {
                     keyValue = el
-                    if (!selectedIndex && isSelected(keyValue, value, null)) {
+                    selected = isSelected(keyValue, value, null)
+                    if (!selectedIndex && selected) {
                         selectedIndex = i
                     }
                 }
@@ -93,17 +92,22 @@ class SelectTagLib {
                     def s = el.toString()
                     if (s) labelBuilder << s.encodeAsHTML()
                 }
-                modelList << new ComboitemValue(labelBuilder.toString(), keyValue)
+                modelList << new ItemObject(labelBuilder.toString(), keyValue, selected)
             }
-            if (selectedIndex != null) {
-                attrs.onCreate = "self.selectedIndex = ${selectedIndex}".toString()
-            } else if (noSelection != null) {
-                def noSelectionKey = noSelection.key
-                def noSelectionValue = noSelection.value
-                modelList.add(0, new ComboitemValue(noSelectionValue, noSelectionKey))
-                attrs.onCreate = "self.selectedIndex = 0"
+            if (attrs.multiple && attrs.multiple != 'false') {
+                attrs.width = attrs.width ?: "200px"
+                z.listbox([model: new ListModelList(modelList), itemRenderer: new SelectListitemRenderer()] + attrs)
+            } else {
+                if (selectedIndex != null) {
+                    attrs.onCreate = "self.selectedIndex = ${selectedIndex}".toString()
+                } else if (noSelection != null) {
+                    def noSelectionKey = noSelection.key
+                    def noSelectionValue = noSelection.value
+                    modelList.add(0, new ItemObject(noSelectionValue, noSelectionKey))
+                    attrs.onCreate = "self.selectedIndex = 0"
+                }
+                z.combobox([model: new ListModelList(modelList), itemRenderer: new SelectComboitemRenderer(), readonly: true] + attrs)
             }
-            z.combobox([model: new ListModelList(modelList), itemRenderer: new SelectComboitemRenderer(),readonly:true] + attrs)
             return
         }
     }
@@ -139,19 +143,28 @@ class SelectTagLib {
 
     class SelectComboitemRenderer implements ComboitemRenderer {
         void render(Comboitem comboitem, Object o) {
-            comboitem.label = o.label
+            comboitem.label = o.key
             comboitem.value = o.value
         }
     }
 
-    class ComboitemValue {
-        String label
-        Object value
-
-        ComboitemValue(String label, Object value) {
-            this.label = label
-            this.value = value
+    class SelectListitemRenderer implements ListitemRenderer {
+        void render(Listitem listitem, Object o) {
+            listitem.label = o.key
+            listitem.value = o.value
+            listitem.selected = o.selected
         }
+    }
 
+    class ItemObject {
+        String key
+        Object value
+        Boolean selected
+
+        ItemObject(String key, Object value, Boolean selected = false) {
+            this.key = key
+            this.value = value
+            this.selected = selected
+        }
     }
 }

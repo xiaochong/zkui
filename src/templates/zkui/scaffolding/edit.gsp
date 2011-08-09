@@ -22,7 +22,6 @@
             display = true
             boolean hasHibernate = PluginManagerHolder.pluginManager.hasGrailsPlugin('hibernate')
             props.each { p ->
-                if (!Collection.class.isAssignableFrom(p.type)) {
                     if (hasHibernate) {
                         cp = domainClass.constrainedProperties[p.name]
                         display = (cp ? cp.display : true)
@@ -32,7 +31,7 @@
                 <z:label value="\${message(code:'${domainClass.propertyName}.${p.name}.label',default:'${p.naturalName}')}"/>
                 ${renderEditor(p)}
             </z:row>
-        <%  }   }   } %>
+        <%  }   } %>
         </z:rows>
     </z:grid>
     <z:hlayout>

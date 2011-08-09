@@ -67,19 +67,21 @@
     }
 
     private renderManyToMany(domainClass, property) {
-        return "<g:select name=\"${property.name}\" from=\"\${${property.referencedDomainClass.fullName}.list()}\" multiple=\"yes\" optionKey=\"id\" size=\"5\" value=\"\${${domainInstance}?.${property.name}*.id}\" />"
+        return "<zkui:select name=\"${property.name}\" from=\"\${${property.referencedDomainClass.fullName}.list()}\" multiple=\"true\" optionKey=\"id\" height=\"250px\" value=\"\${${domainInstance}?.${property.name}*.id}\" />"
     }
 
     private renderOneToMany(domainClass, property) {
         def sw = new StringWriter()
         def pw = new PrintWriter(sw)
         pw.println()
-        pw.println "<ul>"
-        pw.println "<g:each in=\"\${${domainInstance}?.${property.name}?}\" var=\"${property.name[0]}\">"
-        pw.println "    <li><g:link controller=\"${property.referencedDomainClass.propertyName}\" action=\"show\" id=\"\${${property.name[0]}.id}\">\${${property.name[0]}?.encodeAsHTML()}</g:link></li>"
-        pw.println "</g:each>"
-        pw.println "</ul>"
-        pw.println "<g:link controller=\"${property.referencedDomainClass.propertyName}\" action=\"create\" params=\"['${domainClass.propertyName}.id': ${domainInstance}?.id]\">\${message(code: 'default.add.label', args: [message(code: '${property.referencedDomainClass.propertyName}.label', default: '${property.referencedDomainClass.shortName}')])}</g:link>"
+        pw.println "<z:vlayout>"
+        pw.println "    <ul>"
+        pw.println "    <g:each in=\"\${${domainInstance}?.${property.name}?}\" var=\"${property.name[0]}\">"
+        pw.println "        <li><g:link controller=\"${property.referencedDomainClass.propertyName}\" action=\"edit\" id=\"\${${property.name[0]}.id}\">\${${property.name[0]}?.encodeAsHTML()}</g:link></li>"
+        pw.println "    </g:each>"
+        pw.println "    </ul>"
+        pw.println "    <z:toolbarbutton href=\"\${createLink(controller:'${property.referencedDomainClass.propertyName}',action:'create',params:['${domainClass.propertyName}.id': ${domainInstance}?.id])}\" image=\"\${resource(dir:'images/skin',file:'database_add.png')}\" label=\"\${message(code: 'default.add.label', args: [message(code: '${property.referencedDomainClass.propertyName}.label', default: '${property.referencedDomainClass.shortName}')])}\"/>"
+        pw.println "</z:vlayout>"
         return sw.toString()
     }
 

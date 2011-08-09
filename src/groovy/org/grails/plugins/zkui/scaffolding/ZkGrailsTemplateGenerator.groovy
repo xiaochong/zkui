@@ -268,10 +268,10 @@ class ZkGrailsTemplateGenerator implements GrailsTemplateGenerator, ResourceLoad
         def application = ApplicationHolder.getApplication()
         // first check for presence of template in application
         if (resourceLoader && application?.warDeployed) {
-            return resourceLoader.getResource("/WEB-INF/templates/scaffolding/${template}").inputStream.text
+            return resourceLoader.getResource("/WEB-INF/templates/zkui/scaffolding/${template}").inputStream.text
         }
 
-        def templateFile = new FileSystemResource("${basedir}/src/templates/scaffolding/${template}")
+        def templateFile = new FileSystemResource("${basedir}/src/templates/zkui/scaffolding/${template}")
         if (!templateFile.exists()) {
             templateFile = new FileSystemResource("${zkuiPluginDir}/src/templates/zkui/scaffolding/${template}")
         }
@@ -298,7 +298,7 @@ class ZkGrailsTemplateGenerator implements GrailsTemplateGenerator, ResourceLoad
         if (resourceLoader && application?.isWarDeployed()) {
             def resolver = new PathMatchingResourcePatternResolver(resourceLoader)
             try {
-                return resolver.getResources("/WEB-INF/templates/scaffolding/*.gsp").filename.collect(filter)
+                return resolver.getResources("/WEB-INF/templates/scaffolding/zkui/*.gsp").filename.collect(filter)
             }
             catch (e) {
                 return []
@@ -307,7 +307,7 @@ class ZkGrailsTemplateGenerator implements GrailsTemplateGenerator, ResourceLoad
 
         def resources = []
         def resolver = new PathMatchingResourcePatternResolver()
-        String templatesDirPath = "${basedir}/src/templates/scaffolding"
+        String templatesDirPath = "${basedir}/src/templates/zkui/scaffolding"
         def templatesDir = new FileSystemResource(templatesDirPath)
         if (templatesDir.exists()) {
             try {
