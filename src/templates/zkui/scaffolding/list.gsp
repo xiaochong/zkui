@@ -8,7 +8,7 @@
     <body>
         <z:window style="padding:5px" apply="${domainClass.packageName}.${className.toLowerCase()}.ListComposer">
             <z:hlayout>
-                <z:toolbarbutton href="\${createLink(action:'create')}" image="\${resource(dir:'images/skin',file:'database_add.png')}" label="\${message(code:'default.new.label',args:[entityName])}"/>
+                <z:toolbarbutton href="\${createLink(action:'create')}" image="/images/skin/database_add.png" label="\${message(code:'default.new.label',args:[entityName])}"/>
                 <z:space/>
                 <z:label value="\${message(code:'${domainClass.propertyName}.id',default:'Id')}"/>
                 <z:longbox id="idLongbox"/>
@@ -23,7 +23,7 @@
                         Collections.sort(props, comparator.constructors[0].newInstance([domainClass] as Object[]))
                         props.eachWithIndex { p, i ->
                             if (i < 6) {%><z:column label="\${message(code: '${domainClass.propertyName}.${p.name}.label', default: '${p.naturalName}')}"/>
-                    <%}   } %>
+                    <%}   } %><z:column width="100px"/>
                 </z:columns>
             </z:grid>
             <z:paging autohide="true" id="paging" pageSize="15"/>

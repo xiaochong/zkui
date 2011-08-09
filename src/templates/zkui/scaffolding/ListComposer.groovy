@@ -40,9 +40,11 @@ class ListComposer {
 
     class ${className}RowRenderer implements RowRenderer {
         def g
+        def listModel
 
         ${className}RowRenderer(context) {
             this.g = context.g
+            this.listModel = context.listModel
         }
 
         void render(Row row, Object id) {
@@ -55,7 +57,10 @@ class ListComposer {
                         props.eachWithIndex { p, i ->
                             if (i == 0) {%>a(href: g.createLink(controller:"${domainClass.propertyName}",action:'edit',id:id), label: ${propertyName}.id)
                     <%}else if (i < 6) {%>label(value: ${propertyName}.${p.name})
-                    <%}   } %>
+                    <%}   } %>toolbarbutton(label: g.message(code: 'default.button.delete.label', default: 'Delete'), image: "/images/skin/database_delete.png", client_onClick: "if(!confirm('\${g.message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}'))event.stop()", onClick: {
+                        ${className}.get(id as Long).delete(flush: true)
+                        listModel.remove(id)
+                    })
             }
         }
     }

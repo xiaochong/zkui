@@ -61,6 +61,8 @@ class ZkComponentBuilder extends BuilderSupport implements ServletContextAware {
                     // e.g. onClick: "alert('Say hi from JS');"
                     instance.setWidgetListener(attrName, value)
                 }
+            } else if (attrName.startsWith("client_")) {
+                instance.setWidgetListener(attrName.toString().replaceFirst("client_", ''), value.toString())
             } else {
                 value = ZkUriHandler.handle(instance, attrName, value, servletContext.contextPath)
                 instance[attrName] = value
