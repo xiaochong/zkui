@@ -5,6 +5,7 @@ import org.codehaus.groovy.grails.web.metaclass.BindDynamicMethod
 import org.grails.plugins.zkui.ZkComponentBuilder
 import org.grails.plugins.zkui.jsoup.select.Selector
 import org.grails.plugins.zkui.util.UriUtil
+import org.codehaus.groovy.grails.web.util.TypeConvertingMap
 
 class ComposerMockUtils {
 
@@ -30,11 +31,15 @@ class ComposerMockUtils {
             return delegate.addEventListener(eventName, listenerClosure as org.zkoss.zk.ui.event.EventListener)
         }
         org.zkoss.zk.ui.Component.metaClass.getParams = {
-            return delegate.select("[name]").inject([:]) {s, c ->
+            return delegate.select("[name]").inject(new TypeConvertingMap()) {s, c ->
                 def e = s.get(c.name)
                 def value
                 if (c instanceof org.zkoss.zul.Combobox) {
                     value = c.selectedItem?.value
+                } else if (c instanceof org.zkoss.zul.Checkbox) {
+                    value = c.value ?: c.isChecked()
+                } else if (c instanceof org.zkoss.zul.Listbox) {
+                    value = c.getSelectedItems()?.value as String[]
                 } else {
                     value = c.value
                 }
