@@ -1,0 +1,21 @@
+h1. attribute
+
+h2. Purpose
+
+It defines a attribute of the enclosing element. The content of the element is the attribute value, while the name attribute specifies the attribute name.
+
+h2. Examples
+{code:xml}
+<z:button label="Hi">
+  <z:attribute name="onClick">alert("Hi")</z:attribute>
+</z:button>
+{code}
+
+It is equivalent to
+{code:xml}
+<z:button label="Hi" onClick="alert('Hi')"/>
+{code}
+
+h2. Description
+
+It is useful if the value of an attribute is sophisticated.

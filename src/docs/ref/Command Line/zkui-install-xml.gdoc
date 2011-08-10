@@ -1,0 +1,25 @@
+h1. zkui-install-xml
+
+h2. Purpose
+
+Installs the zk.xml file to the main app at web-app/WEB-INF/
+
+h2. Examples
+
+{code:java}
+grails zkui-install-xml
+{code}
+
+h2. Description
+
+Usage:
+
+{code:java}
+grails zkui-install-xml
+{code}
+
+WEB-INF/zk.xml is the configuration descriptor of ZK. This file optional. If you need to configure ZK differently from the default, you could provide a file called zk.xml under the WEB-INF directory.
+
+[ZK Configuration Reference|http://books.zkoss.org/wiki/ZK_Configuration_Reference/zk.xml]
+
+

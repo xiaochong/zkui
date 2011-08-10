@@ -1,0 +1,33 @@
+h1. zkui-install-templates
+
+h2. Purpose
+
+Installs the templates used by @zkui@ during code generation
+
+h2. Examples
+
+{code:java}
+grails zkui-install-templates
+{code}
+
+h2. Description
+
+Usage:
+
+{code:java}
+grails zkui-install-templates
+{code}
+
+Same as Grails's  @install-templates@ command
+
+The @zkui-install-templates@ command will install the set of templates zkui uses for scaffolding code generation activities to the @src/templates/zkui/scaffolding@ directory. The templates installed are as follows:
+
+{code:java}
+src
+   templates
+       zkui
+          scaffolding
+{code}
+
+The @scaffolding@ directory contains templates used by the @generate-* @ commands.
+

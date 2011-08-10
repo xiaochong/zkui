@@ -1,0 +1,25 @@
+h1. zkui-generate-all
+
+h2. Purpose
+
+Generates views,composer and a controller for the given domain class
+
+h2. Examples
+
+{code:java}
+grails zkui-generate-all Book
+grails zkui-generate-all *
+{code}
+
+h2. Description
+
+
+Same as Grails's @generate-all@ Command
+
+supports a feature known as scaffolding which involves the generation of a CRUD (Create/Read/Update/Delete) interface for a given domain class.
+
+
+Usage:
+{code:java}
+grails zkui-generate-all [domain class name or wildcard]
+{code}
