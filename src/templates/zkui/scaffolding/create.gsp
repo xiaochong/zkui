@@ -1,4 +1,4 @@
-<% import grails.persistence.Event %><% import org.codehaus.groovy.grails.plugins.PluginManagerHolder %><%=packageName%>
+<% import grails.persistence.Event %><% import org.codehaus.groovy.grails.plugins.PluginManagerHolder %>
 <html>
 <head>
     <meta name="layout" content="main" />
