@@ -15,6 +15,16 @@
                 <z:space/>
                 <z:button id="searchButton" label="\${message(code:'search')}"/>
             </z:hlayout>
+            <g:if test="\${flash.message}">
+                <z:window mode="popup" border="normal">
+                    <z:hlayout>
+                        <z:image src="/images/skin/information.png"/>
+                        <z:div>
+                            \${flash.message}
+                        </z:div>
+                    </z:hlayout>
+                </z:window>
+            </g:if>
             <z:grid id="grid" emptyMessage="\${message(code:'emptyMessage',default:'No Record')}">
                 <z:columns sizable="true">
                     <%  excludedProps = Event.allEvents.toList() << 'version'

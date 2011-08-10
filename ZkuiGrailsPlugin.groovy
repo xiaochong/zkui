@@ -176,7 +176,7 @@ The different is it more likely to use the Grails' infrastructures such as gsp, 
                 if (selectedComponentList.size() > 0 && selectedComponentList[0] instanceof InputElement) {
                     selectedComponentList[0].setErrorMessage(errorMessage)
                 } else {
-                    log.info(errorMessage)
+                    //todo the remaining errorMessage
                 }
             }
         }
@@ -203,6 +203,7 @@ The different is it more likely to use the Grails' infrastructures such as gsp, 
         }
         def bind = new BindDynamicMethod()
         def paramsObject = {-> RCH.currentRequestAttributes().params }
+        def flashObject = {-> RCH.currentRequestAttributes().flashScope }
         def executionObject = {-> Executions.current }
         def sessionObject = {-> Executions.current.session }
         if (manager?.hasGrailsPlugin("controllers")) {
@@ -224,6 +225,8 @@ The different is it more likely to use the Grails' infrastructures such as gsp, 
                 mc.getSession = sessionObject
                 mc.getExecution = executionObject
                 mc.getParams = paramsObject
+                // the flash object
+                mc.getFlash = flashObject
                 // the bindData method
                 mc.bindData = {Object target, Object args ->
                     bind.invoke(delegate, BindDynamicMethod.METHOD_SIGNATURE, [target, args] as Object[])

@@ -23,13 +23,14 @@ class EditComposer {
             }
             ${propertyName}.properties = params
             if (!${propertyName}.hasErrors() && ${propertyName}.save(flush: true)) {
-                Messagebox.show("\${g.message(code: 'default.updated.message', args: [g.message(code: '${domainClass.propertyName}.label', default: '${className}'), ${propertyName}.id])}")
+                Messagebox.show(g.message(code: 'default.updated.message', args: [g.message(code: '${domainClass.propertyName}.label', default: '${className}'), ${propertyName}.id]))
             }else {
                 log.error ${propertyName}.errors
                 self.renderErrors(bean: ${propertyName})
             }
         }
         else {
+            flash.message = g.message(code: 'default.not.found.message', args: [g.message(code: '${domainClass.propertyName}.label', default: '${className}'), params.id])
             redirect(controller: "${domainClass.propertyName}",action: "list")
         }
 

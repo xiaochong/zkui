@@ -15,6 +15,7 @@ class CreateComposer {
             log.error ${propertyName}.errors
             self.renderErrors(bean: ${propertyName})
         } else {
+            flash.message = g.message(code: 'default.created.message', args: [g.message(code: '${domainClass.propertyName}.label', default: '${className}'), ${propertyName}.id])
             redirect(controller: "${domainClass.propertyName}", action: "list")
         }
     }

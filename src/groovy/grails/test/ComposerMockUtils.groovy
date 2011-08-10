@@ -78,6 +78,9 @@ class ComposerMockUtils {
         def redArgs = [:]
         mc.getRedirectArgs = {-> redArgs}
         mc.redirect = {Map map -> redirectArgs.putAll(map)}
+        mc.getParams = {-> [:] }
+        // the flash object
+        mc.getFlash = {-> [:] }
 
         // the bindData method
         def bind = new BindDynamicMethod()
