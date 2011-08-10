@@ -16,14 +16,15 @@ class EditComposer {
             if (params.version != null) {
                 def version = params.version
                 if (${propertyName}.version > version) {
-                    def failureMessage=g.message(code:"default.optimistic.locking.failure",args:[g.message(code: '${domainClass.propertyName}.label', default: '${className}')],default:"Another user has updated this \${${propertyName}} while you were editing")
-                    Messagebox.show(failureMessage)
+                    String failureMessage = g.message(code:"default.optimistic.locking.failure",args:[g.message(code: '${domainClass.propertyName}.label', default: '${className}')],default:"Another user has updated this \${${propertyName}} while you were editing")
+                    Messagebox.show(failureMessage, g.message(code:'error',default:'Error'), Messagebox.YES, Messagebox.ERROR)
                     return
                 }
             }
             ${propertyName}.properties = params
             if (!${propertyName}.hasErrors() && ${propertyName}.save(flush: true)) {
-                Messagebox.show(g.message(code: 'default.updated.message', args: [g.message(code: '${domainClass.propertyName}.label', default: '${className}'), ${propertyName}.id]))
+                flash.message = g.message(code: 'default.updated.message', args: [g.message(code: '${domainClass.propertyName}.label', default: '${className}'), ${propertyName}.id])
+                redirect(controller: "${domainClass.propertyName}", action: "edit", id: ${propertyName}.id)
             }else {
                 log.error ${propertyName}.errors
                 self.renderErrors(bean: ${propertyName})

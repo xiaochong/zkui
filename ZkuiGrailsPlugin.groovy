@@ -115,7 +115,6 @@ The different is it more likely to use the Grails' infrastructures such as gsp, 
         }
     }
 
-
     def doWithDynamicMethods = { ctx ->
         //Inject taglib namespace to Composer
         TagLibraryLookup gspTagLibraryLookup = ctx.getBean("gspTagLibraryLookup")
@@ -151,6 +150,9 @@ The different is it more likely to use the Grails' infrastructures such as gsp, 
                 } else {
                     value = c.value
                 }
+                if (!value) {
+                    value = ''
+                }
                 if (e == null) {
                     s.put(c.name, value)
                 } else if (e instanceof Collection) {
@@ -170,8 +172,16 @@ The different is it more likely to use the Grails' infrastructures such as gsp, 
             if (!application.isArtefactOfType(DomainClassArtefactHandler.TYPE, args.bean.class)) {
                 throw new IllegalArgumentException("[bean] attribute must be Domain class!")
             }
+            def domainClass = application.getDomainClass(args.bean.class.name)
             args.bean.errors.fieldErrors.each {
-                def selectedComponentList = delegate.select("[name=${it.field}]")
+                def p = domainClass.getPropertyByName(it.field)
+                def name
+                if (p.manyToOne || p.oneToOne) {
+                    name = "${p.referencedDomainClass.propertyName}.id"
+                } else {
+                    name = it.field
+                }
+                def selectedComponentList = delegate.select("[name=${name}]")
                 String errorMessage = gDispatcher.message(error: it)
                 if (selectedComponentList.size() > 0 && selectedComponentList[0] instanceof InputElement) {
                     selectedComponentList[0].setErrorMessage(errorMessage)
@@ -277,7 +287,6 @@ The different is it more likely to use the Grails' infrastructures such as gsp, 
         }
 
         event.manager?.getGrailsPlugin("zkui")?.doWithDynamicMethods(event.ctx)
-
     }
 
     def onConfigChange = { event ->

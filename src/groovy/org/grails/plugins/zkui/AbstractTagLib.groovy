@@ -3,7 +3,6 @@ package org.grails.plugins.zkui
 import javax.servlet.ServletContext
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
-import org.grails.plugins.zkui.PageRenderer
 import org.grails.plugins.zkui.util.InlineUtils
 import org.grails.plugins.zkui.util.ZkUriHandler
 import org.zkoss.web.servlet.http.Https
