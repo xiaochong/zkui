@@ -8,7 +8,8 @@
 
 <body>
 <z:window style="padding:5px" apply="${domainClass.packageName}.${className.toLowerCase()}.EditComposer">
-    <z:longbox name="id" value="\${params.id}" visible="false"/>
+    <z:longbox name="id" value="\${${propertyName}.id}" visible="false"/>
+    <z:longbox name="version" value="\${${propertyName}.version}" visible="false"/>
     <z:grid>
         <z:columns sizable="true">
             <z:column label="\${message(code:'name',default:'Name')}" width="100px"/>
