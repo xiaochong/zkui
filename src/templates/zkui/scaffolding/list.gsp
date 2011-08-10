@@ -33,7 +33,7 @@
                         Collections.sort(props, comparator.constructors[0].newInstance([domainClass] as Object[]))
                         props.eachWithIndex { p, i ->
                             if (i < 6) {%><z:column label="\${message(code: '${domainClass.propertyName}.${p.name}.label', default: '${p.naturalName}')}"/>
-                    <%}   } %><z:column width="100px"/>
+                    <%}   } %><z:column width="150px"/>
                 </z:columns>
             </z:grid>
             <z:paging autohide="true" id="paging" pageSize="15"/>
