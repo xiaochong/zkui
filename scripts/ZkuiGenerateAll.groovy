@@ -40,10 +40,6 @@ target('default': "Generates a CRUD interface (controller + views) for a domain 
         else {
             generateForName = name
             generateForOne()
-            def packageName = name.toString().toLowerCase()
-            createUnitTest(name: "${packageName}.Create", suffix: "Composer", superClass: "ComposerUnitTestCase")
-            createUnitTest(name: "${packageName}.Edit", suffix: "Composer", superClass: "ComposerUnitTestCase")
-            createUnitTest(name: "${packageName}.List", suffix: "Composer", superClass: "ComposerUnitTestCase")
         }
     }
     catch (Exception e) {

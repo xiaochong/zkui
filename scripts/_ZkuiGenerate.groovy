@@ -83,6 +83,10 @@ def generateForDomainClass(domainClass) {
 
         event("StatusUpdate", ["Generating composers for domain class ${domainClass.fullName}"])
         templateGenerator.generateComposers(domainClass, basedir)
+        def packageName = domainClass.fullName.toString().toLowerCase()
+        createUnitTest(name: "${packageName}.Create", suffix: "Composer", superClass: "ComposerUnitTestCase")
+        createUnitTest(name: "${packageName}.Edit", suffix: "Composer", superClass: "ComposerUnitTestCase")
+        createUnitTest(name: "${packageName}.List", suffix: "Composer", superClass: "ComposerUnitTestCase")
         event("GenerateComposersEnd", [domainClass.fullName])
     }
 
