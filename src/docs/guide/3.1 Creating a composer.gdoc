@@ -1,0 +1,19 @@
+Composers can be created with the create-composer target. For example try running the following command from the root of a Grails project:
+{code}
+grails create-composer window
+{code}
+
+The command will result in the creation of a composer at the location grails-app/composers/WindowComposer.groovy:
+{code:groovy}
+class WindowComposer {
+    static transactional = true
+    def afterCompose = {Component comp ->
+        // initialize components here
+    }
+}
+{code}
+WindowComposer by default provide a @afterCompose@ closure to initialize components.
+
+{note}
+The create-composer command is merely for convenience and you can just as easily create composers using your favorite text editor or IDE
+{note}

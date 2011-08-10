@@ -1,0 +1,16 @@
+If the parameter on onEvent it's a String, that is a client side event
+{code:groovy}
+window << {
+    button(label: 'buutton', onClick: "alert('Say hello word! from JS')")
+}
+{code}
+
+Add a prefix @client_@ is useful when you also use server side event that avoid naming conflicts
+
+{code:groovy}
+window << {
+    button(label: 'buutton', client_onClick: "alert('Say hello word! from JS')",onClick:{
+        Messagebox.show("hello word! from Server")
+    })
+}
+{code}

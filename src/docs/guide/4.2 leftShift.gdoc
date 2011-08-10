@@ -1,0 +1,9 @@
+_ZKUI_ also provides a convenient method @leftShift@( << ),so you can modify the above code like:
+{code:groovy}
+def window = new Window(title: "listbox demo", border: "normal")
+window << {
+    listbox {
+       ...
+    }
+}
+{code}

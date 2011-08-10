@@ -1,0 +1,14 @@
+Each component Taglib has a @apply@ attitude,so you can place the composer here
+{code:xml}
+<z:window id="myWindowComposer" apply="package.WindowComposer">
+    ...
+</z:window>
+{code}
+
+In the WindowComposer side
+{code}
+def afterCompose = {Component comp ->
+    assert comp.id=="myWindowComposer"
+    assert (comp instanceof org.zkoss.zul.Window)
+}
+{code}

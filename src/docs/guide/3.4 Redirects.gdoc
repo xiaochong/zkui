@@ -1,0 +1,41 @@
+
+Actions can be redirected using the redirect method present in all composers
+
+The parameters of @redirect@ is same as controller's @redirect@
+
+Composer
+{code}
+class MyComposer{
+    Button mybutton
+
+    def afterCompose = {Component comp ->
+
+    }
+
+    def onClick_mybutton(Event event) {
+        redirect(controller: 'demo', action: 'index', id: 1)
+    }
+}
+{code}
+
+{note}
+following code same as @onClick_button@ above
+
+{code}
+def afterCompose = {Component comp ->
+    mybutton.addEventListener('onClick'){
+        redirect(controller: 'demo', action: 'index', id: 1)
+    }
+}
+{code}
+
+{note}
+
+
+View
+{code:xml}
+<z:window id="mywin" apply="MyComposer">
+    <z:button label="mybutton"/>
+</z:window>
+{code}
+

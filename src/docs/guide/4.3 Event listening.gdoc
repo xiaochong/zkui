@@ -1,0 +1,8 @@
+If the parameter on onEvent it's a Closure, then it's a server side event
+{code:groovy}
+window << {
+    button(label: 'button', onClick: {
+        Messagebox.show("hello word! from Server")
+    })
+}
+{code}

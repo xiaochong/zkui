@@ -1,0 +1,43 @@
+
+To uses Grails' underlying data binding capability,@zkui@ injection a @getParams@ method to [Component|http://www.zkoss.org/javadoc/latest/zk/org/zkoss/zk/ui/Component.html].
+
+Domain Class
+{code}
+class Person {
+    String firstName
+    String lastName
+    String fullName
+    static constraints = {
+    }
+}
+{code}
+
+View
+{code:xml}
+<z:window id="mywin" apply="MyComposer">
+    <z:textbox name="firstName"/>
+    <z:textbox name="lastName"/>
+    <z:textbox name="fullName"/>
+    <z:button label="submit"/>
+</z:window>
+{code}
+
+Composer
+{code}
+class MyComposer{
+    Button submit
+    def afterCompose = {Component mywin ->
+        submit.addEventListener('onClick'){
+            def person=new Person(mywin.params)
+            ...
+        }
+    }
+}
+{code}
+
+A @bindData@ method same as in @controller@ also provide to Composer
+
+{code}
+def p = new Person()
+bindData(p, mywin.params)
+{code}

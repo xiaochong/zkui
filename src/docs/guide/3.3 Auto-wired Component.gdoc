@@ -1,0 +1,30 @@
+If apply a @composer@ to a Component that implement a @IdSpace@ Interface,such as org.zkoss.zul.Window. The Component's children can be auto-wired to composer's fields
+
+The following is an example. The onChange event received by Textbox @mytextbox@ will be forwarded to target Window @mywin@ as a new target event onChange_mytextbox and the Textbox component with id name "mytextbox" and Label with id name @mylabel@ are injected into the "mytextbox" and "mylabel" fields respectively(so you can use mytextbox and mylabel variable directly in onChange_mytextbox without problem).
+
+Composer
+{code}
+class MyComposer{
+    Textbox mytextbox
+    Window self //embeded object, the supervised window "mywin"
+    Page page //the ZK page
+    Label mylabel
+
+    def afterCompose = {Component comp ->
+        assert mytextbox.id=="mytextbox"
+        assert mylabel.id=="mylabel"
+    }
+
+    def onChange_mytextbox(Event event) {
+        mylabel.setValue("You just entered: "+ mytextbox.getValue())
+    }
+}
+{code}
+
+View
+{code:xml}
+<z:window id="mywin" apply="MyComposer">
+    <z:textbox id="mytextbox"/>
+    <z:label id="mylabel"/>
+</z:window>
+{code}

@@ -1,0 +1,36 @@
+@appendChild@  is dynamic method that _ZKUI_ injection to zk [Component|http://www.zkoss.org/javadoc/latest/zk/org/zkoss/zk/ui/Component.html] to begin builder,which accepts a Closure parameter.
+{code:groovy}
+def window = new Window(title: "listbox demo", border: "normal")
+window.appendChild {
+    listbox {
+        listhead(sizable: true) {
+            listheader(label: "name", sort: "auto")
+            listheader(label: "gender", sort: "auto")
+        }
+        listitem {
+            listcell(label: "Mary")
+            listcell(label: "FEMALE")
+        }
+        listitem {
+            listcell(label: "John")
+            listcell(label: "MALE")
+        }
+        listitem {
+            listcell(label: "Jane")
+            listcell(label: "FEMALE")
+        }
+        listitem {
+            listcell(label: "Henry")
+            listcell(label: "MALE")
+        }
+        listfoot {
+            listfooter {
+                label(value: "This is footer1")
+            }
+            listfooter {
+                label(value: "This is footer2")
+            }
+        }
+    }
+}
+{code}

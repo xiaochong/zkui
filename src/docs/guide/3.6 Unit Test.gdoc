@@ -1,0 +1,9 @@
+When use *grails create-composer* create a composer,a unit class that is a sub-class of ComposerUnitTestCase also created
+
+It provides a @mockComposer@ methods for mocking zkui's  Selector,Builder and so on.
+
+{code}
+mockComposer(MyComposer)
+def myComposer=new MyComposer
+...
+{code}
