@@ -150,7 +150,7 @@ The different is it more likely to use the Grails' infrastructures such as gsp, 
                 } else {
                     value = c.value
                 }
-                if (!value) {
+                if (value == null) {
                     value = ''
                 }
                 if (e == null) {
