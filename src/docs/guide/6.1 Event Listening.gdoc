@@ -1,1 +1,75 @@
-todo
+h3. Declare an Event Handler in gsp
+
+An event handler can be declared in a gsp page by specifying an event attribute(An event attribute is an attribute starting with on). For example,
+{code:xml}
+<z:button label="hi" onClick='alert("Hello")'/>
+{code}
+where the content of the event handler is the code snippet in Groovy. The event handler will be interpreted at the run time.
+
+Important Builtin Variables
+* self - the component receiving the event. In the previous example, it is the button itself.
+* event - the event being received. In the previous example, it is an instance of MouseEvent.
+
+
+h3. Listen by Use of an Event Listener
+
+An event listener is a class implementing EventListener. For example,
+{code:groovy}
+class MyListener implements EventListener {
+    void onEvent(Event event) {
+        Messages.show("Hello")
+    }
+}
+{code}
+
+Then, you can register an event listener to the component that might receive the event by use of Component.addEventListener(String, EventListener). For example,
+{code:groovy}
+button.addEventListener("onClick", new MyListener())
+{code}
+
+This is a typical approach to handle events. However, it is a bit tedious to register event listeners one-by-one if there are a lot of listeners.
+ Rather, it is suggested to use the following method:
+
+{code:groovy}
+button.addEventListener("onClick"){Event event->
+    Messages.show("Hello")
+}
+{code}
+
+
+h3. Composer and Event Listener Autowiring
+
+With [Auto-wired Component|guide:3.3 Auto-wired Component], you generally don't need to register event listeners manually. Rather, they could be registered automatically by use of the auto-wiring feature of a composer. For example
+
+{code:groovy}
+class MyComposer{
+    void onClick_hi() {
+        Messsagebox.show("Hello")
+    }
+    void onClick_bye() {
+        Messsagebox.show("Bye")
+    }
+}
+{code}
+
+As shown above, the method to listen an event shall be named by starting with the event name, separating with @_@, and ending with the component's ID. The composer will search all matched methods and register the event listener automatically. Then, in the gsp page, you can specify the apply attribute to associate the composer with a component.
+{code:xml}
+<z:window apply="MyComposer">
+    <z:textbox/>
+    <z:button id="hi"/>
+    <z:button id="bye"/>
+</z:window>
+{code}
+
+If the listener needs to access the event, just declare it as the argument:
+{code:groovy}
+void onClick_hi(MouseEvent event) {
+  Messsagebox.show("Hello, " + event.getName())
+}
+{code}
+Though not limited, a composer is usually associated with an ID space (such as Window) to handle events and component within the give ID space. You could associate any component that properly represents a scope of your application to manage.
+See more [Auto-wired Component|guide:3.3 Auto-wired Component]
+
+h4. Declare a Event Handler in zkui's Builder
+
+see [Event listening|guide:4.3 Event listening]

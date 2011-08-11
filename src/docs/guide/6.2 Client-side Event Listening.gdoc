@@ -1,1 +1,54 @@
-todo
+ZK allows applications to handle events at both the server and client side. Handling events at the server side, as described in the previous sections, are more common, since the listeners can access the backend services directly. However, handling event at the client side improves the responsiveness. For example, it is better to be done with a client-side listener if you want to open the drop-down list when a comobox gains focus.
+A good rule of thumb is to use server-side listeners first since it is easier, and then improve the responsiveness of the critical part, if any, with the client-side listener.
+
+h3. Declare a Client-side Listener in gsp
+Declaring a client-side listener in a gsp  is similar to declaring a server-side listener, except
+* Use the client_  Prefix
+* It is JavaScript
+* Use this to reference to the target widget (while the event is referenced with event)
+* Use this.$f() to reference fellow widgets (Widget.$f())
+For example,
+{code:xml}
+<z:combobox client_onFocus="this.open()"/>
+{code}
+
+h3. The Relationship between Client and Server-side Event Listener
+It is allowed to register both the client and server-side event listeners. They will be both invoked. Of course, the client-side listener is called first, and then the server-side listener. For example,
+{code:xml}
+<z:div>
+  <z:combobox client_onFocus="this.open()" onFocus="self.parent.appendChild(new Label('focus'))"/>
+</z:div>
+{code}
+If you want to stop the event propagation such that the server won't receive the event, you could invoke Event.stop(Map). For example, the server-side listener won't be invoked in the following example:
+{code:xml}
+<z:div>
+  <z:combobox client_onFocus="this.open(); event.stop();" onFocus="self.parent.appendChild(new Label('focus'))"/>
+</z:div>
+{code}
+
+
+h3. Declare a Client-side Listener in Groovy
+The other way to declare a client-side listener at the server is Component.setWidgetListener(String, String). For example,
+{code:groovy}
+    combobox.setWidgetListener("onFocus", "this.open()")
+{code}
+Notice that it is Groovy and running at the server.
+
+h4. Register a Client-side Listener in Client-Side JavaScript
+Listening an event at the client could be done by calling Widget.listen(Map, int). For example,
+{code:xml}
+<z:window>
+    <z:bandbox id="bb"/>
+    <z:script defer="true">
+        this.$f().bb.listen({onFocus: function () {this.open();}});
+    </z:script>
+</z:window>
+{code}
+where
+* defer="true" is required such that the JavaScript code will be evaluated after all widgets are created successfully. Otherwise, it is not able to retreive the bandbox (bb).
+* script is a widget (unlike zscript), so this references to the script widget, rather than the parent.
+* Widget.$f(String) is equivalent to Component.getFellow(String), except it is a JavaScript method (accessible at the client).
+
+h4. Declare a Client-side Listener in zkui's Builder
+
+see [Client-side event listening|guide:4.4 Client-side event listening]
