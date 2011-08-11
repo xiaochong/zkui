@@ -5,6 +5,39 @@
         <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen" title="Ref" charset="utf-8"/>
     </head>
     <body class="body">
-    todo
+    <h3>Declare an Event Handler in gsp</h3><p class="paragraph"/>An event handler can be declared in a gsp page by specifying an event attribute(An event attribute is an attribute starting with on). For example,
+<div class="code"><pre><span class="xml&#45;tag">&#60;z:button label=<span class="xml&#45;quote">"hi"</span> onClick='alert(<span class="xml&#45;quote">"Hello"</span>)'/&#62;</span></pre></div>
+where the content of the event handler is the code snippet in Groovy. The event handler will be interpreted at the run time.<p class="paragraph"/>Important Builtin Variables
+<ul class="star">
+<li>self - the component receiving the event. In the previous example, it is the button itself.</li>
+<li>event - the event being received. In the previous example, it is an instance of MouseEvent.</li>
+</ul><p class="paragraph"/><h3>Listen by Use of an Event Listener</h3><p class="paragraph"/>An event listener is a class implementing EventListener. For example,
+<div class="code"><pre>class MyListener <span class="java&#45;keyword">implements</span> EventListener &#123;
+    void onEvent(Event event) &#123;
+        Messages.show(<span class="java&#45;quote">"Hello"</span>)
+    &#125;
+&#125;</pre></div><p class="paragraph"/>Then, you can register an event listener to the component that might receive the event by use of Component.addEventListener(String, EventListener). For example,
+<div class="code"><pre>button.addEventListener(<span class="java&#45;quote">"onClick"</span>, <span class="java&#45;keyword">new</span> MyListener())</pre></div><p class="paragraph"/>This is a typical approach to handle events. However, it is a bit tedious to register event listeners one-by-one if there are a lot of listeners.
+ Rather, it is suggested to use the following method:<p class="paragraph"/><div class="code"><pre>button.addEventListener(<span class="java&#45;quote">"onClick"</span>)&#123;Event event&#45;&#62;
+    Messages.show(<span class="java&#45;quote">"Hello"</span>)
+&#125;</pre></div><p class="paragraph"/>
+<h3>Composer and Event Listener Autowiring</h3><p class="paragraph"/>With <a href="../guide/single.html#3.3 Auto-wired Component" class="guide">Auto-wired Component</a>, you generally don't need to register event listeners manually. Rather, they could be registered automatically by use of the auto-wiring feature of a composer. For example<p class="paragraph"/><div class="code"><pre>class MyComposer&#123;
+    void onClick_hi() &#123;
+        Messsagebox.show(<span class="java&#45;quote">"Hello"</span>)
+    &#125;
+    void onClick_bye() &#123;
+        Messsagebox.show(<span class="java&#45;quote">"Bye"</span>)
+    &#125;
+&#125;</pre></div><p class="paragraph"/>As shown above, the method to listen an event shall be named by starting with the event name, separating with <code>_</code>, and ending with the component's ID. The composer will search all matched methods and register the event listener automatically. Then, in the gsp page, you can specify the apply attribute to associate the composer with a component.
+<div class="code"><pre><span class="xml&#45;tag">&#60;z:window apply=<span class="xml&#45;quote">"MyComposer"</span>&#62;</span>
+    <span class="xml&#45;tag">&#60;z:textbox/&#62;</span>
+    <span class="xml&#45;tag">&#60;z:button id=<span class="xml&#45;quote">"hi"</span>/&#62;</span>
+    <span class="xml&#45;tag">&#60;z:button id=<span class="xml&#45;quote">"bye"</span>/&#62;</span>
+<span class="xml&#45;tag">&#60;/z:window&#62;</span></pre></div><p class="paragraph"/>If the listener needs to access the event, just declare it as the argument:
+<div class="code"><pre>void onClick_hi(MouseEvent event) &#123;
+  Messsagebox.show(<span class="java&#45;quote">"Hello, "</span> + event.getName())
+&#125;</pre></div>
+Though not limited, a composer is usually associated with an ID space (such as Window) to handle events and component within the give ID space. You could associate any component that properly represents a scope of your application to manage.
+See more <a href="../guide/single.html#3.3 Auto-wired Component" class="guide">Auto-wired Component</a><p class="paragraph"/><h4>Declare a Event Handler in zkui's Builder</h4><p class="paragraph"/>see <a href="../guide/single.html#4.3 Event listening" class="guide">Event listening</a>
     </body>
 </html>

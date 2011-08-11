@@ -1,0 +1,43 @@
+<html>
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+        <title>4.1 appendChild</title>
+        <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen" title="Ref" charset="utf-8"/>
+    </head>
+    <body class="body">
+    <code>appendChild</code>  is dynamic method that  <em class="italic">ZKUI</em>  injection to zk <a href="http://www.zkoss.org/javadoc/latest/zk/org/zkoss/zk/ui/Component.html" target="blank">Component</a> to begin builder,which accepts a Closure parameter.
+<div class="code"><pre>def window = <span class="java&#45;keyword">new</span> Window(title: <span class="java&#45;quote">"listbox demo"</span>, border: <span class="java&#45;quote">"normal"</span>)
+window.appendChild &#123;
+    listbox &#123;
+        listhead(sizable: <span class="java&#45;keyword">true</span>) &#123;
+            listheader(label: <span class="java&#45;quote">"name"</span>, sort: <span class="java&#45;quote">"auto"</span>)
+            listheader(label: <span class="java&#45;quote">"gender"</span>, sort: <span class="java&#45;quote">"auto"</span>)
+        &#125;
+        listitem &#123;
+            listcell(label: <span class="java&#45;quote">"Mary"</span>)
+            listcell(label: <span class="java&#45;quote">"FEMALE"</span>)
+        &#125;
+        listitem &#123;
+            listcell(label: <span class="java&#45;quote">"John"</span>)
+            listcell(label: <span class="java&#45;quote">"MALE"</span>)
+        &#125;
+        listitem &#123;
+            listcell(label: <span class="java&#45;quote">"Jane"</span>)
+            listcell(label: <span class="java&#45;quote">"FEMALE"</span>)
+        &#125;
+        listitem &#123;
+            listcell(label: <span class="java&#45;quote">"Henry"</span>)
+            listcell(label: <span class="java&#45;quote">"MALE"</span>)
+        &#125;
+        listfoot &#123;
+            listfooter &#123;
+                label(value: <span class="java&#45;quote">"This is footer1"</span>)
+            &#125;
+            listfooter &#123;
+                label(value: <span class="java&#45;quote">"This is footer2"</span>)
+            &#125;
+        &#125;
+    &#125;
+&#125;</pre></div>
+    </body>
+</html>

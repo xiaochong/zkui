@@ -5,7 +5,7 @@
         <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen" title="Ref" charset="utf-8"/>
     </head>
     <body class="body">
-    <h1><a name="5. Selector">5. Selector</a></h1>ZK UI Plugin support a CSS (or jquery) like selector syntax to find matching components, that allows very powerful and robust queries.<p class="paragraph"/>It's inspired by the <a href="http://jsoup.org" target="blank">jsoup</a><p class="paragraph"/>The <code>select</code> method is injected to <a href="http://www.zkoss.org/javadoc/latest/zk/org/zkoss/zk/ui/Component.html" target="blank">Component</a>,which returns a list of Component.<p class="paragraph"/>View code
+    <h1><a name="5. Selector">5. Selector</a></h1><h2><a name="5.1 Selector overview">5.1 Selector overview</a></h2>ZK UI Plugin support a CSS (or jquery) like selector syntax to find matching components, that allows very powerful and robust queries.<p class="paragraph"/>It's inspired by the <a href="http://jsoup.org" target="blank">jsoup</a><p class="paragraph"/>The <code>select</code> method is injected to <a href="http://www.zkoss.org/javadoc/latest/zk/org/zkoss/zk/ui/Component.html" target="blank">Component</a>,which returns a list of Component.<p class="paragraph"/>View code
 <div class="code"><pre><span class="xml&#45;tag">&#60;z:window id=<span class="xml&#45;quote">"window"</span> apply=<span class="xml&#45;quote">"MyComposer"</span>&#62;</span>
     <span class="xml&#45;tag">&#60;z:textbox name=<span class="xml&#45;quote">"t1"</span> value=<span class="xml&#45;quote">"value1"</span>/&#62;</span>
     <span class="xml&#45;tag">&#60;z:textbox id=<span class="xml&#45;quote">"t2"</span> value=<span class="xml&#45;quote">"value2"</span>/&#62;</span>
@@ -15,9 +15,8 @@
         assert 3 == window.select(<span class="java&#45;quote">"textbox"</span>).size() // select method returns List&#60;Component&#62;
         assert <span class="java&#45;quote">"value2"</span> == window.select(<span class="java&#45;quote">"&#35;t2"</span>)&#91;0&#93;.value
         assert <span class="java&#45;quote">"value1"</span> == window.select(<span class="java&#45;quote">"textbox&#91;name=t1&#93;"</span>)&#91;0&#93;.value
-    &#125;<p class="paragraph"/>&#125;</pre></div><p class="paragraph"/>
-<h3>Selector overview</h3>
-<ul class="star">
+    &#125;<p class="paragraph"/>&#125;</pre></div>
+<h2><a name="5.2 Base Selector">5.2 Base Selector</a></h2><ul class="star">
 <li><strong class="bold">tagname</strong>: find components by tag, e.g. <code>textbox</code></li>
 <li><strong class="bold">#id</strong>: find components by ID, e.g. <code>#compId</code></li>
 <li><strong class="bold">.class</strong>: find components by class name, e.g. <code>.masthead</code></li>
@@ -27,8 +26,7 @@
 <li><strong class="bold">&#91;attr^=value], &#91;attr$=value], &#91;attr&#42;=value]</strong>: components with attributes that start with, end with, or contain the value, e.g. <code>&#91;href*=/path/]</code></li>
 <li><strong class="bold">&#91;attr~=regex]</strong>: components with attribute values that match the regular expression; e.g. <code>img&#91;src~=(?i)&#46;(png|jpe?g)]</code></li>
 <li><strong class="bold">&#42;</strong>: all components, e.g. <code>&#42;</code></li>
-</ul><p class="paragraph"/><h3>Selector combinations</h3>
-<ul class="star">
+</ul><p class="paragraph"/><h2><a name="5.3 Selector combinations">5.3 Selector combinations</a></h2><ul class="star">
 <li><strong class="bold">el#id</strong>: components with ID, e.g. <code>textbox#compId</code></li>
 <li><strong class="bold">el.class</strong>: components with class, e.g. <code>textbox.masthead</code></li>
 <li><strong class="bold">el&#91;attr]</strong>: components with attribute, e.g. <code>a&#91;href]</code></li>
@@ -38,8 +36,7 @@
 <li><strong class="bold">siblingA + siblingB</strong>: finds sibling B element immediately preceded by sibling A, e.g. <code></code>div.head + div<code></code></li>
 <li><strong class="bold">siblingA ~ siblingX</strong>: finds sibling X element preceded by sibling A, e.g. <code>intbox ~ textbox</code></li>
 <li><strong class="bold">el, el, el</strong>: group multiple selectors, find unique components that match any of the selectors; e.g. <code>div.masthead, div.logo</code></li>
-</ul><p class="paragraph"/><h3>Pseudo selectors</h3>
-<ul class="star">
+</ul><p class="paragraph"/><h2><a name="5.4 Pseudo selectors">5.4 Pseudo selectors</a></h2><ul class="star">
 <li><strong class="bold">:lt(n)</strong>: find components whose sibling index (i.e. its position in the component tree relative to its parent) is less than n; e.g. <code>listitem:lt(3)</code></li>
 <li><strong class="bold">:gt(n)</strong>: find components whose sibling index is greater than n; e.g. <code>div label:gt(2)</code></li>
 <li><strong class="bold">:eq(n)</strong>: find components whose sibling index is equal to n; e.g. <code>window textbox:eq(1)</code></li>

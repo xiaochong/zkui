@@ -1,0 +1,17 @@
+<html>
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+        <title>4.4 Client-side event listening</title>
+        <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen" title="Ref" charset="utf-8"/>
+    </head>
+    <body class="body">
+    If the parameter on onEvent it's a String, that is a client side event
+<div class="code"><pre>window &#60;&#60; &#123;
+    button(label: 'buutton', onClick: <span class="java&#45;quote">"alert('Say hello word! from JS')"</span>)
+&#125;</pre></div><p class="paragraph"/>Add a prefix <code>client_</code> is useful when you also use server side event that avoid naming conflicts<p class="paragraph"/><div class="code"><pre>window &#60;&#60; &#123;
+    button(label: 'buutton', client_onClick: <span class="java&#45;quote">"alert('Say hello word! from JS')"</span>,onClick:&#123;
+        Messagebox.show(<span class="java&#45;quote">"hello word! from Server"</span>)
+    &#125;)
+&#125;</pre></div>
+    </body>
+</html>

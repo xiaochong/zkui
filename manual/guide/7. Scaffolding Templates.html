@@ -1,0 +1,34 @@
+<html>
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+        <title>7. Scaffolding Templates</title>
+        <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen" title="Ref" charset="utf-8"/>
+    </head>
+    <body class="body">
+    <h1><a name="7. Scaffolding Templates">7. Scaffolding Templates</a></h1><code>Zkui</code> supports a feature known as scaffolding which involves the generation of a CRUD (Create/Read/Update/Delete) interface for a given domain class
+<h2><a name="7.1 Static Scaffolding">7.1 Static Scaffolding</a></h2>Same as Grails's generate-all command,<code>zkui</code> use <a href="../ref/Command Line/zkui-generate-all.html" class="Command Line">zkui-generate-all</a> to generates views,composer and a controller for the given domain class<p class="paragraph"/><blockquote class="note">
+To zkui's scaffolding work,you need modify the default layout/main.gsp
+<ol>
+<li>Add the tag &#60;z:resources/&#62; to the head</li>
+<li>Remove &#60;link rel="stylesheet" href="${resource(dir:'css',file:'main.css')}" /&#62;</li>
+<li>Generate the doc type as follows</li>
+</ol><p class="paragraph"/><div class="code"><pre>&#60;!DOCTYPE html PUBLIC <span class="xml&#45;quote">"&#45;//W3C//DTD XHTML 1.0 Transitional//EN"</span>
+ <span class="xml&#45;quote">"http://www.w3.org/TR/xhtml1/DTD/xhtml1&#45;transitional.dtd"</span>&#62;</pre></div><p class="paragraph"/>
+The complete layout/main.gsp Examples
+<div class="code"><pre>&#60;!DOCTYPE html PUBLIC <span class="xml&#45;quote">"&#45;//W3C//DTD XHTML 1.0 Transitional//EN"</span>
+ <span class="xml&#45;quote">"http://www.w3.org/TR/xhtml1/DTD/xhtml1&#45;transitional.dtd"</span>&#62;
+<span class="xml&#45;tag">&#60;html xmlns=<span class="xml&#45;quote">"http://www.w3.org/1999/xhtml"</span>&#62;</span>
+<span class="xml&#45;tag">&#60;head&#62;</span>
+    <span class="xml&#45;tag">&#60;title&#62;</span><span class="xml&#45;tag">&#60;g:layoutTitle default=<span class="xml&#45;quote">"Grails"</span>/&#62;</span><span class="xml&#45;tag">&#60;/title&#62;</span>
+    <span class="xml&#45;tag">&#60;z:resources/&#62;</span>
+    <span class="xml&#45;tag">&#60;g:layoutHead/&#62;</span>
+<span class="xml&#45;tag">&#60;/head&#62;</span>
+<span class="xml&#45;tag">&#60;body&#62;</span>
+<span class="xml&#45;tag">&#60;div id=<span class="xml&#45;quote">"grailsLogo"</span>&#62;</span><span class="xml&#45;tag">&#60;a href=<span class="xml&#45;quote">"http://grails.org"</span>&#62;</span><span class="xml&#45;tag">&#60;img src=<span class="xml&#45;quote">"$&#123;resource(dir: 'images', file: 'grails_logo.png')&#125;"</span>
+                                                      alt=<span class="xml&#45;quote">"Grails"</span> border=<span class="xml&#45;quote">"0"</span>/&#62;</span><span class="xml&#45;tag">&#60;/a&#62;</span><span class="xml&#45;tag">&#60;/div&#62;</span>
+<span class="xml&#45;tag">&#60;g:layoutBody/&#62;</span>
+<span class="xml&#45;tag">&#60;/body&#62;</span>
+<span class="xml&#45;tag">&#60;/html&#62;</span></pre></div><p class="paragraph"/></blockquote><h2><a name="7.2 Customizing the scaffolding templates">7.2 Customizing the scaffolding templates</a></h2>The templates used by zkui to generate the controller, views and composer can be customized by installing the templates with the <code>zkui-install-templates</code> command.
+
+    </body>
+</html>

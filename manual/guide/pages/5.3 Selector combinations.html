@@ -1,0 +1,20 @@
+<html>
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+        <title>5.3 Selector combinations</title>
+        <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen" title="Ref" charset="utf-8"/>
+    </head>
+    <body class="body">
+    <ul class="star">
+<li><strong class="bold">el#id</strong>: components with ID, e.g. <code>textbox#compId</code></li>
+<li><strong class="bold">el.class</strong>: components with class, e.g. <code>textbox.masthead</code></li>
+<li><strong class="bold">el&#91;attr]</strong>: components with attribute, e.g. <code>a&#91;href]</code></li>
+<li><strong class="bold">Any combination</strong>, e.g. <code>a&#91;href].highlight</code></li>
+<li><strong class="bold">ancestor child</strong>: child components that descend from ancestor, e.g. <code>.body textbox</code> finds <code>textbox</code> components anywhere under a block with class "body"</li>
+<li><strong class="bold">parent &#62; child</strong>: child components that descend directly from parent, e.g. <code>window.content &#62; textbox</code> finds textbox components; and <code>window &#62; *</code> finds the direct children of the window tag</li>
+<li><strong class="bold">siblingA + siblingB</strong>: finds sibling B element immediately preceded by sibling A, e.g. <code></code>div.head + div<code></code></li>
+<li><strong class="bold">siblingA ~ siblingX</strong>: finds sibling X element preceded by sibling A, e.g. <code>intbox ~ textbox</code></li>
+<li><strong class="bold">el, el, el</strong>: group multiple selectors, find unique components that match any of the selectors; e.g. <code>div.masthead, div.logo</code></li>
+</ul><p class="paragraph"/>
+    </body>
+</html>

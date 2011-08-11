@@ -1,0 +1,25 @@
+<html>
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+        <title>3.3 Auto-wired Component</title>
+        <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen" title="Ref" charset="utf-8"/>
+    </head>
+    <body class="body">
+    If apply a <code>composer</code> to a Component that implement a <code>IdSpace</code> Interface,such as org.zkoss.zul.Window. The Component's children can be auto-wired to composer's fields<p class="paragraph"/>The following is an example. The onChange event received by Textbox <code>mytextbox</code> will be forwarded to target Window <code>mywin</code> as a new target event onChange_mytextbox and the Textbox component with id name "mytextbox" and Label with id name <code>mylabel</code> are injected into the "mytextbox" and "mylabel" fields respectively(so you can use mytextbox and mylabel variable directly in onChange_mytextbox without problem).<p class="paragraph"/>Composer
+<div class="code"><pre>class MyComposer&#123;
+    Textbox mytextbox
+    Window self //embeded object, the supervised window <span class="java&#45;quote">"mywin"</span>
+    Page page //the ZK page
+    Label mylabel<p class="paragraph"/>    def afterCompose = &#123;Component comp &#45;&#62;
+        assert mytextbox.id==<span class="java&#45;quote">"mytextbox"</span>
+        assert mylabel.id==<span class="java&#45;quote">"mylabel"</span>
+    &#125;<p class="paragraph"/>    def onChange_mytextbox(Event event) &#123;
+        mylabel.setValue(<span class="java&#45;quote">"You just entered: "</span>+ mytextbox.getValue())
+    &#125;
+&#125;</pre></div><p class="paragraph"/>View
+<div class="code"><pre><span class="xml&#45;tag">&#60;z:window id=<span class="xml&#45;quote">"mywin"</span> apply=<span class="xml&#45;quote">"MyComposer"</span>&#62;</span>
+    <span class="xml&#45;tag">&#60;z:textbox id=<span class="xml&#45;quote">"mytextbox"</span>/&#62;</span>
+    <span class="xml&#45;tag">&#60;z:label id=<span class="xml&#45;quote">"mylabel"</span>/&#62;</span>
+<span class="xml&#45;tag">&#60;/z:window&#62;</span></pre></div>
+    </body>
+</html>

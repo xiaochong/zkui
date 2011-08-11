@@ -1,0 +1,18 @@
+<html>
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+        <title>1.4 Selector</title>
+        <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen" title="Ref" charset="utf-8"/>
+    </head>
+    <body class="body">
+    Provides a very convenient API for extracting and manipulating zk component, using the jquery-like methods.<p class="paragraph"/>View
+<div class="code"><pre><span class="xml&#45;tag">&#60;z:window id=<span class="xml&#45;quote">"window"</span>&#62;</span>
+    <span class="xml&#45;tag">&#60;z:textbox name=<span class="xml&#45;quote">"t1"</span> value=<span class="xml&#45;quote">"value1"</span>/&#62;</span>
+    <span class="xml&#45;tag">&#60;z:textbox id=<span class="xml&#45;quote">"t2"</span> value=<span class="xml&#45;quote">"value2"</span>/&#62;</span>
+    <span class="xml&#45;tag">&#60;z:textbox value=<span class="xml&#45;quote">"value3"</span>/&#62;</span>
+<span class="xml&#45;tag">&#60;/z:window&#62;</span></pre></div><p class="paragraph"/>Selector code
+<div class="code"><pre>assert 3 == window.select(<span class="java&#45;quote">"textbox"</span>).size()
+assert <span class="java&#45;quote">"value2"</span> == window.select(<span class="java&#45;quote">"&#35;t2"</span>)&#91;0&#93;.value
+assert <span class="java&#45;quote">"value1"</span> == window.select(<span class="java&#45;quote">"textbox&#91;name=t1&#93;"</span>)&#91;0&#93;.value</pre></div>
+    </body>
+</html>

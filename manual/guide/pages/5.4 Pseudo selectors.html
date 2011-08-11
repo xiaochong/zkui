@@ -1,0 +1,16 @@
+<html>
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+        <title>5.4 Pseudo selectors</title>
+        <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen" title="Ref" charset="utf-8"/>
+    </head>
+    <body class="body">
+    <ul class="star">
+<li><strong class="bold">:lt(n)</strong>: find components whose sibling index (i.e. its position in the component tree relative to its parent) is less than n; e.g. <code>listitem:lt(3)</code></li>
+<li><strong class="bold">:gt(n)</strong>: find components whose sibling index is greater than n; e.g. <code>div label:gt(2)</code></li>
+<li><strong class="bold">:eq(n)</strong>: find components whose sibling index is equal to n; e.g. <code>window textbox:eq(1)</code></li>
+<li><strong class="bold">:has(seletor)</strong>: find components that contain components matching the selector; e.g. <code>div:has(label)</code></li>
+<li><strong class="bold">:not(selector)</strong>: find components that do not match the selector; e.g. <code>div:not(.logo)</code></li>
+</ul><p class="paragraph"/>
+    </body>
+</html>

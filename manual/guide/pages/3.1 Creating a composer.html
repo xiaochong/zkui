@@ -1,0 +1,19 @@
+<html>
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+        <title>3.1 Creating a composer</title>
+        <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen" title="Ref" charset="utf-8"/>
+    </head>
+    <body class="body">
+    Composers can be created with the create-composer target. For example try running the following command from the root of a Grails project:
+<div class="code"><pre>grails create&#45;composer window</pre></div><p class="paragraph"/>The command will result in the creation of a composer at the location grails-app/composers/WindowComposer.groovy:
+<div class="code"><pre>class WindowComposer &#123;
+    def afterCompose = &#123;Component comp &#45;&#62;
+        // initialize components here
+    &#125;
+&#125;</pre></div>
+WindowComposer by default provide a <code>afterCompose</code> closure to initialize components.<p class="paragraph"/><blockquote class="note">
+The create-composer command is merely for convenience and you can just as easily create composers using your favorite text editor or IDE
+</blockquote>
+    </body>
+</html>

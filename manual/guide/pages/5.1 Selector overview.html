@@ -1,0 +1,21 @@
+<html>
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+        <title>5.1 Selector overview</title>
+        <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen" title="Ref" charset="utf-8"/>
+    </head>
+    <body class="body">
+    ZK UI Plugin support a CSS (or jquery) like selector syntax to find matching components, that allows very powerful and robust queries.<p class="paragraph"/>It's inspired by the <a href="http://jsoup.org" target="blank">jsoup</a><p class="paragraph"/>The <code>select</code> method is injected to <a href="http://www.zkoss.org/javadoc/latest/zk/org/zkoss/zk/ui/Component.html" target="blank">Component</a>,which returns a list of Component.<p class="paragraph"/>View code
+<div class="code"><pre><span class="xml&#45;tag">&#60;z:window id=<span class="xml&#45;quote">"window"</span> apply=<span class="xml&#45;quote">"MyComposer"</span>&#62;</span>
+    <span class="xml&#45;tag">&#60;z:textbox name=<span class="xml&#45;quote">"t1"</span> value=<span class="xml&#45;quote">"value1"</span>/&#62;</span>
+    <span class="xml&#45;tag">&#60;z:textbox id=<span class="xml&#45;quote">"t2"</span> value=<span class="xml&#45;quote">"value2"</span>/&#62;</span>
+    <span class="xml&#45;tag">&#60;z:textbox value=<span class="xml&#45;quote">"value3"</span>/&#62;</span>
+<span class="xml&#45;tag">&#60;/z:window&#62;</span></pre></div><p class="paragraph"/>Composer code
+<div class="code"><pre>class MyComposer&#123;<p class="paragraph"/>    def afterCompose = &#123;Component window &#45;&#62;
+        assert 3 == window.select(<span class="java&#45;quote">"textbox"</span>).size() // select method returns List&#60;Component&#62;
+        assert <span class="java&#45;quote">"value2"</span> == window.select(<span class="java&#45;quote">"&#35;t2"</span>)&#91;0&#93;.value
+        assert <span class="java&#45;quote">"value1"</span> == window.select(<span class="java&#45;quote">"textbox&#91;name=t1&#93;"</span>)&#91;0&#93;.value
+    &#125;<p class="paragraph"/>&#125;</pre></div>
+
+    </body>
+</html>

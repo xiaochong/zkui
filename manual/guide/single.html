@@ -1,7 +1,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>ZK UI Plugin for Grails 0.3 - Reference Documentation</title>
+        <title>ZK UI Plugin for Grails 0.3.1 - Reference Documentation</title>
         <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen" title="Style" charset="utf-8"/>
         <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8" />
     </head>
@@ -17,23 +17,21 @@
             <div class="message">zkui</div>
             <h1>ZK UI Plugin for Grails - Reference Documentation</h1>
             <p><strong>Authors:</strong> groovyquan</p>
-            <p><strong>Version:</strong> 0.3</p>
+            <p><strong>Version:</strong> 0.3.1</p>
             <em>This document is licensed under GNU Free Documentation License,ZK UI Plugin for Grails is released under LGPL</em>
         </div>
 
         <div id="toc">
             <h2>Table of Contents</h2>
-            <div class="tocItem" style="margin-left:0px"><a href="#1. Introduction">1. Introduction</a></div><div class="tocItem" style="margin-left:0px"><a href="#2. Getting Started">2. Getting Started</a></div><div class="tocItem" style="margin-left:10px"><a href="#2.1 Hello World">2.1 Hello World</a></div><div class="tocItem" style="margin-left:10px"><a href="#2.2 Say Hello in Ajax way">2.2 Say Hello in Ajax way</a></div><div class="tocItem" style="margin-left:10px"><a href="#2.3 Identify a component">2.3 Identify a component</a></div><div class="tocItem" style="margin-left:10px"><a href="#2.4 A component is a POJO">2.4 A component is a POJO</a></div><div class="tocItem" style="margin-left:10px"><a href="#2.5 Separating code from user interface">2.5 Separating code from user interface</a></div><div class="tocItem" style="margin-left:0px"><a href="#3. Composer">3. Composer</a></div><div class="tocItem" style="margin-left:0px"><a href="#4. Builder">4. Builder</a></div><div class="tocItem" style="margin-left:0px"><a href="#5. Selector">5. Selector</a></div><div class="tocItem" style="margin-left:0px"><a href="#6. Event Handling">6. Event Handling</a></div><div class="tocItem" style="margin-left:10px"><a href="#6.1 Event Listening">6.1 Event Listening</a></div><div class="tocItem" style="margin-left:10px"><a href="#6.2 Client-side Event Listening">6.2 Client-side Event Listening</a></div>
+            <div class="tocItem" style="margin-left:0px"><a href="#1. Introduction">1. Introduction</a></div><div class="tocItem" style="margin-left:10px"><a href="#1.1 Taglib">1.1 Taglib</a></div><div class="tocItem" style="margin-left:10px"><a href="#1.2 Composer">1.2 Composer</a></div><div class="tocItem" style="margin-left:10px"><a href="#1.3 Builder">1.3 Builder</a></div><div class="tocItem" style="margin-left:10px"><a href="#1.4 Selector">1.4 Selector</a></div><div class="tocItem" style="margin-left:0px"><a href="#2. Getting Started">2. Getting Started</a></div><div class="tocItem" style="margin-left:10px"><a href="#2.1 Hello World">2.1 Hello World</a></div><div class="tocItem" style="margin-left:10px"><a href="#2.2 Say Hello in Ajax way">2.2 Say Hello in Ajax way</a></div><div class="tocItem" style="margin-left:10px"><a href="#2.3 Identify a component">2.3 Identify a component</a></div><div class="tocItem" style="margin-left:10px"><a href="#2.4 A component is a POJO">2.4 A component is a POJO</a></div><div class="tocItem" style="margin-left:10px"><a href="#2.5 Separating code from user interface">2.5 Separating code from user interface</a></div><div class="tocItem" style="margin-left:0px"><a href="#3. Composer">3. Composer</a></div><div class="tocItem" style="margin-left:10px"><a href="#3.1 Creating a composer">3.1 Creating a composer</a></div><div class="tocItem" style="margin-left:10px"><a href="#3.2 Apply a composer">3.2 Apply a composer</a></div><div class="tocItem" style="margin-left:10px"><a href="#3.3 Auto-wired Component">3.3 Auto-wired Component</a></div><div class="tocItem" style="margin-left:10px"><a href="#3.4 Redirects">3.4 Redirects</a></div><div class="tocItem" style="margin-left:10px"><a href="#3.5 Data Binding">3.5 Data Binding</a></div><div class="tocItem" style="margin-left:10px"><a href="#3.6 Unit Test">3.6 Unit Test</a></div><div class="tocItem" style="margin-left:10px"><a href="#3.7 Render Errors">3.7 Render Errors</a></div><div class="tocItem" style="margin-left:0px"><a href="#4. Builder">4. Builder</a></div><div class="tocItem" style="margin-left:10px"><a href="#4.1 appendChild">4.1 appendChild</a></div><div class="tocItem" style="margin-left:10px"><a href="#4.2 leftShift">4.2 leftShift</a></div><div class="tocItem" style="margin-left:10px"><a href="#4.3 Event listening">4.3 Event listening</a></div><div class="tocItem" style="margin-left:10px"><a href="#4.4 Client-side event listening">4.4 Client-side event listening</a></div><div class="tocItem" style="margin-left:0px"><a href="#5. Selector">5. Selector</a></div><div class="tocItem" style="margin-left:10px"><a href="#5.1 Selector overview">5.1 Selector overview</a></div><div class="tocItem" style="margin-left:10px"><a href="#5.2 Base Selector">5.2 Base Selector</a></div><div class="tocItem" style="margin-left:10px"><a href="#5.3 Selector combinations">5.3 Selector combinations</a></div><div class="tocItem" style="margin-left:10px"><a href="#5.4 Pseudo selectors">5.4 Pseudo selectors</a></div><div class="tocItem" style="margin-left:0px"><a href="#6. Event Handling">6. Event Handling</a></div><div class="tocItem" style="margin-left:10px"><a href="#6.1 Event Listening">6.1 Event Listening</a></div><div class="tocItem" style="margin-left:10px"><a href="#6.2 Client-side Event Listening">6.2 Client-side Event Listening</a></div><div class="tocItem" style="margin-left:0px"><a href="#7. Scaffolding Templates">7. Scaffolding Templates</a></div><div class="tocItem" style="margin-left:10px"><a href="#7.1 Static Scaffolding">7.1 Static Scaffolding</a></div><div class="tocItem" style="margin-left:10px"><a href="#7.2 Customizing the scaffolding templates">7.2 Customizing the scaffolding templates</a></div>
         </div>
         <div id="content">
-            <h1><a name="1. Introduction">1. Introduction</a></h1>ZK UI plugin,the same as the ZKGrails plugin, seamlessly integrates ZK with Grails' infrastructures.<p class="paragraph"/>The difference is it uses the Grails' infrastructures more, such as gsp, controllers rather than zk's zul.<p class="paragraph"/>ZK UI Grails plug-ins brings powerful features as follows<p class="paragraph"/><h3>Taglib</h3>
-Use Tag Libraries
+            <h1><a name="1. Introduction">1. Introduction</a></h1>ZK UI plugin,the same as the ZKGrails plugin, seamlessly integrates ZK with Grails' infrastructures.<p class="paragraph"/>The difference is it uses the Grails' infrastructures more, such as gsp, controllers rather than zk's zul.<p class="paragraph"/>ZK UI Grails plug-ins brings powerful features as follows<p class="paragraph"/><p class="paragraph"/><h2><a name="1.1 Taglib">1.1 Taglib</a></h2>Use Tag Libraries
 <div class="code"><pre><span class="xml&#45;tag">&#60;z:window title=<span class="xml&#45;quote">"My First ZK UI Application"</span> border=<span class="xml&#45;quote">"normal"</span>&#62;</span>
     Hello World!
 <span class="xml&#45;tag">&#60;/z:window&#62;</span></pre></div>
-<img border="0" class="center" src="../img/2.1 Hello World.png"></img><p class="paragraph"/><h3>Composer</h3>
-Provides a Composer Artefacts simplify the integration between grails and zk<p class="paragraph"/>Usage:
-<div class="code"><pre>grails create&#45;composer &#91;name&#93;</pre></div><p class="paragraph"/><h3>Builder</h3><p class="paragraph"/>A groovy way to create zk components, following groovy Builder paradigm<p class="paragraph"/><code>Controller</code>
+<img border="0" class="center" src="../img/2.1 Hello World.png"></img><h2><a name="1.2 Composer">1.2 Composer</a></h2>Provides a Composer Artefacts simplify the integration between grails and zk<p class="paragraph"/>Usage:
+<div class="code"><pre>grails create&#45;composer &#91;name&#93;</pre></div><h2><a name="1.3 Builder">1.3 Builder</a></h2>A groovy way to create zk components, following groovy Builder paradigm<p class="paragraph"/><code>Controller</code>
 <div class="code"><pre>def index = &#123;
     def window = <span class="java&#45;keyword">new</span> Window(title: <span class="java&#45;quote">"listbox demo"</span>, border: <span class="java&#45;quote">"normal"</span>)
     window &#60;&#60; &#123;
@@ -71,7 +69,7 @@ Provides a Composer Artefacts simplify the integration between grails and zk<p c
     &#91;window:window&#93;
 &#125;</pre></div><p class="paragraph"/><code>View</code>
 <div class="code"><pre><span class="xml&#45;tag">&#60;z:render comp=<span class="xml&#45;quote">"$&#123;window&#125;"</span>/&#62;</span></pre></div>
-<img border="0" class="center" src="../img/listbox.png"></img><p class="paragraph"/><h3>Selector</h3><p class="paragraph"/>Provides a very convenient API for extracting and manipulating zk component, using the jquery-like methods.<p class="paragraph"/>View
+<img border="0" class="center" src="../img/listbox.png"></img><h2><a name="1.4 Selector">1.4 Selector</a></h2>Provides a very convenient API for extracting and manipulating zk component, using the jquery-like methods.<p class="paragraph"/>View
 <div class="code"><pre><span class="xml&#45;tag">&#60;z:window id=<span class="xml&#45;quote">"window"</span>&#62;</span>
     <span class="xml&#45;tag">&#60;z:textbox name=<span class="xml&#45;quote">"t1"</span> value=<span class="xml&#45;quote">"value1"</span>/&#62;</span>
     <span class="xml&#45;tag">&#60;z:textbox id=<span class="xml&#45;quote">"t2"</span> value=<span class="xml&#45;quote">"value2"</span>/&#62;</span>
@@ -79,8 +77,7 @@ Provides a Composer Artefacts simplify the integration between grails and zk<p c
 <span class="xml&#45;tag">&#60;/z:window&#62;</span></pre></div><p class="paragraph"/>Selector code
 <div class="code"><pre>assert 3 == window.select(<span class="java&#45;quote">"textbox"</span>).size()
 assert <span class="java&#45;quote">"value2"</span> == window.select(<span class="java&#45;quote">"&#35;t2"</span>)&#91;0&#93;.value
-assert <span class="java&#45;quote">"value1"</span> == window.select(<span class="java&#45;quote">"textbox&#91;name=t1&#93;"</span>)&#91;0&#93;.value</pre></div><p class="paragraph"/>
-<h1><a name="2. Getting Started">2. Getting Started</a></h1>
+assert <span class="java&#45;quote">"value1"</span> == window.select(<span class="java&#45;quote">"textbox&#91;name=t1&#93;"</span>)&#91;0&#93;.value</pre></div><h1><a name="2. Getting Started">2. Getting Started</a></h1>
 <h2><a name="2.1 Hello World">2.1 Hello World</a></h2><h3>DOCTYPE</h3>
 The html pages generated by gsp must generate the doc type as follows.
 <div class="code"><pre>&#60;!DOCTYPE html PUBLIC <span class="xml&#45;quote">"&#45;//W3C//DTD XHTML 1.0 Transitional//EN"</span>
@@ -146,31 +143,24 @@ The above code can be simplified as follows<p class="paragraph"/><div class="cod
     <span class="xml&#45;tag">&#60;z:separator/&#62;</span>
     <span class="xml&#45;tag">&#60;z:vlayout id=<span class="xml&#45;quote">"result"</span>/&#62;</span>
 <span class="xml&#45;tag">&#60;/z:window&#62;</span></pre></div>
-<h1><a name="3. Composer">3. Composer</a></h1>A composer is responsible to initialize a component (or a component of tree) when ZK loader is composing a component. It is the controller in the MVC pattern, while the component is the view,which separate the code from the user interfaces.<p class="paragraph"/><h3>Creating a composer</h3>
-Composers can be created with the create-composer target. For example try running the following command from the root of a Grails project:
+<h1><a name="3. Composer">3. Composer</a></h1>A composer is responsible to initialize a component (or a component of tree) when ZK loader is composing a component. It is the controller in the MVC pattern, while the component is the view,which separate the code from the user interfaces.
+<h2><a name="3.1 Creating a composer">3.1 Creating a composer</a></h2>Composers can be created with the create-composer target. For example try running the following command from the root of a Grails project:
 <div class="code"><pre>grails create&#45;composer window</pre></div><p class="paragraph"/>The command will result in the creation of a composer at the location grails-app/composers/WindowComposer.groovy:
 <div class="code"><pre>class WindowComposer &#123;
-    <span class="java&#45;keyword">static</span> transactional = <span class="java&#45;keyword">true</span>
     def afterCompose = &#123;Component comp &#45;&#62;
         // initialize components here
     &#125;
 &#125;</pre></div>
 WindowComposer by default provide a <code>afterCompose</code> closure to initialize components.<p class="paragraph"/><blockquote class="note">
 The create-composer command is merely for convenience and you can just as easily create composers using your favorite text editor or IDE
-</blockquote><p class="paragraph"/><h3>Apply a composer</h3>
-Each component Taglib has a <code>apply</code> attitude,so you can place the composer here
+</blockquote><h2><a name="3.2 Apply a composer">3.2 Apply a composer</a></h2>Each component Taglib has a <code>apply</code> attitude,so you can place the composer here
 <div class="code"><pre><span class="xml&#45;tag">&#60;z:window id=<span class="xml&#45;quote">"myWindowComposer"</span> apply=<span class="xml&#45;quote">"package.WindowComposer"</span>&#62;</span>
     &#8230;
 <span class="xml&#45;tag">&#60;/z:window&#62;</span></pre></div><p class="paragraph"/>In the WindowComposer side
 <div class="code"><pre>def afterCompose = &#123;Component comp &#45;&#62;
     assert comp.id==<span class="java&#45;quote">"myWindowComposer"</span>
     assert (comp <span class="java&#45;keyword">instanceof</span> org.zkoss.zul.Window)
-&#125;</pre></div><p class="paragraph"/><h3>Transactional</h3>
-Like grails services,composer allow the enablement of transaction demarcation, which is essentially a declarative way of saying all methods within this composer are to be made transactional
-All composers have transaction demarcation enabled by default - to disable it, simply set the transactional property to false<p class="paragraph"/><blockquote class="note">
-Strongly recommend that set the transactional property to false,unless the transactional code in composer is very simple,it would be best use grails' services or programmatic transactions with the withTransaction method.
-</blockquote><p class="paragraph"/><h3>Auto-wired Component</h3>
-If apply a <code>composer</code> to a Component that implement a <code>IdSpace</code> Interface,such as org.zkoss.zul.Window. The Component's children can be auto-wired to composer's fields<p class="paragraph"/>The following is an example. The onChange event received by Textbox <code>mytextbox</code> will be forwarded to target Window <code>mywin</code> as a new target event onChange_mytextbox and the Textbox component with id name "mytextbox" and Label with id name <code>mylabel</code> are injected into the "mytextbox" and "mylabel" fields respectively(so you can use mytextbox and mylabel variable directly in onChange_mytextbox without problem).<p class="paragraph"/>Composer
+&#125;</pre></div><h2><a name="3.3 Auto-wired Component">3.3 Auto-wired Component</a></h2>If apply a <code>composer</code> to a Component that implement a <code>IdSpace</code> Interface,such as org.zkoss.zul.Window. The Component's children can be auto-wired to composer's fields<p class="paragraph"/>The following is an example. The onChange event received by Textbox <code>mytextbox</code> will be forwarded to target Window <code>mywin</code> as a new target event onChange_mytextbox and the Textbox component with id name "mytextbox" and Label with id name <code>mylabel</code> are injected into the "mytextbox" and "mylabel" fields respectively(so you can use mytextbox and mylabel variable directly in onChange_mytextbox without problem).<p class="paragraph"/>Composer
 <div class="code"><pre>class MyComposer&#123;
     Textbox mytextbox
     Window self //embeded object, the supervised window <span class="java&#45;quote">"mywin"</span>
@@ -185,7 +175,8 @@ If apply a <code>composer</code> to a Component that implement a <code>IdSpace</
 <div class="code"><pre><span class="xml&#45;tag">&#60;z:window id=<span class="xml&#45;quote">"mywin"</span> apply=<span class="xml&#45;quote">"MyComposer"</span>&#62;</span>
     <span class="xml&#45;tag">&#60;z:textbox id=<span class="xml&#45;quote">"mytextbox"</span>/&#62;</span>
     <span class="xml&#45;tag">&#60;z:label id=<span class="xml&#45;quote">"mylabel"</span>/&#62;</span>
-<span class="xml&#45;tag">&#60;/z:window&#62;</span></pre></div><p class="paragraph"/><h3>Redirects</h3><p class="paragraph"/>Actions can be redirected using the redirect method present in all composers<p class="paragraph"/>The parameters of <code>redirect</code> is same as controller's <code>redirect</code><p class="paragraph"/>Composer
+<span class="xml&#45;tag">&#60;/z:window&#62;</span></pre></div><h2><a name="3.4 Redirects">3.4 Redirects</a></h2>
+Actions can be redirected using the redirect method present in all composers<p class="paragraph"/>The parameters of <code>redirect</code> is same as controller's <code>redirect</code><p class="paragraph"/>Composer
 <div class="code"><pre>class MyComposer&#123;
     Button mybutton<p class="paragraph"/>    def afterCompose = &#123;Component comp &#45;&#62;<p class="paragraph"/>    &#125;<p class="paragraph"/>    def onClick_mybutton(Event event) &#123;
         redirect(controller: 'demo', action: 'index', id: 1)
@@ -199,8 +190,8 @@ following code same as <code>onClick_button</code> above<p class="paragraph"/><d
 View
 <div class="code"><pre><span class="xml&#45;tag">&#60;z:window id=<span class="xml&#45;quote">"mywin"</span> apply=<span class="xml&#45;quote">"MyComposer"</span>&#62;</span>
     <span class="xml&#45;tag">&#60;z:button label=<span class="xml&#45;quote">"mybutton"</span>/&#62;</span>
-<span class="xml&#45;tag">&#60;/z:window&#62;</span></pre></div><p class="paragraph"/>
-<h3>Data Binding</h3><p class="paragraph"/>To uses Grails' underlying data binding capability,<code>zkui</code> injection a <code>getParams</code> method to <a href="http://www.zkoss.org/javadoc/latest/zk/org/zkoss/zk/ui/Component.html" target="blank">Component</a>.<p class="paragraph"/>Domain Class
+<span class="xml&#45;tag">&#60;/z:window&#62;</span></pre></div><p class="paragraph"/><h2><a name="3.5 Data Binding">3.5 Data Binding</a></h2>
+To uses Grails' underlying data binding capability,<code>zkui</code> injection a <code>getParams</code> method to <a href="http://www.zkoss.org/javadoc/latest/zk/org/zkoss/zk/ui/Component.html" target="blank">Component</a>.<p class="paragraph"/>Domain Class
 <div class="code"><pre>class Person &#123;
     <span class="java&#45;object">String</span> firstName
     <span class="java&#45;object">String</span> lastName
@@ -223,12 +214,33 @@ View
         &#125;
     &#125;
 &#125;</pre></div><p class="paragraph"/>A <code>bindData</code> method same as in <code>controller</code> also provide to Composer<p class="paragraph"/><div class="code"><pre>def p = <span class="java&#45;keyword">new</span> Person()
-bindData(p, mywin.params)</pre></div><p class="paragraph"/><h3>Unit Test</h3>
-When use <strong class="bold">grails create-composer</strong> create a composer,a unit class that is a sub-class of ComposerUnitTestCase also created<p class="paragraph"/>It provides a <code>mockComposer</code> methods for mocking zkui's  Selector,Builder and so on.<p class="paragraph"/><div class="code"><pre>mockComposer(MyComposer)
+bindData(p, mywin.params)</pre></div>
+<h2><a name="3.6 Unit Test">3.6 Unit Test</a></h2>When use <strong class="bold">grails create-composer</strong> create a composer,a unit class that is a sub-class of ComposerUnitTestCase also created<p class="paragraph"/>It provides a <code>mockComposer</code> methods for mocking zkui's  Selector,Builder and so on.<p class="paragraph"/><div class="code"><pre>mockComposer(MyComposer)
 def myComposer=<span class="java&#45;keyword">new</span> MyComposer
 ...</pre></div>
-<h1><a name="4. Builder">4. Builder</a></h1>Builders are internal DSLs that provide ease in working with certain types of problems.It is very useful for work with nested,hierarchical structures, such as tree structures, XML representations,or HTML representations.<p class="paragraph"/>Let’s take a look at an example of one way to create zk component in Groovy—using a builder:<p class="paragraph"/><h3>appendChild</h3>
-<code>appendChild</code>  is dynamic method that  <em class="italic">ZKUI</em>  injection to zk <a href="http://www.zkoss.org/javadoc/latest/zk/org/zkoss/zk/ui/Component.html" target="blank">Component</a> to begin builder,which accepts a Closure parameter.
+<h2><a name="3.7 Render Errors">3.7 Render Errors</a></h2><code>zkui</code> injection a <code>renderErrors</code> method to <a href="http://www.zkoss.org/javadoc/latest/zk/org/zkoss/zk/ui/Component.html" target="blank">Component</a>.<p class="paragraph"/>If you have Domain class
+<div class="code"><pre>class Book&#123;
+    <span class="java&#45;object">String</span> author
+    <span class="java&#45;object">String</span> title
+&#125;</pre></div><p class="paragraph"/>In View
+<div class="code"><pre><span class="xml&#45;tag">&#60;z:window id=<span class="xml&#45;quote">"formWindow"</span> title=<span class="xml&#45;quote">"demo"</span> apply=<span class="xml&#45;quote">"your.Composer"</span>&#62;</span>
+    <span class="xml&#45;tag">&#60;z:textbox name=<span class="xml&#45;quote">"author"</span>/&#62;</span>
+    <span class="xml&#45;tag">&#60;z:textbox name=<span class="xml&#45;quote">"title"</span>/&#62;</span>
+    &#8230;
+<span class="xml&#45;tag">&#60;/z:window&#62;</span></pre></div><p class="paragraph"/>Then in <code>your.Composer</code> use renderErrors<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">if</span> (!book.save()) &#123;
+            formWindow.renderErrors(bean: book)
+ &#125;</pre></div><p class="paragraph"/>
+In addition,you can also use grails's traditional <code>renderErrors</code><p class="paragraph"/>In <code>your.Composer</code>
+<div class="code"><pre><span class="java&#45;keyword">if</span> (!book.save()) &#123;
+    flash.book = book
+    redirect(controller: <span class="java&#45;quote">"book"</span>, action: <span class="java&#45;quote">"edit"</span>, id: book.id)
+ &#125;</pre></div><p class="paragraph"/>In your view
+<div class="code"><pre><span class="xml&#45;tag">&#60;g:hasErrors bean=<span class="xml&#45;quote">"$&#123;flash.book&#125;"</span>&#62;</span>
+<span class="xml&#45;tag">&#60;div class=<span class="xml&#45;quote">"errors"</span>&#62;</span>
+    <span class="xml&#45;tag">&#60;g:renderErrors bean=<span class="xml&#45;quote">"$&#123;flash.book&#125;"</span> as=<span class="xml&#45;quote">"list"</span> /&#62;</span>
+<span class="xml&#45;tag">&#60;/div&#62;</span>
+<span class="xml&#45;tag">&#60;/g:hasErrors&#62;</span></pre></div><p class="paragraph"/>
+<h1><a name="4. Builder">4. Builder</a></h1>Builders are internal DSLs that provide ease in working with certain types of problems.It is very useful for work with nested,hierarchical structures, such as tree structures, XML representations,or HTML representations.<p class="paragraph"/>Let’s take a look at an example of one way to create zk component in Groovy—using a builder:<p class="paragraph"/><h2><a name="4.1 appendChild">4.1 appendChild</a></h2><code>appendChild</code>  is dynamic method that  <em class="italic">ZKUI</em>  injection to zk <a href="http://www.zkoss.org/javadoc/latest/zk/org/zkoss/zk/ui/Component.html" target="blank">Component</a> to begin builder,which accepts a Closure parameter.
 <div class="code"><pre>def window = <span class="java&#45;keyword">new</span> Window(title: <span class="java&#45;quote">"listbox demo"</span>, border: <span class="java&#45;quote">"normal"</span>)
 window.appendChild &#123;
     listbox &#123;
@@ -261,21 +273,25 @@ window.appendChild &#123;
             &#125;
         &#125;
     &#125;
-&#125;</pre></div><p class="paragraph"/><h3>leftShift ( &#60;&#60; )</h3><p class="paragraph"/> <em class="italic">ZKUI</em>  also provides a convenient method <code>leftShift</code>,so you can modify the above code like:
+&#125;</pre></div><h2><a name="4.2 leftShift">4.2 leftShift</a></h2> <em class="italic">ZKUI</em>  also provides a convenient method <code>leftShift</code>( &#60;&#60; ),so you can modify the above code like:
 <div class="code"><pre>def window = <span class="java&#45;keyword">new</span> Window(title: <span class="java&#45;quote">"listbox demo"</span>, border: <span class="java&#45;quote">"normal"</span>)
 window &#60;&#60; &#123;
     listbox &#123;
        &#8230;
     &#125;
-&#125;</pre></div><p class="paragraph"/><h3>Event listening</h3><p class="paragraph"/>If the parameter on onEvent it's a Closure, then it's a server side event
+&#125;</pre></div><h2><a name="4.3 Event listening">4.3 Event listening</a></h2>If the parameter on onEvent it's a Closure, then it's a server side event
 <div class="code"><pre>window &#60;&#60; &#123;
     button(label: 'button', onClick: &#123;
         Messagebox.show(<span class="java&#45;quote">"hello word! from Server"</span>)
     &#125;)
-&#125;</pre></div><p class="paragraph"/><h4>Client-side event listening</h4><p class="paragraph"/>If the parameter on onEvent it's a String, that is a client side event
+&#125;</pre></div><h2><a name="4.4 Client-side event listening">4.4 Client-side event listening</a></h2>If the parameter on onEvent it's a String, that is a client side event
 <div class="code"><pre>window &#60;&#60; &#123;
     button(label: 'buutton', onClick: <span class="java&#45;quote">"alert('Say hello word! from JS')"</span>)
-&#125;</pre></div><p class="paragraph"/><h1><a name="5. Selector">5. Selector</a></h1>ZK UI Plugin support a CSS (or jquery) like selector syntax to find matching components, that allows very powerful and robust queries.<p class="paragraph"/>It's inspired by the <a href="http://jsoup.org" target="blank">jsoup</a><p class="paragraph"/>The <code>select</code> method is injected to <a href="http://www.zkoss.org/javadoc/latest/zk/org/zkoss/zk/ui/Component.html" target="blank">Component</a>,which returns a list of Component.<p class="paragraph"/>View code
+&#125;</pre></div><p class="paragraph"/>Add a prefix <code>client_</code> is useful when you also use server side event that avoid naming conflicts<p class="paragraph"/><div class="code"><pre>window &#60;&#60; &#123;
+    button(label: 'buutton', client_onClick: <span class="java&#45;quote">"alert('Say hello word! from JS')"</span>,onClick:&#123;
+        Messagebox.show(<span class="java&#45;quote">"hello word! from Server"</span>)
+    &#125;)
+&#125;</pre></div><h1><a name="5. Selector">5. Selector</a></h1><h2><a name="5.1 Selector overview">5.1 Selector overview</a></h2>ZK UI Plugin support a CSS (or jquery) like selector syntax to find matching components, that allows very powerful and robust queries.<p class="paragraph"/>It's inspired by the <a href="http://jsoup.org" target="blank">jsoup</a><p class="paragraph"/>The <code>select</code> method is injected to <a href="http://www.zkoss.org/javadoc/latest/zk/org/zkoss/zk/ui/Component.html" target="blank">Component</a>,which returns a list of Component.<p class="paragraph"/>View code
 <div class="code"><pre><span class="xml&#45;tag">&#60;z:window id=<span class="xml&#45;quote">"window"</span> apply=<span class="xml&#45;quote">"MyComposer"</span>&#62;</span>
     <span class="xml&#45;tag">&#60;z:textbox name=<span class="xml&#45;quote">"t1"</span> value=<span class="xml&#45;quote">"value1"</span>/&#62;</span>
     <span class="xml&#45;tag">&#60;z:textbox id=<span class="xml&#45;quote">"t2"</span> value=<span class="xml&#45;quote">"value2"</span>/&#62;</span>
@@ -285,9 +301,8 @@ window &#60;&#60; &#123;
         assert 3 == window.select(<span class="java&#45;quote">"textbox"</span>).size() // select method returns List&#60;Component&#62;
         assert <span class="java&#45;quote">"value2"</span> == window.select(<span class="java&#45;quote">"&#35;t2"</span>)&#91;0&#93;.value
         assert <span class="java&#45;quote">"value1"</span> == window.select(<span class="java&#45;quote">"textbox&#91;name=t1&#93;"</span>)&#91;0&#93;.value
-    &#125;<p class="paragraph"/>&#125;</pre></div><p class="paragraph"/>
-<h3>Selector overview</h3>
-<ul class="star">
+    &#125;<p class="paragraph"/>&#125;</pre></div>
+<h2><a name="5.2 Base Selector">5.2 Base Selector</a></h2><ul class="star">
 <li><strong class="bold">tagname</strong>: find components by tag, e.g. <code>textbox</code></li>
 <li><strong class="bold">#id</strong>: find components by ID, e.g. <code>#compId</code></li>
 <li><strong class="bold">.class</strong>: find components by class name, e.g. <code>.masthead</code></li>
@@ -297,8 +312,7 @@ window &#60;&#60; &#123;
 <li><strong class="bold">&#91;attr^=value], &#91;attr$=value], &#91;attr&#42;=value]</strong>: components with attributes that start with, end with, or contain the value, e.g. <code>&#91;href*=/path/]</code></li>
 <li><strong class="bold">&#91;attr~=regex]</strong>: components with attribute values that match the regular expression; e.g. <code>img&#91;src~=(?i)&#46;(png|jpe?g)]</code></li>
 <li><strong class="bold">&#42;</strong>: all components, e.g. <code>&#42;</code></li>
-</ul><p class="paragraph"/><h3>Selector combinations</h3>
-<ul class="star">
+</ul><p class="paragraph"/><h2><a name="5.3 Selector combinations">5.3 Selector combinations</a></h2><ul class="star">
 <li><strong class="bold">el#id</strong>: components with ID, e.g. <code>textbox#compId</code></li>
 <li><strong class="bold">el.class</strong>: components with class, e.g. <code>textbox.masthead</code></li>
 <li><strong class="bold">el&#91;attr]</strong>: components with attribute, e.g. <code>a&#91;href]</code></li>
@@ -308,14 +322,104 @@ window &#60;&#60; &#123;
 <li><strong class="bold">siblingA + siblingB</strong>: finds sibling B element immediately preceded by sibling A, e.g. <code></code>div.head + div<code></code></li>
 <li><strong class="bold">siblingA ~ siblingX</strong>: finds sibling X element preceded by sibling A, e.g. <code>intbox ~ textbox</code></li>
 <li><strong class="bold">el, el, el</strong>: group multiple selectors, find unique components that match any of the selectors; e.g. <code>div.masthead, div.logo</code></li>
-</ul><p class="paragraph"/><h3>Pseudo selectors</h3>
-<ul class="star">
+</ul><p class="paragraph"/><h2><a name="5.4 Pseudo selectors">5.4 Pseudo selectors</a></h2><ul class="star">
 <li><strong class="bold">:lt(n)</strong>: find components whose sibling index (i.e. its position in the component tree relative to its parent) is less than n; e.g. <code>listitem:lt(3)</code></li>
 <li><strong class="bold">:gt(n)</strong>: find components whose sibling index is greater than n; e.g. <code>div label:gt(2)</code></li>
 <li><strong class="bold">:eq(n)</strong>: find components whose sibling index is equal to n; e.g. <code>window textbox:eq(1)</code></li>
 <li><strong class="bold">:has(seletor)</strong>: find components that contain components matching the selector; e.g. <code>div:has(label)</code></li>
 <li><strong class="bold">:not(selector)</strong>: find components that do not match the selector; e.g. <code>div:not(.logo)</code></li>
-</ul><p class="paragraph"/><h1><a name="6. Event Handling">6. Event Handling</a></h1>todo<h2><a name="6.1 Event Listening">6.1 Event Listening</a></h2>todo<h2><a name="6.2 Client-side Event Listening">6.2 Client-side Event Listening</a></h2>todo
+</ul><p class="paragraph"/><h1><a name="6. Event Handling">6. Event Handling</a></h1><h2><a name="6.1 Event Listening">6.1 Event Listening</a></h2><h3>Declare an Event Handler in gsp</h3><p class="paragraph"/>An event handler can be declared in a gsp page by specifying an event attribute(An event attribute is an attribute starting with on). For example,
+<div class="code"><pre><span class="xml&#45;tag">&#60;z:button label=<span class="xml&#45;quote">"hi"</span> onClick='alert(<span class="xml&#45;quote">"Hello"</span>)'/&#62;</span></pre></div>
+where the content of the event handler is the code snippet in Groovy. The event handler will be interpreted at the run time.<p class="paragraph"/>Important Builtin Variables
+<ul class="star">
+<li>self - the component receiving the event. In the previous example, it is the button itself.</li>
+<li>event - the event being received. In the previous example, it is an instance of MouseEvent.</li>
+</ul><p class="paragraph"/><h3>Listen by Use of an Event Listener</h3><p class="paragraph"/>An event listener is a class implementing EventListener. For example,
+<div class="code"><pre>class MyListener <span class="java&#45;keyword">implements</span> EventListener &#123;
+    void onEvent(Event event) &#123;
+        Messages.show(<span class="java&#45;quote">"Hello"</span>)
+    &#125;
+&#125;</pre></div><p class="paragraph"/>Then, you can register an event listener to the component that might receive the event by use of Component.addEventListener(String, EventListener). For example,
+<div class="code"><pre>button.addEventListener(<span class="java&#45;quote">"onClick"</span>, <span class="java&#45;keyword">new</span> MyListener())</pre></div><p class="paragraph"/>This is a typical approach to handle events. However, it is a bit tedious to register event listeners one-by-one if there are a lot of listeners.
+ Rather, it is suggested to use the following method:<p class="paragraph"/><div class="code"><pre>button.addEventListener(<span class="java&#45;quote">"onClick"</span>)&#123;Event event&#45;&#62;
+    Messages.show(<span class="java&#45;quote">"Hello"</span>)
+&#125;</pre></div><p class="paragraph"/>
+<h3>Composer and Event Listener Autowiring</h3><p class="paragraph"/>With <a href="../guide/single.html#3.3 Auto-wired Component" class="guide">Auto-wired Component</a>, you generally don't need to register event listeners manually. Rather, they could be registered automatically by use of the auto-wiring feature of a composer. For example<p class="paragraph"/><div class="code"><pre>class MyComposer&#123;
+    void onClick_hi() &#123;
+        Messsagebox.show(<span class="java&#45;quote">"Hello"</span>)
+    &#125;
+    void onClick_bye() &#123;
+        Messsagebox.show(<span class="java&#45;quote">"Bye"</span>)
+    &#125;
+&#125;</pre></div><p class="paragraph"/>As shown above, the method to listen an event shall be named by starting with the event name, separating with <code>_</code>, and ending with the component's ID. The composer will search all matched methods and register the event listener automatically. Then, in the gsp page, you can specify the apply attribute to associate the composer with a component.
+<div class="code"><pre><span class="xml&#45;tag">&#60;z:window apply=<span class="xml&#45;quote">"MyComposer"</span>&#62;</span>
+    <span class="xml&#45;tag">&#60;z:textbox/&#62;</span>
+    <span class="xml&#45;tag">&#60;z:button id=<span class="xml&#45;quote">"hi"</span>/&#62;</span>
+    <span class="xml&#45;tag">&#60;z:button id=<span class="xml&#45;quote">"bye"</span>/&#62;</span>
+<span class="xml&#45;tag">&#60;/z:window&#62;</span></pre></div><p class="paragraph"/>If the listener needs to access the event, just declare it as the argument:
+<div class="code"><pre>void onClick_hi(MouseEvent event) &#123;
+  Messsagebox.show(<span class="java&#45;quote">"Hello, "</span> + event.getName())
+&#125;</pre></div>
+Though not limited, a composer is usually associated with an ID space (such as Window) to handle events and component within the give ID space. You could associate any component that properly represents a scope of your application to manage.
+See more <a href="../guide/single.html#3.3 Auto-wired Component" class="guide">Auto-wired Component</a><p class="paragraph"/><h4>Declare a Event Handler in zkui's Builder</h4><p class="paragraph"/>see <a href="../guide/single.html#4.3 Event listening" class="guide">Event listening</a><h2><a name="6.2 Client-side Event Listening">6.2 Client-side Event Listening</a></h2>ZK allows applications to handle events at both the server and client side. Handling events at the server side, as described in the previous sections, are more common, since the listeners can access the backend services directly. However, handling event at the client side improves the responsiveness. For example, it is better to be done with a client-side listener if you want to open the drop-down list when a comobox gains focus.
+A good rule of thumb is to use server-side listeners first since it is easier, and then improve the responsiveness of the critical part, if any, with the client-side listener.<p class="paragraph"/><h3>Declare a Client-side Listener in gsp</h3>
+Declaring a client-side listener in a gsp  is similar to declaring a server-side listener, except
+<ul class="star">
+<li>Use the client_  Prefix</li>
+<li>It is JavaScript</li>
+<li>Use this to reference to the target widget (while the event is referenced with event)</li>
+<li>Use this.$f() to reference fellow widgets (Widget.$f())</li>
+</ul><p class="paragraph"/>For example,
+<div class="code"><pre><span class="xml&#45;tag">&#60;z:combobox client_onFocus=<span class="xml&#45;quote">"this.open()"</span>/&#62;</span></pre></div><p class="paragraph"/><h3>The Relationship between Client and Server-side Event Listener</h3>
+It is allowed to register both the client and server-side event listeners. They will be both invoked. Of course, the client-side listener is called first, and then the server-side listener. For example,
+<div class="code"><pre><span class="xml&#45;tag">&#60;z:div&#62;</span>
+  <span class="xml&#45;tag">&#60;z:combobox client_onFocus=<span class="xml&#45;quote">"this.open()"</span> onFocus=<span class="xml&#45;quote">"self.parent.appendChild(new Label('focus'))"</span>/&#62;</span>
+<span class="xml&#45;tag">&#60;/z:div&#62;</span></pre></div>
+If you want to stop the event propagation such that the server won't receive the event, you could invoke Event.stop(Map). For example, the server-side listener won't be invoked in the following example:
+<div class="code"><pre><span class="xml&#45;tag">&#60;z:div&#62;</span>
+  <span class="xml&#45;tag">&#60;z:combobox client_onFocus=<span class="xml&#45;quote">"this.open(); event.stop();"</span> onFocus=<span class="xml&#45;quote">"self.parent.appendChild(new Label('focus'))"</span>/&#62;</span>
+<span class="xml&#45;tag">&#60;/z:div&#62;</span></pre></div><p class="paragraph"/>
+<h3>Declare a Client-side Listener in Groovy</h3>
+The other way to declare a client-side listener at the server is Component.setWidgetListener(String, String). For example,
+<div class="code"><pre>combobox.setWidgetListener(<span class="java&#45;quote">"onFocus"</span>, <span class="java&#45;quote">"<span class="java&#45;keyword">this</span>.open()"</span>)</pre></div>
+Notice that it is Groovy and running at the server.<p class="paragraph"/><h4>Register a Client-side Listener in Client-Side JavaScript</h4>
+Listening an event at the client could be done by calling Widget.listen(Map, int). For example,
+<div class="code"><pre><span class="xml&#45;tag">&#60;z:window&#62;</span>
+    <span class="xml&#45;tag">&#60;z:bandbox id=<span class="xml&#45;quote">"bb"</span>/&#62;</span>
+    <span class="xml&#45;tag">&#60;z:script defer=<span class="xml&#45;quote">"true"</span>&#62;</span>
+        this.$f().bb.listen(&#123;onFocus: function () &#123;this.open();&#125;&#125;);
+    <span class="xml&#45;tag">&#60;/z:script&#62;</span>
+<span class="xml&#45;tag">&#60;/z:window&#62;</span></pre></div>
+where
+<ul class="star">
+<li>defer="true" is required such that the JavaScript code will be evaluated after all widgets are created successfully. Otherwise, it is not able to retreive the bandbox (bb).</li>
+<li>script is a widget (unlike zscript), so this references to the script widget, rather than the parent.</li>
+<li>Widget.$f(String) is equivalent to Component.getFellow(String), except it is a JavaScript method (accessible at the client).</li>
+</ul><p class="paragraph"/><h4>Declare a Client-side Listener in zkui's Builder</h4><p class="paragraph"/>see <a href="../guide/single.html#4.4 Client-side event listening" class="guide">Client-side event listening</a><h1><a name="7. Scaffolding Templates">7. Scaffolding Templates</a></h1><code>Zkui</code> supports a feature known as scaffolding which involves the generation of a CRUD (Create/Read/Update/Delete) interface for a given domain class
+<h2><a name="7.1 Static Scaffolding">7.1 Static Scaffolding</a></h2>Same as Grails's generate-all command,<code>zkui</code> use <a href="../ref/Command Line/zkui-generate-all.html" class="Command Line">zkui-generate-all</a> to generates views,composer and a controller for the given domain class<p class="paragraph"/><blockquote class="note">
+To zkui's scaffolding work,you need modify the default layout/main.gsp
+<ol>
+<li>Add the tag &#60;z:resources/&#62; to the head</li>
+<li>Remove &#60;link rel="stylesheet" href="${resource(dir:'css',file:'main.css')}" /&#62;</li>
+<li>Generate the doc type as follows</li>
+</ol><p class="paragraph"/><div class="code"><pre>&#60;!DOCTYPE html PUBLIC <span class="xml&#45;quote">"&#45;//W3C//DTD XHTML 1.0 Transitional//EN"</span>
+ <span class="xml&#45;quote">"http://www.w3.org/TR/xhtml1/DTD/xhtml1&#45;transitional.dtd"</span>&#62;</pre></div><p class="paragraph"/>
+The complete layout/main.gsp Examples
+<div class="code"><pre>&#60;!DOCTYPE html PUBLIC <span class="xml&#45;quote">"&#45;//W3C//DTD XHTML 1.0 Transitional//EN"</span>
+ <span class="xml&#45;quote">"http://www.w3.org/TR/xhtml1/DTD/xhtml1&#45;transitional.dtd"</span>&#62;
+<span class="xml&#45;tag">&#60;html xmlns=<span class="xml&#45;quote">"http://www.w3.org/1999/xhtml"</span>&#62;</span>
+<span class="xml&#45;tag">&#60;head&#62;</span>
+    <span class="xml&#45;tag">&#60;title&#62;</span><span class="xml&#45;tag">&#60;g:layoutTitle default=<span class="xml&#45;quote">"Grails"</span>/&#62;</span><span class="xml&#45;tag">&#60;/title&#62;</span>
+    <span class="xml&#45;tag">&#60;z:resources/&#62;</span>
+    <span class="xml&#45;tag">&#60;g:layoutHead/&#62;</span>
+<span class="xml&#45;tag">&#60;/head&#62;</span>
+<span class="xml&#45;tag">&#60;body&#62;</span>
+<span class="xml&#45;tag">&#60;div id=<span class="xml&#45;quote">"grailsLogo"</span>&#62;</span><span class="xml&#45;tag">&#60;a href=<span class="xml&#45;quote">"http://grails.org"</span>&#62;</span><span class="xml&#45;tag">&#60;img src=<span class="xml&#45;quote">"$&#123;resource(dir: 'images', file: 'grails_logo.png')&#125;"</span>
+                                                      alt=<span class="xml&#45;quote">"Grails"</span> border=<span class="xml&#45;quote">"0"</span>/&#62;</span><span class="xml&#45;tag">&#60;/a&#62;</span><span class="xml&#45;tag">&#60;/div&#62;</span>
+<span class="xml&#45;tag">&#60;g:layoutBody/&#62;</span>
+<span class="xml&#45;tag">&#60;/body&#62;</span>
+<span class="xml&#45;tag">&#60;/html&#62;</span></pre></div><p class="paragraph"/></blockquote><h2><a name="7.2 Customizing the scaffolding templates">7.2 Customizing the scaffolding templates</a></h2>The templates used by zkui to generate the controller, views and composer can be customized by installing the templates with the <code>zkui-install-templates</code> command.
+
         </div>
         <div id="footer">
              ZK UI Plugin Project

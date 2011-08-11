@@ -5,8 +5,7 @@
         <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen" title="Ref" charset="utf-8"/>
     </head>
     <body class="body">
-    <h1><a name="4. Builder">4. Builder</a></h1>Builders are internal DSLs that provide ease in working with certain types of problems.It is very useful for work with nested,hierarchical structures, such as tree structures, XML representations,or HTML representations.<p class="paragraph"/>Let’s take a look at an example of one way to create zk component in Groovy—using a builder:<p class="paragraph"/><h3>appendChild</h3>
-<code>appendChild</code>  is dynamic method that  <em class="italic">ZKUI</em>  injection to zk <a href="http://www.zkoss.org/javadoc/latest/zk/org/zkoss/zk/ui/Component.html" target="blank">Component</a> to begin builder,which accepts a Closure parameter.
+    <h1><a name="4. Builder">4. Builder</a></h1>Builders are internal DSLs that provide ease in working with certain types of problems.It is very useful for work with nested,hierarchical structures, such as tree structures, XML representations,or HTML representations.<p class="paragraph"/>Let’s take a look at an example of one way to create zk component in Groovy—using a builder:<p class="paragraph"/><h2><a name="4.1 appendChild">4.1 appendChild</a></h2><code>appendChild</code>  is dynamic method that  <em class="italic">ZKUI</em>  injection to zk <a href="http://www.zkoss.org/javadoc/latest/zk/org/zkoss/zk/ui/Component.html" target="blank">Component</a> to begin builder,which accepts a Closure parameter.
 <div class="code"><pre>def window = <span class="java&#45;keyword">new</span> Window(title: <span class="java&#45;quote">"listbox demo"</span>, border: <span class="java&#45;quote">"normal"</span>)
 window.appendChild &#123;
     listbox &#123;
@@ -39,20 +38,24 @@ window.appendChild &#123;
             &#125;
         &#125;
     &#125;
-&#125;</pre></div><p class="paragraph"/><h3>leftShift ( &#60;&#60; )</h3><p class="paragraph"/> <em class="italic">ZKUI</em>  also provides a convenient method <code>leftShift</code>,so you can modify the above code like:
+&#125;</pre></div><h2><a name="4.2 leftShift">4.2 leftShift</a></h2> <em class="italic">ZKUI</em>  also provides a convenient method <code>leftShift</code>( &#60;&#60; ),so you can modify the above code like:
 <div class="code"><pre>def window = <span class="java&#45;keyword">new</span> Window(title: <span class="java&#45;quote">"listbox demo"</span>, border: <span class="java&#45;quote">"normal"</span>)
 window &#60;&#60; &#123;
     listbox &#123;
        &#8230;
     &#125;
-&#125;</pre></div><p class="paragraph"/><h3>Event listening</h3><p class="paragraph"/>If the parameter on onEvent it's a Closure, then it's a server side event
+&#125;</pre></div><h2><a name="4.3 Event listening">4.3 Event listening</a></h2>If the parameter on onEvent it's a Closure, then it's a server side event
 <div class="code"><pre>window &#60;&#60; &#123;
     button(label: 'button', onClick: &#123;
         Messagebox.show(<span class="java&#45;quote">"hello word! from Server"</span>)
     &#125;)
-&#125;</pre></div><p class="paragraph"/><h4>Client-side event listening</h4><p class="paragraph"/>If the parameter on onEvent it's a String, that is a client side event
+&#125;</pre></div><h2><a name="4.4 Client-side event listening">4.4 Client-side event listening</a></h2>If the parameter on onEvent it's a String, that is a client side event
 <div class="code"><pre>window &#60;&#60; &#123;
     button(label: 'buutton', onClick: <span class="java&#45;quote">"alert('Say hello word! from JS')"</span>)
-&#125;</pre></div><p class="paragraph"/>
+&#125;</pre></div><p class="paragraph"/>Add a prefix <code>client_</code> is useful when you also use server side event that avoid naming conflicts<p class="paragraph"/><div class="code"><pre>window &#60;&#60; &#123;
+    button(label: 'buutton', client_onClick: <span class="java&#45;quote">"alert('Say hello word! from JS')"</span>,onClick:&#123;
+        Messagebox.show(<span class="java&#45;quote">"hello word! from Server"</span>)
+    &#125;)
+&#125;</pre></div>
     </body>
 </html>

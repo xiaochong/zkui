@@ -5,31 +5,24 @@
         <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen" title="Ref" charset="utf-8"/>
     </head>
     <body class="body">
-    <h1><a name="3. Composer">3. Composer</a></h1>A composer is responsible to initialize a component (or a component of tree) when ZK loader is composing a component. It is the controller in the MVC pattern, while the component is the view,which separate the code from the user interfaces.<p class="paragraph"/><h3>Creating a composer</h3>
-Composers can be created with the create-composer target. For example try running the following command from the root of a Grails project:
+    <h1><a name="3. Composer">3. Composer</a></h1>A composer is responsible to initialize a component (or a component of tree) when ZK loader is composing a component. It is the controller in the MVC pattern, while the component is the view,which separate the code from the user interfaces.
+<h2><a name="3.1 Creating a composer">3.1 Creating a composer</a></h2>Composers can be created with the create-composer target. For example try running the following command from the root of a Grails project:
 <div class="code"><pre>grails create&#45;composer window</pre></div><p class="paragraph"/>The command will result in the creation of a composer at the location grails-app/composers/WindowComposer.groovy:
 <div class="code"><pre>class WindowComposer &#123;
-    <span class="java&#45;keyword">static</span> transactional = <span class="java&#45;keyword">true</span>
     def afterCompose = &#123;Component comp &#45;&#62;
         // initialize components here
     &#125;
 &#125;</pre></div>
 WindowComposer by default provide a <code>afterCompose</code> closure to initialize components.<p class="paragraph"/><blockquote class="note">
 The create-composer command is merely for convenience and you can just as easily create composers using your favorite text editor or IDE
-</blockquote><p class="paragraph"/><h3>Apply a composer</h3>
-Each component Taglib has a <code>apply</code> attitude,so you can place the composer here
+</blockquote><h2><a name="3.2 Apply a composer">3.2 Apply a composer</a></h2>Each component Taglib has a <code>apply</code> attitude,so you can place the composer here
 <div class="code"><pre><span class="xml&#45;tag">&#60;z:window id=<span class="xml&#45;quote">"myWindowComposer"</span> apply=<span class="xml&#45;quote">"package.WindowComposer"</span>&#62;</span>
     &#8230;
 <span class="xml&#45;tag">&#60;/z:window&#62;</span></pre></div><p class="paragraph"/>In the WindowComposer side
 <div class="code"><pre>def afterCompose = &#123;Component comp &#45;&#62;
     assert comp.id==<span class="java&#45;quote">"myWindowComposer"</span>
     assert (comp <span class="java&#45;keyword">instanceof</span> org.zkoss.zul.Window)
-&#125;</pre></div><p class="paragraph"/><h3>Transactional</h3>
-Like grails services,composer allow the enablement of transaction demarcation, which is essentially a declarative way of saying all methods within this composer are to be made transactional
-All composers have transaction demarcation enabled by default - to disable it, simply set the transactional property to false<p class="paragraph"/><blockquote class="note">
-Strongly recommend that set the transactional property to false,unless the transactional code in composer is very simple,it would be best use grails' services or programmatic transactions with the withTransaction method.
-</blockquote><p class="paragraph"/><h3>Auto-wired Component</h3>
-If apply a <code>composer</code> to a Component that implement a <code>IdSpace</code> Interface,such as org.zkoss.zul.Window. The Component's children can be auto-wired to composer's fields<p class="paragraph"/>The following is an example. The onChange event received by Textbox <code>mytextbox</code> will be forwarded to target Window <code>mywin</code> as a new target event onChange_mytextbox and the Textbox component with id name "mytextbox" and Label with id name <code>mylabel</code> are injected into the "mytextbox" and "mylabel" fields respectively(so you can use mytextbox and mylabel variable directly in onChange_mytextbox without problem).<p class="paragraph"/>Composer
+&#125;</pre></div><h2><a name="3.3 Auto-wired Component">3.3 Auto-wired Component</a></h2>If apply a <code>composer</code> to a Component that implement a <code>IdSpace</code> Interface,such as org.zkoss.zul.Window. The Component's children can be auto-wired to composer's fields<p class="paragraph"/>The following is an example. The onChange event received by Textbox <code>mytextbox</code> will be forwarded to target Window <code>mywin</code> as a new target event onChange_mytextbox and the Textbox component with id name "mytextbox" and Label with id name <code>mylabel</code> are injected into the "mytextbox" and "mylabel" fields respectively(so you can use mytextbox and mylabel variable directly in onChange_mytextbox without problem).<p class="paragraph"/>Composer
 <div class="code"><pre>class MyComposer&#123;
     Textbox mytextbox
     Window self //embeded object, the supervised window <span class="java&#45;quote">"mywin"</span>
@@ -44,7 +37,8 @@ If apply a <code>composer</code> to a Component that implement a <code>IdSpace</
 <div class="code"><pre><span class="xml&#45;tag">&#60;z:window id=<span class="xml&#45;quote">"mywin"</span> apply=<span class="xml&#45;quote">"MyComposer"</span>&#62;</span>
     <span class="xml&#45;tag">&#60;z:textbox id=<span class="xml&#45;quote">"mytextbox"</span>/&#62;</span>
     <span class="xml&#45;tag">&#60;z:label id=<span class="xml&#45;quote">"mylabel"</span>/&#62;</span>
-<span class="xml&#45;tag">&#60;/z:window&#62;</span></pre></div><p class="paragraph"/><h3>Redirects</h3><p class="paragraph"/>Actions can be redirected using the redirect method present in all composers<p class="paragraph"/>The parameters of <code>redirect</code> is same as controller's <code>redirect</code><p class="paragraph"/>Composer
+<span class="xml&#45;tag">&#60;/z:window&#62;</span></pre></div><h2><a name="3.4 Redirects">3.4 Redirects</a></h2>
+Actions can be redirected using the redirect method present in all composers<p class="paragraph"/>The parameters of <code>redirect</code> is same as controller's <code>redirect</code><p class="paragraph"/>Composer
 <div class="code"><pre>class MyComposer&#123;
     Button mybutton<p class="paragraph"/>    def afterCompose = &#123;Component comp &#45;&#62;<p class="paragraph"/>    &#125;<p class="paragraph"/>    def onClick_mybutton(Event event) &#123;
         redirect(controller: 'demo', action: 'index', id: 1)
@@ -58,8 +52,8 @@ following code same as <code>onClick_button</code> above<p class="paragraph"/><d
 View
 <div class="code"><pre><span class="xml&#45;tag">&#60;z:window id=<span class="xml&#45;quote">"mywin"</span> apply=<span class="xml&#45;quote">"MyComposer"</span>&#62;</span>
     <span class="xml&#45;tag">&#60;z:button label=<span class="xml&#45;quote">"mybutton"</span>/&#62;</span>
-<span class="xml&#45;tag">&#60;/z:window&#62;</span></pre></div><p class="paragraph"/>
-<h3>Data Binding</h3><p class="paragraph"/>To uses Grails' underlying data binding capability,<code>zkui</code> injection a <code>getParams</code> method to <a href="http://www.zkoss.org/javadoc/latest/zk/org/zkoss/zk/ui/Component.html" target="blank">Component</a>.<p class="paragraph"/>Domain Class
+<span class="xml&#45;tag">&#60;/z:window&#62;</span></pre></div><p class="paragraph"/><h2><a name="3.5 Data Binding">3.5 Data Binding</a></h2>
+To uses Grails' underlying data binding capability,<code>zkui</code> injection a <code>getParams</code> method to <a href="http://www.zkoss.org/javadoc/latest/zk/org/zkoss/zk/ui/Component.html" target="blank">Component</a>.<p class="paragraph"/>Domain Class
 <div class="code"><pre>class Person &#123;
     <span class="java&#45;object">String</span> firstName
     <span class="java&#45;object">String</span> lastName
@@ -82,10 +76,32 @@ View
         &#125;
     &#125;
 &#125;</pre></div><p class="paragraph"/>A <code>bindData</code> method same as in <code>controller</code> also provide to Composer<p class="paragraph"/><div class="code"><pre>def p = <span class="java&#45;keyword">new</span> Person()
-bindData(p, mywin.params)</pre></div><p class="paragraph"/><h3>Unit Test</h3>
-When use <strong class="bold">grails create-composer</strong> create a composer,a unit class that is a sub-class of ComposerUnitTestCase also created<p class="paragraph"/>It provides a <code>mockComposer</code> methods for mocking zkui's  Selector,Builder and so on.<p class="paragraph"/><div class="code"><pre>mockComposer(MyComposer)
+bindData(p, mywin.params)</pre></div>
+<h2><a name="3.6 Unit Test">3.6 Unit Test</a></h2>When use <strong class="bold">grails create-composer</strong> create a composer,a unit class that is a sub-class of ComposerUnitTestCase also created<p class="paragraph"/>It provides a <code>mockComposer</code> methods for mocking zkui's  Selector,Builder and so on.<p class="paragraph"/><div class="code"><pre>mockComposer(MyComposer)
 def myComposer=<span class="java&#45;keyword">new</span> MyComposer
 ...</pre></div>
+<h2><a name="3.7 Render Errors">3.7 Render Errors</a></h2><code>zkui</code> injection a <code>renderErrors</code> method to <a href="http://www.zkoss.org/javadoc/latest/zk/org/zkoss/zk/ui/Component.html" target="blank">Component</a>.<p class="paragraph"/>If you have Domain class
+<div class="code"><pre>class Book&#123;
+    <span class="java&#45;object">String</span> author
+    <span class="java&#45;object">String</span> title
+&#125;</pre></div><p class="paragraph"/>In View
+<div class="code"><pre><span class="xml&#45;tag">&#60;z:window id=<span class="xml&#45;quote">"formWindow"</span> title=<span class="xml&#45;quote">"demo"</span> apply=<span class="xml&#45;quote">"your.Composer"</span>&#62;</span>
+    <span class="xml&#45;tag">&#60;z:textbox name=<span class="xml&#45;quote">"author"</span>/&#62;</span>
+    <span class="xml&#45;tag">&#60;z:textbox name=<span class="xml&#45;quote">"title"</span>/&#62;</span>
+    &#8230;
+<span class="xml&#45;tag">&#60;/z:window&#62;</span></pre></div><p class="paragraph"/>Then in <code>your.Composer</code> use renderErrors<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">if</span> (!book.save()) &#123;
+            formWindow.renderErrors(bean: book)
+ &#125;</pre></div><p class="paragraph"/>
+In addition,you can also use grails's traditional <code>renderErrors</code><p class="paragraph"/>In <code>your.Composer</code>
+<div class="code"><pre><span class="java&#45;keyword">if</span> (!book.save()) &#123;
+    flash.book = book
+    redirect(controller: <span class="java&#45;quote">"book"</span>, action: <span class="java&#45;quote">"edit"</span>, id: book.id)
+ &#125;</pre></div><p class="paragraph"/>In your view
+<div class="code"><pre><span class="xml&#45;tag">&#60;g:hasErrors bean=<span class="xml&#45;quote">"$&#123;flash.book&#125;"</span>&#62;</span>
+<span class="xml&#45;tag">&#60;div class=<span class="xml&#45;quote">"errors"</span>&#62;</span>
+    <span class="xml&#45;tag">&#60;g:renderErrors bean=<span class="xml&#45;quote">"$&#123;flash.book&#125;"</span> as=<span class="xml&#45;quote">"list"</span> /&#62;</span>
+<span class="xml&#45;tag">&#60;/div&#62;</span>
+<span class="xml&#45;tag">&#60;/g:hasErrors&#62;</span></pre></div><p class="paragraph"/>
 
     </body>
 </html>

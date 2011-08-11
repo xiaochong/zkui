@@ -1,0 +1,15 @@
+<html>
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+        <title>ZK UI Plugin for Grails 0.3.1 - Reference Documentation</title>
+        <link rel="stylesheet" href="../../css/ref.css" type="text/css" media="screen" title="Ref" charset="utf-8"/>
+    </head>
+    <body class="body">
+    <h1>attribute</h1><p class="paragraph"/><h2>Purpose</h2><p class="paragraph"/>It defines a attribute of the enclosing element. The content of the element is the attribute value, while the name attribute specifies the attribute name.<p class="paragraph"/><h2>Examples</h2>
+<div class="code"><pre><span class="xml&#45;tag">&#60;z:button label=<span class="xml&#45;quote">"Hi"</span>&#62;</span>
+  <span class="xml&#45;tag">&#60;z:attribute name=<span class="xml&#45;quote">"onClick"</span>&#62;</span>alert(<span class="xml&#45;quote">"Hi"</span>)<span class="xml&#45;tag">&#60;/z:attribute&#62;</span>
+<span class="xml&#45;tag">&#60;/z:button&#62;</span></pre></div><p class="paragraph"/>It is equivalent to
+<div class="code"><pre><span class="xml&#45;tag">&#60;z:button label=<span class="xml&#45;quote">"Hi"</span> onClick=<span class="xml&#45;quote">"alert('Hi')"</span>/&#62;</span></pre></div><p class="paragraph"/><h2>Description</h2><p class="paragraph"/>It is useful if the value of an attribute is sophisticated.
+
+    </body>
+</html>
