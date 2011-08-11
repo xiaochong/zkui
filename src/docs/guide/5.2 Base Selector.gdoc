@@ -1,0 +1,9 @@
+* *tagname*: find components by tag, e.g. @textbox@
+* *#id*: find components by ID, e.g. @#compId@
+* *.class*: find components by class name, e.g. @.masthead@
+* *\[attribute]*: components with attribute, e.g. @\[href]@
+* *\[^attr]*: components with an attribute name prefix, e.g. @\[^lab]@
+* *\[attr=value]*: components with attribute value, e.g. @\[width=500]@
+* *\[attr^=value], \[attr$=value], \[attr\*=value]*: components with attributes that start with, end with, or contain the value, e.g. @\[href*=/path/]@
+* *\[attr~=regex]*: components with attribute values that match the regular expression; e.g. @img\[src~=(?i)\.(png|jpe?g)]@
+* *\**: all components, e.g. @\*@

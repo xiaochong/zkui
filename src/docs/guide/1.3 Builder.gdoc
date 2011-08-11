@@ -1,0 +1,47 @@
+A groovy way to create zk components, following groovy Builder paradigm
+
+@Controller@
+{code:groovy}
+def index = {
+    def window = new Window(title: "listbox demo", border: "normal")
+    window << {
+        listbox {
+            listhead(sizable: true) {
+                listheader(label: "name", sort: "auto")
+                listheader(label: "gender", sort: "auto")
+            }
+            listitem {
+                listcell(label: "Mary")
+                listcell(label: "FEMALE")
+            }
+            listitem {
+                listcell(label: "John")
+                listcell(label: "MALE")
+            }
+            listitem {
+                listcell(label: "Jane")
+                listcell(label: "FEMALE")
+            }
+            listitem {
+                listcell(label: "Henry")
+                listcell(label: "MALE")
+            }
+            listfoot {
+                listfooter {
+                    label(value: "This is footer1")
+                }
+                listfooter {
+                    label(value: "This is footer2")
+                }
+            }
+        }
+    }
+    [window:window]
+}
+{code}
+
+@View@
+{code:xml}
+<z:render comp="${window}"/>
+{code}
+!listbox.png!

@@ -1,0 +1,7 @@
+Use Tag Libraries
+{code:xml}
+<z:window title="My First ZK UI Application" border="normal">
+    Hello World!
+</z:window>
+{code}
+!2.1 Hello World.png!

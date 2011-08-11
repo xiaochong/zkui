@@ -1,0 +1,37 @@
+Same as Grails's generate-all command,@zkui@ use [zkui-generate-all|Command Line] to generates views,composer and a controller for the given domain class
+
+{note}
+To zkui's scaffolding work,you need modify the default layout/main.gsp
+
+# Add the tag <z:resources/> to the head
+
+# Remove <link rel="stylesheet" href="${resource(dir:'css',file:'main.css')}" />
+
+# Generate the doc type as follows
+{code:xml}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+{code}
+
+
+The complete layout/main.gsp Examples
+{code:xml}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title><g:layoutTitle default="Grails"/></title>
+    <z:resources/>
+    <g:layoutHead/>
+</head>
+<body>
+<div id="grailsLogo"><a href="http://grails.org"><img src="${resource(dir: 'images', file: 'grails_logo.png')}"
+                                                      alt="Grails" border="0"/></a></div>
+<g:layoutBody/>
+</body>
+</html>
+
+{code}
+
+{note}

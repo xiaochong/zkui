@@ -6,7 +6,6 @@ grails create-composer window
 The command will result in the creation of a composer at the location grails-app/composers/WindowComposer.groovy:
 {code:groovy}
 class WindowComposer {
-    static transactional = true
     def afterCompose = {Component comp ->
         // initialize components here
     }

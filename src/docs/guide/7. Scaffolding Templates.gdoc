@@ -1,0 +1,1 @@
+@Zkui@ supports a feature known as scaffolding which involves the generation of a CRUD (Create/Read/Update/Delete) interface for a given domain class

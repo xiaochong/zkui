@@ -1,0 +1,1 @@
+The templates used by zkui to generate the controller, views and composer can be customized by installing the templates with the @zkui-install-templates@ command.

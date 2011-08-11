@@ -1,0 +1,5 @@
+* *:lt(n)*: find components whose sibling index (i.e. its position in the component tree relative to its parent) is less than n; e.g. @listitem:lt(3)@
+* *:gt(n)*: find components whose sibling index is greater than n; e.g. @div label:gt(2)@
+* *:eq(n)*: find components whose sibling index is equal to n; e.g. @window textbox:eq(1)@
+* *:has(seletor)*: find components that contain components matching the selector; e.g. @div:has(label)@
+* *:not(selector)*: find components that do not match the selector; e.g. @div:not(.logo)@

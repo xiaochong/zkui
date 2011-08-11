@@ -1,0 +1,6 @@
+Provides a Composer Artefacts simplify the integration between grails and zk
+
+Usage:
+{code:java}
+grails create-composer [name]
+{code}

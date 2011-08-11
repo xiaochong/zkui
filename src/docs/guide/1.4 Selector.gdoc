@@ -1,0 +1,17 @@
+Provides a very convenient API for extracting and manipulating zk component, using the jquery-like methods.
+
+View
+{code:xml}
+<z:window id="window">
+    <z:textbox name="t1" value="value1"/>
+    <z:textbox id="t2" value="value2"/>
+    <z:textbox value="value3"/>
+</z:window>
+{code}
+
+Selector code
+{code}
+assert 3 == window.select("textbox").size()
+assert "value2" == window.select("#t2")[0].value
+assert "value1" == window.select("textbox[name=t1]")[0].value
+{code}

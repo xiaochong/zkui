@@ -1,0 +1,49 @@
+@zkui@ injection a @renderErrors@ method to [Component|http://www.zkoss.org/javadoc/latest/zk/org/zkoss/zk/ui/Component.html].
+
+If you have Domain class
+{code:groovy}
+class Book{
+    String author
+    String title
+}
+{code}
+
+In View
+{code:xml}
+<z:window id="formWindow" title="demo" apply="your.Composer">
+    <z:textbox name="author"/>
+    <z:textbox name="title"/>
+    ...
+</z:window>
+{code}
+
+Then in @your.Composer@ use renderErrors
+
+{code:groovy}
+ if (!book.save()) {
+            formWindow.renderErrors(bean: book)
+ }
+{code}
+
+
+In addition,you can also use grails's traditional @renderErrors@
+
+In @your.Composer@
+{code:groovy}
+ if (!book.save()) {
+    flash.book = book
+    redirect(controller: "book", action: "edit", id: book.id)
+ }
+
+{code}
+
+In your view
+{code:xml}
+<g:hasErrors bean="${flash.book}">
+<div class="errors">
+    <g:renderErrors bean="${flash.book}" as="list" />
+</div>
+</g:hasErrors>
+{code}
+
+

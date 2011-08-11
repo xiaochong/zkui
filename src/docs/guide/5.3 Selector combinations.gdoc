@@ -1,0 +1,9 @@
+* *el#id*: components with ID, e.g. @textbox#compId@
+* *el.class*: components with class, e.g. @textbox.masthead@
+* *el\[attr]*: components with attribute, e.g. @a\[href]@
+* *Any combination*, e.g. @a\[href].highlight@
+* *ancestor child*: child components that descend from ancestor, e.g. @.body textbox@ finds @textbox@ components anywhere under a block with class "body"
+* *parent > child*: child components that descend directly from parent, e.g. @window.content > textbox@ finds textbox components; and @window > *@ finds the direct children of the window tag
+* *siblingA + siblingB*: finds sibling B element immediately preceded by sibling A, e.g. @@div.head + div@@
+* *siblingA ~ siblingX*: finds sibling X element preceded by sibling A, e.g. @intbox ~ textbox@
+* *el, el, el*: group multiple selectors, find unique components that match any of the selectors; e.g. @div.masthead, div.logo@
