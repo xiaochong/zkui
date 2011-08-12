@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" %><% import grails.persistence.Event %><html>
+<% import grails.persistence.Event %><html>
     <head>
         <meta name="layout" content="main" />
         <g:set var="entityName" value="\${message(code: '${domainClass.propertyName}.label', default: '${className}')}" />
