@@ -3,6 +3,7 @@ package org.grails.plugins.zkui
 import javax.servlet.ServletContext
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
+import org.grails.plugins.zkui.PageRenderer
 import org.grails.plugins.zkui.util.InlineUtils
 import org.grails.plugins.zkui.util.ZkUriHandler
 import org.zkoss.web.servlet.http.Https
@@ -30,9 +31,16 @@ abstract class AbstractTagLib {
         def composeHandle = new ComposerHandler(attrs.remove("apply"))
         Component component = componentClass.newInstance()
         composeHandle.doBeforeComposeChildren(component)
-        if (!pageScope.variables.containsKey("parents")) {
-            pageScope.parents = new LinkedList<Component>()
-            pageScope.parents.push(component)
+        // fix issues #9
+        boolean existParents = false
+        try {
+            if (pageScope.getVariable('parents')) {
+                existParents = true
+            }
+        } catch (e) {}
+        if (!existParents) {
+            pageScope.setVariable('parents', new LinkedList<Component>())
+            pageScope.getVariable('parents').push(component)
             doRender(servletContext, request, response, body, pageScope, out, composeHandle, component, attrs)
         } else {
             doChildComponent(servletContext, pageScope, component, attrs, body, composeHandle, out)
