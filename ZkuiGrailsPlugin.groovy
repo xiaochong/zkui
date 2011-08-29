@@ -12,6 +12,7 @@ import org.grails.plugins.zkui.metaclass.RedirectDynamicMethod
 import org.grails.plugins.zkui.util.UriUtil
 import org.zkoss.zk.ui.Executions
 import org.zkoss.zul.impl.InputElement
+import org.zkoss.zul.Messagebox
 
 class ZkuiGrailsPlugin {
     // the plugin version
@@ -205,6 +206,22 @@ The different is it more likely to use the Grails' infrastructures such as gsp, 
 
         org.zkoss.zk.ui.Execution.metaClass.putAt = { String name, value ->
             delegate.setAttribute(name, value)
+        }
+
+        Messagebox.metaClass.static.show = {int messageCode, int titleCode, int buttons, java.lang.String icon, int focus, Closure listener ->
+            Messagebox.show(messageCode, titleCode, buttons, icon, focus, listener as org.zkoss.zk.ui.event.EventListener)
+        }
+        Messagebox.metaClass.static.show = {int messageCode, java.lang.Object[] args, int titleCode, int buttons, String icon, int focus, Closure listener ->
+            Messagebox.show(messageCode, args, titleCode, buttons, icon, focus, listener as org.zkoss.zk.ui.event.EventListener)
+        }
+        Messagebox.metaClass.static.show = {int messageCode, java.lang.Object arg, int titleCode, int buttons, java.lang.String icon, int focus, Closure listener ->
+            Messagebox.show(messageCode, arg, titleCode, buttons, icon, focus, listener as org.zkoss.zk.ui.event.EventListener)
+        }
+        Messagebox.metaClass.static.show = {String message, java.lang.String title, int buttons, String icon, Closure listener ->
+            Messagebox.show(message, title, buttons, icon, listener as org.zkoss.zk.ui.event.EventListener)
+        }
+        Messagebox.metaClass.static.show = {String message, String title, int buttons, String icon, int focus, Closure listener ->
+            Messagebox.show(message, title, buttons, icon, focus, listener as org.zkoss.zk.ui.event.EventListener)
         }
 
         def redirect = new RedirectDynamicMethod(ctx)
