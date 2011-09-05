@@ -20,7 +20,7 @@ import org.zkoss.zk.ui.event.Event
 import org.zkoss.zul.Label
 
 class PropertyRetrieverComposer {
-    static transactional = false
+
     def afterCompose = {Component target ->
         target.addEventListener("onClick", new org.zkoss.zk.ui.event.EventListener() { //add a event listener in Groovy
             public void onEvent(Event event) {
@@ -43,7 +43,7 @@ import org.zkoss.zk.ui.event.Event
 import org.zkoss.zul.Label
 
 class PropertyRetrieverComposer {
-    static transactional = false
+
     def afterCompose = {Component target ->
         target.addEventListener("onClick") {Event event ->
             String prop = System.getProperty(target.getFellow("input").value)

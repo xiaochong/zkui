@@ -1,0 +1,27 @@
+h1. page
+
+h2. Purpose
+
+It specifies how a zk page should be handled. Currently the id and style arguments can be assigned.
+
+h2. Examples
+{code:xml}
+<z:page id="page_id_1" style="width:100%;height:100%">
+    <z:window>
+        ...
+    </z:window>
+</z:page>
+
+<z:page id="page_id_2">
+    <z:window>
+        ...
+    </z:window>
+</z:page>
+{code}
+
+h2. Description
+
+Attributes
+
+* @id@ - Specifies the identifier of the page, such that we can retrieve it back.
+* @style@ - Specifies the CSS style used to render the page. If not specified, it depends on the mold. The default mold uses width:100% as the default value.
