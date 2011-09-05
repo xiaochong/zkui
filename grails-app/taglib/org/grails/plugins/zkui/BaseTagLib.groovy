@@ -40,7 +40,7 @@ class BaseTagLib {
         String content = b.call()
         if (content) {
             if ("true".equalsIgnoreCase(attrs.trim)) content = content.trim()
-            AbstractTagLib.setAttrs([(attrs.name): content], pageScope.parents.last, servletContext)
+            AbstractTagLib.setAttrs([(attrs.name): content], request['parents']?.last, servletContext)
         }
     }
 }

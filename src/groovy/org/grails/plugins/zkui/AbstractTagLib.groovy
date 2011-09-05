@@ -31,29 +31,23 @@ abstract class AbstractTagLib {
         def composeHandle = new ComposerHandler(attrs.remove("apply"))
         Component component = componentClass.newInstance()
         composeHandle.doBeforeComposeChildren(component)
-        // fix issues #9
-        boolean existParents = false
-        try {
-            if (pageScope.getVariable('parents')) {
-                existParents = true
-            }
-        } catch (e) {}
-        if (!existParents) {
-            pageScope.setVariable('parents', new LinkedList<Component>())
-            pageScope.getVariable('parents').push(component)
-            doRender(servletContext, request, response, body, pageScope, out, composeHandle, component, attrs)
+        if (!request.getAttribute('parents')) {
+            def parents = new LinkedList<Component>()
+            parents.push(component)
+            request.setAttribute('parents', parents)
+            doRender(servletContext, request, response, body, out, composeHandle, component, attrs)
         } else {
-            doChildComponent(servletContext, pageScope, component, attrs, body, composeHandle, out)
+            doChildComponent(servletContext, request, component, attrs, body, composeHandle, out)
         }
     }
 
-    private def doChildComponent(ServletContext servletContext, Binding pageScope, Component component, attrs, body, ComposerHandler composeHandle, out) {
-        pageScope.parents.last.appendChild(component)
-        pageScope.parents.push(component)
+    private def doChildComponent(ServletContext servletContext, HttpServletRequest request, Component component, attrs, body, ComposerHandler composeHandle, out) {
+        request['parents'].last.appendChild(component)
+        request['parents'].push(component)
         setAttrs(attrs, component, servletContext)
-        bodyCall(body, component, out)
+        bodyCall(body, component, out, request)
         composeHandle.doAfterCompose(component)
-        pageScope.parents.pop()
+        request['parents'].pop()
         //fire onCreate event...
         sendOnCreateEvent(component)
     }
@@ -85,7 +79,7 @@ abstract class AbstractTagLib {
         }
     }
 
-    private def bodyCall(body, Component component, out) {
+    private def bodyCall(body, Component component, out, request) {
         String content = body.call()
         if (content && !content.allWhitespace) {
             if (component.metaClass.respondsTo(component, 'setContent', String)) {
@@ -94,13 +88,13 @@ abstract class AbstractTagLib {
                 InlineUtils.adjustChildren(null, component, component.getChildren(), content)
             }
         }
-        if (pageScope.parents.size() > 1) {
+        if (request['parents'].size() > 1) {
             InlineUtils.writeComponentMark(out, component)
         }
     }
 
     private def doRender(ServletContext servletContext, HttpServletRequest request, HttpServletResponse response,
-                         body, Binding pageScope, Writer out, composeHandle, rootComponent, attrs) {
+                         body, Writer out, composeHandle, rootComponent, attrs) {
         final Page page
         final WebManager webManager = WebManager.getWebManagerIfAny(servletContext)
         final Session sess = WebManager.getSession(servletContext, request)
@@ -117,7 +111,7 @@ abstract class AbstractTagLib {
             ((SessionCtrl) sess).notifyClientRequest(true)
 
             final UiFactory uf = wappc.getUiFactory()
-            final Richlet richlet = new EmbedRichlet(body, pageScope, composeHandle, rootComponent, attrs, servletContext, out)
+            final Richlet richlet = new EmbedRichlet(body, request, composeHandle, rootComponent, attrs, servletContext, out)
             page = uf.newPage(ri, richlet, path)
             page.setZScriptLanguage("groovy")
 
@@ -144,23 +138,23 @@ abstract class AbstractTagLib {
         } finally {
             SessionsCtrl.setCurrent((Session) null)
             I18Ns.cleanup(request, old)
-            pageScope.parents.clear()
-            pageScope.variables.remove("parents")
+            request.getAttribute('parents').clear()
+            request.removeAttribute('parents')
         }
     }
 
     private class EmbedRichlet extends GenericRichlet {
         def body
-        def pageScope
+        def request
         def composeHandle
         def rootComp
         def attrs
         def servletContext
         def out
 
-        EmbedRichlet(body, pageScope, composeHandle, rootComp, attrs, servletContext, out) {
+        EmbedRichlet(body, request, composeHandle, rootComp, attrs, servletContext, out) {
             this.body = body
-            this.pageScope = pageScope
+            this.request = request
             this.composeHandle = composeHandle
             this.rootComp = rootComp
             this.attrs = attrs
@@ -171,7 +165,7 @@ abstract class AbstractTagLib {
         void service(Page page) {
             rootComp.setPage(page)
             setAttrs(attrs, rootComp, servletContext)
-            bodyCall(body, rootComp, out)
+            bodyCall(body, rootComp, out, request)
             composeHandle.doAfterCompose(rootComp)
             sendOnCreateEvent(rootComp)
         }
