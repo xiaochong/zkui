@@ -43,4 +43,18 @@ class BaseTagLib {
             AbstractTagLib.setAttrs([(attrs.name): content], request['parents']?.last, servletContext)
         }
     }
+
+    def page = {attrs, b ->
+        if (attrs.id) {
+            request.setAttribute('zk_page_id', attrs.id)
+        }
+        def zkPageStyle = attrs.style
+        if (zkPageStyle) {
+            zkPageStyle = zkPageStyle != null && zkPageStyle.length() > 0 ? zkPageStyle : null
+            request.setAttribute('zk_page_style', zkPageStyle)
+        }
+        out << b.call()
+        request.removeAttribute('zk_page_id')
+        request.removeAttribute('zk_page_style')
+    }
 }

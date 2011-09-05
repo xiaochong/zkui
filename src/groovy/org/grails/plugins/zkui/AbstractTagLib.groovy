@@ -114,7 +114,14 @@ abstract class AbstractTagLib {
             final Richlet richlet = new EmbedRichlet(body, request, composeHandle, rootComponent, attrs, servletContext, out)
             page = uf.newPage(ri, richlet, path)
             page.setZScriptLanguage("groovy")
-
+            String zkPageId = request.getAttribute('zk_page_id')
+            if (zkPageId) {
+                page.setId(zkPageId)
+            }
+            String zkPageStyle = request.getAttribute('zk_page_style')
+            if (zkPageStyle) {
+                page.setStyle(zkPageStyle)
+            }
             final Execution exec = new ExecutionImpl(servletContext, request, response, desktop, page)
             final boolean cacheable = exec.getDesktop().getDevice().isCacheable()
             if (!cacheable) {
