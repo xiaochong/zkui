@@ -43,9 +43,7 @@ Notice that it is not JavaScript,It is Groovy and runs at the server
     <span class="xml&#45;tag">&#60;z:label id=<span class="xml&#45;quote">"result"</span>/&#62;</span>
 <span class="xml&#45;tag">&#60;/z:window&#62;</span></pre></div><h2><a name="2.5 Separating code from user interface">2.5 Separating code from user interface</a></h2>Embedding Groovy code in a gsp page is straightforward and easy to read. However, in a production environment, it is usually better to separate the code from the user interfaces. In additions, the compiled Groovy code runs much faster than the embedded code which is interpreted at the run time.<p class="paragraph"/>To separate code from UI, we could implement a Composer<p class="paragraph"/>use create-composer command<p class="paragraph"/><div class="code"><pre>grails create&#45;composer zkuidemo.PropertyRetriever</pre></div><p class="paragraph"/>A composer called PropertyRetrieverComposer will be created in the grails-app/composers directory<p class="paragraph"/>Modify the generated PropertyRetrieverComposer as follows<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">package</span> zkuidemo<p class="paragraph"/><span class="java&#45;keyword">import</span> org.zkoss.zk.ui.Component
 <span class="java&#45;keyword">import</span> org.zkoss.zk.ui.event.Event
-<span class="java&#45;keyword">import</span> org.zkoss.zul.Label<p class="paragraph"/>class PropertyRetrieverComposer &#123;
-    <span class="java&#45;keyword">static</span> transactional = <span class="java&#45;keyword">false</span>
-    def afterCompose = &#123;Component target &#45;&#62;
+<span class="java&#45;keyword">import</span> org.zkoss.zul.Label<p class="paragraph"/>class PropertyRetrieverComposer &#123;<p class="paragraph"/>    def afterCompose = &#123;Component target &#45;&#62;
         target.addEventListener(<span class="java&#45;quote">"onClick"</span>, <span class="java&#45;keyword">new</span> org.zkoss.zk.ui.event.EventListener() &#123; //add a event listener in Groovy
             <span class="java&#45;keyword">public</span> void onEvent(Event event) &#123;
                 <span class="java&#45;object">String</span> prop = <span class="java&#45;object">System</span>.getProperty(target.getFellow(<span class="java&#45;quote">"input"</span>).getValue())
@@ -56,9 +54,7 @@ Notice that it is not JavaScript,It is Groovy and runs at the server
 &#125;</pre></div><p class="paragraph"/>
 The above code can be simplified as follows<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">package</span> zkuidemo<p class="paragraph"/><span class="java&#45;keyword">import</span> org.zkoss.zk.ui.Component
 <span class="java&#45;keyword">import</span> org.zkoss.zk.ui.event.Event
-<span class="java&#45;keyword">import</span> org.zkoss.zul.Label<p class="paragraph"/>class PropertyRetrieverComposer &#123;
-    <span class="java&#45;keyword">static</span> transactional = <span class="java&#45;keyword">false</span>
-    def afterCompose = &#123;Component target &#45;&#62;
+<span class="java&#45;keyword">import</span> org.zkoss.zul.Label<p class="paragraph"/>class PropertyRetrieverComposer &#123;<p class="paragraph"/>    def afterCompose = &#123;Component target &#45;&#62;
         target.addEventListener(<span class="java&#45;quote">"onClick"</span>) &#123;Event event &#45;&#62;
             <span class="java&#45;object">String</span> prop = <span class="java&#45;object">System</span>.getProperty(target.getFellow(<span class="java&#45;quote">"input"</span>).value)
             target.getFellow(<span class="java&#45;quote">"result"</span>).appendChild(<span class="java&#45;keyword">new</span> Label(prop))
