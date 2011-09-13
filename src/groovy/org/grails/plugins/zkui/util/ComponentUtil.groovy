@@ -26,7 +26,7 @@ class ComponentUtil {
         def attrType = component.metaClass.getMetaProperty(attrName)?.type
         if (attrType?.isPrimitive() || attrType in String || attrType in Number || attrType in Boolean || attrType in Character || attrType in Constraint || attrType == null) {
             value = ZkUriHandler.handle(component, attrName, value, contextPath)
-            Property.assign(component, attrName, value.toString())
+            if (value != null) Property.assign(component, attrName, value.toString())
         } else {
             component[attrName] = value
         }
