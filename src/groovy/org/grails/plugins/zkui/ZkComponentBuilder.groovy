@@ -57,6 +57,7 @@ class ZkComponentBuilder extends BuilderSupport implements ServletContextAware {
                 instance[attrName] = value
             }
         }
+        AbstractTagLib.sendOnCreateEvent(instance)
         return instance
     }
 
