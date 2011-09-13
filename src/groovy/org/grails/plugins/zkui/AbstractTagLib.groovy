@@ -6,7 +6,6 @@ import javax.servlet.http.HttpServletResponse
 import org.grails.plugins.zkui.PageRenderer
 import org.grails.plugins.zkui.util.ComponentUtil
 import org.grails.plugins.zkui.util.InlineUtils
-import org.grails.plugins.zkui.util.ZkUriHandler
 import org.zkoss.web.servlet.http.Https
 import org.zkoss.zk.ui.http.ExecutionImpl
 import org.zkoss.zk.ui.http.I18Ns
@@ -15,9 +14,7 @@ import org.zkoss.zk.ui.impl.Attributes
 import org.zkoss.zk.ui.impl.RequestInfoImpl
 import org.zkoss.zk.ui.metainfo.EventHandler
 import org.zkoss.zk.ui.metainfo.PageDefinitions
-import org.zkoss.zk.ui.metainfo.Property
 import org.zkoss.zk.ui.metainfo.ZScript
-import org.zkoss.zul.Constraint
 import org.zkoss.zk.ui.*
 import org.zkoss.zk.ui.sys.*
 
@@ -59,13 +56,7 @@ abstract class AbstractTagLib {
             } else if (attrName.startsWith("client_")) {
                 component.setWidgetListener(attrName.toString().replaceFirst("client_", ''), value.toString())
             } else {
-                def attrType = component.metaClass.getMetaProperty(attrName)?.type
-                if (attrType?.isPrimitive() || attrType in String || attrType in Number || attrType in Boolean || attrType in Character || attrType in Constraint || attrType == null) {
-                    value = ZkUriHandler.handle(component, attrName, value, servletContext.contextPath)
-                    Property.assign(component, attrName, value.toString())
-                } else {
-                    component[attrName] = value
-                }
+                ComponentUtil.setAttr(component, attrName, value, servletContext.contextPath)
             }
         }
     }

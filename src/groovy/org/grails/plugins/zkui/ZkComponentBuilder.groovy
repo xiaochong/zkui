@@ -2,7 +2,6 @@ package org.grails.plugins.zkui
 
 import javax.servlet.ServletContext
 import org.grails.plugins.zkui.util.ComponentUtil
-import org.grails.plugins.zkui.util.ZkUriHandler
 import org.springframework.web.context.ServletContextAware
 import org.zkoss.zk.ui.Component
 import org.zkoss.zk.ui.event.EventListener
@@ -53,8 +52,7 @@ class ZkComponentBuilder extends BuilderSupport implements ServletContextAware {
             } else if (attrName.startsWith("client_")) {
                 instance.setWidgetListener(attrName.toString().replaceFirst("client_", ''), value.toString())
             } else {
-                value = ZkUriHandler.handle(instance, attrName, value, servletContext.contextPath)
-                instance[attrName] = value
+                ComponentUtil.setAttr(instance, attrName, value, servletContext.contextPath)
             }
         }
         ComponentUtil.sendOnCreateEvent(instance)
