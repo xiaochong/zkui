@@ -4,6 +4,7 @@ import javax.servlet.ServletContext
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 import org.grails.plugins.zkui.PageRenderer
+import org.grails.plugins.zkui.util.ComponentUtil
 import org.grails.plugins.zkui.util.InlineUtils
 import org.grails.plugins.zkui.util.ZkUriHandler
 import org.zkoss.web.servlet.http.Https
@@ -24,12 +25,10 @@ import org.zkoss.zk.ui.sys.*
 
 abstract class AbstractTagLib {
 
-    abstract Class getComponentClass()
-
-    void doTag(attrs, body, ServletContext servletContext, HttpServletRequest request,
-               HttpServletResponse response, Binding pageScope, Writer out) {
+    void doTag(attrs, body, String tagName, String languageName = null) {
+        Class cls = ComponentUtil.getComponentClass(tagName, languageName)
+        Component component = (Component) cls.newInstance()
         def composeHandle = new ComposerHandler(attrs.remove("apply"))
-        Component component = componentClass.newInstance()
         composeHandle.doBeforeComposeChildren(component)
         if (!request.getAttribute('parents')) {
             def parents = new LinkedList<Component>()

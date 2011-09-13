@@ -1,19 +1,15 @@
 package org.grails.plugins.zkui
 
 import javax.servlet.ServletContext
+import org.grails.plugins.zkui.util.ComponentUtil
 import org.grails.plugins.zkui.util.ZkUriHandler
 import org.springframework.web.context.ServletContextAware
-import org.zkoss.util.resource.Locators
 import org.zkoss.zk.ui.Component
 import org.zkoss.zk.ui.event.EventListener
-import org.zkoss.zk.ui.metainfo.LanguageDefinition
-import org.zkoss.zk.ui.metainfo.PageDefinition
 
 class ZkComponentBuilder extends BuilderSupport implements ServletContextAware {
     ServletContext servletContext
     Component parentComponent
-    PageDefinition pageDefinition
-    LanguageDefinition languageDefinition
 
     protected void setParent(Object parent, Object child) {
         child.parent = parent
@@ -41,14 +37,7 @@ class ZkComponentBuilder extends BuilderSupport implements ServletContextAware {
     }
 
     private Component handle(String name, Map attributes) {
-        if (!languageDefinition) languageDefinition = LanguageDefinition.lookup(null)
-        def compDefinition = languageDefinition.getComponentDefinitionIfAny(name)
-        if (!compDefinition) {
-            if (!pageDefinition) pageDefinition = new PageDefinition(languageDefinition, Locators.default)
-            compDefinition = pageDefinition.getComponentDefinition(name, true)
-        }
-        if (!compDefinition) throw new MissingPropertyException(name, parentComponent.class)
-        Class cls = compDefinition.resolveImplementationClass(null, null)
+        Class cls = ComponentUtil.getComponentClass(name, null)
         Component instance = (Component) cls.newInstance()
         attributes.each {String attrName, Object value ->
             if (attrName =~ /^on[A-Z]\w+/) {
