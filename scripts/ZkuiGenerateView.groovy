@@ -15,7 +15,7 @@
  */
 
 /**
- * Gant script that generates a CRUD controller and matching views for a given domain class
+ * Gant script that generates CRUD views for a given domain class
  *
  * @author Graeme Rocher
  *
@@ -26,9 +26,9 @@ includeTargets << grailsScript("_GrailsCreateArtifacts")
 includeTargets << new File("${zkuiPluginDir}/scripts/_ZkuiGenerate.groovy")
 
 generateViews = true
-generateController = true
+generateController = false
 
-target('default': "Generates a CRUD interface (controller + views) for a domain class") {
+target('default': "Gant script that generates CRUD views for a given domain class") {
     depends(checkVersion, parseArguments, packageApp)
     promptForName(type: "Domain Class")
 
@@ -43,7 +43,7 @@ target('default': "Generates a CRUD interface (controller + views) for a domain 
         }
     }
     catch (Exception e) {
-        logError("Error running zkui-generate-all", e)
+        logError("Error running zkui-generate-view", e)
         exit(1)
     }
 }
