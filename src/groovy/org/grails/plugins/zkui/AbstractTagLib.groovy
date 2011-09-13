@@ -8,8 +8,6 @@ import org.grails.plugins.zkui.util.ComponentUtil
 import org.grails.plugins.zkui.util.InlineUtils
 import org.grails.plugins.zkui.util.ZkUriHandler
 import org.zkoss.web.servlet.http.Https
-import org.zkoss.zk.ui.event.CreateEvent
-import org.zkoss.zk.ui.event.Events
 import org.zkoss.zk.ui.http.ExecutionImpl
 import org.zkoss.zk.ui.http.I18Ns
 import org.zkoss.zk.ui.http.WebManager
@@ -48,13 +46,7 @@ abstract class AbstractTagLib {
         composeHandle.doAfterCompose(component)
         request['parents'].pop()
         //fire onCreate event...
-        sendOnCreateEvent(component)
-    }
-
-    static def sendOnCreateEvent(Component component) {
-        if (Events.isListened(component, Events.ON_CREATE, false)) {
-            Events.postEvent(new CreateEvent(Events.ON_CREATE, component, Executions.getCurrent().getArg()))
-        }
+        ComponentUtil.sendOnCreateEvent(component)
     }
 
     static def setAttrs(attrs, Component component, servletContext) {
@@ -173,7 +165,7 @@ abstract class AbstractTagLib {
             setAttrs(attrs, rootComp, servletContext)
             bodyCall(body, rootComp, out, request)
             composeHandle.doAfterCompose(rootComp)
-            sendOnCreateEvent(rootComp)
+            ComponentUtil.sendOnCreateEvent(rootComp)
         }
     }
 }
