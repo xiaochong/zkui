@@ -37,7 +37,8 @@ class ZkuiGrailsPlugin {
             "grails-app/views/error.gsp",
             "src/docs/**",
             "scripts/_Events.groovy",
-            "web-app/**"
+            "web-app/**",
+            "gen/**"
     ]
 
     // TODO Fill in these fields
