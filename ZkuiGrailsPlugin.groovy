@@ -106,6 +106,9 @@ The different is it more likely to use the Grails' infrastructures such as gsp, 
 
     def doWithSpring = {
         "webManagerInit"(org.grails.plugins.zkui.WebManagerInit)
+        "composerHandler"(org.grails.plugins.zkui.ComposerHandler) { bean ->
+            bean.scope = "prototype"
+        }
         "zkComponentBuilder"(org.grails.plugins.zkui.ZkComponentBuilder) { bean ->
             bean.scope = "prototype"
         }

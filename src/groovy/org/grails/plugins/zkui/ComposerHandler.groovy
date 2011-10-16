@@ -1,21 +1,24 @@
 package org.grails.plugins.zkui
 
-import org.codehaus.groovy.grails.commons.ApplicationHolder
 import org.grails.plugins.zkui.artefacts.ComposerArtefactHandler
 import org.zkoss.lang.Classes
 import org.zkoss.zk.ui.Component
 import org.zkoss.zk.ui.UiException
 import org.zkoss.zk.ui.util.Composer
 import org.zkoss.zk.ui.util.ComposerExt
+import org.codehaus.groovy.grails.plugins.support.aware.GrailsApplicationAware
+import org.codehaus.groovy.grails.commons.GrailsApplication
 
-class ComposerHandler {
+class ComposerHandler implements GrailsApplicationAware {
+    GrailsApplication application
     Composer composer
     ComposerExt composerExt
 
-    ComposerHandler(apply) {
+    def handle(apply) {
         composer = parseAppliedComposer(apply)
         if (composer != null)
             composerExt = composer instanceof ComposerExt ? (ComposerExt) composer : null
+        return this
     }
 
     def doBeforeComposeChildren(Component comp) {
@@ -26,12 +29,12 @@ class ComposerHandler {
         composer?.doAfterCompose(comp)
     }
 
-    private static Composer parseAppliedComposer(Object o) {
+    private Composer parseAppliedComposer(Object o) {
         if (null == o) return null
         try {
             if (o instanceof String) {
-                if (ApplicationHolder.application.isArtefactOfType(ComposerArtefactHandler.TYPE, o)) {
-                    def composerBean = ApplicationHolder.application.mainContext.getBean(o)
+                if (application.isArtefactOfType(ComposerArtefactHandler.TYPE, o)) {
+                    def composerBean = application.mainContext.getBean(o)
                     o = new GrailsComposerWrapper(composerBean)
                 } else {
                     o = Classes.newInstanceByThread(((String) o).trim())
@@ -44,5 +47,9 @@ class ComposerHandler {
             throw UiException.Aide.wrap(ex)
         }
         return null
+    }
+
+    void setGrailsApplication(GrailsApplication application) {
+        this.application = application
     }
 }

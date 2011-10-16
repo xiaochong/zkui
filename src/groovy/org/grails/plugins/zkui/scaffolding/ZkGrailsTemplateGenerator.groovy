@@ -5,10 +5,7 @@ import groovy.text.Template
 import org.apache.commons.logging.Log
 import org.apache.commons.logging.LogFactory
 import org.codehaus.groovy.grails.cli.CommandLineHelper
-import org.codehaus.groovy.grails.commons.ApplicationHolder
-import org.codehaus.groovy.grails.commons.ConfigurationHolder
 import org.codehaus.groovy.grails.commons.GrailsDomainClass
-import org.codehaus.groovy.grails.plugins.PluginManagerHolder
 import org.codehaus.groovy.grails.scaffolding.DomainClassPropertyComparator
 import org.codehaus.groovy.grails.scaffolding.GrailsTemplateGenerator
 import org.codehaus.groovy.grails.scaffolding.SimpleDomainClassPropertyComparator
@@ -17,8 +14,11 @@ import org.springframework.core.io.FileSystemResource
 import org.springframework.core.io.ResourceLoader
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver
 import org.springframework.util.Assert
+import org.codehaus.groovy.grails.commons.GrailsApplication
+import org.codehaus.groovy.grails.plugins.PluginManagerAware
+import org.codehaus.groovy.grails.plugins.GrailsPluginManager
 
-class ZkGrailsTemplateGenerator implements GrailsTemplateGenerator, ResourceLoaderAware {
+class ZkGrailsTemplateGenerator implements GrailsTemplateGenerator, ResourceLoaderAware, PluginManagerAware {
     static final Log LOG = LogFactory.getLog(ZkGrailsTemplateGenerator)
 
     String basedir = "."
@@ -28,23 +28,34 @@ class ZkGrailsTemplateGenerator implements GrailsTemplateGenerator, ResourceLoad
     ResourceLoader resourceLoader
     Template renderEditorTemplate
     String domainSuffix = 'Instance'
+    GrailsApplication grailsApplication
+    GrailsPluginManager pluginManager
 
     /**
      * Used by the scripts so that they can pass in their AntBuilder instance.
      */
-    ZkGrailsTemplateGenerator(ClassLoader classLoader, File zkuiPluginDir) {
-        this.zkuiPluginDir = zkuiPluginDir
+    ZkGrailsTemplateGenerator(ClassLoader classLoader) {
         engine = new SimpleTemplateEngine(classLoader)
-        def suffix = ConfigurationHolder.config?.grails?.scaffolding?.templates?.domainSuffix
-        if (suffix != [:]) {
-            domainSuffix = suffix
-        }
     }
 
     /**
      * Default constructor.
      */
     ZkGrailsTemplateGenerator() {}
+
+    void setGrailsApplication(GrailsApplication ga) {
+        this.grailsApplication = ga
+        if (ga != null) {
+            def suffix = ga.config?.grails?.scaffolding?.templates?.domainSuffix
+            if (suffix != [:]) {
+                domainSuffix = suffix
+            }
+        }
+    }
+
+    void setZkuiPluginDir(File zkuiPluginDir) {
+        this.zkuiPluginDir = zkuiPluginDir
+    }
 
     void setResourceLoader(ResourceLoader rl) {
         LOG.info "Scaffolding template generator set to use resource loader ${rl}"
@@ -55,7 +66,7 @@ class ZkGrailsTemplateGenerator implements GrailsTemplateGenerator, ResourceLoad
     def renderEditor = { property ->
         def domainClass = property.domainClass
         def cp
-        if (PluginManagerHolder.pluginManager.hasGrailsPlugin('hibernate')) {
+        if (pluginManager.hasGrailsPlugin('hibernate')) {
             cp = domainClass.constrainedProperties[property.name]
         }
 
@@ -149,7 +160,7 @@ class ZkGrailsTemplateGenerator implements GrailsTemplateGenerator, ResourceLoad
         def t = engine.createTemplate(templateText)
         def multiPart = domainClass.properties.find {it.type == ([] as Byte[]).class || it.type == ([] as byte[]).class}
 
-        boolean hasHibernate = PluginManagerHolder.pluginManager.hasGrailsPlugin('hibernate')
+        boolean hasHibernate = pluginManager.hasGrailsPlugin('hibernate')
         def packageName = domainClass.packageName ? "${domainClass.packageName}.${domainClass.propertyName.toLowerCase()}" : ""
         def binding = [packageName: packageName,
                 domainClass: domainClass,
@@ -218,7 +229,7 @@ class ZkGrailsTemplateGenerator implements GrailsTemplateGenerator, ResourceLoad
         def t = engine.createTemplate(templateText)
         def multiPart = domainClass.properties.find {it.type == ([] as Byte[]).class || it.type == ([] as byte[]).class}
 
-        boolean hasHibernate = PluginManagerHolder.pluginManager.hasGrailsPlugin('hibernate')
+        boolean hasHibernate = pluginManager.hasGrailsPlugin('hibernate')
         def packageName = domainClass.packageName ? "<%@ page import=\"${domainClass.fullName}\" %>" : ""
         def binding = [packageName: packageName,
                 domainClass: domainClass,
@@ -234,7 +245,7 @@ class ZkGrailsTemplateGenerator implements GrailsTemplateGenerator, ResourceLoad
     void generateController(GrailsDomainClass domainClass, Writer out) {
         def templateText = getTemplateText("Controller.groovy")
 
-        boolean hasHibernate = PluginManagerHolder.pluginManager.hasGrailsPlugin('hibernate')
+        boolean hasHibernate = pluginManager.hasGrailsPlugin('hibernate')
         def binding = [packageName: domainClass.packageName,
                 domainClass: domainClass,
                 className: domainClass.shortName,
@@ -265,7 +276,7 @@ class ZkGrailsTemplateGenerator implements GrailsTemplateGenerator, ResourceLoad
     }
 
     private getTemplateText(String template) {
-        def application = ApplicationHolder.getApplication()
+        def application = grailsApplication
         // first check for presence of template in application
         if (resourceLoader && application?.warDeployed) {
             return resourceLoader.getResource("/WEB-INF/templates/zkui/scaffolding/${template}").inputStream.text
@@ -278,7 +289,7 @@ class ZkGrailsTemplateGenerator implements GrailsTemplateGenerator, ResourceLoad
         return templateFile.inputStream.getText()
     }
 
-    def getComposerTemplateNames(){
+    def getComposerTemplateNames() {
         Closure filter = { it[0..-8] }
         def resources = []
         def resolver = new PathMatchingResourcePatternResolver()

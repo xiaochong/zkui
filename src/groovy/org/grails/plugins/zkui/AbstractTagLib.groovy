@@ -17,13 +17,17 @@ import org.zkoss.zk.ui.metainfo.PageDefinitions
 import org.zkoss.zk.ui.metainfo.ZScript
 import org.zkoss.zk.ui.*
 import org.zkoss.zk.ui.sys.*
+import org.springframework.context.ApplicationContextAware
+import org.springframework.context.ApplicationContext
 
-abstract class AbstractTagLib {
+abstract class AbstractTagLib implements ApplicationContextAware {
+    ApplicationContext applicationContext
 
     void doTag(attrs, body, String tagName, String languageName = null) {
         Class cls = ComponentUtil.getComponentClass(tagName, languageName)
         Component component = (Component) cls.newInstance()
-        def composeHandle = new ComposerHandler(attrs.remove("apply"))
+        ComposerHandler composeHandle = applicationContext.getBean('composerHandler')
+        composeHandle.handle(attrs.remove("apply"))
         composeHandle.doBeforeComposeChildren(component)
         if (!request.getAttribute('parents')) {
             def parents = new LinkedList<Component>()

@@ -74,8 +74,10 @@ target(uberGenerate: "Generates controllers and views for all domain classes.") 
 }
 
 def generateForDomainClass(domainClass) {
-    def templateGenerator = classLoader.loadClass("org.grails.plugins.zkui.scaffolding.ZkGrailsTemplateGenerator").newInstance([classLoader, zkuiPluginDir] as Object[])
-
+    def templateGenerator = classLoader.loadClass("org.grails.plugins.zkui.scaffolding.ZkGrailsTemplateGenerator").newInstance([classLoader] as Object[])
+    templateGenerator.grailsApplication = grailsApp
+    templateGenerator.pluginManager = pluginManager
+    templateGenerator.zkuiPluginDir = zkuiPluginDir
     if (generateViews) {
         event("StatusUpdate", ["Generating views for domain class ${domainClass.fullName}"])
         templateGenerator.generateViews(domainClass, basedir)
