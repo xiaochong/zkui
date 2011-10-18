@@ -11,8 +11,8 @@ import org.grails.plugins.zkui.jsoup.select.Selector
 import org.grails.plugins.zkui.metaclass.RedirectDynamicMethod
 import org.grails.plugins.zkui.util.UriUtil
 import org.zkoss.zk.ui.Executions
-import org.zkoss.zul.impl.InputElement
 import org.zkoss.zul.Messagebox
+import org.zkoss.zul.impl.InputElement
 
 class ZkuiGrailsPlugin {
     // the plugin version
@@ -152,6 +152,8 @@ The different is it more likely to use the Grails' infrastructures such as gsp, 
                     value = c.value ?: c.isChecked()
                 } else if (c instanceof org.zkoss.zul.Listbox) {
                     value = c.getSelectedItems()?.value as String[]
+                } else if (c instanceof org.zkoss.zul.Radiogroup) {
+                    return s
                 } else {
                     value = c.value
                 }
