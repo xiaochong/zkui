@@ -1,4 +1,4 @@
-Each component Taglib has a @apply@ attitude,so you can place the composer here
+Each component Taglib has a @apply@ attribute,so you can place the composer here
 {code:xml}
 <z:window id="myWindowComposer" apply="package.WindowComposer">
     ...
