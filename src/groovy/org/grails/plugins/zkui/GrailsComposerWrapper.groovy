@@ -4,14 +4,17 @@ import java.lang.reflect.Method
 import org.codehaus.groovy.runtime.InvokerHelper
 import org.zkoss.zk.ui.Component
 import org.zkoss.zk.ui.Components
+import org.zkoss.zk.ui.Page
 import org.zkoss.zk.ui.event.Event
 import org.zkoss.zk.ui.event.EventListener
 import org.zkoss.zk.ui.event.Events
 import org.zkoss.zk.ui.event.ForwardEvent
+import org.zkoss.zk.ui.metainfo.ComponentInfo
 import org.zkoss.zk.ui.sys.ComponentsCtrl
 import org.zkoss.zk.ui.util.Composer
+import org.zkoss.zk.ui.util.ComposerExt
 
-class GrailsComposerWrapper implements Composer, EventListener {
+class GrailsComposerWrapper implements Composer, ComposerExt, EventListener {
     public static final char SEPARATOR = '_' as char
     final controller
 
@@ -59,9 +62,26 @@ class GrailsComposerWrapper implements Composer, EventListener {
     }
 
     void doAfterCompose(Component comp) {
-        Components.wireVariables(comp, controller)
+        Components.wireVariables(comp, controller,'#' as char )
         Components.addForwards(comp, controller, SEPARATOR)
         this.bindComponent(comp)
         controller.afterCompose(comp)
+    }
+
+    public ComponentInfo doBeforeCompose(Page page, Component parent, ComponentInfo compInfo) {
+        //do nothing
+        return compInfo
+    }
+
+    public void doBeforeComposeChildren(Component comp) throws Exception {
+        Components.wireController(comp, controller)
+    }
+
+    public boolean doCatch(Throwable ex) throws Exception {
+        return false;
+    }
+
+    public void doFinally() throws Exception {
+        //do nothing
     }
 }

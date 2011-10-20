@@ -1,13 +1,16 @@
 package org.grails.plugins.zkui.util
 
+import java.util.Map.Entry
+import org.zkoss.lang.reflect.Fields
 import org.zkoss.zk.ui.Component
 import org.zkoss.zk.ui.Executions
 import org.zkoss.zk.ui.event.CreateEvent
 import org.zkoss.zk.ui.event.Events
+import org.zkoss.zk.ui.ext.DynamicPropertied
 import org.zkoss.zk.ui.metainfo.ComponentDefinition
 import org.zkoss.zk.ui.metainfo.LanguageDefinition
 import org.zkoss.zk.ui.metainfo.Property
-import org.zkoss.zul.Constraint
+import org.zkoss.zk.ui.metainfo.impl.AnnotationHelper
 
 class ComponentUtil {
     static Class getComponentClass(String tagName, String languageName) {
@@ -23,12 +26,40 @@ class ComponentUtil {
     }
 
     static def setAttr(Component component, String attrName, value, contextPath) {
-        def attrType = component.metaClass.getMetaProperty(attrName)?.type
-        if (attrType?.isPrimitive() || attrType in String || attrType in Number || attrType in Boolean || attrType in Character || attrType in Constraint || attrType == null) {
-            value = ZkUriHandler.handle(component, attrName, value, contextPath)
-            if (value != null) Property.assign(component, attrName, value.toString())
-        } else {
-            component[attrName] = value
+        value = ZkUriHandler.handle(component, attrName, value, contextPath)
+        evaluateDynaAttribute(component, attrName, value)
+    }
+
+    static def evaluateDynaAttributes(Component target, Map attrs) {
+        for (Iterator itor = attrs.entrySet().iterator(); itor.hasNext();) {
+            Map.Entry entry = (Entry) itor.next();
+            String attnm = (String) entry.getKey();
+            Object value = entry.getValue();
+            evaluateDynaAttribute(target, attnm, value);
         }
+    }
+
+    static def evaluateDynaAttribute(Component target, String attnm, Object value) {
+        if (value != null && value instanceof String) {
+            String attval = value.toString();
+            // test if this attribute is an annotation...
+            if (isAnnotation(attval)) { //annotation
+                AnnotationHelper helper = new AnnotationHelper();
+                helper.addByCompoundValue(attval.substring(2, attval.length() - 1));
+                helper.applyAnnotations(target, "self".equals(attnm) ? null : attnm, true);
+            }
+            else if (target.getDefinition().isMacro())
+                ((DynamicPropertied) target).setDynamicProperty(attnm, value);
+            else Property.assign(target, attnm, value);
+        } else if (target.getDefinition().isMacro())
+            ((DynamicPropertied) target).setDynamicProperty(attnm, value);
+        else Fields.setByCompound(target, attnm, value, true);
+    }
+
+    static boolean isAnnotation(String attval) {
+        final int len = attval.length();
+        return (len >= 3 && attval.charAt(0) == '@' &&
+                attval.charAt(1) == '{' &&
+                attval.charAt(len - 1) == '}');
     }
 }
