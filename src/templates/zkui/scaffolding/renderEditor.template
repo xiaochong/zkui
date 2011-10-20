@@ -67,7 +67,7 @@
     }
 
     private renderManyToMany(domainClass, property) {
-        return "<zkui:select name=\"${property.name}\" from=\"\${${property.referencedDomainClass.fullName}.list()}\" multiple=\"true\" optionKey=\"id\" height=\"250px\" value=\"\${${domainInstance}?.${property.name}*.id}\" />"
+        return "<zkui:select name=\"${property.name}\" from=\"\${${property.referencedDomainClass.fullName}.list()}\" multiple=\"true\" checkmark=\"true\" optionKey=\"id\" height=\"250px\" value=\"\${${domainInstance}?.${property.name}*.id}\" />"
     }
 
     private renderOneToMany(domainClass, property) {
