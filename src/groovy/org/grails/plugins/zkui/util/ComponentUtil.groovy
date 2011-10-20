@@ -1,6 +1,7 @@
 package org.grails.plugins.zkui.util
 
 import java.util.Map.Entry
+import org.codehaus.groovy.grails.web.util.StreamCharBuffer
 import org.zkoss.lang.reflect.Fields
 import org.zkoss.zk.ui.Component
 import org.zkoss.zk.ui.Executions
@@ -40,7 +41,8 @@ class ComponentUtil {
     }
 
     static def evaluateDynaAttribute(Component target, String attnm, Object value) {
-        if (value != null && value instanceof String) {
+        if (value == null) return
+        if (value instanceof String || value instanceof StreamCharBuffer) {
             String attval = value.toString();
             // test if this attribute is an annotation...
             if (isAnnotation(attval)) { //annotation
@@ -50,7 +52,7 @@ class ComponentUtil {
             }
             else if (target.getDefinition().isMacro())
                 ((DynamicPropertied) target).setDynamicProperty(attnm, value);
-            else Property.assign(target, attnm, value);
+            else Property.assign(target, attnm, value.toString());
         } else if (target.getDefinition().isMacro())
             ((DynamicPropertied) target).setDynamicProperty(attnm, value);
         else Fields.setByCompound(target, attnm, value, true);
