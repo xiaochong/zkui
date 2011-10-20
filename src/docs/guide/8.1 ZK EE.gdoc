@@ -1,0 +1,10 @@
+ZK UI supports  ZK Enterprise features.
+
+Just put the zk ee jar to @libs@ or put jar dependencies in grails-app/conf/BuildConfig.groovy
+
+You can also install the Enterprise edition by
+{code}
+$ grails install-plugin zk-ee
+{code}
+
+This plugin contains addition jars required for enabling ZK Enterprise features.

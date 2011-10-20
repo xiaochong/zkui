@@ -1,0 +1,113 @@
+h3. How to use
+
+You can simply put theme jar in @lib@ directory.
+
+Or add dependencies in grails-app/conf/BuildConfig.groovy
+h4. First, add zkoss' maven Dependency Repositories
+{code:groovy}
+repositories {
+        ...
+        mavenRepo "http://mavensync.zkoss.org/maven2/"
+        ...
+}
+{code}
+h4. Second,specify dependencies
+{code:groovy}
+    dependencies {
+        // there are three theme 'breeze', 'sapphire', 'silvertail'
+        def zkThemeVersion="5.0.9"
+        def zkTheme="breeze"
+        runtime "org.zkoss.theme:${zkTheme}:${zkThemeVersion}"
+    }
+{code}
+
+
+h3. How to switch different themes dynamically
+
+The default theme provider checks the current theme settings in order of preferences;
+
+h4. First priority: Cookie
+Set cookie zktheme=name
+
+For instance, write cookie zktheme=breeze, breeze theme will be activated
+
+h4. Second priority: Library property
+The default theme provider will obtain the current theme setting from library property if cookie is empty.
+{code:xml}
+<library-property>
+     <name>org.zkoss.theme.preferred</name>
+     <value>name</value>
+</library-property>
+{code}
+For example, the following code will activiate the breeze theme.
+{code:xml}
+<library-property>
+     <name>org.zkoss.theme.preferred</name>
+     <value>breeze</value>
+</library-property>
+{code}
+
+h4. Third priority: System's default them
+The default theme provider maintains a default theme. If theme provider can't find theme setting in cookie or library property, default theme will be activated.
+
+
+h3. Dynamically switch themes using cookie
+
+Here are a list of cookie sample codes that you can choose from.
+h4. Breeze
+{code:groovy}
+Themes.setTheme(Executions.getCurrent(), "breeze")
+Executions.sendRedirect(null)
+{code}
+
+h4. Sapphire
+{code:groovy}
+Themes.setTheme(Executions.getCurrent(), "sapphire")
+Executions.sendRedirect(null)
+{code}
+
+h4. Silvertail
+{code:groovy}
+Themes.setTheme(Executions.getCurrent(), "silvertail")
+Executions.sendRedirect(null)
+{code}
+
+h4. Classic blue
+{code:groovy}
+Themes.setTheme(Executions.getCurrent(), "classicblue")
+Executions.sendRedirect(null)
+{code}
+
+h3. Dynamically switch themes using library property
+
+h4. Breeze
+{code:groovy}
+Library.setProperty("org.zkoss.theme.preferred", "breeze")
+Executions.sendRedirect(null)
+{code}
+
+h4. Sapphire
+{code:groovy}
+Library.setProperty("org.zkoss.theme.preferred", "sapphire")
+Executions.sendRedirect(null)
+{code}
+
+h4. Silvertail
+{code:groovy}
+Library.setProperty("org.zkoss.theme.preferred", "silvertail")
+Executions.sendRedirect(null)
+{code}
+
+h4. Classic blue
+{code:groovy}
+Library.setProperty("org.zkoss.theme.preferred", "classicblue")
+Executions.sendRedirect(null)
+{code}
+
+h3. Retrieve web app supported theme names
+{code:groovy}
+String names = Library.getProperty("org.zkoss.theme.names");
+{code}
+
+h3. Reference
+[ZK Themes GetStarted|http://code.google.com/p/zkthemes/wiki/GetStarted]

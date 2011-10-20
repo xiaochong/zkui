@@ -1,0 +1,17 @@
+You can extends the org.grails.plugins.zkui.AbstractTagLib implement the Extensions Component's Taglib same as:
+
+{code:groovy}
+import org.grails.plugins.zkui.AbstractTagLib
+
+class CalendarsTagLib extends AbstractTagLib {
+    static namespace = "z"
+
+    def calendars = { attrs, body ->
+        doTag(attrs, body, "calendars")
+    }
+
+}
+{code}
+
+
+and put the Calendar jar to @lib@

@@ -1,0 +1,35 @@
+Data binding is a mechanism that automates the data-copy plumbing code (CRUD) between UI components and the data source. Application developers only have to tell the data binding manager about the associations between UI components and the data source. Then, the data -binding manager will do all the loading (loading data from the data source to UI components) and saving (saving data from UI component into the data source) jobs automatically.
+
+h3. Activates Data Binding Manager
+{code:xml}
+<z:window  apply="org.zkoss.demo.MyComposer,org.zkoss.zkplus.databind.AnnotateDataBindingComposer">
+</z:window>
+{code}
+
+For more information, please refer to the relative blog post [Databinding Composer|http://blog.zkoss.org/index.php/2011/08/11/databinding-composer/]
+
+h3. Associate UI Components with Data Source
+After activating the data-binding manager, you have to define the required UI objects and then associate them with the data source.
+
+In the gsp view:
+{code:xml}
+<z:window id="win" apply="test.TestComposer,org.zkoss.zkplus.databind.AnnotateDataBindingComposer">
+    <z:textbox value="@{win#composer.username}"/>
+<z:/window>
+{code}
+
+In the test.TestComposer:
+{code:groovy}
+class TestComposer{
+
+    def username="test"
+
+    def afterCompose = {Component comp ->
+        ...
+    }
+}
+{code}
+
+See more [ZK Developer's Reference/Data Binding|http://books.zkoss.org/wiki/ZK%20Developer's%20Reference/Data%20Binding]
+
+

@@ -1,0 +1,26 @@
+h1. Overview
+
+The ZHTML component set is a collection of components,which is designed to have rich features, each ZHTML component represents a HTML tag. For example, the following XML element will cause ZK Loader to create a component called Ul
+{code:xml}
+<h:ul/>
+{code}
+
+h1. Dynamic Update
+
+Because Components are instantiated for XML elements specified with the ZHTML namespace, you could update its content dynamically on the server. For example, we could allow users to click a button to add a column as shown below.
+{code:xml}
+<z:window title="mix HTML demo">
+    <h:table border="1">
+        <h:tr id="row1">
+            <h:td>column 1</h:td>
+            <h:td>
+                <z:listbox id="list" mold="select">
+                    <z:listitem label="AA"/>
+                    <z:listitem label="BB"/>
+                </z:listbox>
+            </h:td>
+        </h:tr>
+    </h:table>
+    <z:button label="add" onClick="row1.appendChild(new org.zkoss.zhtml.Td())"/>
+</z:window>
+{code}

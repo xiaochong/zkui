@@ -1,0 +1,25 @@
+h1. zkui-generate-view
+
+h2. Purpose
+
+Generates views and composer for the given domain class
+
+h2. Examples
+
+{code:java}
+grails zkui-generate-view Book
+grails zkui-generate-view *
+{code}
+
+h2. Description
+
+
+Same as Grails's @generate-view@ Command
+
+supports a feature known as scaffolding which involves the generation of a CRUD (Create/Read/Update/Delete) interface for a given domain class.
+
+
+Usage:
+{code:java}
+grails zkui-generate-view [domain class name or wildcard]
+{code}

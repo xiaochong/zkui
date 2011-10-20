@@ -1,0 +1,25 @@
+h1. zkui-generate-controller
+
+h2. Purpose
+
+Generates a controller for the given domain class
+
+h2. Examples
+
+{code:java}
+grails zkui-generate-controller Book
+grails zkui-generate-controller *
+{code}
+
+h2. Description
+
+
+Same as Grails's @generate-controller@ Command
+
+supports a feature known as scaffolding which involves the generation of a CRUD (Create/Read/Update/Delete) interface for a given domain class.
+
+
+Usage:
+{code:java}
+grails zkui-generate-controller [domain class name or wildcard]
+{code}
