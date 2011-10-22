@@ -1,7 +1,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Grails ZK UI Plugin 0.3.2 - Reference Documentation</title>
+        <title>Grails ZK UI Plugin 0.4 - Reference Documentation</title>
         <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen" title="Style" charset="utf-8"/>
         <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8" />
     </head>
@@ -17,13 +17,13 @@
             <div class="message">zkui</div>
             <h1>Grails ZK UI Plugin - Reference Documentation</h1>
             <p><strong>Authors:</strong> groovyquan</p>
-            <p><strong>Version:</strong> 0.3.2</p>
+            <p><strong>Version:</strong> 0.4</p>
             <em>This document is licensed under GNU Free Documentation License,ZK UI Plugin is released under LGPL</em>
         </div>
 
         <div id="toc">
             <h2>Table of Contents</h2>
-            <div class="tocItem" style="margin-left:0px"><a href="#1. Introduction">1. Introduction</a></div><div class="tocItem" style="margin-left:10px"><a href="#1.1 Taglib">1.1 Taglib</a></div><div class="tocItem" style="margin-left:10px"><a href="#1.2 Composer">1.2 Composer</a></div><div class="tocItem" style="margin-left:10px"><a href="#1.3 Builder">1.3 Builder</a></div><div class="tocItem" style="margin-left:10px"><a href="#1.4 Selector">1.4 Selector</a></div><div class="tocItem" style="margin-left:0px"><a href="#2. Getting Started">2. Getting Started</a></div><div class="tocItem" style="margin-left:10px"><a href="#2.1 Hello World">2.1 Hello World</a></div><div class="tocItem" style="margin-left:10px"><a href="#2.2 Say Hello in Ajax way">2.2 Say Hello in Ajax way</a></div><div class="tocItem" style="margin-left:10px"><a href="#2.3 Identify a component">2.3 Identify a component</a></div><div class="tocItem" style="margin-left:10px"><a href="#2.4 A component is a POJO">2.4 A component is a POJO</a></div><div class="tocItem" style="margin-left:10px"><a href="#2.5 Separating code from user interface">2.5 Separating code from user interface</a></div><div class="tocItem" style="margin-left:0px"><a href="#3. Composer">3. Composer</a></div><div class="tocItem" style="margin-left:10px"><a href="#3.1 Creating a composer">3.1 Creating a composer</a></div><div class="tocItem" style="margin-left:10px"><a href="#3.2 Apply a composer">3.2 Apply a composer</a></div><div class="tocItem" style="margin-left:10px"><a href="#3.3 Auto-wired Component">3.3 Auto-wired Component</a></div><div class="tocItem" style="margin-left:10px"><a href="#3.4 Redirects">3.4 Redirects</a></div><div class="tocItem" style="margin-left:10px"><a href="#3.5 Data Binding">3.5 Data Binding</a></div><div class="tocItem" style="margin-left:10px"><a href="#3.6 Unit Test">3.6 Unit Test</a></div><div class="tocItem" style="margin-left:10px"><a href="#3.7 Render Errors">3.7 Render Errors</a></div><div class="tocItem" style="margin-left:0px"><a href="#4. Builder">4. Builder</a></div><div class="tocItem" style="margin-left:10px"><a href="#4.1 appendChild">4.1 appendChild</a></div><div class="tocItem" style="margin-left:10px"><a href="#4.2 leftShift">4.2 leftShift</a></div><div class="tocItem" style="margin-left:10px"><a href="#4.3 Event listening">4.3 Event listening</a></div><div class="tocItem" style="margin-left:10px"><a href="#4.4 Client-side event listening">4.4 Client-side event listening</a></div><div class="tocItem" style="margin-left:0px"><a href="#5. Selector">5. Selector</a></div><div class="tocItem" style="margin-left:10px"><a href="#5.1 Selector overview">5.1 Selector overview</a></div><div class="tocItem" style="margin-left:10px"><a href="#5.2 Base Selector">5.2 Base Selector</a></div><div class="tocItem" style="margin-left:10px"><a href="#5.3 Selector combinations">5.3 Selector combinations</a></div><div class="tocItem" style="margin-left:10px"><a href="#5.4 Pseudo selectors">5.4 Pseudo selectors</a></div><div class="tocItem" style="margin-left:0px"><a href="#6. Event Handling">6. Event Handling</a></div><div class="tocItem" style="margin-left:10px"><a href="#6.1 Event Listening">6.1 Event Listening</a></div><div class="tocItem" style="margin-left:10px"><a href="#6.2 Client-side Event Listening">6.2 Client-side Event Listening</a></div><div class="tocItem" style="margin-left:0px"><a href="#7. Scaffolding Templates">7. Scaffolding Templates</a></div><div class="tocItem" style="margin-left:10px"><a href="#7.1 Static Scaffolding">7.1 Static Scaffolding</a></div><div class="tocItem" style="margin-left:10px"><a href="#7.2 Customizing the scaffolding templates">7.2 Customizing the scaffolding templates</a></div>
+            <div class="tocItem" style="margin-left:0px"><a href="#1. Introduction">1. Introduction</a></div><div class="tocItem" style="margin-left:10px"><a href="#1.1 Taglib">1.1 Taglib</a></div><div class="tocItem" style="margin-left:10px"><a href="#1.2 Composer">1.2 Composer</a></div><div class="tocItem" style="margin-left:10px"><a href="#1.3 Builder">1.3 Builder</a></div><div class="tocItem" style="margin-left:10px"><a href="#1.4 Selector">1.4 Selector</a></div><div class="tocItem" style="margin-left:0px"><a href="#2. Getting Started">2. Getting Started</a></div><div class="tocItem" style="margin-left:10px"><a href="#2.1 Hello World">2.1 Hello World</a></div><div class="tocItem" style="margin-left:10px"><a href="#2.2 Say Hello in Ajax way">2.2 Say Hello in Ajax way</a></div><div class="tocItem" style="margin-left:10px"><a href="#2.3 Identify a component">2.3 Identify a component</a></div><div class="tocItem" style="margin-left:10px"><a href="#2.4 A component is a POJO">2.4 A component is a POJO</a></div><div class="tocItem" style="margin-left:10px"><a href="#2.5 Separating code from user interface">2.5 Separating code from user interface</a></div><div class="tocItem" style="margin-left:0px"><a href="#3. Composer">3. Composer</a></div><div class="tocItem" style="margin-left:10px"><a href="#3.1 Creating a composer">3.1 Creating a composer</a></div><div class="tocItem" style="margin-left:10px"><a href="#3.2 Apply a composer">3.2 Apply a composer</a></div><div class="tocItem" style="margin-left:10px"><a href="#3.3 Auto-wired Component">3.3 Auto-wired Component</a></div><div class="tocItem" style="margin-left:10px"><a href="#3.4 Redirects">3.4 Redirects</a></div><div class="tocItem" style="margin-left:10px"><a href="#3.5 Data Binding">3.5 Data Binding</a></div><div class="tocItem" style="margin-left:10px"><a href="#3.6 Unit Test">3.6 Unit Test</a></div><div class="tocItem" style="margin-left:10px"><a href="#3.7 Render Errors">3.7 Render Errors</a></div><div class="tocItem" style="margin-left:10px"><a href="#3.8 ZK's Data Binding">3.8 ZK's Data Binding</a></div><div class="tocItem" style="margin-left:0px"><a href="#4. Builder">4. Builder</a></div><div class="tocItem" style="margin-left:10px"><a href="#4.1 appendChild">4.1 appendChild</a></div><div class="tocItem" style="margin-left:10px"><a href="#4.2 leftShift">4.2 leftShift</a></div><div class="tocItem" style="margin-left:10px"><a href="#4.3 Event listening">4.3 Event listening</a></div><div class="tocItem" style="margin-left:10px"><a href="#4.4 Client-side event listening">4.4 Client-side event listening</a></div><div class="tocItem" style="margin-left:0px"><a href="#5. Selector">5. Selector</a></div><div class="tocItem" style="margin-left:10px"><a href="#5.1 Selector overview">5.1 Selector overview</a></div><div class="tocItem" style="margin-left:10px"><a href="#5.2 Base Selector">5.2 Base Selector</a></div><div class="tocItem" style="margin-left:10px"><a href="#5.3 Selector combinations">5.3 Selector combinations</a></div><div class="tocItem" style="margin-left:10px"><a href="#5.4 Pseudo selectors">5.4 Pseudo selectors</a></div><div class="tocItem" style="margin-left:0px"><a href="#6. Event Handling">6. Event Handling</a></div><div class="tocItem" style="margin-left:10px"><a href="#6.1 Event Listening">6.1 Event Listening</a></div><div class="tocItem" style="margin-left:10px"><a href="#6.2 Client-side Event Listening">6.2 Client-side Event Listening</a></div><div class="tocItem" style="margin-left:0px"><a href="#7. Scaffolding Templates">7. Scaffolding Templates</a></div><div class="tocItem" style="margin-left:10px"><a href="#7.1 Static Scaffolding">7.1 Static Scaffolding</a></div><div class="tocItem" style="margin-left:10px"><a href="#7.2 Customizing the scaffolding templates">7.2 Customizing the scaffolding templates</a></div><div class="tocItem" style="margin-left:0px"><a href="#8. Integration">8. Integration</a></div><div class="tocItem" style="margin-left:10px"><a href="#8.1 ZK EE">8.1 ZK EE</a></div><div class="tocItem" style="margin-left:10px"><a href="#8.2 ZK Themes">8.2 ZK Themes</a></div><div class="tocItem" style="margin-left:10px"><a href="#8.3 ZK Extensions Component">8.3 ZK Extensions Component</a></div>
         </div>
         <div id="content">
             <h1><a name="1. Introduction">1. Introduction</a></h1>ZK UI plugin,the same as the ZKGrails plugin, seamlessly integrates ZK with Grails' infrastructures.<p class="paragraph"/>The difference is it uses the Grails' infrastructures more, such as gsp, controllers rather than zk's zul.<p class="paragraph"/>ZK UI Grails plug-ins brings powerful features as follows<p class="paragraph"/><p class="paragraph"/><h2><a name="1.1 Taglib">1.1 Taglib</a></h2>Use Tag Libraries
@@ -149,7 +149,7 @@ The above code can be simplified as follows<p class="paragraph"/><div class="cod
 &#125;</pre></div>
 WindowComposer by default provide a <code>afterCompose</code> closure to initialize components.<p class="paragraph"/><blockquote class="note">
 The create-composer command is merely for convenience and you can just as easily create composers using your favorite text editor or IDE
-</blockquote><h2><a name="3.2 Apply a composer">3.2 Apply a composer</a></h2>Each component Taglib has a <code>apply</code> attitude,so you can place the composer here
+</blockquote><h2><a name="3.2 Apply a composer">3.2 Apply a composer</a></h2>Each component Taglib has a <code>apply</code> attribute,so you can place the composer here
 <div class="code"><pre><span class="xml&#45;tag">&#60;z:window id=<span class="xml&#45;quote">"myWindowComposer"</span> apply=<span class="xml&#45;quote">"package.WindowComposer"</span>&#62;</span>
     &#8230;
 <span class="xml&#45;tag">&#60;/z:window&#62;</span></pre></div><p class="paragraph"/>In the WindowComposer side
@@ -236,6 +236,17 @@ In addition,you can also use grails's traditional <code>renderErrors</code><p cl
     <span class="xml&#45;tag">&#60;g:renderErrors bean=<span class="xml&#45;quote">"$&#123;flash.book&#125;"</span> as=<span class="xml&#45;quote">"list"</span> /&#62;</span>
 <span class="xml&#45;tag">&#60;/div&#62;</span>
 <span class="xml&#45;tag">&#60;/g:hasErrors&#62;</span></pre></div><p class="paragraph"/>
+<h2><a name="3.8 ZK's Data Binding">3.8 ZK's Data Binding</a></h2>Data binding is a mechanism that automates the data-copy plumbing code (CRUD) between UI components and the data source. Application developers only have to tell the data binding manager about the associations between UI components and the data source. Then, the data -binding manager will do all the loading (loading data from the data source to UI components) and saving (saving data from UI component into the data source) jobs automatically.<p class="paragraph"/><h3>Activates Data Binding Manager</h3>
+<div class="code"><pre><span class="xml&#45;tag">&#60;z:window  apply=<span class="xml&#45;quote">"org.zkoss.demo.MyComposer,org.zkoss.zkplus.databind.AnnotateDataBindingComposer"</span>&#62;</span>
+<span class="xml&#45;tag">&#60;/z:window&#62;</span></pre></div><p class="paragraph"/>For more information, please refer to the relative blog post <a href="http://blog.zkoss.org/index.php/2011/08/11/databinding-composer/" target="blank">Databinding Composer</a><p class="paragraph"/><h3>Associate UI Components with Data Source</h3>
+After activating the data-binding manager, you have to define the required UI objects and then associate them with the data source.<p class="paragraph"/>In the gsp view:
+<div class="code"><pre><span class="xml&#45;tag">&#60;z:window id=<span class="xml&#45;quote">"win"</span> apply=<span class="xml&#45;quote">"test.TestComposer,org.zkoss.zkplus.databind.AnnotateDataBindingComposer"</span>&#62;</span>
+    <span class="xml&#45;tag">&#60;z:textbox value=<span class="xml&#45;quote">"@&#123;win&#35;composer.username&#125;"</span>/&#62;</span>
+<span class="xml&#45;tag">&#60;z:/window&#62;</span></pre></div><p class="paragraph"/>In the test.TestComposer:
+<div class="code"><pre>class TestComposer&#123;<p class="paragraph"/>    def username=<span class="java&#45;quote">"test"</span><p class="paragraph"/>    def afterCompose = &#123;Component comp &#45;&#62;
+        &#8230;
+    &#125;
+&#125;</pre></div><p class="paragraph"/>See more <a href="http://books.zkoss.org/wiki/ZK%20Developer's%20Reference/Data%20Binding" target="blank">ZK Developer&#39;s Reference/Data Binding</a><p class="paragraph"/>
 <h1><a name="4. Builder">4. Builder</a></h1>Builders are internal DSLs that provide ease in working with certain types of problems.It is very useful for work with nested,hierarchical structures, such as tree structures, XML representations,or HTML representations.<p class="paragraph"/>Let’s take a look at an example of one way to create zk component in Groovy—using a builder:<p class="paragraph"/><h2><a name="4.1 appendChild">4.1 appendChild</a></h2><code>appendChild</code>  is dynamic method that  <em class="italic">ZKUI</em>  injection to zk <a href="http://www.zkoss.org/javadoc/latest/zk/org/zkoss/zk/ui/Component.html" target="blank">Component</a> to begin builder,which accepts a Closure parameter.
 <div class="code"><pre>def window = <span class="java&#45;keyword">new</span> Window(title: <span class="java&#45;quote">"listbox demo"</span>, border: <span class="java&#45;quote">"normal"</span>)
 window.appendChild &#123;
@@ -415,7 +426,58 @@ The complete layout/main.gsp Examples
 <span class="xml&#45;tag">&#60;g:layoutBody/&#62;</span>
 <span class="xml&#45;tag">&#60;/body&#62;</span>
 <span class="xml&#45;tag">&#60;/html&#62;</span></pre></div><p class="paragraph"/></blockquote><h2><a name="7.2 Customizing the scaffolding templates">7.2 Customizing the scaffolding templates</a></h2>The templates used by zkui to generate the controller, views and composer can be customized by installing the templates with the <code>zkui-install-templates</code> command.
-
+<h1><a name="8. Integration">8. Integration</a></h1><h2><a name="8.1 ZK EE">8.1 ZK EE</a></h2>ZK UI supports  ZK Enterprise features.<p class="paragraph"/>Just put the zk ee jar to <code>libs</code> or put jar dependencies in grails-app/conf/BuildConfig.groovy<p class="paragraph"/>You can also install the Enterprise edition by
+<div class="code"><pre>$ grails install&#45;plugin zk&#45;ee</pre></div><p class="paragraph"/>This plugin contains addition jars required for enabling ZK Enterprise features.<h2><a name="8.2 ZK Themes">8.2 ZK Themes</a></h2><h3>How to use</h3><p class="paragraph"/>You can simply put theme jar in <code>lib</code> directory.<p class="paragraph"/>Or add dependencies in grails-app/conf/BuildConfig.groovy
+<h4>First, add zkoss' maven Dependency Repositories</h4>
+<div class="code"><pre>repositories &#123;
+        &#8230;
+        mavenRepo <span class="java&#45;quote">"http://mavensync.zkoss.org/maven2/"</span>
+        &#8230;
+&#125;</pre></div>
+<h4>Second,specify dependencies</h4>
+<div class="code"><pre>dependencies &#123;
+        // there are three theme 'breeze', 'sapphire', 'silvertail'
+        def zkThemeVersion=<span class="java&#45;quote">"5.0.9"</span>
+        def zkTheme=<span class="java&#45;quote">"breeze"</span>
+        runtime <span class="java&#45;quote">"org.zkoss.theme:$&#123;zkTheme&#125;:$&#123;zkThemeVersion&#125;"</span>
+    &#125;</pre></div><p class="paragraph"/>
+<h3>How to switch different themes dynamically</h3><p class="paragraph"/>The default theme provider checks the current theme settings in order of preferences;<p class="paragraph"/><h4>First priority: Cookie</h4>
+Set cookie zktheme=name<p class="paragraph"/>For instance, write cookie zktheme=breeze, breeze theme will be activated<p class="paragraph"/><h4>Second priority: Library property</h4>
+The default theme provider will obtain the current theme setting from library property if cookie is empty.
+<div class="code"><pre><span class="xml&#45;tag">&#60;library&#45;property&#62;</span>
+     <span class="xml&#45;tag">&#60;name&#62;</span>org.zkoss.theme.preferred<span class="xml&#45;tag">&#60;/name&#62;</span>
+     <span class="xml&#45;tag">&#60;value&#62;</span>name<span class="xml&#45;tag">&#60;/value&#62;</span>
+<span class="xml&#45;tag">&#60;/library&#45;property&#62;</span></pre></div>
+For example, the following code will activiate the breeze theme.
+<div class="code"><pre><span class="xml&#45;tag">&#60;library&#45;property&#62;</span>
+     <span class="xml&#45;tag">&#60;name&#62;</span>org.zkoss.theme.preferred<span class="xml&#45;tag">&#60;/name&#62;</span>
+     <span class="xml&#45;tag">&#60;value&#62;</span>breeze<span class="xml&#45;tag">&#60;/value&#62;</span>
+<span class="xml&#45;tag">&#60;/library&#45;property&#62;</span></pre></div><p class="paragraph"/><h4>Third priority: System's default them</h4>
+The default theme provider maintains a default theme. If theme provider can't find theme setting in cookie or library property, default theme will be activated.<p class="paragraph"/>
+<h3>Dynamically switch themes using cookie</h3><p class="paragraph"/>Here are a list of cookie sample codes that you can choose from.
+<h4>Breeze</h4>
+<div class="code"><pre>Themes.setTheme(Executions.getCurrent(), <span class="java&#45;quote">"breeze"</span>)
+Executions.sendRedirect(<span class="java&#45;keyword">null</span>)</pre></div><p class="paragraph"/><h4>Sapphire</h4>
+<div class="code"><pre>Themes.setTheme(Executions.getCurrent(), <span class="java&#45;quote">"sapphire"</span>)
+Executions.sendRedirect(<span class="java&#45;keyword">null</span>)</pre></div><p class="paragraph"/><h4>Silvertail</h4>
+<div class="code"><pre>Themes.setTheme(Executions.getCurrent(), <span class="java&#45;quote">"silvertail"</span>)
+Executions.sendRedirect(<span class="java&#45;keyword">null</span>)</pre></div><p class="paragraph"/><h4>Classic blue</h4>
+<div class="code"><pre>Themes.setTheme(Executions.getCurrent(), <span class="java&#45;quote">"classicblue"</span>)
+Executions.sendRedirect(<span class="java&#45;keyword">null</span>)</pre></div><p class="paragraph"/><h3>Dynamically switch themes using library property</h3><p class="paragraph"/><h4>Breeze</h4>
+<div class="code"><pre>Library.setProperty(<span class="java&#45;quote">"org.zkoss.theme.preferred"</span>, <span class="java&#45;quote">"breeze"</span>)
+Executions.sendRedirect(<span class="java&#45;keyword">null</span>)</pre></div><p class="paragraph"/><h4>Sapphire</h4>
+<div class="code"><pre>Library.setProperty(<span class="java&#45;quote">"org.zkoss.theme.preferred"</span>, <span class="java&#45;quote">"sapphire"</span>)
+Executions.sendRedirect(<span class="java&#45;keyword">null</span>)</pre></div><p class="paragraph"/><h4>Silvertail</h4>
+<div class="code"><pre>Library.setProperty(<span class="java&#45;quote">"org.zkoss.theme.preferred"</span>, <span class="java&#45;quote">"silvertail"</span>)
+Executions.sendRedirect(<span class="java&#45;keyword">null</span>)</pre></div><p class="paragraph"/><h4>Classic blue</h4>
+<div class="code"><pre>Library.setProperty(<span class="java&#45;quote">"org.zkoss.theme.preferred"</span>, <span class="java&#45;quote">"classicblue"</span>)
+Executions.sendRedirect(<span class="java&#45;keyword">null</span>)</pre></div><p class="paragraph"/><h3>Retrieve web app supported theme names</h3>
+<div class="code"><pre><span class="java&#45;object">String</span> names = Library.getProperty(<span class="java&#45;quote">"org.zkoss.theme.names"</span>);</pre></div><p class="paragraph"/><h3>Reference</h3>
+<a href="http://code.google.com/p/zkthemes/wiki/GetStarted" target="blank">ZK Themes GetStarted</a><h2><a name="8.3 ZK Extensions Component">8.3 ZK Extensions Component</a></h2>You can extends the org.grails.plugins.zkui.AbstractTagLib implement the Extensions Component's Taglib same as:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> org.grails.plugins.zkui.AbstractTagLib<p class="paragraph"/>class CalendarsTagLib <span class="java&#45;keyword">extends</span> AbstractTagLib &#123;
+    <span class="java&#45;keyword">static</span> namespace = <span class="java&#45;quote">"z"</span><p class="paragraph"/>    def calendars = &#123; attrs, body &#45;&#62;
+        doTag(attrs, body, <span class="java&#45;quote">"calendars"</span>)
+    &#125;<p class="paragraph"/>&#125;</pre></div><p class="paragraph"/>
+and put the Calendar jar to <code>lib</code>
         </div>
         <div id="footer">
              Grails ZK UI Plugin Project

@@ -1,0 +1,61 @@
+<html>
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+        <title>8. Integration</title>
+        <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen" title="Ref" charset="utf-8"/>
+    </head>
+    <body class="body">
+    <h1><a name="8. Integration">8. Integration</a></h1><h2><a name="8.1 ZK EE">8.1 ZK EE</a></h2>ZK UI supports  ZK Enterprise features.<p class="paragraph"/>Just put the zk ee jar to <code>libs</code> or put jar dependencies in grails-app/conf/BuildConfig.groovy<p class="paragraph"/>You can also install the Enterprise edition by
+<div class="code"><pre>$ grails install&#45;plugin zk&#45;ee</pre></div><p class="paragraph"/>This plugin contains addition jars required for enabling ZK Enterprise features.<h2><a name="8.2 ZK Themes">8.2 ZK Themes</a></h2><h3>How to use</h3><p class="paragraph"/>You can simply put theme jar in <code>lib</code> directory.<p class="paragraph"/>Or add dependencies in grails-app/conf/BuildConfig.groovy
+<h4>First, add zkoss' maven Dependency Repositories</h4>
+<div class="code"><pre>repositories &#123;
+        &#8230;
+        mavenRepo <span class="java&#45;quote">"http://mavensync.zkoss.org/maven2/"</span>
+        &#8230;
+&#125;</pre></div>
+<h4>Second,specify dependencies</h4>
+<div class="code"><pre>dependencies &#123;
+        // there are three theme 'breeze', 'sapphire', 'silvertail'
+        def zkThemeVersion=<span class="java&#45;quote">"5.0.9"</span>
+        def zkTheme=<span class="java&#45;quote">"breeze"</span>
+        runtime <span class="java&#45;quote">"org.zkoss.theme:$&#123;zkTheme&#125;:$&#123;zkThemeVersion&#125;"</span>
+    &#125;</pre></div><p class="paragraph"/>
+<h3>How to switch different themes dynamically</h3><p class="paragraph"/>The default theme provider checks the current theme settings in order of preferences;<p class="paragraph"/><h4>First priority: Cookie</h4>
+Set cookie zktheme=name<p class="paragraph"/>For instance, write cookie zktheme=breeze, breeze theme will be activated<p class="paragraph"/><h4>Second priority: Library property</h4>
+The default theme provider will obtain the current theme setting from library property if cookie is empty.
+<div class="code"><pre><span class="xml&#45;tag">&#60;library&#45;property&#62;</span>
+     <span class="xml&#45;tag">&#60;name&#62;</span>org.zkoss.theme.preferred<span class="xml&#45;tag">&#60;/name&#62;</span>
+     <span class="xml&#45;tag">&#60;value&#62;</span>name<span class="xml&#45;tag">&#60;/value&#62;</span>
+<span class="xml&#45;tag">&#60;/library&#45;property&#62;</span></pre></div>
+For example, the following code will activiate the breeze theme.
+<div class="code"><pre><span class="xml&#45;tag">&#60;library&#45;property&#62;</span>
+     <span class="xml&#45;tag">&#60;name&#62;</span>org.zkoss.theme.preferred<span class="xml&#45;tag">&#60;/name&#62;</span>
+     <span class="xml&#45;tag">&#60;value&#62;</span>breeze<span class="xml&#45;tag">&#60;/value&#62;</span>
+<span class="xml&#45;tag">&#60;/library&#45;property&#62;</span></pre></div><p class="paragraph"/><h4>Third priority: System's default them</h4>
+The default theme provider maintains a default theme. If theme provider can't find theme setting in cookie or library property, default theme will be activated.<p class="paragraph"/>
+<h3>Dynamically switch themes using cookie</h3><p class="paragraph"/>Here are a list of cookie sample codes that you can choose from.
+<h4>Breeze</h4>
+<div class="code"><pre>Themes.setTheme(Executions.getCurrent(), <span class="java&#45;quote">"breeze"</span>)
+Executions.sendRedirect(<span class="java&#45;keyword">null</span>)</pre></div><p class="paragraph"/><h4>Sapphire</h4>
+<div class="code"><pre>Themes.setTheme(Executions.getCurrent(), <span class="java&#45;quote">"sapphire"</span>)
+Executions.sendRedirect(<span class="java&#45;keyword">null</span>)</pre></div><p class="paragraph"/><h4>Silvertail</h4>
+<div class="code"><pre>Themes.setTheme(Executions.getCurrent(), <span class="java&#45;quote">"silvertail"</span>)
+Executions.sendRedirect(<span class="java&#45;keyword">null</span>)</pre></div><p class="paragraph"/><h4>Classic blue</h4>
+<div class="code"><pre>Themes.setTheme(Executions.getCurrent(), <span class="java&#45;quote">"classicblue"</span>)
+Executions.sendRedirect(<span class="java&#45;keyword">null</span>)</pre></div><p class="paragraph"/><h3>Dynamically switch themes using library property</h3><p class="paragraph"/><h4>Breeze</h4>
+<div class="code"><pre>Library.setProperty(<span class="java&#45;quote">"org.zkoss.theme.preferred"</span>, <span class="java&#45;quote">"breeze"</span>)
+Executions.sendRedirect(<span class="java&#45;keyword">null</span>)</pre></div><p class="paragraph"/><h4>Sapphire</h4>
+<div class="code"><pre>Library.setProperty(<span class="java&#45;quote">"org.zkoss.theme.preferred"</span>, <span class="java&#45;quote">"sapphire"</span>)
+Executions.sendRedirect(<span class="java&#45;keyword">null</span>)</pre></div><p class="paragraph"/><h4>Silvertail</h4>
+<div class="code"><pre>Library.setProperty(<span class="java&#45;quote">"org.zkoss.theme.preferred"</span>, <span class="java&#45;quote">"silvertail"</span>)
+Executions.sendRedirect(<span class="java&#45;keyword">null</span>)</pre></div><p class="paragraph"/><h4>Classic blue</h4>
+<div class="code"><pre>Library.setProperty(<span class="java&#45;quote">"org.zkoss.theme.preferred"</span>, <span class="java&#45;quote">"classicblue"</span>)
+Executions.sendRedirect(<span class="java&#45;keyword">null</span>)</pre></div><p class="paragraph"/><h3>Retrieve web app supported theme names</h3>
+<div class="code"><pre><span class="java&#45;object">String</span> names = Library.getProperty(<span class="java&#45;quote">"org.zkoss.theme.names"</span>);</pre></div><p class="paragraph"/><h3>Reference</h3>
+<a href="http://code.google.com/p/zkthemes/wiki/GetStarted" target="blank">ZK Themes GetStarted</a><h2><a name="8.3 ZK Extensions Component">8.3 ZK Extensions Component</a></h2>You can extends the org.grails.plugins.zkui.AbstractTagLib implement the Extensions Component's Taglib same as:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> org.grails.plugins.zkui.AbstractTagLib<p class="paragraph"/>class CalendarsTagLib <span class="java&#45;keyword">extends</span> AbstractTagLib &#123;
+    <span class="java&#45;keyword">static</span> namespace = <span class="java&#45;quote">"z"</span><p class="paragraph"/>    def calendars = &#123; attrs, body &#45;&#62;
+        doTag(attrs, body, <span class="java&#45;quote">"calendars"</span>)
+    &#125;<p class="paragraph"/>&#125;</pre></div><p class="paragraph"/>
+and put the Calendar jar to <code>lib</code>
+    </body>
+</html>
