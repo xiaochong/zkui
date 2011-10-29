@@ -73,7 +73,12 @@ class ComposerHandler implements GrailsApplicationAware {
         def context = grailsApplication.mainContext
         def containsBean = context.containsBean(o)
         if (containsBean) {
-            return new GrailsComposerWrapper(context.getBean(o))
+            def bean = context.getBean(o)
+            if (bean instanceof Composer) {
+                return bean
+            } else {
+                return new GrailsComposerWrapper(bean)
+            }
         } else {
             return Classes.newInstanceByThread(((String) o).trim())
         }
