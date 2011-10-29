@@ -3,9 +3,10 @@ package org.grails.plugins.zkui
 import javax.servlet.ServletContext
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
-import org.grails.plugins.zkui.PageRenderer
 import org.grails.plugins.zkui.util.ComponentUtil
 import org.grails.plugins.zkui.util.InlineUtils
+import org.springframework.context.ApplicationContext
+import org.springframework.context.ApplicationContextAware
 import org.zkoss.web.servlet.http.Https
 import org.zkoss.zk.ui.http.ExecutionImpl
 import org.zkoss.zk.ui.http.I18Ns
@@ -17,8 +18,6 @@ import org.zkoss.zk.ui.metainfo.PageDefinitions
 import org.zkoss.zk.ui.metainfo.ZScript
 import org.zkoss.zk.ui.*
 import org.zkoss.zk.ui.sys.*
-import org.springframework.context.ApplicationContextAware
-import org.springframework.context.ApplicationContext
 
 abstract class AbstractTagLib implements ApplicationContextAware {
     ApplicationContext applicationContext
@@ -56,7 +55,7 @@ abstract class AbstractTagLib implements ApplicationContextAware {
         }.each {String attrName, value ->
             if (attrName.startsWith("on")) {
                 final ZScript zScript = ZScript.parseContent(value.toString())
-                ((ComponentCtrl) component).addEventHandler(attrName, new EventHandler(zScript, null))
+                ((ComponentCtrl) component).addEventHandler(attrName, new EventHandler(null, zScript, null))
             } else if (attrName.startsWith("client_")) {
                 component.setWidgetListener(attrName.toString().replaceFirst("client_", ''), value.toString())
             } else {
@@ -121,12 +120,12 @@ abstract class AbstractTagLib implements ApplicationContextAware {
                 }
             }
             exec.setAttribute(Attributes.PAGE_REDRAW_CONTROL, "page")
-            exec.setAttribute(Attributes.PAGE_RENDERER, new PageRenderer());
+            exec.setAttribute(Attributes.PAGE_RENDERER, new org.grails.plugins.zkui.PageRenderer())
             try {
                 wappc.getUiEngine().execNewPage(exec, richlet, page, out)
             } finally {
-                exec.removeAttribute(Attributes.PAGE_REDRAW_CONTROL);
-                exec.removeAttribute(Attributes.PAGE_RENDERER);
+                exec.removeAttribute(Attributes.PAGE_REDRAW_CONTROL)
+                exec.removeAttribute(Attributes.PAGE_RENDERER)
             }
         } finally {
             SessionsCtrl.setCurrent((Session) null)
