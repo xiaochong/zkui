@@ -13,6 +13,8 @@ import org.zkoss.zk.ui.metainfo.ComponentInfo
 import org.zkoss.zk.ui.sys.ComponentsCtrl
 import org.zkoss.zk.ui.util.Composer
 import org.zkoss.zk.ui.util.ComposerExt
+import org.zkoss.zk.ui.select.Selectors
+import org.zkoss.zk.ui.IdSpace
 
 class GrailsComposerWrapper implements Composer, ComposerExt, EventListener {
     public static final char SEPARATOR = '_' as char
@@ -65,6 +67,8 @@ class GrailsComposerWrapper implements Composer, ComposerExt, EventListener {
         Components.wireVariables(comp, controller,'#' as char )
         Components.addForwards(comp, controller, SEPARATOR)
         this.bindComponent(comp)
+        this.autowire(comp)
+        Selectors.wireEventListeners(comp, controller)
         controller.afterCompose(comp)
     }
 
@@ -74,14 +78,24 @@ class GrailsComposerWrapper implements Composer, ComposerExt, EventListener {
     }
 
     public void doBeforeComposeChildren(Component comp) throws Exception {
-        Components.wireController(comp, controller)
+//        Components.wireController(comp, controller)
+        Selectors.wireController(comp, controller)
     }
 
     public boolean doCatch(Throwable ex) throws Exception {
-        return false;
+        return false
     }
 
     public void doFinally() throws Exception {
         //do nothing
+    }
+
+    // helper //
+    private void autowire(Component comp) {
+        IdSpace spaceOwner = comp.getSpaceOwner()
+        if (spaceOwner instanceof Page)
+            Selectors.wireVariables((Page) spaceOwner, controller)
+        else
+            Selectors.wireVariables((Component) spaceOwner, controller)
     }
 }
