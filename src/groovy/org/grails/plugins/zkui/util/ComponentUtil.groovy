@@ -47,7 +47,7 @@ class ComponentUtil {
             // test if this attribute is an annotation...
             if (isAnnotation(attval)) { //annotation
                 AnnotationHelper helper = new AnnotationHelper();
-                helper.addByCompoundValue(attval.substring(2, attval.length() - 1));
+                helper.addByCompoundValue(attval);
                 helper.applyAnnotations(target, "self".equals(attnm) ? null : attnm, true);
             }
             else if (target.getDefinition().isMacro())
@@ -59,9 +59,6 @@ class ComponentUtil {
     }
 
     static boolean isAnnotation(String attval) {
-        final int len = attval.length();
-        return (len >= 3 && attval.charAt(0) == '@' &&
-                attval.charAt(1) == '{' &&
-                attval.charAt(len - 1) == '}');
+        return attval.startsWith('@');
     }
 }
