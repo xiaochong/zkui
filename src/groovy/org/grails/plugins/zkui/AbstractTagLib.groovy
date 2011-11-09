@@ -54,8 +54,12 @@ abstract class AbstractTagLib implements ApplicationContextAware {
             it.value != null
         }.each {String attrName, value ->
             if (attrName.startsWith("on")) {
-                final ZScript zScript = ZScript.parseContent(value.toString())
-                ((ComponentCtrl) component).addEventHandler(attrName, new EventHandler(null, zScript, null))
+                if (ComponentUtil.isAnnotation(value)) {
+                    ComponentUtil.evaluateDynaAttribute(component, attrName, value)
+                } else {
+                    final ZScript zScript = ZScript.parseContent(value.toString())
+                    ((ComponentCtrl) component).addEventHandler(attrName, new EventHandler(null, zScript, null))
+                }
             } else if (attrName.startsWith("client_")) {
                 component.setWidgetListener(attrName.toString().replaceFirst("client_", ''), value.toString())
             } else {
