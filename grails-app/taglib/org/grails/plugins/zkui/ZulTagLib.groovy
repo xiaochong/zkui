@@ -42,6 +42,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
@@ -53,8 +54,167 @@ class ZulTagLib extends AbstractTagLib {
      * @attr onClientInfo
      */
     def a = { attrs, body ->
-        true || attrs.dir || attrs.href || attrs.target || attrs.tabindex || attrs.disabled || attrs.image || attrs.imageContent || attrs.hoverImage || attrs.hoverImageContent || attrs.label || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onDoubleClick || attrs.onClick || attrs.onRightClick || attrs.onBookmarkChange || attrs.onClientInfo
+        true || attrs.dir || attrs.href || attrs.target || attrs.tabindex || attrs.disabled || attrs.image || attrs.imageContent || attrs.hoverImage || attrs.hoverImageContent || attrs.label || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onDoubleClick || attrs.onClick || attrs.onRightClick || attrs.onBookmarkChange || attrs.onClientInfo
         doTag(attrs, body, "a")
+    }
+
+    /**
+     *
+     * @attr x
+     * @attr y
+     * @attr context
+     * @attr popup
+     * @attr tooltip
+     * @attr onCtrlKey
+     * @attr ctrlKeys
+     * @attr width
+     * @attr height
+     * @attr sclass
+     * @attr zclass
+     * @attr style
+     * @attr left
+     * @attr top
+     * @attr draggable
+     * @attr droppable
+     * @attr focus
+     * @attr tooltiptext
+     * @attr zindex
+     * @attr renderdefer
+     * @attr onCreate
+     * @attr onDrop
+     * @attr action
+     * @attr hflex
+     * @attr vflex
+     * @attr id
+     * @attr visible
+     * @attr mold
+     * @attr autag
+     * @attr onFulfill
+     * @attr auService
+     * @attr stubonly
+     * @attr apply
+     */
+    def absolutechildren = { attrs, body ->
+        true || attrs.x || attrs.y || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
+        doTag(attrs, body, "absolutechildren")
+    }
+
+    /**
+     *
+     * @attr context
+     * @attr popup
+     * @attr tooltip
+     * @attr onCtrlKey
+     * @attr ctrlKeys
+     * @attr width
+     * @attr height
+     * @attr sclass
+     * @attr zclass
+     * @attr style
+     * @attr left
+     * @attr top
+     * @attr draggable
+     * @attr droppable
+     * @attr focus
+     * @attr tooltiptext
+     * @attr zindex
+     * @attr renderdefer
+     * @attr onCreate
+     * @attr onDrop
+     * @attr action
+     * @attr hflex
+     * @attr vflex
+     * @attr id
+     * @attr visible
+     * @attr mold
+     * @attr autag
+     * @attr onFulfill
+     * @attr auService
+     * @attr stubonly
+     * @attr apply
+     */
+    def absolutelayout = { attrs, body ->
+        true || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
+        doTag(attrs, body, "absolutelayout")
+    }
+
+    /**
+     *
+     * @attr anchor
+     * @attr context
+     * @attr popup
+     * @attr tooltip
+     * @attr onCtrlKey
+     * @attr ctrlKeys
+     * @attr width
+     * @attr height
+     * @attr sclass
+     * @attr zclass
+     * @attr style
+     * @attr left
+     * @attr top
+     * @attr draggable
+     * @attr droppable
+     * @attr focus
+     * @attr tooltiptext
+     * @attr zindex
+     * @attr renderdefer
+     * @attr onCreate
+     * @attr onDrop
+     * @attr action
+     * @attr hflex
+     * @attr vflex
+     * @attr id
+     * @attr visible
+     * @attr mold
+     * @attr autag
+     * @attr onFulfill
+     * @attr auService
+     * @attr stubonly
+     * @attr apply
+     */
+    def anchorchildren = { attrs, body ->
+        true || attrs.anchor || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
+        doTag(attrs, body, "anchorchildren")
+    }
+
+    /**
+     *
+     * @attr context
+     * @attr popup
+     * @attr tooltip
+     * @attr onCtrlKey
+     * @attr ctrlKeys
+     * @attr width
+     * @attr height
+     * @attr sclass
+     * @attr zclass
+     * @attr style
+     * @attr left
+     * @attr top
+     * @attr draggable
+     * @attr droppable
+     * @attr focus
+     * @attr tooltiptext
+     * @attr zindex
+     * @attr renderdefer
+     * @attr onCreate
+     * @attr onDrop
+     * @attr action
+     * @attr hflex
+     * @attr vflex
+     * @attr id
+     * @attr visible
+     * @attr mold
+     * @attr autag
+     * @attr onFulfill
+     * @attr auService
+     * @attr stubonly
+     * @attr apply
+     */
+    def anchorlayout = { attrs, body ->
+        true || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
+        doTag(attrs, body, "anchorlayout")
     }
 
     /**
@@ -88,13 +248,14 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
      * @attr apply
      */
     def applet = { attrs, body ->
-        true || attrs.code || attrs.codebase || attrs.archive || attrs.align || attrs.hspace || attrs.vspace || attrs.mayscript || attrs.params || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
+        true || attrs.code || attrs.codebase || attrs.archive || attrs.align || attrs.hspace || attrs.vspace || attrs.mayscript || attrs.params || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
         doTag(attrs, body, "applet")
     }
 
@@ -106,13 +267,14 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
      * @attr apply
      */
     def area = { attrs, body ->
-        true || attrs.shape || attrs.coords || attrs.tooltiptext || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
+        true || attrs.shape || attrs.coords || attrs.tooltiptext || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
         doTag(attrs, body, "area")
     }
 
@@ -148,6 +310,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
@@ -156,7 +319,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr onClientInfo
      */
     def audio = { attrs, body ->
-        true || attrs.align || attrs.border || attrs.src || attrs.autostart || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onBookmarkChange || attrs.onClientInfo
+        true || attrs.align || attrs.border || attrs.src || attrs.autostart || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onBookmarkChange || attrs.onClientInfo
         doTag(attrs, body, "audio")
     }
 
@@ -188,13 +351,14 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
      * @attr apply
      */
     def auxhead = { attrs, body ->
-        true || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
+        true || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
         doTag(attrs, body, "auxhead")
     }
 
@@ -235,6 +399,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
@@ -244,7 +409,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr onRightClick
      */
     def auxheader = { attrs, body ->
-        true || attrs.colspan || attrs.rowspan || attrs.align || attrs.valign || attrs.image || attrs.imageContent || attrs.hoverImage || attrs.hoverImageContent || attrs.label || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onDoubleClick || attrs.onClick || attrs.onRightClick
+        true || attrs.colspan || attrs.rowspan || attrs.align || attrs.valign || attrs.image || attrs.imageContent || attrs.hoverImage || attrs.hoverImageContent || attrs.label || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onDoubleClick || attrs.onClick || attrs.onRightClick
         doTag(attrs, body, "auxheader")
     }
 
@@ -296,6 +461,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
@@ -304,7 +470,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr onClientInfo
      */
     def bandbox = { attrs, body ->
-        true || attrs.autodrop || attrs.buttonVisible || attrs.constraint || attrs.value || attrs.type || attrs.open || attrs.onOpen || attrs.name || attrs.disabled || attrs.readonly || attrs.inplace || attrs.maxlength || attrs.cols || attrs.tabindex || attrs.onChange || attrs.onChanging || attrs.onFocus || attrs.onBlur || attrs.onOK || attrs.onCancel || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onBookmarkChange || attrs.onClientInfo
+        true || attrs.autodrop || attrs.buttonVisible || attrs.constraint || attrs.value || attrs.type || attrs.open || attrs.onOpen || attrs.name || attrs.disabled || attrs.readonly || attrs.inplace || attrs.maxlength || attrs.cols || attrs.tabindex || attrs.onChange || attrs.onChanging || attrs.onFocus || attrs.onBlur || attrs.onOK || attrs.onCancel || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onBookmarkChange || attrs.onClientInfo
         doTag(attrs, body, "bandbox")
     }
 
@@ -336,13 +502,14 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
      * @attr apply
      */
     def bandpopup = { attrs, body ->
-        true || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
+        true || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
         doTag(attrs, body, "bandpopup")
     }
 
@@ -370,13 +537,14 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
      * @attr apply
      */
     def borderlayout = { attrs, body ->
-        true || attrs.animationDisabled || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
+        true || attrs.animationDisabled || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
         doTag(attrs, body, "borderlayout")
     }
 
@@ -415,6 +583,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
@@ -423,7 +592,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr onClientInfo
      */
     def box = { attrs, body ->
-        true || attrs.orient || attrs.spacing || attrs.widths || attrs.heights || attrs.align || attrs.pack || attrs.sizedByContent || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onBookmarkChange || attrs.onClientInfo
+        true || attrs.orient || attrs.spacing || attrs.widths || attrs.heights || attrs.align || attrs.pack || attrs.sizedByContent || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onBookmarkChange || attrs.onClientInfo
         doTag(attrs, body, "box")
     }
 
@@ -468,6 +637,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
@@ -479,7 +649,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr onClientInfo
      */
     def button = { attrs, body ->
-        true || attrs.orient || attrs.dir || attrs.type || attrs.href || attrs.target || attrs.disabled || attrs.autodisable || attrs.tabindex || attrs.image || attrs.imageContent || attrs.hoverImage || attrs.hoverImageContent || attrs.label || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onDoubleClick || attrs.onClick || attrs.onRightClick || attrs.onBookmarkChange || attrs.onClientInfo
+        true || attrs.orient || attrs.dir || attrs.type || attrs.href || attrs.target || attrs.disabled || attrs.autodisable || attrs.tabindex || attrs.image || attrs.imageContent || attrs.hoverImage || attrs.hoverImageContent || attrs.label || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onDoubleClick || attrs.onClick || attrs.onRightClick || attrs.onBookmarkChange || attrs.onClientInfo
         doTag(attrs, body, "button")
     }
 
@@ -514,6 +684,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
@@ -522,7 +693,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr onClientInfo
      */
     def calendar = { attrs, body ->
-        true || attrs.name || attrs.value || attrs.onChange || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onBookmarkChange || attrs.onClientInfo
+        true || attrs.name || attrs.value || attrs.onChange || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onBookmarkChange || attrs.onClientInfo
         doTag(attrs, body, "calendar")
     }
 
@@ -569,6 +740,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
@@ -577,7 +749,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr onClientInfo
      */
     def calendars = { attrs, body ->
-        true || attrs.days || attrs.beginTime || attrs.endTime || attrs.timeslots || attrs.model || attrs.firstDayOfWeek || attrs.weekOfYear || attrs.dateFormatter || attrs.readonly || attrs.timeZone || attrs.onEventCreate || attrs.onEventEdit || attrs.onEventUpdate || attrs.onDayClick || attrs.onWeekClick || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onBookmarkChange || attrs.onClientInfo
+        true || attrs.days || attrs.beginTime || attrs.endTime || attrs.timeslots || attrs.model || attrs.firstDayOfWeek || attrs.weekOfYear || attrs.dateFormatter || attrs.readonly || attrs.timeZone || attrs.onEventCreate || attrs.onEventEdit || attrs.onEventUpdate || attrs.onDayClick || attrs.onWeekClick || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onBookmarkChange || attrs.onClientInfo
         doTag(attrs, body, "calendars")
     }
 
@@ -614,6 +786,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
@@ -623,7 +796,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr onRightClick
      */
     def caption = { attrs, body ->
-        true || attrs.image || attrs.imageContent || attrs.hoverImage || attrs.hoverImageContent || attrs.label || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onDoubleClick || attrs.onClick || attrs.onRightClick
+        true || attrs.image || attrs.imageContent || attrs.hoverImage || attrs.hoverImageContent || attrs.label || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onDoubleClick || attrs.onClick || attrs.onRightClick
         doTag(attrs, body, "caption")
     }
 
@@ -659,13 +832,14 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
      * @attr apply
      */
     def cell = { attrs, body ->
-        true || attrs.colspan || attrs.rowspan || attrs.align || attrs.valign || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
+        true || attrs.colspan || attrs.rowspan || attrs.align || attrs.valign || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
         doTag(attrs, body, "cell")
     }
 
@@ -703,22 +877,19 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
      * @attr apply
      */
     def center = { attrs, body ->
-        true || attrs.flex || attrs.margins || attrs.autoscroll || attrs.border || attrs.onOpen || attrs.title || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
+        true || attrs.flex || attrs.margins || attrs.autoscroll || attrs.border || attrs.onOpen || attrs.title || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
         doTag(attrs, body, "center")
     }
 
     /**
      *
-     * @attr border
-     * @attr align
-     * @attr hspace
-     * @attr vspace
      * @attr type
      * @attr model
      * @attr title
@@ -762,6 +933,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
@@ -772,7 +944,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr onClientInfo
      */
     def chart = { attrs, body ->
-        true || attrs.border || attrs.align || attrs.hspace || attrs.vspace || attrs.type || attrs.model || attrs.title || attrs.xAxis || attrs.yAxis || attrs.threeD || attrs.showLegend || attrs.showTooltiptext || attrs.paneAlpha || attrs.paneColor || attrs.fgAlpha || attrs.bgAlpha || attrs.bgColor || attrs.orient || attrs.timeZone || attrs.period || attrs.areaListener || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onClick || attrs.onRightClick || attrs.onBookmarkChange || attrs.onClientInfo
+        true || attrs.type || attrs.model || attrs.title || attrs.xAxis || attrs.yAxis || attrs.threeD || attrs.showLegend || attrs.showTooltiptext || attrs.paneAlpha || attrs.paneColor || attrs.fgAlpha || attrs.bgAlpha || attrs.bgColor || attrs.orient || attrs.timeZone || attrs.period || attrs.areaListener || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onClick || attrs.onRightClick || attrs.onBookmarkChange || attrs.onClientInfo
         doTag(attrs, body, "chart")
     }
 
@@ -815,6 +987,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
@@ -826,7 +999,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr onClientInfo
      */
     def checkbox = { attrs, body ->
-        true || attrs.name || attrs.checked || attrs.disabled || attrs.tabindex || attrs.onCheck || attrs.value || attrs.image || attrs.imageContent || attrs.hoverImage || attrs.hoverImageContent || attrs.label || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onDoubleClick || attrs.onClick || attrs.onRightClick || attrs.onBookmarkChange || attrs.onClientInfo
+        true || attrs.name || attrs.checked || attrs.disabled || attrs.tabindex || attrs.onCheck || attrs.value || attrs.image || attrs.imageContent || attrs.hoverImage || attrs.hoverImageContent || attrs.label || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onDoubleClick || attrs.onClick || attrs.onRightClick || attrs.onBookmarkChange || attrs.onClientInfo
         doTag(attrs, body, "checkbox")
     }
 
@@ -885,6 +1058,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
@@ -894,7 +1068,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr onRightClick
      */
     def column = { attrs, body ->
-        true || attrs.sort || attrs.sortDirection || attrs.sortAscending || attrs.sortDescending || attrs.onSort || attrs.value || attrs.align || attrs.valign || attrs.image || attrs.imageContent || attrs.hoverImage || attrs.hoverImageContent || attrs.label || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onDoubleClick || attrs.onClick || attrs.onRightClick
+        true || attrs.sort || attrs.sortDirection || attrs.sortAscending || attrs.sortDescending || attrs.onSort || attrs.value || attrs.align || attrs.valign || attrs.image || attrs.imageContent || attrs.hoverImage || attrs.hoverImageContent || attrs.label || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onDoubleClick || attrs.onClick || attrs.onRightClick
         doTag(attrs, body, "column")
     }
 
@@ -926,13 +1100,14 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
      * @attr apply
      */
     def columnchildren = { attrs, body ->
-        true || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
+        true || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
         doTag(attrs, body, "columnchildren")
     }
 
@@ -964,13 +1139,14 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
      * @attr apply
      */
     def columnlayout = { attrs, body ->
-        true || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
+        true || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
         doTag(attrs, body, "columnlayout")
     }
 
@@ -1004,13 +1180,14 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
      * @attr apply
      */
     def columns = { attrs, body ->
-        true || attrs.sizable || attrs.value || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
+        true || attrs.sizable || attrs.value || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
         doTag(attrs, body, "columns")
     }
 
@@ -1068,6 +1245,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
@@ -1076,7 +1254,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr onClientInfo
      */
     def combobox = { attrs, body ->
-        true || attrs.autocomplete || attrs.autodrop || attrs.buttonVisible || attrs.constraint || attrs.value || attrs.model || attrs.itemRenderer || attrs.type || attrs.open || attrs.selectedItem || attrs.selectedIndex || attrs.onOpen || attrs.onSelect || attrs.name || attrs.disabled || attrs.readonly || attrs.inplace || attrs.maxlength || attrs.cols || attrs.tabindex || attrs.onChange || attrs.onChanging || attrs.onFocus || attrs.onBlur || attrs.onOK || attrs.onCancel || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onBookmarkChange || attrs.onClientInfo
+        true || attrs.autocomplete || attrs.autodrop || attrs.buttonVisible || attrs.constraint || attrs.value || attrs.model || attrs.itemRenderer || attrs.type || attrs.open || attrs.selectedItem || attrs.selectedIndex || attrs.onOpen || attrs.onSelect || attrs.name || attrs.disabled || attrs.readonly || attrs.inplace || attrs.maxlength || attrs.cols || attrs.tabindex || attrs.onChange || attrs.onChanging || attrs.onFocus || attrs.onBlur || attrs.onOK || attrs.onCancel || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onBookmarkChange || attrs.onClientInfo
         doTag(attrs, body, "combobox")
     }
 
@@ -1117,6 +1295,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
@@ -1126,8 +1305,65 @@ class ZulTagLib extends AbstractTagLib {
      * @attr onRightClick
      */
     def comboitem = { attrs, body ->
-        true || attrs.description || attrs.value || attrs.content || attrs.disabled || attrs.image || attrs.imageContent || attrs.hoverImage || attrs.hoverImageContent || attrs.label || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onDoubleClick || attrs.onClick || attrs.onRightClick
+        true || attrs.description || attrs.value || attrs.content || attrs.disabled || attrs.image || attrs.imageContent || attrs.hoverImage || attrs.hoverImageContent || attrs.label || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onDoubleClick || attrs.onClick || attrs.onRightClick
         doTag(attrs, body, "comboitem")
+    }
+
+    /**
+     *
+     * @attr orient
+     * @attr dir
+     * @attr type
+     * @attr href
+     * @attr target
+     * @attr disabled
+     * @attr autodisable
+     * @attr tabindex
+     * @attr image
+     * @attr imageContent
+     * @attr hoverImage
+     * @attr hoverImageContent
+     * @attr label
+     * @attr context
+     * @attr popup
+     * @attr tooltip
+     * @attr onCtrlKey
+     * @attr ctrlKeys
+     * @attr width
+     * @attr height
+     * @attr sclass
+     * @attr zclass
+     * @attr style
+     * @attr left
+     * @attr top
+     * @attr draggable
+     * @attr droppable
+     * @attr focus
+     * @attr tooltiptext
+     * @attr zindex
+     * @attr renderdefer
+     * @attr onCreate
+     * @attr onDrop
+     * @attr action
+     * @attr hflex
+     * @attr vflex
+     * @attr id
+     * @attr visible
+     * @attr mold
+     * @attr autag
+     * @attr onFulfill
+     * @attr auService
+     * @attr stubonly
+     * @attr apply
+     * @attr onDoubleClick
+     * @attr onClick
+     * @attr onRightClick
+     * @attr onBookmarkChange
+     * @attr onClientInfo
+     */
+    def combobutton = { attrs, body ->
+        true || attrs.orient || attrs.dir || attrs.type || attrs.href || attrs.target || attrs.disabled || attrs.autodisable || attrs.tabindex || attrs.image || attrs.imageContent || attrs.hoverImage || attrs.hoverImageContent || attrs.label || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onDoubleClick || attrs.onClick || attrs.onRightClick || attrs.onBookmarkChange || attrs.onClientInfo
+        doTag(attrs, body, "combobutton")
     }
 
     /**
@@ -1180,6 +1416,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
@@ -1188,7 +1425,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr onClientInfo
      */
     def datebox = { attrs, body ->
-        true || attrs.constraint || attrs.value || attrs.lenient || attrs.buttonVisible || attrs.open || attrs.displayedTimeZones || attrs.timeZonesReadonly || attrs.locale || attrs.format || attrs.name || attrs.disabled || attrs.readonly || attrs.inplace || attrs.maxlength || attrs.cols || attrs.tabindex || attrs.onChange || attrs.onChanging || attrs.onFocus || attrs.onBlur || attrs.onOK || attrs.onCancel || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onBookmarkChange || attrs.onClientInfo
+        true || attrs.constraint || attrs.value || attrs.lenient || attrs.buttonVisible || attrs.open || attrs.displayedTimeZones || attrs.timeZonesReadonly || attrs.locale || attrs.format || attrs.name || attrs.disabled || attrs.readonly || attrs.inplace || attrs.maxlength || attrs.cols || attrs.tabindex || attrs.onChange || attrs.onChanging || attrs.onFocus || attrs.onBlur || attrs.onOK || attrs.onCancel || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onBookmarkChange || attrs.onClientInfo
         doTag(attrs, body, "datebox")
     }
 
@@ -1239,6 +1476,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
@@ -1247,7 +1485,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr onClientInfo
      */
     def decimalbox = { attrs, body ->
-        true || attrs.constraint || attrs.value || attrs.scale || attrs.roundingMode || attrs.locale || attrs.format || attrs.name || attrs.disabled || attrs.readonly || attrs.inplace || attrs.maxlength || attrs.cols || attrs.tabindex || attrs.onChange || attrs.onChanging || attrs.onFocus || attrs.onBlur || attrs.onOK || attrs.onCancel || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onBookmarkChange || attrs.onClientInfo
+        true || attrs.constraint || attrs.value || attrs.scale || attrs.roundingMode || attrs.locale || attrs.format || attrs.name || attrs.disabled || attrs.readonly || attrs.inplace || attrs.maxlength || attrs.cols || attrs.tabindex || attrs.onChange || attrs.onChanging || attrs.onFocus || attrs.onBlur || attrs.onOK || attrs.onCancel || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onBookmarkChange || attrs.onClientInfo
         doTag(attrs, body, "decimalbox")
     }
 
@@ -1282,19 +1520,19 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
      * @attr apply
      */
     def detail = { attrs, body ->
-        true || attrs.contentStyle || attrs.image || attrs.open || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
+        true || attrs.contentStyle || attrs.image || attrs.open || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
         doTag(attrs, body, "detail")
     }
 
     /**
      *
-     * @attr align
      * @attr context
      * @attr popup
      * @attr tooltip
@@ -1321,6 +1559,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
@@ -1332,7 +1571,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr onClientInfo
      */
     def div = { attrs, body ->
-        true || attrs.align || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onDoubleClick || attrs.onClick || attrs.onRightClick || attrs.onBookmarkChange || attrs.onClientInfo
+        true || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onDoubleClick || attrs.onClick || attrs.onRightClick || attrs.onBookmarkChange || attrs.onClientInfo
         doTag(attrs, body, "div")
     }
 
@@ -1382,6 +1621,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
@@ -1390,7 +1630,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr onClientInfo
      */
     def doublebox = { attrs, body ->
-        true || attrs.constraint || attrs.value || attrs.roundingMode || attrs.locale || attrs.format || attrs.name || attrs.disabled || attrs.readonly || attrs.inplace || attrs.maxlength || attrs.cols || attrs.tabindex || attrs.onChange || attrs.onChanging || attrs.onFocus || attrs.onBlur || attrs.onOK || attrs.onCancel || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onBookmarkChange || attrs.onClientInfo
+        true || attrs.constraint || attrs.value || attrs.roundingMode || attrs.locale || attrs.format || attrs.name || attrs.disabled || attrs.readonly || attrs.inplace || attrs.maxlength || attrs.cols || attrs.tabindex || attrs.onChange || attrs.onChanging || attrs.onFocus || attrs.onBlur || attrs.onOK || attrs.onCancel || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onBookmarkChange || attrs.onClientInfo
         doTag(attrs, body, "doublebox")
     }
 
@@ -1442,6 +1682,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
@@ -1450,7 +1691,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr onClientInfo
      */
     def doublespinner = { attrs, body ->
-        true || attrs.constraint || attrs.buttonVisible || attrs.step || attrs.value || attrs.roundingMode || attrs.locale || attrs.format || attrs.name || attrs.disabled || attrs.readonly || attrs.inplace || attrs.maxlength || attrs.cols || attrs.tabindex || attrs.onChange || attrs.onChanging || attrs.onFocus || attrs.onBlur || attrs.onOK || attrs.onCancel || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onBookmarkChange || attrs.onClientInfo
+        true || attrs.constraint || attrs.buttonVisible || attrs.step || attrs.value || attrs.roundingMode || attrs.locale || attrs.format || attrs.name || attrs.disabled || attrs.readonly || attrs.inplace || attrs.maxlength || attrs.cols || attrs.tabindex || attrs.onChange || attrs.onChanging || attrs.onFocus || attrs.onBlur || attrs.onOK || attrs.onCancel || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onBookmarkChange || attrs.onClientInfo
         doTag(attrs, body, "doublespinner")
     }
 
@@ -1494,13 +1735,14 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
      * @attr apply
      */
     def east = { attrs, body ->
-        true || attrs.flex || attrs.size || attrs.splittable || attrs.collapsible || attrs.margins || attrs.open || attrs.autoscroll || attrs.border || attrs.maxsize || attrs.minsize || attrs.onOpen || attrs.title || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
+        true || attrs.flex || attrs.size || attrs.splittable || attrs.collapsible || attrs.margins || attrs.open || attrs.autoscroll || attrs.border || attrs.maxsize || attrs.minsize || attrs.onOpen || attrs.title || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
         doTag(attrs, body, "east")
     }
 
@@ -1529,13 +1771,14 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
      * @attr apply
      */
     def fileupload = { attrs, body ->
-        true || attrs.native || attrs.number || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
+        true || attrs.native || attrs.number || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
         doTag(attrs, body, "fileupload")
     }
 
@@ -1571,13 +1814,14 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
      * @attr apply
      */
     def fisheye = { attrs, body ->
-        true || attrs.label || attrs.image || attrs.imageContent || attrs.onClick || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
+        true || attrs.label || attrs.image || attrs.imageContent || attrs.onClick || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
         doTag(attrs, body, "fisheye")
     }
 
@@ -1619,13 +1863,14 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
      * @attr apply
      */
     def fisheyebar = { attrs, body ->
-        true || attrs.itemWidth || attrs.itemHeight || attrs.itemMaxWidth || attrs.itemMaxHeight || attrs.itemPadding || attrs.orient || attrs.attachEdge || attrs.labelEdge || attrs.onChildAdded || attrs.onChildRemoved || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
+        true || attrs.itemWidth || attrs.itemHeight || attrs.itemMaxWidth || attrs.itemMaxHeight || attrs.itemPadding || attrs.orient || attrs.attachEdge || attrs.labelEdge || attrs.onChildAdded || attrs.onChildRemoved || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
         doTag(attrs, body, "fisheyebar")
     }
 
@@ -1658,13 +1903,14 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
      * @attr apply
      */
     def flashes = { attrs, body ->
-        true || attrs.bgcolor || attrs.loop || attrs.autoplay || attrs.wmode || attrs.src || attrs.content || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
+        true || attrs.bgcolor || attrs.loop || attrs.autoplay || attrs.wmode || attrs.src || attrs.content || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
         doTag(attrs, body, "flash")
     }
 
@@ -1696,13 +1942,14 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
      * @attr apply
      */
     def flashchart = { attrs, body ->
-        true || attrs.type || attrs.model || attrs.xAxis || attrs.yAxis || attrs.chartStyle || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
+        true || attrs.type || attrs.model || attrs.xAxis || attrs.yAxis || attrs.chartStyle || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
         doTag(attrs, body, "flashchart")
     }
 
@@ -1744,6 +1991,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
@@ -1752,7 +2000,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr onClientInfo
      */
     def fusionchart = { attrs, body ->
-        true || attrs.type || attrs.model || attrs.tableModel || attrs.chartConfig || attrs.tableRenderer || attrs.engine || attrs.dataXMLPath || attrs.title || attrs.subTitle || attrs.xAxis || attrs.yAxis || attrs.threeD || attrs.showLegend || attrs.orient || attrs.onClick || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onBookmarkChange || attrs.onClientInfo
+        true || attrs.type || attrs.model || attrs.tableModel || attrs.chartConfig || attrs.tableRenderer || attrs.engine || attrs.dataXMLPath || attrs.title || attrs.subTitle || attrs.xAxis || attrs.yAxis || attrs.threeD || attrs.showLegend || attrs.orient || attrs.onClick || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onBookmarkChange || attrs.onClientInfo
         doTag(attrs, body, "fusionchart")
     }
 
@@ -1784,18 +2032,21 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
      * @attr apply
      */
     def foot = { attrs, body ->
-        true || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
+        true || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
         doTag(attrs, body, "foot")
     }
 
     /**
      *
+     * @attr align
+     * @attr valign
      * @attr span
      * @attr image
      * @attr imageContent
@@ -1828,6 +2079,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
@@ -1837,7 +2089,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr onRightClick
      */
     def footer = { attrs, body ->
-        true || attrs.span || attrs.image || attrs.imageContent || attrs.hoverImage || attrs.hoverImageContent || attrs.label || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onDoubleClick || attrs.onClick || attrs.onRightClick
+        true || attrs.align || attrs.valign || attrs.span || attrs.image || attrs.imageContent || attrs.hoverImage || attrs.hoverImageContent || attrs.label || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onDoubleClick || attrs.onClick || attrs.onRightClick
         doTag(attrs, body, "footer")
     }
 
@@ -1871,13 +2123,14 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
      * @attr apply
      */
     def frozen = { attrs, body ->
-        true || attrs.columns || attrs.start || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
+        true || attrs.columns || attrs.start || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
         doTag(attrs, body, "frozen")
     }
 
@@ -1920,6 +2173,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
@@ -1928,7 +2182,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr onClientInfo
      */
     def grid = { attrs, body ->
-        true || attrs.pageSize || attrs.paginal || attrs.model || attrs.rowRenderer || attrs.sizedByContent || attrs.oddRowSclass || attrs.onPaging || attrs.pagingPosition || attrs.innerWidth || attrs.autopaging || attrs.emptyMessage || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onBookmarkChange || attrs.onClientInfo
+        true || attrs.pageSize || attrs.paginal || attrs.model || attrs.rowRenderer || attrs.sizedByContent || attrs.oddRowSclass || attrs.onPaging || attrs.pagingPosition || attrs.innerWidth || attrs.autopaging || attrs.emptyMessage || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onBookmarkChange || attrs.onClientInfo
         doTag(attrs, body, "grid")
     }
 
@@ -1964,6 +2218,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
@@ -1975,7 +2230,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr onClientInfo
      */
     def groupbox = { attrs, body ->
-        true || attrs.open || attrs.closable || attrs.contentStyle || attrs.onOpen || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onDoubleClick || attrs.onClick || attrs.onRightClick || attrs.onBookmarkChange || attrs.onClientInfo
+        true || attrs.open || attrs.closable || attrs.contentStyle || attrs.onOpen || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onDoubleClick || attrs.onClick || attrs.onRightClick || attrs.onBookmarkChange || attrs.onClientInfo
         doTag(attrs, body, "groupbox")
     }
 
@@ -2014,13 +2269,14 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
      * @attr apply
      */
     def group = { attrs, body ->
-        true || attrs.align || attrs.nowrap || attrs.spans || attrs.valign || attrs.value || attrs.label || attrs.open || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
+        true || attrs.align || attrs.nowrap || attrs.spans || attrs.valign || attrs.value || attrs.label || attrs.open || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
         doTag(attrs, body, "group")
     }
 
@@ -2058,13 +2314,14 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
      * @attr apply
      */
     def groupfoot = { attrs, body ->
-        true || attrs.align || attrs.nowrap || attrs.spans || attrs.valign || attrs.value || attrs.label || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
+        true || attrs.align || attrs.nowrap || attrs.spans || attrs.valign || attrs.value || attrs.label || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
         doTag(attrs, body, "groupfoot")
     }
 
@@ -2101,6 +2358,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
@@ -2109,7 +2367,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr onClientInfo
      */
     def hbox = { attrs, body ->
-        true || attrs.spacing || attrs.widths || attrs.align || attrs.pack || attrs.sizedByContent || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onBookmarkChange || attrs.onClientInfo
+        true || attrs.spacing || attrs.widths || attrs.align || attrs.pack || attrs.sizedByContent || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onBookmarkChange || attrs.onClientInfo
         doTag(attrs, body, "hbox")
     }
 
@@ -2142,6 +2400,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
@@ -2150,7 +2409,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr onClientInfo
      */
     def hlayout = { attrs, body ->
-        true || attrs.spacing || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onBookmarkChange || attrs.onClientInfo
+        true || attrs.spacing || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onBookmarkChange || attrs.onClientInfo
         doTag(attrs, body, "hlayout")
     }
 
@@ -2183,6 +2442,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
@@ -2191,7 +2451,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr onClientInfo
      */
     def html = { attrs, body ->
-        true || attrs.content || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onBookmarkChange || attrs.onClientInfo
+        true || attrs.content || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onBookmarkChange || attrs.onClientInfo
         doTag(attrs, body, "html")
     }
 
@@ -2200,7 +2460,6 @@ class ZulTagLib extends AbstractTagLib {
      * @attr name
      * @attr src
      * @attr scrolling
-     * @attr align
      * @attr autohide
      * @attr onURIChange
      * @attr width
@@ -2224,6 +2483,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
@@ -2232,7 +2492,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr onClientInfo
      */
     def iframe = { attrs, body ->
-        true || attrs.name || attrs.src || attrs.scrolling || attrs.align || attrs.autohide || attrs.onURIChange || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onBookmarkChange || attrs.onClientInfo
+        true || attrs.name || attrs.src || attrs.scrolling || attrs.autohide || attrs.onURIChange || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onBookmarkChange || attrs.onClientInfo
         doTag(attrs, body, "iframe")
     }
 
@@ -2242,9 +2502,6 @@ class ZulTagLib extends AbstractTagLib {
      * @attr content
      * @attr hover
      * @attr hoverContent
-     * @attr align
-     * @attr hspace
-     * @attr vspace
      * @attr context
      * @attr popup
      * @attr tooltip
@@ -2271,6 +2528,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
@@ -2282,17 +2540,13 @@ class ZulTagLib extends AbstractTagLib {
      * @attr onClientInfo
      */
     def image = { attrs, body ->
-        true || attrs.src || attrs.content || attrs.hover || attrs.hoverContent || attrs.align || attrs.hspace || attrs.vspace || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onDoubleClick || attrs.onClick || attrs.onRightClick || attrs.onBookmarkChange || attrs.onClientInfo
+        true || attrs.src || attrs.content || attrs.hover || attrs.hoverContent || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onDoubleClick || attrs.onClick || attrs.onRightClick || attrs.onBookmarkChange || attrs.onClientInfo
         doTag(attrs, body, "image")
     }
 
     /**
      *
-     * @attr border
      * @attr src
-     * @attr align
-     * @attr hspace
-     * @attr vspace
      * @attr content
      * @attr context
      * @attr popup
@@ -2320,6 +2574,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
@@ -2330,7 +2585,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr onClientInfo
      */
     def imagemap = { attrs, body ->
-        true || attrs.border || attrs.src || attrs.align || attrs.hspace || attrs.vspace || attrs.content || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onClick || attrs.onRightClick || attrs.onBookmarkChange || attrs.onClientInfo
+        true || attrs.src || attrs.content || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onClick || attrs.onRightClick || attrs.onBookmarkChange || attrs.onClientInfo
         doTag(attrs, body, "imagemap")
     }
 
@@ -2367,6 +2622,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
@@ -2375,7 +2631,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr onClientInfo
      */
     def include = { attrs, body ->
-        true || attrs.src || attrs.localized || attrs.progressing || attrs.mode || attrs.comment || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onBookmarkChange || attrs.onClientInfo
+        true || attrs.src || attrs.localized || attrs.progressing || attrs.mode || attrs.comment || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onBookmarkChange || attrs.onClientInfo
         doTag(attrs, body, "include")
     }
 
@@ -2425,6 +2681,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
@@ -2433,7 +2690,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr onClientInfo
      */
     def intbox = { attrs, body ->
-        true || attrs.constraint || attrs.value || attrs.roundingMode || attrs.locale || attrs.format || attrs.name || attrs.disabled || attrs.readonly || attrs.inplace || attrs.maxlength || attrs.cols || attrs.tabindex || attrs.onChange || attrs.onChanging || attrs.onFocus || attrs.onBlur || attrs.onOK || attrs.onCancel || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onBookmarkChange || attrs.onClientInfo
+        true || attrs.constraint || attrs.value || attrs.roundingMode || attrs.locale || attrs.format || attrs.name || attrs.disabled || attrs.readonly || attrs.inplace || attrs.maxlength || attrs.cols || attrs.tabindex || attrs.onChange || attrs.onChanging || attrs.onFocus || attrs.onBlur || attrs.onOK || attrs.onCancel || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onBookmarkChange || attrs.onClientInfo
         doTag(attrs, body, "intbox")
     }
 
@@ -2483,6 +2740,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
@@ -2491,7 +2749,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr onClientInfo
      */
     def longbox = { attrs, body ->
-        true || attrs.constraint || attrs.value || attrs.roundingMode || attrs.locale || attrs.format || attrs.name || attrs.disabled || attrs.readonly || attrs.inplace || attrs.maxlength || attrs.cols || attrs.tabindex || attrs.onChange || attrs.onChanging || attrs.onFocus || attrs.onBlur || attrs.onOK || attrs.onCancel || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onBookmarkChange || attrs.onClientInfo
+        true || attrs.constraint || attrs.value || attrs.roundingMode || attrs.locale || attrs.format || attrs.name || attrs.disabled || attrs.readonly || attrs.inplace || attrs.maxlength || attrs.cols || attrs.tabindex || attrs.onChange || attrs.onChanging || attrs.onFocus || attrs.onBlur || attrs.onOK || attrs.onCancel || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onBookmarkChange || attrs.onClientInfo
         doTag(attrs, body, "longbox")
     }
 
@@ -2526,6 +2784,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
@@ -2537,7 +2796,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr onClientInfo
      */
     def label = { attrs, body ->
-        true || attrs.value || attrs.multiline || attrs.maxlength || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onDoubleClick || attrs.onClick || attrs.onRightClick || attrs.onBookmarkChange || attrs.onClientInfo
+        true || attrs.value || attrs.multiline || attrs.maxlength || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onDoubleClick || attrs.onClick || attrs.onRightClick || attrs.onBookmarkChange || attrs.onClientInfo
         doTag(attrs, body, "label")
     }
 
@@ -2591,6 +2850,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
@@ -2599,7 +2859,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr onClientInfo
      */
     def listbox = { attrs, body ->
-        true || attrs.checkmark || attrs.disabled || attrs.pageSize || attrs.paginal || attrs.onPaging || attrs.multiple || attrs.rows || attrs.maxlength || attrs.name || attrs.oddRowSclass || attrs.selectedItem || attrs.selectedIndex || attrs.tabindex || attrs.model || attrs.itemRenderer || attrs.sizedByContent || attrs.onSelect || attrs.pagingPosition || attrs.innerWidth || attrs.nonselectableTags || attrs.autopaging || attrs.emptyMessage || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onBookmarkChange || attrs.onClientInfo
+        true || attrs.checkmark || attrs.disabled || attrs.pageSize || attrs.paginal || attrs.onPaging || attrs.multiple || attrs.rows || attrs.maxlength || attrs.name || attrs.oddRowSclass || attrs.selectedItem || attrs.selectedIndex || attrs.tabindex || attrs.model || attrs.itemRenderer || attrs.sizedByContent || attrs.onSelect || attrs.pagingPosition || attrs.innerWidth || attrs.nonselectableTags || attrs.autopaging || attrs.emptyMessage || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onBookmarkChange || attrs.onClientInfo
         doTag(attrs, body, "listbox")
     }
 
@@ -2637,6 +2897,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
@@ -2646,7 +2907,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr onRightClick
      */
     def listcell = { attrs, body ->
-        true || attrs.span || attrs.image || attrs.imageContent || attrs.hoverImage || attrs.hoverImageContent || attrs.label || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onDoubleClick || attrs.onClick || attrs.onRightClick
+        true || attrs.span || attrs.image || attrs.imageContent || attrs.hoverImage || attrs.hoverImageContent || attrs.label || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onDoubleClick || attrs.onClick || attrs.onRightClick
         doTag(attrs, body, "listcell")
     }
 
@@ -2678,18 +2939,21 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
      * @attr apply
      */
     def listfoot = { attrs, body ->
-        true || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
+        true || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
         doTag(attrs, body, "listfoot")
     }
 
     /**
      *
+     * @attr align
+     * @attr valign
      * @attr span
      * @attr image
      * @attr imageContent
@@ -2722,6 +2986,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
@@ -2731,7 +2996,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr onRightClick
      */
     def listfooter = { attrs, body ->
-        true || attrs.span || attrs.image || attrs.imageContent || attrs.hoverImage || attrs.hoverImageContent || attrs.label || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onDoubleClick || attrs.onClick || attrs.onRightClick
+        true || attrs.align || attrs.valign || attrs.span || attrs.image || attrs.imageContent || attrs.hoverImage || attrs.hoverImageContent || attrs.label || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onDoubleClick || attrs.onClick || attrs.onRightClick
         doTag(attrs, body, "listfooter")
     }
 
@@ -2769,13 +3034,14 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
      * @attr apply
      */
     def listgroup = { attrs, body ->
-        true || attrs.label || attrs.value || attrs.disabled || attrs.checkable || attrs.selected || attrs.open || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
+        true || attrs.label || attrs.value || attrs.disabled || attrs.checkable || attrs.selected || attrs.open || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
         doTag(attrs, body, "listgroup")
     }
 
@@ -2812,13 +3078,14 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
      * @attr apply
      */
     def listgroupfoot = { attrs, body ->
-        true || attrs.label || attrs.value || attrs.disabled || attrs.checkable || attrs.selected || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
+        true || attrs.label || attrs.value || attrs.disabled || attrs.checkable || attrs.selected || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
         doTag(attrs, body, "listgroupfoot")
     }
 
@@ -2852,13 +3119,14 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
      * @attr apply
      */
     def listhead = { attrs, body ->
-        true || attrs.sizable || attrs.value || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
+        true || attrs.sizable || attrs.value || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
         doTag(attrs, body, "listhead")
     }
 
@@ -2904,6 +3172,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
@@ -2913,7 +3182,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr onRightClick
      */
     def listheader = { attrs, body ->
-        true || attrs.sort || attrs.sortDirection || attrs.sortAscending || attrs.sortDescending || attrs.maxlength || attrs.onSort || attrs.value || attrs.align || attrs.valign || attrs.image || attrs.imageContent || attrs.hoverImage || attrs.hoverImageContent || attrs.label || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onDoubleClick || attrs.onClick || attrs.onRightClick
+        true || attrs.sort || attrs.sortDirection || attrs.sortAscending || attrs.sortDescending || attrs.maxlength || attrs.onSort || attrs.value || attrs.align || attrs.valign || attrs.image || attrs.imageContent || attrs.hoverImage || attrs.hoverImageContent || attrs.label || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onDoubleClick || attrs.onClick || attrs.onRightClick
         doTag(attrs, body, "listheader")
     }
 
@@ -2950,13 +3219,14 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
      * @attr apply
      */
     def listitem = { attrs, body ->
-        true || attrs.label || attrs.value || attrs.disabled || attrs.checkable || attrs.selected || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
+        true || attrs.label || attrs.value || attrs.disabled || attrs.checkable || attrs.selected || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
         doTag(attrs, body, "listitem")
     }
 
@@ -2994,6 +3264,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
@@ -3003,7 +3274,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr onRightClick
      */
     def menu = { attrs, body ->
-        true || attrs.content || attrs.image || attrs.imageContent || attrs.hoverImage || attrs.hoverImageContent || attrs.label || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onDoubleClick || attrs.onClick || attrs.onRightClick
+        true || attrs.content || attrs.image || attrs.imageContent || attrs.hoverImage || attrs.hoverImageContent || attrs.label || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onDoubleClick || attrs.onClick || attrs.onRightClick
         doTag(attrs, body, "menu")
     }
 
@@ -3038,6 +3309,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
@@ -3046,7 +3318,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr onClientInfo
      */
     def menubar = { attrs, body ->
-        true || attrs.orient || attrs.autodrop || attrs.scrollable || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onBookmarkChange || attrs.onClientInfo
+        true || attrs.orient || attrs.autodrop || attrs.scrollable || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onBookmarkChange || attrs.onClientInfo
         doTag(attrs, body, "menubar")
     }
 
@@ -3091,6 +3363,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
@@ -3100,7 +3373,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr onRightClick
      */
     def menuitem = { attrs, body ->
-        true || attrs.checkmark || attrs.value || attrs.checked || attrs.autocheck || attrs.href || attrs.target || attrs.disabled || attrs.src || attrs.image || attrs.imageContent || attrs.hoverImage || attrs.hoverImageContent || attrs.label || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onDoubleClick || attrs.onClick || attrs.onRightClick
+        true || attrs.checkmark || attrs.value || attrs.checked || attrs.autocheck || attrs.href || attrs.target || attrs.disabled || attrs.src || attrs.image || attrs.imageContent || attrs.hoverImage || attrs.hoverImageContent || attrs.label || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onDoubleClick || attrs.onClick || attrs.onRightClick
         doTag(attrs, body, "menuitem")
     }
 
@@ -3133,13 +3406,14 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
      * @attr apply
      */
     def menupopup = { attrs, body ->
-        true || attrs.onOpen || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
+        true || attrs.onOpen || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
         doTag(attrs, body, "menupopup")
     }
 
@@ -3171,13 +3445,14 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
      * @attr apply
      */
     def menuseparator = { attrs, body ->
-        true || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
+        true || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
         doTag(attrs, body, "menuseparator")
     }
 
@@ -3221,13 +3496,14 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
      * @attr apply
      */
     def north = { attrs, body ->
-        true || attrs.flex || attrs.size || attrs.splittable || attrs.collapsible || attrs.margins || attrs.open || attrs.autoscroll || attrs.border || attrs.maxsize || attrs.minsize || attrs.onOpen || attrs.title || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
+        true || attrs.flex || attrs.size || attrs.splittable || attrs.collapsible || attrs.margins || attrs.open || attrs.autoscroll || attrs.border || attrs.maxsize || attrs.minsize || attrs.onOpen || attrs.title || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
         doTag(attrs, body, "north")
     }
 
@@ -3270,13 +3546,14 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
      * @attr apply
      */
     def panel = { attrs, body ->
-        true || attrs.border || attrs.closable || attrs.collapsible || attrs.floatable || attrs.maximizable || attrs.maximized || attrs.minimized || attrs.minimizable || attrs.movable || attrs.open || attrs.title || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
+        true || attrs.border || attrs.closable || attrs.collapsible || attrs.floatable || attrs.maximizable || attrs.maximized || attrs.minimized || attrs.minimizable || attrs.movable || attrs.open || attrs.title || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
         doTag(attrs, body, "panel")
     }
 
@@ -3308,13 +3585,14 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
      * @attr apply
      */
     def panelchildren = { attrs, body ->
-        true || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
+        true || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
         doTag(attrs, body, "panelchildren")
     }
 
@@ -3352,13 +3630,14 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
      * @attr apply
      */
     def paging = { attrs, body ->
-        true || attrs.pageSize || attrs.totalSize || attrs.activePage || attrs.pageIncrement || attrs.detailed || attrs.autohide || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
+        true || attrs.pageSize || attrs.totalSize || attrs.activePage || attrs.pageIncrement || attrs.detailed || attrs.autohide || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
         doTag(attrs, body, "paging")
     }
 
@@ -3391,6 +3670,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
@@ -3399,7 +3679,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr onClientInfo
      */
     def popup = { attrs, body ->
-        true || attrs.onOpen || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onBookmarkChange || attrs.onClientInfo
+        true || attrs.onOpen || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onBookmarkChange || attrs.onClientInfo
         doTag(attrs, body, "popup")
     }
 
@@ -3431,13 +3711,14 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
      * @attr apply
      */
     def portalchildren = { attrs, body ->
-        true || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
+        true || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
         doTag(attrs, body, "portalchildren")
     }
 
@@ -3469,13 +3750,14 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
      * @attr apply
      */
     def portallayout = { attrs, body ->
-        true || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
+        true || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
         doTag(attrs, body, "portallayout")
     }
 
@@ -3508,13 +3790,14 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
      * @attr apply
      */
     def progressmeter = { attrs, body ->
-        true || attrs.value || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
+        true || attrs.value || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
         doTag(attrs, body, "progressmeter")
     }
 
@@ -3558,6 +3841,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
@@ -3567,7 +3851,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr onRightClick
      */
     def radio = { attrs, body ->
-        true || attrs.selected || attrs.checked || attrs.disabled || attrs.tabindex || attrs.value || attrs.onCheck || attrs.radiogroup || attrs.image || attrs.imageContent || attrs.hoverImage || attrs.hoverImageContent || attrs.label || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onDoubleClick || attrs.onClick || attrs.onRightClick
+        true || attrs.selected || attrs.checked || attrs.disabled || attrs.tabindex || attrs.value || attrs.onCheck || attrs.radiogroup || attrs.image || attrs.imageContent || attrs.hoverImage || attrs.hoverImageContent || attrs.label || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onDoubleClick || attrs.onClick || attrs.onRightClick
         doTag(attrs, body, "radio")
     }
 
@@ -3604,6 +3888,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
@@ -3612,7 +3897,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr onClientInfo
      */
     def radiogroup = { attrs, body ->
-        true || attrs.name || attrs.orient || attrs.selectedItem || attrs.selectedIndex || attrs.onCheck || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onBookmarkChange || attrs.onClientInfo
+        true || attrs.name || attrs.orient || attrs.selectedItem || attrs.selectedIndex || attrs.onCheck || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onBookmarkChange || attrs.onClientInfo
         doTag(attrs, body, "radiogroup")
     }
 
@@ -3649,13 +3934,14 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
      * @attr apply
      */
     def row = { attrs, body ->
-        true || attrs.align || attrs.nowrap || attrs.spans || attrs.valign || attrs.value || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
+        true || attrs.align || attrs.nowrap || attrs.spans || attrs.valign || attrs.value || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
         doTag(attrs, body, "row")
     }
 
@@ -3687,13 +3973,14 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
      * @attr apply
      */
     def rows = { attrs, body ->
-        true || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
+        true || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
         doTag(attrs, body, "rows")
     }
 
@@ -3706,14 +3993,57 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
      * @attr apply
      */
     def script = { attrs, body ->
-        true || attrs.src || attrs.type || attrs.charset || attrs.defer || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
+        true || attrs.src || attrs.type || attrs.charset || attrs.defer || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
         doTag(attrs, body, "script")
+    }
+
+    /**
+     *
+     * @attr name
+     * @attr disabled
+     * @attr selectedIndex
+     * @attr tabindex
+     * @attr itemRenderer
+     * @attr onSelect
+     * @attr width
+     * @attr height
+     * @attr sclass
+     * @attr zclass
+     * @attr style
+     * @attr left
+     * @attr top
+     * @attr draggable
+     * @attr droppable
+     * @attr focus
+     * @attr tooltiptext
+     * @attr zindex
+     * @attr renderdefer
+     * @attr onCreate
+     * @attr onDrop
+     * @attr action
+     * @attr hflex
+     * @attr vflex
+     * @attr id
+     * @attr visible
+     * @attr mold
+     * @attr autag
+     * @attr onFulfill
+     * @attr auService
+     * @attr stubonly
+     * @attr apply
+     * @attr onBookmarkChange
+     * @attr onClientInfo
+     */
+    def selectbox = { attrs, body ->
+        true || attrs.name || attrs.disabled || attrs.selectedIndex || attrs.tabindex || attrs.itemRenderer || attrs.onSelect || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onBookmarkChange || attrs.onClientInfo
+        doTag(attrs, body, "selectbox")
     }
 
     /**
@@ -3747,6 +4077,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
@@ -3755,7 +4086,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr onClientInfo
      */
     def separator = { attrs, body ->
-        true || attrs.spacing || attrs.orient || attrs.bar || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onBookmarkChange || attrs.onClientInfo
+        true || attrs.spacing || attrs.orient || attrs.bar || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onBookmarkChange || attrs.onClientInfo
         doTag(attrs, body, "separator")
     }
 
@@ -3795,6 +4126,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
@@ -3803,7 +4135,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr onClientInfo
      */
     def slider = { attrs, body ->
-        true || attrs.name || attrs.curpos || attrs.maxpos || attrs.slidingtext || attrs.pageIncrement || attrs.onRightClick || attrs.onScroll || attrs.onScrolling || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onBookmarkChange || attrs.onClientInfo
+        true || attrs.name || attrs.curpos || attrs.maxpos || attrs.slidingtext || attrs.pageIncrement || attrs.onRightClick || attrs.onScroll || attrs.onScrolling || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onBookmarkChange || attrs.onClientInfo
         doTag(attrs, body, "slider")
     }
 
@@ -3847,13 +4179,14 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
      * @attr apply
      */
     def south = { attrs, body ->
-        true || attrs.flex || attrs.size || attrs.splittable || attrs.collapsible || attrs.margins || attrs.open || attrs.autoscroll || attrs.border || attrs.maxsize || attrs.minsize || attrs.onOpen || attrs.title || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
+        true || attrs.flex || attrs.size || attrs.splittable || attrs.collapsible || attrs.margins || attrs.open || attrs.autoscroll || attrs.border || attrs.maxsize || attrs.minsize || attrs.onOpen || attrs.title || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
         doTag(attrs, body, "south")
     }
 
@@ -3888,6 +4221,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
@@ -3896,7 +4230,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr onClientInfo
      */
     def space = { attrs, body ->
-        true || attrs.spacing || attrs.orient || attrs.bar || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onBookmarkChange || attrs.onClientInfo
+        true || attrs.spacing || attrs.orient || attrs.bar || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onBookmarkChange || attrs.onClientInfo
         doTag(attrs, body, "space")
     }
 
@@ -3948,6 +4282,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
@@ -3956,7 +4291,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr onClientInfo
      */
     def spinner = { attrs, body ->
-        true || attrs.constraint || attrs.buttonVisible || attrs.step || attrs.value || attrs.roundingMode || attrs.locale || attrs.format || attrs.name || attrs.disabled || attrs.readonly || attrs.inplace || attrs.maxlength || attrs.cols || attrs.tabindex || attrs.onChange || attrs.onChanging || attrs.onFocus || attrs.onBlur || attrs.onOK || attrs.onCancel || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onBookmarkChange || attrs.onClientInfo
+        true || attrs.constraint || attrs.buttonVisible || attrs.step || attrs.value || attrs.roundingMode || attrs.locale || attrs.format || attrs.name || attrs.disabled || attrs.readonly || attrs.inplace || attrs.maxlength || attrs.cols || attrs.tabindex || attrs.onChange || attrs.onChanging || attrs.onFocus || attrs.onBlur || attrs.onOK || attrs.onCancel || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onBookmarkChange || attrs.onClientInfo
         doTag(attrs, body, "spinner")
     }
 
@@ -3991,13 +4326,14 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
      * @attr apply
      */
     def splitter = { attrs, body ->
-        true || attrs.collapse || attrs.open || attrs.onOpen || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
+        true || attrs.collapse || attrs.open || attrs.onOpen || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
         doTag(attrs, body, "splitter")
     }
 
@@ -4009,13 +4345,14 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
      * @attr apply
      */
     def style = { attrs, body ->
-        true || attrs.src || attrs.content || attrs.media || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
+        true || attrs.src || attrs.content || attrs.media || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
         doTag(attrs, body, "style")
     }
 
@@ -4055,6 +4392,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
@@ -4064,7 +4402,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr onRightClick
      */
     def tab = { attrs, body ->
-        true || attrs.selected || attrs.closable || attrs.onClose || attrs.image || attrs.imageContent || attrs.hoverImage || attrs.hoverImageContent || attrs.label || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onDoubleClick || attrs.onClick || attrs.onRightClick
+        true || attrs.selected || attrs.closable || attrs.onClose || attrs.image || attrs.imageContent || attrs.hoverImage || attrs.hoverImageContent || attrs.label || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onDoubleClick || attrs.onClick || attrs.onRightClick
         doTag(attrs, body, "tab")
     }
 
@@ -4104,6 +4442,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
@@ -4112,7 +4451,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr onClientInfo
      */
     def tabbox = { attrs, body ->
-        true || attrs.tabscroll || attrs.panelSpacing || attrs.selectedIndex || attrs.selectedTab || attrs.selectedPanel || attrs.orient || attrs.onRightClick || attrs.onSelect || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onBookmarkChange || attrs.onClientInfo
+        true || attrs.tabscroll || attrs.panelSpacing || attrs.selectedIndex || attrs.selectedTab || attrs.selectedPanel || attrs.orient || attrs.onRightClick || attrs.onSelect || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onBookmarkChange || attrs.onClientInfo
         doTag(attrs, body, "tabbox")
     }
 
@@ -4144,6 +4483,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
@@ -4153,7 +4493,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr onRightClick
      */
     def tabpanel = { attrs, body ->
-        true || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onDoubleClick || attrs.onClick || attrs.onRightClick
+        true || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onDoubleClick || attrs.onClick || attrs.onRightClick
         doTag(attrs, body, "tabpanel")
     }
 
@@ -4185,13 +4525,14 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
      * @attr apply
      */
     def tabpanels = { attrs, body ->
-        true || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
+        true || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
         doTag(attrs, body, "tabpanels")
     }
 
@@ -4224,13 +4565,14 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
      * @attr apply
      */
     def tabs = { attrs, body ->
-        true || attrs.align || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
+        true || attrs.align || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
         doTag(attrs, body, "tabs")
     }
 
@@ -4264,13 +4606,14 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
      * @attr apply
      */
     def tablechildren = { attrs, body ->
-        true || attrs.colspan || attrs.rowspan || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
+        true || attrs.colspan || attrs.rowspan || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
         doTag(attrs, body, "tablechildren")
     }
 
@@ -4303,13 +4646,14 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
      * @attr apply
      */
     def tablelayout = { attrs, body ->
-        true || attrs.columns || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
+        true || attrs.columns || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
         doTag(attrs, body, "tablelayout")
     }
 
@@ -4360,6 +4704,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
@@ -4368,7 +4713,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr onClientInfo
      */
     def textbox = { attrs, body ->
-        true || attrs.constraint || attrs.value || attrs.type || attrs.rows || attrs.multiline || attrs.tabbable || attrs.name || attrs.disabled || attrs.readonly || attrs.inplace || attrs.maxlength || attrs.cols || attrs.tabindex || attrs.onChange || attrs.onChanging || attrs.onFocus || attrs.onBlur || attrs.onOK || attrs.onCancel || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onBookmarkChange || attrs.onClientInfo
+        true || attrs.constraint || attrs.value || attrs.type || attrs.rows || attrs.multiline || attrs.tabbable || attrs.name || attrs.disabled || attrs.readonly || attrs.inplace || attrs.maxlength || attrs.cols || attrs.tabindex || attrs.onChange || attrs.onChanging || attrs.onFocus || attrs.onBlur || attrs.onOK || attrs.onCancel || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onBookmarkChange || attrs.onClientInfo
         doTag(attrs, body, "textbox")
     }
 
@@ -4399,6 +4744,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
@@ -4407,7 +4753,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr onClientInfo
      */
     def timer = { attrs, body ->
-        true || attrs.delay || attrs.repeats || attrs.running || attrs.onTimer || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onBookmarkChange || attrs.onClientInfo
+        true || attrs.delay || attrs.repeats || attrs.running || attrs.onTimer || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onBookmarkChange || attrs.onClientInfo
         doTag(attrs, body, "timer")
     }
 
@@ -4458,6 +4804,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
@@ -4466,7 +4813,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr onClientInfo
      */
     def timebox = { attrs, body ->
-        true || attrs.constraint || attrs.value || attrs.buttonVisible || attrs.timeZone || attrs.locale || attrs.format || attrs.name || attrs.disabled || attrs.readonly || attrs.inplace || attrs.maxlength || attrs.cols || attrs.tabindex || attrs.onChange || attrs.onChanging || attrs.onFocus || attrs.onBlur || attrs.onOK || attrs.onCancel || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onBookmarkChange || attrs.onClientInfo
+        true || attrs.constraint || attrs.value || attrs.buttonVisible || attrs.timeZone || attrs.locale || attrs.format || attrs.name || attrs.disabled || attrs.readonly || attrs.inplace || attrs.maxlength || attrs.cols || attrs.tabindex || attrs.onChange || attrs.onChanging || attrs.onFocus || attrs.onBlur || attrs.onOK || attrs.onCancel || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onBookmarkChange || attrs.onClientInfo
         doTag(attrs, body, "timebox")
     }
 
@@ -4499,6 +4846,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
@@ -4510,7 +4858,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr onClientInfo
      */
     def toolbar = { attrs, body ->
-        true || attrs.orient || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onDoubleClick || attrs.onClick || attrs.onRightClick || attrs.onBookmarkChange || attrs.onClientInfo
+        true || attrs.orient || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onDoubleClick || attrs.onClick || attrs.onRightClick || attrs.onBookmarkChange || attrs.onClientInfo
         doTag(attrs, body, "toolbar")
     }
 
@@ -4553,6 +4901,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
@@ -4564,7 +4913,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr onClientInfo
      */
     def toolbarbutton = { attrs, body ->
-        true || attrs.orient || attrs.dir || attrs.href || attrs.target || attrs.tabindex || attrs.disabled || attrs.image || attrs.imageContent || attrs.hoverImage || attrs.hoverImageContent || attrs.label || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onDoubleClick || attrs.onClick || attrs.onRightClick || attrs.onBookmarkChange || attrs.onClientInfo
+        true || attrs.orient || attrs.dir || attrs.href || attrs.target || attrs.tabindex || attrs.disabled || attrs.image || attrs.imageContent || attrs.hoverImage || attrs.hoverImageContent || attrs.label || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onDoubleClick || attrs.onClick || attrs.onRightClick || attrs.onBookmarkChange || attrs.onClientInfo
         doTag(attrs, body, "toolbarbutton")
     }
 
@@ -4612,6 +4961,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
@@ -4620,7 +4970,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr onClientInfo
      */
     def tree = { attrs, body ->
-        true || attrs.rows || attrs.name || attrs.checkmark || attrs.pageSize || attrs.paginal || attrs.onPaging || attrs.multiple || attrs.selectedItem || attrs.model || attrs.itemRenderer || attrs.sizedByContent || attrs.onSelect || attrs.pagingPosition || attrs.innerWidth || attrs.nonselectableTags || attrs.autopaging || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onBookmarkChange || attrs.onClientInfo
+        true || attrs.rows || attrs.name || attrs.checkmark || attrs.pageSize || attrs.paginal || attrs.onPaging || attrs.multiple || attrs.selectedItem || attrs.model || attrs.itemRenderer || attrs.sizedByContent || attrs.onSelect || attrs.pagingPosition || attrs.innerWidth || attrs.nonselectableTags || attrs.autopaging || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onBookmarkChange || attrs.onClientInfo
         doTag(attrs, body, "tree")
     }
 
@@ -4658,6 +5008,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
@@ -4667,7 +5018,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr onRightClick
      */
     def treecell = { attrs, body ->
-        true || attrs.span || attrs.image || attrs.imageContent || attrs.hoverImage || attrs.hoverImageContent || attrs.label || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onDoubleClick || attrs.onClick || attrs.onRightClick
+        true || attrs.span || attrs.image || attrs.imageContent || attrs.hoverImage || attrs.hoverImageContent || attrs.label || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onDoubleClick || attrs.onClick || attrs.onRightClick
         doTag(attrs, body, "treecell")
     }
 
@@ -4699,13 +5050,14 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
      * @attr apply
      */
     def treechildren = { attrs, body ->
-        true || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
+        true || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
         doTag(attrs, body, "treechildren")
     }
 
@@ -4750,6 +5102,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
@@ -4759,7 +5112,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr onRightClick
      */
     def treecol = { attrs, body ->
-        true || attrs.sort || attrs.sortDirection || attrs.sortAscending || attrs.sortDescending || attrs.maxlength || attrs.onSort || attrs.align || attrs.valign || attrs.image || attrs.imageContent || attrs.hoverImage || attrs.hoverImageContent || attrs.label || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onDoubleClick || attrs.onClick || attrs.onRightClick
+        true || attrs.sort || attrs.sortDirection || attrs.sortAscending || attrs.sortDescending || attrs.maxlength || attrs.onSort || attrs.align || attrs.valign || attrs.image || attrs.imageContent || attrs.hoverImage || attrs.hoverImageContent || attrs.label || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onDoubleClick || attrs.onClick || attrs.onRightClick
         doTag(attrs, body, "treecol")
     }
 
@@ -4792,13 +5145,14 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
      * @attr apply
      */
     def treecols = { attrs, body ->
-        true || attrs.sizable || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
+        true || attrs.sizable || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
         doTag(attrs, body, "treecols")
     }
 
@@ -4830,18 +5184,21 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
      * @attr apply
      */
     def treefoot = { attrs, body ->
-        true || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
+        true || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
         doTag(attrs, body, "treefoot")
     }
 
     /**
      *
+     * @attr align
+     * @attr valign
      * @attr span
      * @attr image
      * @attr imageContent
@@ -4874,6 +5231,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
@@ -4883,7 +5241,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr onRightClick
      */
     def treefooter = { attrs, body ->
-        true || attrs.span || attrs.image || attrs.imageContent || attrs.hoverImage || attrs.hoverImageContent || attrs.label || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onDoubleClick || attrs.onClick || attrs.onRightClick
+        true || attrs.align || attrs.valign || attrs.span || attrs.image || attrs.imageContent || attrs.hoverImage || attrs.hoverImageContent || attrs.label || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onDoubleClick || attrs.onClick || attrs.onRightClick
         doTag(attrs, body, "treefooter")
     }
 
@@ -4923,6 +5281,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
@@ -4932,7 +5291,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr onRightClick
      */
     def treeitem = { attrs, body ->
-        true || attrs.value || attrs.open || attrs.selected || attrs.checkable || attrs.image || attrs.disabled || attrs.onOpen || attrs.label || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onDoubleClick || attrs.onClick || attrs.onRightClick
+        true || attrs.value || attrs.open || attrs.selected || attrs.checkable || attrs.image || attrs.disabled || attrs.onOpen || attrs.label || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onDoubleClick || attrs.onClick || attrs.onRightClick
         doTag(attrs, body, "treeitem")
     }
 
@@ -4965,6 +5324,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
@@ -4974,7 +5334,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr onRightClick
      */
     def treerow = { attrs, body ->
-        true || attrs.label || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onDoubleClick || attrs.onClick || attrs.onRightClick
+        true || attrs.label || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onDoubleClick || attrs.onClick || attrs.onRightClick
         doTag(attrs, body, "treerow")
     }
 
@@ -5011,6 +5371,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
@@ -5019,7 +5380,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr onClientInfo
      */
     def vbox = { attrs, body ->
-        true || attrs.spacing || attrs.heights || attrs.align || attrs.pack || attrs.sizedByContent || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onBookmarkChange || attrs.onClientInfo
+        true || attrs.spacing || attrs.heights || attrs.align || attrs.pack || attrs.sizedByContent || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onBookmarkChange || attrs.onClientInfo
         doTag(attrs, body, "vbox")
     }
 
@@ -5052,6 +5413,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
@@ -5060,7 +5422,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr onClientInfo
      */
     def vlayout = { attrs, body ->
-        true || attrs.spacing || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onBookmarkChange || attrs.onClientInfo
+        true || attrs.spacing || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onBookmarkChange || attrs.onClientInfo
         doTag(attrs, body, "vlayout")
     }
 
@@ -5104,13 +5466,14 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
      * @attr apply
      */
     def west = { attrs, body ->
-        true || attrs.flex || attrs.size || attrs.splittable || attrs.collapsible || attrs.margins || attrs.open || attrs.autoscroll || attrs.border || attrs.maxsize || attrs.minsize || attrs.onOpen || attrs.title || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
+        true || attrs.flex || attrs.size || attrs.splittable || attrs.collapsible || attrs.margins || attrs.open || attrs.autoscroll || attrs.border || attrs.maxsize || attrs.minsize || attrs.onOpen || attrs.title || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
         doTag(attrs, body, "west")
     }
 
@@ -5163,6 +5526,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
@@ -5174,7 +5538,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr onClientInfo
      */
     def window = { attrs, body ->
-        true || attrs.border || attrs.title || attrs.mode || attrs.closable || attrs.sizable || attrs.position || attrs.contentStyle || attrs.minheight || attrs.minwidth || attrs.defaultActionOnShow || attrs.maximizable || attrs.maximized || attrs.minimized || attrs.minimizable || attrs.contentSclass || attrs.onOK || attrs.onCancel || attrs.onMove || attrs.onOpen || attrs.onClose || attrs.onZIndex || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onDoubleClick || attrs.onClick || attrs.onRightClick || attrs.onBookmarkChange || attrs.onClientInfo
+        true || attrs.border || attrs.title || attrs.mode || attrs.closable || attrs.sizable || attrs.position || attrs.contentStyle || attrs.minheight || attrs.minwidth || attrs.defaultActionOnShow || attrs.maximizable || attrs.maximized || attrs.minimized || attrs.minimizable || attrs.contentSclass || attrs.onOK || attrs.onCancel || attrs.onMove || attrs.onOpen || attrs.onClose || attrs.onZIndex || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply || attrs.onDoubleClick || attrs.onClick || attrs.onRightClick || attrs.onBookmarkChange || attrs.onClientInfo
         doTag(attrs, body, "window")
     }
 
@@ -5189,13 +5553,14 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
      * @attr apply
      */
     def ckeditor = { attrs, body ->
-        true || attrs.width || attrs.height || attrs.value || attrs.toolbar || attrs.onSave || attrs.customConfigurationsPath || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
+        true || attrs.width || attrs.height || attrs.value || attrs.toolbar || attrs.onSave || attrs.customConfigurationsPath || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
         doTag(attrs, body, "ckeditor")
     }
 
@@ -5210,13 +5575,14 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
      * @attr apply
      */
     def fckeditor = { attrs, body ->
-        true || attrs.width || attrs.height || attrs.value || attrs.toolbarSet || attrs.onSave || attrs.customConfigurationsPath || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
+        true || attrs.width || attrs.height || attrs.value || attrs.toolbarSet || attrs.onSave || attrs.customConfigurationsPath || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
         doTag(attrs, body, "fckeditor")
     }
 
@@ -5252,13 +5618,14 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
      * @attr apply
      */
     def ginfo = { attrs, body ->
-        true || attrs.open || attrs.lng || attrs.lat || attrs.content || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
+        true || attrs.open || attrs.lng || attrs.lat || attrs.content || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
         doTag(attrs, body, "ginfo")
     }
 
@@ -5290,13 +5657,14 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
      * @attr apply
      */
     def gimage = { attrs, body ->
-        true || attrs.swlng || attrs.swlat || attrs.nelng || attrs.nelat || attrs.content || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
+        true || attrs.swlng || attrs.swlat || attrs.nelng || attrs.nelat || attrs.content || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
         doTag(attrs, body, "gimage")
     }
 
@@ -5355,13 +5723,14 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
      * @attr apply
      */
     def gmarker = { attrs, body ->
-        true || attrs.open || attrs.lng || attrs.lat || attrs.content || attrs.iconAnchorX || attrs.iconAnchorY || attrs.iconDragCrossAnchorX || attrs.iconDragCrossAnchorY || attrs.iconDragCrossHeight || attrs.iconDragCrossImage || attrs.iconDragCrossWidth || attrs.iconImage || attrs.iconImageMap || attrs.iconInfoAnchorX || attrs.iconInfoAnchorY || attrs.iconMaxHeight || attrs.iconMozPrintImage || attrs.iconPrintImage || attrs.iconPrintShadow || attrs.iconShadow || attrs.iconShadowHeight || attrs.iconShadowWidth || attrs.iconHeight || attrs.iconWidth || attrs.iconTransparent || attrs.onMapDrop || attrs.onMarkerDrop || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
+        true || attrs.open || attrs.lng || attrs.lat || attrs.content || attrs.iconAnchorX || attrs.iconAnchorY || attrs.iconDragCrossAnchorX || attrs.iconDragCrossAnchorY || attrs.iconDragCrossHeight || attrs.iconDragCrossImage || attrs.iconDragCrossWidth || attrs.iconImage || attrs.iconImageMap || attrs.iconInfoAnchorX || attrs.iconInfoAnchorY || attrs.iconMaxHeight || attrs.iconMozPrintImage || attrs.iconPrintImage || attrs.iconPrintShadow || attrs.iconShadow || attrs.iconShadowHeight || attrs.iconShadowWidth || attrs.iconHeight || attrs.iconWidth || attrs.iconTransparent || attrs.onMapDrop || attrs.onMarkerDrop || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
         doTag(attrs, body, "gmarker")
     }
 
@@ -5423,13 +5792,14 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
      * @attr apply
      */
     def gmaps = { attrs, body ->
-        true || attrs.continuousZoom || attrs.doubleClickZoom || attrs.enableDragging || attrs.enableGoogleBar || attrs.hybrid || attrs.itemRenderer || attrs.lat || attrs.lng || attrs.mapType || attrs.model || attrs.normal || attrs.physical || attrs.satellite || attrs.scrollWheelZoom || attrs.selectedItem || attrs.showLargeCtrl || attrs.showOverviewCtrl || attrs.showScaleCtrl || attrs.showSmallCtrl || attrs.showTypeCtrl || attrs.showZoomCtrl || attrs.zoom || attrs.onMapMove || attrs.onMapZoom || attrs.onInfoChange || attrs.onMapClick || attrs.onMapDoubleClick || attrs.onMapDrop || attrs.onMapRightClick || attrs.onMarkerDrop || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
+        true || attrs.continuousZoom || attrs.doubleClickZoom || attrs.enableDragging || attrs.enableGoogleBar || attrs.hybrid || attrs.itemRenderer || attrs.lat || attrs.lng || attrs.mapType || attrs.model || attrs.normal || attrs.physical || attrs.satellite || attrs.scrollWheelZoom || attrs.selectedItem || attrs.showLargeCtrl || attrs.showOverviewCtrl || attrs.showScaleCtrl || attrs.showSmallCtrl || attrs.showTypeCtrl || attrs.showZoomCtrl || attrs.zoom || attrs.onMapMove || attrs.onMapZoom || attrs.onInfoChange || attrs.onMapClick || attrs.onMapDoubleClick || attrs.onMapDrop || attrs.onMapRightClick || attrs.onMarkerDrop || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
         doTag(attrs, body, "gmaps")
     }
 
@@ -5470,13 +5840,14 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
      * @attr apply
      */
     def gpolygon = { attrs, body ->
-        true || attrs.points || attrs.color || attrs.weight || attrs.opacity || attrs.numLevels || attrs.outline || attrs.fill || attrs.fillColor || attrs.fillOpacity || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
+        true || attrs.points || attrs.color || attrs.weight || attrs.opacity || attrs.numLevels || attrs.outline || attrs.fill || attrs.fillColor || attrs.fillOpacity || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
         doTag(attrs, body, "gpolygon")
     }
 
@@ -5513,13 +5884,14 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
      * @attr apply
      */
     def gpolyline = { attrs, body ->
-        true || attrs.points || attrs.color || attrs.weight || attrs.opacity || attrs.numLevels || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
+        true || attrs.points || attrs.color || attrs.weight || attrs.opacity || attrs.numLevels || attrs.context || attrs.popup || attrs.tooltip || attrs.onCtrlKey || attrs.ctrlKeys || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
         doTag(attrs, body, "gpolyline")
     }
 
@@ -5552,13 +5924,14 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
      * @attr apply
      */
     def gscreen = { attrs, body ->
-        true || attrs.content || attrs.offsetX || attrs.offsetY || attrs.screenX || attrs.screenY || attrs.src || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
+        true || attrs.content || attrs.offsetX || attrs.offsetY || attrs.screenX || attrs.screenY || attrs.src || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
         doTag(attrs, body, "gscreen")
     }
 
@@ -5589,13 +5962,14 @@ class ZulTagLib extends AbstractTagLib {
      * @attr id
      * @attr visible
      * @attr mold
+     * @attr autag
      * @attr onFulfill
      * @attr auService
      * @attr stubonly
      * @attr apply
      */
     def jasperreport = { attrs, body ->
-        true || attrs.source || attrs.parameters || attrs.datasource || attrs.type || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
+        true || attrs.source || attrs.parameters || attrs.datasource || attrs.type || attrs.width || attrs.height || attrs.sclass || attrs.zclass || attrs.style || attrs.left || attrs.top || attrs.draggable || attrs.droppable || attrs.focus || attrs.tooltiptext || attrs.zindex || attrs.renderdefer || attrs.onCreate || attrs.onDrop || attrs.action || attrs.hflex || attrs.vflex || attrs.id || attrs.visible || attrs.mold || attrs.autag || attrs.onFulfill || attrs.auService || attrs.stubonly || attrs.apply
         doTag(attrs, body, "jasperreport")
     }
 
