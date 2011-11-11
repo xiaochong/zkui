@@ -1,5 +1,6 @@
 package org.grails.plugins.zkui
 
+import java.util.concurrent.ConcurrentHashMap
 import org.grails.plugins.zkui.util.Renders
 import org.zkoss.util.ArraysX
 import org.zkoss.xel.VariableResolver
@@ -7,6 +8,7 @@ import org.zkoss.zk.fn.JspFns
 import org.zkoss.zk.ui.Component
 import org.zkoss.zk.ui.Execution
 import org.zkoss.zk.ui.Executions
+import org.zkoss.zk.ui.metainfo.PageDefinition
 import org.zkoss.zk.ui.util.Template
 
 class BaseTagLib {
@@ -65,6 +67,9 @@ class BaseTagLib {
 
     def template = {attrs, b ->
         true || attrs.name || attrs.src
+        if (!attrs.name) {
+            throwTagError("template [name] must not be null")
+        }
         final Map<String, String> _params = new LinkedHashMap<String, String>()
         String name = null, src = null;
         attrs.each {key, value ->
@@ -84,6 +89,7 @@ class BaseTagLib {
     }
 
     private static class TemplateImpl implements Template, Serializable {
+        static ConcurrentHashMap<Integer, PageDefinition> pageDefCache = new ConcurrentHashMap()
         final Map _params
         final String src
         final String body
@@ -96,15 +102,13 @@ class BaseTagLib {
 
         Component[] create(Component parent, Component insertBefore, VariableResolver resolver) {
             final Execution exec = Executions.getCurrent()
-            if (resolver != null) exec.addVariableResolver(resolver)
-            final Component[] cs
-            try {
-                cs = [exec.createComponentsDirectly(body, null, parent, insertBefore, resolver)] as Component[]
-            } finally {
-                if (resolver != null) exec.removeVariableResolver(resolver)
+            PageDefinition pageDef = pageDefCache.get(body.hashCode() as Integer)
+            if (!pageDef) {
+                pageDef = exec.getPageDefinitionDirectly(body, null)
+                pageDefCache.putIfAbsent(body.hashCode() as Integer, pageDef)
             }
-            final Component c2 = src != null ?
-                exec.createComponents(src, parent, insertBefore, resolver) : null
+            final Component[] cs = [exec.createComponents(pageDef, parent, insertBefore, resolver)] as Component[]
+            final Component c2 = src != null ? exec.createComponents(src, parent, insertBefore, resolver) : null
             def components = merge(cs, c2)
             return components
         }
