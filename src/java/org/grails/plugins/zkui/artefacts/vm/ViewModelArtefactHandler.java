@@ -1,17 +1,17 @@
-package org.grails.plugins.zkui.artefacts;
+package org.grails.plugins.zkui.artefacts.vm;
 
 import org.codehaus.groovy.grails.commons.ArtefactHandlerAdapter;
 import org.codehaus.groovy.grails.commons.DomainClassArtefactHandler;
+import org.grails.plugins.zkui.artefacts.composer.GrailsComposerClass;
 
+public class ViewModelArtefactHandler extends ArtefactHandlerAdapter {
 
-public class ComposerArtefactHandler extends ArtefactHandlerAdapter {
+    public static final String TYPE = "ViewModel";
 
-    public static final String TYPE = "Composer";
-
-    public ComposerArtefactHandler() {
+    public ViewModelArtefactHandler() {
         super(TYPE, GrailsComposerClass.class,
-                DefaultGrailsComposerClass.class,
-                DefaultGrailsComposerClass.COMPOSER,
+                DefaultGrailsViewModelClass.class,
+                DefaultGrailsViewModelClass.VIEW_MODEL,
                 false);
     }
 

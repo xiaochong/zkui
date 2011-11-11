@@ -6,7 +6,8 @@ import org.codehaus.groovy.grails.web.metaclass.BindDynamicMethod
 import org.codehaus.groovy.grails.web.pages.GroovyPage
 import org.codehaus.groovy.grails.web.pages.TagLibraryLookup
 import org.codehaus.groovy.grails.web.util.TypeConvertingMap
-import org.grails.plugins.zkui.artefacts.ComposerArtefactHandler
+import org.grails.plugins.zkui.artefacts.composer.ComposerArtefactHandler
+import org.grails.plugins.zkui.artefacts.vm.ViewModelArtefactHandler
 import org.grails.plugins.zkui.jsoup.select.Selector
 import org.grails.plugins.zkui.metaclass.RedirectDynamicMethod
 import org.grails.plugins.zkui.util.UriUtil
@@ -25,7 +26,7 @@ class ZkuiGrailsPlugin {
     def loadAfter = ['core', 'hibernate', 'controllers']
 
     def artefacts = [
-            org.grails.plugins.zkui.artefacts.ComposerArtefactHandler
+            ComposerArtefactHandler, ViewModelArtefactHandler
     ]
 
     def watchedResources = [
@@ -53,8 +54,7 @@ The different is it more likely to use the Grails' infrastructures such as gsp, 
     // URL to the plugin's documentation
     def documentation = "http://grails.org/plugin/zkui"
 
-    static final String GOSIV_CLASS =
-    "org.grails.plugins.zkui.ZkuiGrailsOpenSessionInViewFilter"
+    static final String GOSIV_CLASS = "org.grails.plugins.zkui.ZkuiGrailsOpenSessionInViewFilter"
 
     def doWithWebDescriptor = { webXml ->
         def listenerElement = webXml.'listener'
