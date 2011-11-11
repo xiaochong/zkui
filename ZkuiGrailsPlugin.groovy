@@ -31,7 +31,10 @@ class ZkuiGrailsPlugin {
 
     def watchedResources = [
             "file:./grails-app/composers/**/*Composer.groovy",
-            "file:./plugins/*/grails-app/composers/**/*Composer.groovy"]
+            "file:./plugins/*/grails-app/composers/**/*Composer.groovy",
+            "file:./grails-app/vms/**/*VM.groovy",
+            "file:./plugins/*/grails-app/vms/**/*VM.groovy"
+    ]
 
     // resources that are excluded from plugin packaging
     def pluginExcludes = [
@@ -112,8 +115,17 @@ The different is it more likely to use the Grails' infrastructures such as gsp, 
         "zkComponentBuilder"(org.grails.plugins.zkui.ZkComponentBuilder) { bean ->
             bean.scope = "prototype"
         }
+        "org.zkoss.bind.BindComposer"(org.grails.plugins.zkui.composer.BindComposer) {bean ->
+            bean.scope = "prototype"
+        }
         application.composerClasses.each { composerClass ->
             "${composerClass.clazz.name}"(composerClass.clazz) { bean ->
+                bean.scope = "prototype"
+                bean.autowire = "byName"
+            }
+        }
+        application.viewModelClasses.each { viewModelClass ->
+            "${viewModelClass.clazz.name}"(viewModelClass.clazz) { bean ->
                 bean.scope = "prototype"
                 bean.autowire = "byName"
             }
@@ -302,6 +314,23 @@ The different is it more likely to use the Grails' infrastructures such as gsp, 
 
             def beans = beans {
                 "${composerBeanName}"(composerClass.clazz) { bean ->
+                    bean.scope = "prototype"
+                    bean.autowire = "byName"
+                }
+            }
+            beans.registerBeans(event.ctx)
+        } else if (application.isArtefactOfType(ViewModelArtefactHandler.TYPE, event.source)) {
+            def context = event.ctx
+            if (!context) {
+                if (log.isDebugEnabled())
+                    log.debug("Application context not found. Can't reload")
+                return
+            }
+            def viewModelClass = application.addArtefact(ViewModelArtefactHandler.TYPE, event.source)
+            def viewModelBeanName = viewModelClass.clazz.name
+
+            def beans = beans {
+                "${viewModelBeanName}"(viewModelClass.clazz) { bean ->
                     bean.scope = "prototype"
                     bean.autowire = "byName"
                 }
