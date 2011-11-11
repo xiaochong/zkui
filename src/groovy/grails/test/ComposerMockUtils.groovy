@@ -4,8 +4,9 @@ import org.codehaus.groovy.grails.plugins.testing.GrailsMockHttpServletRequest
 import org.codehaus.groovy.grails.web.metaclass.BindDynamicMethod
 import org.codehaus.groovy.grails.web.util.TypeConvertingMap
 import org.grails.plugins.zkui.ZkComponentBuilder
-import org.grails.plugins.zkui.jsoup.select.Selector
 import org.grails.plugins.zkui.util.UriUtil
+import org.zkoss.zk.ui.Component
+import org.zkoss.zk.ui.select.Selectors
 
 class ComposerMockUtils {
 
@@ -25,7 +26,7 @@ class ComposerMockUtils {
             delegate.appendChild(value)
         }
         org.zkoss.zk.ui.Component.metaClass.select = {String query ->
-            return Selector.select(query, delegate)
+            return Selectors.find((Component) delegate, query)
         }
         org.zkoss.zk.ui.Component.metaClass.addEventListener = {String eventName, Closure listenerClosure ->
             return delegate.addEventListener(eventName, listenerClosure as org.zkoss.zk.ui.event.EventListener)

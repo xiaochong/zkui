@@ -14,6 +14,7 @@ import org.zkoss.zk.ui.Executions
 import org.zkoss.zk.ui.select.Selectors
 import org.zkoss.zul.Messagebox
 import org.zkoss.zul.impl.InputElement
+import org.zkoss.zk.ui.Component
 
 class ZkuiGrailsPlugin {
     // the plugin version
@@ -149,7 +150,7 @@ The different is it more likely to use the Grails' infrastructures such as gsp, 
             delegate.appendChild(value)
         }
         org.zkoss.zk.ui.Component.metaClass.select = {String query ->
-            return Selectors.find(delegate, query)
+            return Selectors.find((Component)delegate, query)
         }
         org.zkoss.zk.ui.Component.metaClass.addEventListener = {String eventName, Closure listenerClosure ->
             return delegate.addEventListener(eventName, listenerClosure as org.zkoss.zk.ui.event.EventListener)
