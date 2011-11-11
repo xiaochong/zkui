@@ -302,35 +302,24 @@ The different is it more likely to use the Grails' infrastructures such as gsp, 
     def onChange = { event ->
         // watching is modified and reloaded. The event contains: event.source,
         // event.application, event.manager, event.ctx, and event.plugin.
+        def artefactType = null
         if (application.isArtefactOfType(ComposerArtefactHandler.TYPE, event.source)) {
-            def context = event.ctx
-            if (!context) {
-                if (log.isDebugEnabled())
-                    log.debug("Application context not found. Can't reload")
-                return
-            }
-            def composerClass = application.addArtefact(ComposerArtefactHandler.TYPE, event.source)
-            def composerBeanName = composerClass.clazz.name
-
-            def beans = beans {
-                "${composerBeanName}"(composerClass.clazz) { bean ->
-                    bean.scope = "prototype"
-                    bean.autowire = "byName"
-                }
-            }
-            beans.registerBeans(event.ctx)
+            artefactType = ComposerArtefactHandler.TYPE
         } else if (application.isArtefactOfType(ViewModelArtefactHandler.TYPE, event.source)) {
+            artefactType = ViewModelArtefactHandler.TYPE
+        }
+        if (artefactType) {
             def context = event.ctx
             if (!context) {
                 if (log.isDebugEnabled())
                     log.debug("Application context not found. Can't reload")
                 return
             }
-            def viewModelClass = application.addArtefact(ViewModelArtefactHandler.TYPE, event.source)
-            def viewModelBeanName = viewModelClass.clazz.name
+            def artefactClass = application.addArtefact(artefactType, event.source)
+            def artefactBeanName = artefactClass.clazz.name
 
             def beans = beans {
-                "${viewModelBeanName}"(viewModelClass.clazz) { bean ->
+                "${artefactBeanName}"(artefactClass.clazz) { bean ->
                     bean.scope = "prototype"
                     bean.autowire = "byName"
                 }
