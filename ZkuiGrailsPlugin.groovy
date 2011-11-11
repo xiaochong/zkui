@@ -157,6 +157,7 @@ The different is it more likely to use the Grails' infrastructures such as gsp, 
         org.zkoss.zk.ui.Component.metaClass.getParams = {
             return delegate.select("*").inject([:]) {s, c ->
                 if (!c.metaClass.respondsTo(c, 'getName')) return s
+                if (c.name == null) return s
                 def e = s.get(c.name)
                 def value
                 if (c instanceof org.zkoss.zul.Combobox) {
