@@ -1,0 +1,28 @@
+h1. attribute
+
+h2. Purpose
+
+Before ZK 6.0, [the custom renderer|http://books.zkoss.org/wiki/ZK_Developer%27s_Reference/MVC/View] must be implemented through Java. Although Java is very powerful and anything can be achieved with it, it is still tedious and not always the most feasible solution having to create and maintain an additional Java class every single time. Speaking in terms of the MVC concept, in many cases, it makes much more sense to place ZUL as it is closer to "View" rather than the "Control" in the Java code.
+
+With ZK 6.0, a new concept called "template" is introduced. It allow UI designers to specify templates right in a ZUML page, the model can then be rendered based on the template without any Java code.
+
+Grails ZK UI 0.5 also support the "template" concept.
+
+h2. Examples
+{code:xml}
+<z:listbox model="@bind(vm.items)" selectedItem="@bind(vm.selected)" hflex="true" height="300px">
+    ...
+
+    <z:template name="model" var="item">
+        <listitem>
+            <listcell label="@bind(item.name)"/>
+            <listcell label="@bind(item.price) @converter('formatedNumber', format='###,##0.00')"/>
+            <listcell label="@bind(item.quantity)" sclass="@bind(item.quantity lt 3 ?'red':'')"/>
+        </listitem>
+    </z:template>
+</z:listbox>
+{code}
+
+h2. Description
+
+Reference [Envisage ZK 6.0: Rendering List and Tree Model with Templates|http://books.zkoss.org/wiki/Small%20Talks/2011/July/Envisage%20ZK%206.0:%20Rendering%20List%20and%20Tree%20Model%20with%20Templates]

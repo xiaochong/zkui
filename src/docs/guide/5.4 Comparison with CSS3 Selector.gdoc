@@ -1,0 +1,10 @@
+{table}
+*Syntax* | *In CSS 3 Selector* | *In Component Selector* | *Comment*
+tagname | DOM element type | Component type |
+#id | DOM ID | Component ID |
+.class |CSS class | SClass / ZClass |
+[attr='value'] | DOM attribute | getAttr() or dynamic attribute | If getAttr() is not a method on such component, it is skipped
+:pseudo-class | Pseudo class | Pseudo class | :root, :empty, :first-child, :last-child, :only-child, :nth-child(), :nth-last-child()
+::pseudo-element | Pseudo element | N/A |
+> + ~ | Combinator | Combinator | Identical to CSS 3 combinators
+{table}

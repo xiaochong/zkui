@@ -13,5 +13,5 @@ Selector code
 {code}
 assert 3 == window.select("textbox").size()
 assert "value2" == window.select("#t2")[0].value
-assert "value1" == window.select("textbox[name=t1]")[0].value
+assert "value1" == window.select("textbox[name='t1']")[0].value
 {code}
