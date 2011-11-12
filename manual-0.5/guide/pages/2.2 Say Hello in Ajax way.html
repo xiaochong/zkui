@@ -1,0 +1,14 @@
+<html>
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+        <title>2.2 Say Hello in Ajax way</title>
+        <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen" title="Ref" charset="utf-8"/>
+    </head>
+    <body class="body">
+    Let us put some interactivity into it.
+<div class="code"><pre><span class="xml&#45;tag">&#60;z:button label=<span class="xml&#45;quote">"Say Hello"</span> onClick=<span class="xml&#45;quote">"Messagebox.show('Hello World! Time now is:'+new Date())"</span>/&#62;</span></pre></div>
+Then, when you click the button, you'll see the following:<p class="paragraph"/><img border="0" class="center" src="../img/2.2 Say Hello in Ajax way.png"></img><p class="paragraph"/>The onClick attribute is a special attribute used to add an event listener to the component such that it is invoked when an end user clicks the component. The attribute value could be any legal groovy code.<p class="paragraph"/>Here we invoke <a href="http://www.zkoss.org/javadoc/latest/zk/org/zkoss/zul/Messagebox.html#show(java.lang.String)" target="blank">Messagebox.show(String)</a> to show a message box as depicted above.<p class="paragraph"/><blockquote class="note">
+Notice that it is not JavaScript,It is Groovy and runs at the server
+</blockquote>
+    </body>
+</html>

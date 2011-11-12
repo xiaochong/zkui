@@ -1,0 +1,19 @@
+<html>
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+        <title>3.11 Support extends GenericForwardComposer or other Composer</title>
+        <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen" title="Ref" charset="utf-8"/>
+    </head>
+    <body class="body">
+    In Grails ZK UI 0.5,support extends GenericForwardComposer or other Composer,so can take advantage of the GenericForwardComposer<p class="paragraph"/>In grails-app/composers<p class="paragraph"/><div class="code"><pre>class TestComposer <span class="java&#45;keyword">extends</span> GenericForwardComposer &#123;<p class="paragraph"/>    TestComposer() &#123;
+        <span class="java&#45;keyword">super</span>('_' as <span class="java&#45;object">char</span>)
+    &#125;<p class="paragraph"/>    @Override
+    void doAfterCompose(Component comp) &#123;
+        <span class="java&#45;keyword">super</span>.doAfterCompose(comp)
+        // initialize components here
+    &#125;<p class="paragraph"/>&#125;</pre></div><p class="paragraph"/>Equivalent to the following<p class="paragraph"/><div class="code"><pre>class TestComposer &#123;<p class="paragraph"/>    def afterCompose = &#123;comp &#45;&#62;
+        // initialize components here
+    &#125;
+&#125;</pre></div>
+    </body>
+</html>

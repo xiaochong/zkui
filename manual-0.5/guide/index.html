@@ -1,0 +1,45 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Grails ZK UI Plugin 0.5.M1 - Reference Documentation</title>
+        <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen" title="Style" charset="utf-8"/>
+        <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8" />
+    </head>
+    <body class="body">
+        <div id="header">
+            <div class="images"><br/><br/>
+                <a href="http://grails.org" target="_blank"><img alt="ZK UI Logo" title="ZK UI Plugin for Grails Framework" src="../img/zkui_logo.png" border="0"/></a>
+                <span style="right:30px; top:20px; position:absolute;">
+                    <a href="../index.html" target="_top">Frames</a> | <a href="index.html" target="_top">No Frames</a><br/><br/>
+                    <a href="http://springsource.com" target="_blank"></a>
+                </span>
+            </div>
+            <div class="message">zkui</div>
+            <h1>Grails ZK UI Plugin - Reference Documentation</h1>
+            <p><strong>Authors:</strong> groovyquan</p>
+            <p><strong>Version:</strong> 0.5.M1</p>
+            <em>This document is licensed under GNU Free Documentation License,ZK UI Plugin is released under LGPL</em>
+        </div>
+
+        <div id="toc">
+            <h2>Table of Contents</h2>
+            <div class="tocItem" style="margin-left:0px"><a href="1. Introduction.html">1. Introduction</a></div><div class="tocItem" style="margin-left:10px"><a href="1. Introduction.html#1.1 Taglib">1.1 Taglib</a></div><div class="tocItem" style="margin-left:10px"><a href="1. Introduction.html#1.2 Composer">1.2 Composer</a></div><div class="tocItem" style="margin-left:10px"><a href="1. Introduction.html#1.3 Builder">1.3 Builder</a></div><div class="tocItem" style="margin-left:10px"><a href="1. Introduction.html#1.4 Selector">1.4 Selector</a></div><div class="tocItem" style="margin-left:0px"><a href="2. Getting Started.html">2. Getting Started</a></div><div class="tocItem" style="margin-left:10px"><a href="2. Getting Started.html#2.1 Hello World">2.1 Hello World</a></div><div class="tocItem" style="margin-left:10px"><a href="2. Getting Started.html#2.2 Say Hello in Ajax way">2.2 Say Hello in Ajax way</a></div><div class="tocItem" style="margin-left:10px"><a href="2. Getting Started.html#2.3 Identify a component">2.3 Identify a component</a></div><div class="tocItem" style="margin-left:10px"><a href="2. Getting Started.html#2.4 A component is a POJO">2.4 A component is a POJO</a></div><div class="tocItem" style="margin-left:10px"><a href="2. Getting Started.html#2.5 Separating code from user interface">2.5 Separating code from user interface</a></div><div class="tocItem" style="margin-left:0px"><a href="3. Composer.html">3. Composer</a></div><div class="tocItem" style="margin-left:10px"><a href="3. Composer.html#3.1 Creating a composer">3.1 Creating a composer</a></div><div class="tocItem" style="margin-left:10px"><a href="3. Composer.html#3.2 Apply a composer">3.2 Apply a composer</a></div><div class="tocItem" style="margin-left:10px"><a href="3. Composer.html#3.3 Auto-wired Component">3.3 Auto-wired Component</a></div><div class="tocItem" style="margin-left:10px"><a href="3. Composer.html#3.4 Redirects">3.4 Redirects</a></div><div class="tocItem" style="margin-left:10px"><a href="3. Composer.html#3.5 Data Binding">3.5 Data Binding</a></div><div class="tocItem" style="margin-left:10px"><a href="3. Composer.html#3.6 Unit Test">3.6 Unit Test</a></div><div class="tocItem" style="margin-left:10px"><a href="3. Composer.html#3.7 Render Errors">3.7 Render Errors</a></div><div class="tocItem" style="margin-left:10px"><a href="3. Composer.html#3.8 ZK's old Data Binding">3.8 ZK's old Data Binding</a></div><div class="tocItem" style="margin-left:10px"><a href="3. Composer.html#3.9 The Next Generation Data Binding System">3.9 The Next Generation Data Binding System</a></div><div class="tocItem" style="margin-left:10px"><a href="3. Composer.html#3.10 An Annotation Based Composer For MVC">3.10 An Annotation Based Composer For MVC</a></div><div class="tocItem" style="margin-left:10px"><a href="3. Composer.html#3.11 Support extends GenericForwardComposer or other Composer">3.11 Support extends GenericForwardComposer or other Composer</a></div><div class="tocItem" style="margin-left:0px"><a href="4. Builder.html">4. Builder</a></div><div class="tocItem" style="margin-left:10px"><a href="4. Builder.html#4.1 appendChild">4.1 appendChild</a></div><div class="tocItem" style="margin-left:10px"><a href="4. Builder.html#4.2 leftShift">4.2 leftShift</a></div><div class="tocItem" style="margin-left:10px"><a href="4. Builder.html#4.3 Event listening">4.3 Event listening</a></div><div class="tocItem" style="margin-left:10px"><a href="4. Builder.html#4.4 Client-side event listening">4.4 Client-side event listening</a></div><div class="tocItem" style="margin-left:0px"><a href="5. Selector.html">5. Selector</a></div><div class="tocItem" style="margin-left:10px"><a href="5. Selector.html#5.1 Selector overview">5.1 Selector overview</a></div><div class="tocItem" style="margin-left:10px"><a href="5. Selector.html#5.2 Base Selector">5.2 Base Selector</a></div><div class="tocItem" style="margin-left:10px"><a href="5. Selector.html#5.3 Selector combinations">5.3 Selector combinations</a></div><div class="tocItem" style="margin-left:10px"><a href="5. Selector.html#5.4 Comparison with CSS3 Selector">5.4 Comparison with CSS3 Selector</a></div><div class="tocItem" style="margin-left:10px"><a href="5. Selector.html#5.5 More about Selector">5.5 More about Selector</a></div><div class="tocItem" style="margin-left:0px"><a href="6. Event Handling.html">6. Event Handling</a></div><div class="tocItem" style="margin-left:10px"><a href="6. Event Handling.html#6.1 Event Listening">6.1 Event Listening</a></div><div class="tocItem" style="margin-left:10px"><a href="6. Event Handling.html#6.2 Client-side Event Listening">6.2 Client-side Event Listening</a></div><div class="tocItem" style="margin-left:0px"><a href="7. Scaffolding Templates.html">7. Scaffolding Templates</a></div><div class="tocItem" style="margin-left:10px"><a href="7. Scaffolding Templates.html#7.1 Static Scaffolding">7.1 Static Scaffolding</a></div><div class="tocItem" style="margin-left:10px"><a href="7. Scaffolding Templates.html#7.2 Customizing the scaffolding templates">7.2 Customizing the scaffolding templates</a></div><div class="tocItem" style="margin-left:0px"><a href="8. Integration.html">8. Integration</a></div><div class="tocItem" style="margin-left:10px"><a href="8. Integration.html#8.1 ZK EE">8.1 ZK EE</a></div><div class="tocItem" style="margin-left:10px"><a href="8. Integration.html#8.2 ZK Themes">8.2 ZK Themes</a></div><div class="tocItem" style="margin-left:10px"><a href="8. Integration.html#8.3 ZK Extensions Component">8.3 ZK Extensions Component</a></div><div class="tocItem" style="margin-left:0px"><a href="9. Architecture presentation patterns Model-View-View-Model(MVVM).html">9. Architecture presentation patterns Model-View-View-Model(MVVM)</a></div><div class="tocItem" style="margin-left:10px"><a href="9. Architecture presentation patterns Model-View-View-Model(MVVM).html#9.1 Hello MVVM">9.1 Hello MVVM</a></div><div class="tocItem" style="margin-left:10px"><a href="9. Architecture presentation patterns Model-View-View-Model(MVVM).html#9.2 Design your first MVVM page">9.2 Design your first MVVM page</a></div>
+        </div>
+        <div id="content">
+            
+        </div>
+        <div id="footer">
+             Grails ZK UI Plugin Project
+        </div>
+        <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+        </script>
+        <script type="text/javascript">
+            try {
+                var pageTracker = _gat._getTracker("UA-23956384-1");
+                pageTracker._trackPageview();
+            } catch(err) {
+            }</script>
+    </body>
+</html>

@@ -1,0 +1,232 @@
+<html>
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+        <title>9.2 Design your first MVVM page</title>
+        <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen" title="Ref" charset="utf-8"/>
+    </head>
+    <body class="body">
+    <h3>Case scenario</h3>
+I will use a search example to show how you can archive MVVM design pattern in Grails ZK UI by using ZK Bind. Please imagine yourself creating a search page in which the searching of an item is done by a filter string; the search result of items is displayed in a list and when selecting on an item, it will also show the details of the selected item.<p class="paragraph"/><h3>Create Domain class</h3>
+<div class="code"><pre>grails create&#45;domain&#45;class item</pre></div><p class="paragraph"/>
+Modify the <code>Item</code> Domain class:
+<div class="code"><pre>class Item &#123;
+    <span class="java&#45;object">String</span> name
+    <span class="java&#45;object">String</span> description
+    <span class="java&#45;object">double</span> price
+    <span class="java&#45;object">int</span> quantity<p class="paragraph"/>    <span class="java&#45;keyword">public</span> Item(<span class="java&#45;object">String</span> name, <span class="java&#45;object">String</span> description, <span class="java&#45;object">double</span> price, <span class="java&#45;object">int</span> quantity) &#123;
+        <span class="java&#45;keyword">this</span>.name = name
+        <span class="java&#45;keyword">this</span>.description = description
+        <span class="java&#45;keyword">this</span>.price = price
+        <span class="java&#45;keyword">this</span>.quantity = quantity
+    &#125;<p class="paragraph"/>    <span class="java&#45;keyword">public</span> <span class="java&#45;object">double</span> getTotalPrice() &#123;
+        <span class="java&#45;keyword">return</span> price &#42; quantity
+    &#125;<p class="paragraph"/>    <span class="java&#45;keyword">static</span> constraints = &#123;
+    &#125;
+&#125;</pre></div><p class="paragraph"/><h3>Create the <code>search</code> service</h3>
+<div class="code"><pre>grails create&#45;service search</pre></div><p class="paragraph"/>Modify the SearchService:
+<div class="code"><pre>class SearchService &#123;<p class="paragraph"/>    List&#60;Item&#62; search(<span class="java&#45;object">String</span> fitler) &#123;
+        <span class="java&#45;keyword">if</span> (<span class="java&#45;quote">"&#42;"</span>.equals(fitler)) <span class="java&#45;keyword">return</span> Item.list()
+        <span class="java&#45;keyword">return</span> Item.findAllByNameIlike(<span class="java&#45;quote">"%$&#123;fitler&#125;%"</span>)
+    &#125;
+&#125;</pre></div><p class="paragraph"/><h3>Design the View Model</h3>
+Follow the design concept of MVVM, we should design the view model first, we should not consider the visual effect. A view model should not depend on a View, but consider the data and actions as it contract for interacting with the View. In this scenario, we need a String as a filter and a ListModelList&#60;Item&#62; for the search result and a doSearch() method to perform the search command. Further, we also need a selected filed to keep the item which is currently selected.
+As you can see, I am defending a View Model and it is isolated from the View, which means that it is possible to be reused by another View and even tested by pure Java code. Following is the code of the View Model.<p class="paragraph"/><div class="code"><pre>grails create&#45;view&#45;model demo.search</pre></div><p class="paragraph"/>The above command will generate the ViewModel in grails-app/vms/SearchVM.groovy<p class="paragraph"/>Modify the ViewModel :
+<div class="code"><pre>class SearchVM &#123;
+    //the search condition
+    <span class="java&#45;object">String</span> filter = <span class="java&#45;quote">"&#42;"</span><p class="paragraph"/>    //the search result
+    ListModelList&#60;Item&#62; items<p class="paragraph"/>    //the selected item
+    Item selected<p class="paragraph"/>    //inject the SearchService
+    def searchService<p class="paragraph"/>    <span class="java&#45;keyword">public</span> <span class="java&#45;object">String</span> getFilter() &#123;
+        <span class="java&#45;keyword">return</span> filter
+    &#125;<p class="paragraph"/>    @NotifyChange
+    <span class="java&#45;keyword">public</span> void setFilter(<span class="java&#45;object">String</span> filter) &#123;
+        <span class="java&#45;keyword">this</span>.filter = filter
+    &#125;<p class="paragraph"/>    <span class="java&#45;keyword">public</span> ListModel&#60;Item&#62; getItems() &#123;
+        <span class="java&#45;keyword">if</span> (items == <span class="java&#45;keyword">null</span>) &#123;
+            doSearch()
+        &#125;
+        <span class="java&#45;keyword">return</span> items
+    &#125;<p class="paragraph"/>    @NotifyChange(&#91;<span class="java&#45;quote">"items"</span>, <span class="java&#45;quote">"selected"</span>&#93;)
+    <span class="java&#45;keyword">public</span> void doSearch() &#123;
+        items = <span class="java&#45;keyword">new</span> ListModelList&#60;Item&#62;()
+        items.addAll(searchService.search(filter))
+        selected = <span class="java&#45;keyword">null</span>
+    &#125;<p class="paragraph"/>    <span class="java&#45;keyword">public</span> Item getSelected() &#123;
+        <span class="java&#45;keyword">return</span> selected
+    &#125;<p class="paragraph"/>    @NotifyChange
+    <span class="java&#45;keyword">public</span> void setSelected(Item selected) &#123;
+        <span class="java&#45;keyword">this</span>.selected = selected
+    &#125;<p class="paragraph"/>    Converter totalPriceConverter = <span class="java&#45;keyword">null</span><p class="paragraph"/>    <span class="java&#45;keyword">public</span> Converter getTotalPriceConverter() &#123;
+        <span class="java&#45;keyword">if</span> (totalPriceConverter != <span class="java&#45;keyword">null</span>) &#123;
+            <span class="java&#45;keyword">return</span> totalPriceConverter
+        &#125;
+        <span class="java&#45;keyword">return</span> totalPriceConverter = <span class="java&#45;keyword">new</span> Converter() &#123;
+            <span class="java&#45;keyword">public</span> <span class="java&#45;object">Object</span> coerceToBean(<span class="java&#45;object">Object</span> val, Component component, BindContext ctx) &#123;
+                <span class="java&#45;keyword">return</span> <span class="java&#45;keyword">null</span>//never called in <span class="java&#45;keyword">this</span> example
+            &#125;<p class="paragraph"/>            <span class="java&#45;keyword">public</span> <span class="java&#45;object">Object</span> coerceToUi(<span class="java&#45;object">Object</span> val, Component component, BindContext ctx) &#123;
+                <span class="java&#45;keyword">if</span> (val == <span class="java&#45;keyword">null</span>) <span class="java&#45;keyword">return</span> <span class="java&#45;keyword">null</span>
+                <span class="java&#45;object">String</span> str = <span class="java&#45;keyword">new</span> DecimalFormat('$ &#35;&#35;&#35;,&#35;&#35;&#35;,&#35;&#35;&#35;,&#35;&#35;0.00').format((<span class="java&#45;object">Double</span>) val)
+                <span class="java&#45;keyword">return</span> str
+            &#125;
+        &#125;
+    &#125;
+&#125;</pre></div><p class="paragraph"/>SearchVM is created by grails command <code>create-view-model</code> ,we need to notify ZK Bind that the properties of this <code>View Model</code> were changed. In ZK Bind, it has the binder to help the binding between View and View Model. By adding <code>NotifyChange on a setter method of a property, after binder set the property, it is noticed to reload components that bind to this property. Add </code>NotifyChange on a command method, after Binder executes the method, it is noticed to reload components that bind to these properties.
+For example, I add <code>NotifyChange on setFilter, when binder sets the value by setFilter(), it is noticed to reload any binding that is related to filter property of the view model. I also added </code>NotifyChange("items","selected") on doSearch(), that is because when doing the search, I will search by the filter and has a new item list and also reset selected to null, so I need to notify Binder this 2 properties was changed.
+With @NotifyChange, it let binder knows when to reload the view automatically.<p class="paragraph"/><h3>Design a View with ZK Bind</h3>
+After the View Mode is ready, we are now able to bind View to View Model, not only the data, but also the action, and reloading the changed data automatically (thanks the @NotifyChange in SearchVM).
+Here is the designed View that will be use in this article to bind with View Model:
+<img border="0" class="center" src="../img/mvvm-in-zk6-view-example.png"></img><p class="paragraph"/><h3>Apply the BindComposer</h3><p class="paragraph"/>Now, we have to create a ‘search.gsp’ and bind it to the View Model. To do this, set the ‘apply’ attribute to ‘org.zkoss.bind.BindComposer’ as the composer, and bind the ‘viewModel’ to ‘SearchVM’ that was just created. BindComposer will read all the ZK Bind syntax and create a binder to bind View and View Model.<p class="paragraph"/><div class="code"><pre>&#60;z:window title=<span class="java&#45;quote">"Search Storage Item"</span> border=<span class="java&#45;quote">"normal"</span> width=<span class="java&#45;quote">"600px"</span>
+    apply=<span class="java&#45;quote">"org.zkoss.bind.BindComposer"</span> viewModel=<span class="java&#45;quote">"@bind(vm='demo.SearchVM')"</span> &#62;
+...<p class="paragraph"/>&#60;/z:window&#62;</pre></div><p class="paragraph"/>The @bind(name=expression) here, is the syntax to assign a View Model to the binder, ‘name’ is the name of the View Model which will be referenced in nested binding. ‘expression’ is an EL 2.2 expression and there are some rules about this expression; if the evaluated result is a ‘String’, it uses ‘String’ as a class name to create the view model whereas if the result is a ‘Class’, it creates the View Model by ‘Class.newInstance()’. Moreover, if the result is a non-primitive Object then it will use it directly, other-wise, it complains an exception.<p class="paragraph"/><h3>Binding the textbox with filter data</h3><p class="paragraph"/>We need a textbox to represent the filter data, when user types in the textbox, the data will automatically update to ‘vm.filter’, and we also want the search button disabled if the value of ‘vm.filter’ is empty.<p class="paragraph"/><strong class="bold">View : search.gsp</strong>
+<div class="code"><pre>&#60;z:textbox value=<span class="java&#45;quote">"@bind(vm.filter)"</span> instant=<span class="java&#45;quote">"<span class="java&#45;keyword">true</span>"</span>/&#62;
+&#60;z:button label=<span class="java&#45;quote">"Search"</span> disabled=<span class="java&#45;quote">"<code>bind(empty vm.filter)"</span>/&#62;</pre></div><p class="paragraph"/>The </code>bind(expression) here, is the two-way binding syntax to bind component’s attribute and the VM’s property together, it constructs a prompt binding, which means that the change of a component’s attribute caused by a user’s action will also be saved to the VM’s property. And any changed notification of the property will cause a reload of the component.
+In the above example, I have binded the ‘vm.filter’ to the ‘value’ attribute of the textbox, and the ‘disabled’ attribute of the button. When editing the textbox, ‘vm.filter’ will be changed and the button will immediately be enabled or disabled depending on the value of ‘vm.filter’.<p class="paragraph"/><h3>Binding the listbox with search result</h3><p class="paragraph"/>In ZK 6, we introduce a new feature called ‘template’, it is a perfect matching when binding a collection. We will have a listbox and a template to show the search result.<p class="paragraph"/><strong class="bold">View : search.gsp</strong>
+<div class="code"><pre>&#60;z:listbox model=<span class="java&#45;quote">"<code>bind(vm.items)"</span> selectedItem=<span class="java&#45;quote">"</code>bind(vm.selected)"</span> hflex=<span class="java&#45;quote">"<span class="java&#45;keyword">true</span>"</span> height=<span class="java&#45;quote">"300px"</span>&#62;
+    &#60;z:listhead&#62;
+        &#60;z:listheader label=<span class="java&#45;quote">"Name"</span>/&#62;
+        &#60;z:listheader label=<span class="java&#45;quote">"Price"</span> align=<span class="java&#45;quote">"center"</span> width=<span class="java&#45;quote">"80px"</span>/&#62;
+        &#60;z:listheader label=<span class="java&#45;quote">"Quantity"</span> align=<span class="java&#45;quote">"center"</span> width=<span class="java&#45;quote">"80px"</span>/&#62;
+    &#60;/z:listhead&#62;
+    &#60;z:template name=<span class="java&#45;quote">"model"</span> <span class="java&#45;keyword">var</span>=<span class="java&#45;quote">"item"</span>&#62;
+        &#60;listitem&#62;
+            &#60;listcell label=<span class="java&#45;quote">"@bind(item.name)"</span>/&#62;
+            &#60;listcell label=<span class="java&#45;quote">"<code>bind(item.price) </code>converter('formatedNumber', format='&#35;&#35;&#35;,&#35;&#35;0.00')"</span>/&#62;
+            &#60;listcell label=<span class="java&#45;quote">"<code>bind(item.quantity)"</span> sclass=<span class="java&#45;quote">"</code>bind(item.quantity lt 3 ?'red':'')"</span>/&#62;
+        &#60;/listitem&#62;
+    &#60;/z:template&#62;
+&#60;/z:listbox&#62;</pre></div><p class="paragraph"/>The <code>bind(expression) can also apply to ‘model’ attribute of a component. When binding to a model, we have to provide a template, which name is ‘model’, to render each item in the model. In the template, we have to set the name of ‘var’, so we could use it as an item in the template. We also introduce the </code>converter(expression) syntax, so you can write a ‘Converter’ to convert data to attribute when loading to component, and convert back when saving to bean.
+In the above example, the ‘model’ of listbox binds to ‘vm.items’, and the ‘selectedItem’ binds to ‘vm.selected’ with a template that has responsibility to render each item of the ‘vm.items’. Of course, we could also use @bind in the template, even bind to a ‘sclass’ attribute of a listcell with a flexible expression ‘item.quantity lt 3?’red’:’’’. Look into ‘item.price’, it is a double, I want it to be shown with an expected format, therefore a built-in converter ‘formatedNumber’ and a format argument ‘###,##0.00’ are used.<p class="paragraph"/><h3>Binding the selected item</h3>
+When binding the listbox, we also bind the ‘selectedItem’ of listbox to ‘selected’ property of View Model. You do not need to worry about selectedItem(in which its value type is a Listitem) of listbox being the incorrect data type of the model because binder will convert it to item automatically. By the binding of ‘selectedItem’, when selecting an item in the listbox, the ‘selected’ property will be updated to the selected item and displayed in detail.<p class="paragraph"/><strong class="bold">View : search.gsp</strong>
+<div class="code"><pre>&#60;z:groupbox visible=<span class="java&#45;quote">"@bind(not empty vm.selected)"</span> hflex=<span class="java&#45;quote">"<span class="java&#45;keyword">true</span>"</span> mold=<span class="java&#45;quote">"3d"</span>&#62;
+    &#60;z:caption label=<span class="java&#45;quote">"@bind(vm.selected.name)"</span>/&#62;
+    &#60;z:grid hflex=<span class="java&#45;quote">"<span class="java&#45;keyword">true</span>"</span>&#62;
+        &#60;z:columns&#62;
+            &#60;z:column width=<span class="java&#45;quote">"120px"</span>/&#62;
+            &#60;z:column/&#62;
+        &#60;/z:columns&#62;
+        &#60;z:rows&#62;
+            &#60;z:row&#62;
+                Description &#60;z:label value=<span class="java&#45;quote">"@bind(vm.selected.description)"</span>/&#62;
+            &#60;/z:row&#62;
+            &#60;z:row&#62;
+                Price &#60;z:label value=<span class="java&#45;quote">"<code>bind(vm.selected.price) </code>converter('formatedNumber', format='&#35;&#35;&#35;,&#35;&#35;0.00')"</span>/&#62;
+            &#60;/z:row&#62;
+            &#60;z:row&#62;
+                Quantity &#60;z:label value=<span class="java&#45;quote">"<code>bind(vm.selected.quantity)"</span> sclass=<span class="java&#45;quote">"</code>bind(vm.selected.quantity lt 3 ?'red':'')"</span>/&#62;
+            &#60;/z:row&#62;
+            &#60;z:row&#62;
+                Total Price &#60;z:label value=<span class="java&#45;quote">"<code>bind(vm.selected.totalPrice) </code>converter(vm.totalPriceConverter)"</span>/&#62;
+            &#60;/z:row&#62;
+        &#60;/z:rows&#62;
+    &#60;/z:grid&#62;
+&#60;/z:groupbox&#62;</pre></div>
+In the example above, we bind ‘visible’ attribute of groupbox with the expression ‘not empty vm.selected’, so that the groupbox will only appear visible when user selects an item. Oppositely, if no item is selected, this groupbox will not show up. The @converter() is used again here but with some differences. The converter now comes from the View Model . Of course, a ‘getTotalPriceConverter’ method needs to be prepared in View Model and return a Converter.<p class="paragraph"/><strong class="bold">ViewModel : SearchVM.groovy</strong>
+<div class="code"><pre>Converter totalPriceConverter = <span class="java&#45;keyword">null</span><p class="paragraph"/> <span class="java&#45;keyword">public</span> Converter getTotalPriceConverter() &#123;
+     <span class="java&#45;keyword">if</span> (totalPriceConverter != <span class="java&#45;keyword">null</span>) &#123;
+         <span class="java&#45;keyword">return</span> totalPriceConverter
+     &#125;
+     <span class="java&#45;keyword">return</span> totalPriceConverter = <span class="java&#45;keyword">new</span> Converter() &#123;
+         <span class="java&#45;keyword">public</span> <span class="java&#45;object">Object</span> coerceToBean(<span class="java&#45;object">Object</span> val, Component component, BindContext ctx) &#123;
+             <span class="java&#45;keyword">return</span> <span class="java&#45;keyword">null</span>//never called in <span class="java&#45;keyword">this</span> example
+         &#125;<p class="paragraph"/>         <span class="java&#45;keyword">public</span> <span class="java&#45;object">Object</span> coerceToUi(<span class="java&#45;object">Object</span> val, Component component, BindContext ctx) &#123;
+             <span class="java&#45;keyword">if</span> (val == <span class="java&#45;keyword">null</span>) <span class="java&#45;keyword">return</span> <span class="java&#45;keyword">null</span>
+             <span class="java&#45;object">String</span> str = <span class="java&#45;keyword">new</span> DecimalFormat('$ &#35;&#35;&#35;,&#35;&#35;&#35;,&#35;&#35;&#35;,&#35;&#35;0.00').format((<span class="java&#45;object">Double</span>) val)
+             <span class="java&#45;keyword">return</span> str
+         &#125;
+     &#125;
+ &#125;</pre></div><p class="paragraph"/><h3>Binding the button action to a command</h3>
+Now, we have to perform a command of the View Model when clicking on the search button. To do so, add a @bind in the onClick event of the button.<p class="paragraph"/><div class="code"><pre>&#60;z:button label=<span class="java&#45;quote">"Search"</span> onClick=<span class="java&#45;quote">"@bind('doSearch')"</span> disabled=<span class="java&#45;quote">"<code>bind(empty vm.filter)"</span>/&#62;</pre></div><p class="paragraph"/>The </code>bind(expression) syntax in the event of a component represents the binding of an event to a command of the View Model. It has some rules.
+<ol>
+<li>The evaluation result of the expression result has to be a ‘String’,</li>
+<li>The string must also be the name of the command</li>
+<li>View model must have an executable method that has the name of the command.</li>
+</ol><p class="paragraph"/>In the case above, onClick is binded with a ‘doSearch’ command. When clicking on the button, binder will go through the command lifecycle (we will talk about this in another smalltalk ,link when ready) and execute the doSearch method of view model.<p class="paragraph"/><h3>The all:<strong class="bold">search.gsp</strong></h3><p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;%@ page contentType=<span class="xml&#45;quote">"text/html;charset=UTF&#45;8"</span> %&#62;</span>
+<span class="xml&#45;tag">&#60;html&#62;</span>
+<span class="xml&#45;tag">&#60;head&#62;</span>
+    <span class="xml&#45;tag">&#60;title&#62;</span>MVVM Demo<span class="xml&#45;tag">&#60;/title&#62;</span>
+    <span class="xml&#45;tag">&#60;z:resources/&#62;</span>
+    <span class="xml&#45;tag">&#60;style type=<span class="xml&#45;quote">"text/css"</span>&#62;</span>
+    .z&#45;listcell.red .z&#45;listcell&#45;cnt, .z&#45;label.red &#123;
+        color: red;
+    &#125;
+    <span class="xml&#45;tag">&#60;/style&#62;</span>
+<span class="xml&#45;tag">&#60;/head&#62;</span><p class="paragraph"/><span class="xml&#45;tag">&#60;body&#62;</span>
+<span class="xml&#45;tag">&#60;z:window title=<span class="xml&#45;quote">"Search Storage Item"</span> border=<span class="xml&#45;quote">"normal"</span> width=<span class="xml&#45;quote">"600px"</span>
+          apply=<span class="xml&#45;quote">"org.zkoss.bind.BindComposer"</span> viewModel=<span class="xml&#45;quote">"@bind(vm='zkui6demo.SearchVM')"</span>&#62;</span>
+    <span class="xml&#45;tag">&#60;z:vbox hflex=<span class="xml&#45;quote">"true"</span>&#62;</span>
+        <span class="xml&#45;tag">&#60;z:hbox&#62;</span>
+            Filter :
+            <span class="xml&#45;tag">&#60;z:textbox value=<span class="xml&#45;quote">"@bind(vm.filter)"</span> instant=<span class="xml&#45;quote">"true"</span>/&#62;</span>
+            <span class="xml&#45;tag">&#60;z:button label=<span class="xml&#45;quote">"Search"</span> onClick=<span class="xml&#45;quote">"<code>bind('doSearch')"</span> disabled=<span class="xml&#45;quote">"</code>bind(empty vm.filter)"</span>/&#62;</span>
+        <span class="xml&#45;tag">&#60;/z:hbox&#62;</span>
+        <span class="xml&#45;tag">&#60;z:listbox model=<span class="xml&#45;quote">"<code>bind(vm.items)"</span> selectedItem=<span class="xml&#45;quote">"</code>bind(vm.selected)"</span> hflex=<span class="xml&#45;quote">"true"</span> height=<span class="xml&#45;quote">"300px"</span>&#62;</span>
+            <span class="xml&#45;tag">&#60;z:listhead&#62;</span>
+                <span class="xml&#45;tag">&#60;z:listheader label=<span class="xml&#45;quote">"Name"</span>/&#62;</span>
+                <span class="xml&#45;tag">&#60;z:listheader label=<span class="xml&#45;quote">"Price"</span> align=<span class="xml&#45;quote">"center"</span> width=<span class="xml&#45;quote">"80px"</span>/&#62;</span>
+                <span class="xml&#45;tag">&#60;z:listheader label=<span class="xml&#45;quote">"Quantity"</span> align=<span class="xml&#45;quote">"center"</span> width=<span class="xml&#45;quote">"80px"</span>/&#62;</span>
+            <span class="xml&#45;tag">&#60;/z:listhead&#62;</span>
+            <span class="xml&#45;tag">&#60;z:template name=<span class="xml&#45;quote">"model"</span> var=<span class="xml&#45;quote">"item"</span>&#62;</span>
+                <span class="xml&#45;tag">&#60;listitem&#62;</span>
+                    <span class="xml&#45;tag">&#60;listcell label=<span class="xml&#45;quote">"@bind(item.name)"</span>/&#62;</span>
+                    <span class="xml&#45;tag">&#60;listcell label=<span class="xml&#45;quote">"<code>bind(item.price) </code>converter('formatedNumber', format='&#35;&#35;&#35;,&#35;&#35;0.00')"</span>/&#62;</span>
+                    <span class="xml&#45;tag">&#60;listcell label=<span class="xml&#45;quote">"<code>bind(item.quantity)"</span> sclass=<span class="xml&#45;quote">"</code>bind(item.quantity lt 3 ?'red':'')"</span>/&#62;</span>
+                <span class="xml&#45;tag">&#60;/listitem&#62;</span>
+            <span class="xml&#45;tag">&#60;/z:template&#62;</span>
+        <span class="xml&#45;tag">&#60;/z:listbox&#62;</span>
+        <span class="xml&#45;tag">&#60;z:groupbox visible=<span class="xml&#45;quote">"@bind(not empty vm.selected)"</span> hflex=<span class="xml&#45;quote">"true"</span> mold=<span class="xml&#45;quote">"3d"</span>&#62;</span>
+            <span class="xml&#45;tag">&#60;z:caption label=<span class="xml&#45;quote">"@bind(vm.selected.name)"</span>/&#62;</span>
+            <span class="xml&#45;tag">&#60;z:grid hflex=<span class="xml&#45;quote">"true"</span>&#62;</span>
+                <span class="xml&#45;tag">&#60;z:columns&#62;</span>
+                    <span class="xml&#45;tag">&#60;z:column width=<span class="xml&#45;quote">"120px"</span>/&#62;</span>
+                    <span class="xml&#45;tag">&#60;z:column/&#62;</span>
+                <span class="xml&#45;tag">&#60;/z:columns&#62;</span>
+                <span class="xml&#45;tag">&#60;z:rows&#62;</span>
+                    <span class="xml&#45;tag">&#60;z:row&#62;</span>
+                        Description <span class="xml&#45;tag">&#60;z:label value=<span class="xml&#45;quote">"@bind(vm.selected.description)"</span>/&#62;</span>
+                    <span class="xml&#45;tag">&#60;/z:row&#62;</span>
+                    <span class="xml&#45;tag">&#60;z:row&#62;</span>
+                        Price <span class="xml&#45;tag">&#60;z:label value=<span class="xml&#45;quote">"<code>bind(vm.selected.price) </code>converter('formatedNumber', format='&#35;&#35;&#35;,&#35;&#35;0.00')"</span>/&#62;</span>
+                    <span class="xml&#45;tag">&#60;/z:row&#62;</span>
+                    <span class="xml&#45;tag">&#60;z:row&#62;</span>
+                        Quantity <span class="xml&#45;tag">&#60;z:label value=<span class="xml&#45;quote">"<code>bind(vm.selected.quantity)"</span> sclass=<span class="xml&#45;quote">"</code>bind(vm.selected.quantity lt 3 ?'red':'')"</span>/&#62;</span>
+                    <span class="xml&#45;tag">&#60;/z:row&#62;</span>
+                    <span class="xml&#45;tag">&#60;z:row&#62;</span>
+                        Total Price <span class="xml&#45;tag">&#60;z:label value=<span class="xml&#45;quote">"<code>bind(vm.selected.totalPrice) </code>converter(vm.totalPriceConverter)"</span>/&#62;</span>
+                    <span class="xml&#45;tag">&#60;/z:row&#62;</span>
+                <span class="xml&#45;tag">&#60;/z:rows&#62;</span>
+            <span class="xml&#45;tag">&#60;/z:grid&#62;</span>
+        <span class="xml&#45;tag">&#60;/z:groupbox&#62;</span>
+    <span class="xml&#45;tag">&#60;/z:vbox&#62;</span>
+<span class="xml&#45;tag">&#60;/z:window&#62;</span>
+<span class="xml&#45;tag">&#60;/body&#62;</span>
+<span class="xml&#45;tag">&#60;/html&#62;</span></pre></div><p class="paragraph"/><h3>Initialization data</h3><p class="paragraph"/>Initialization data in  BootStrap.groovy<p class="paragraph"/><div class="code"><pre>class BootStrap &#123;<p class="paragraph"/>    def init = &#123; servletContext &#45;&#62;
+        List&#60;Item&#62; allItems = <span class="java&#45;keyword">new</span> ArrayList&#60;Item&#62;()
+        allItems.add(<span class="java&#45;keyword">new</span> Item(<span class="java&#45;quote">"P001&#45;A"</span>, <span class="java&#45;quote">"part 001, type A"</span>, nextPrice(), nextQuantity()))
+        allItems.add(<span class="java&#45;keyword">new</span> Item(<span class="java&#45;quote">"P001&#45;B"</span>, <span class="java&#45;quote">"part 001, type B"</span>, nextPrice(), nextQuantity()))
+        allItems.add(<span class="java&#45;keyword">new</span> Item(<span class="java&#45;quote">"P001&#45;C"</span>, <span class="java&#45;quote">"part 001, type C"</span>, nextPrice(), nextQuantity()))
+        allItems.add(<span class="java&#45;keyword">new</span> Item(<span class="java&#45;quote">"P001&#45;D"</span>, <span class="java&#45;quote">"part 001, type D"</span>, nextPrice(), nextQuantity()))
+        allItems.add(<span class="java&#45;keyword">new</span> Item(<span class="java&#45;quote">"P001&#45;E"</span>, <span class="java&#45;quote">"part 001, type E"</span>, nextPrice(), nextQuantity()))<p class="paragraph"/>        allItems.add(<span class="java&#45;keyword">new</span> Item(<span class="java&#45;quote">"P002&#45;A"</span>, <span class="java&#45;quote">"part 001, type A"</span>, nextPrice(), nextQuantity()))
+        allItems.add(<span class="java&#45;keyword">new</span> Item(<span class="java&#45;quote">"P002&#45;B"</span>, <span class="java&#45;quote">"part 001, type B"</span>, nextPrice(), nextQuantity()))
+        allItems.add(<span class="java&#45;keyword">new</span> Item(<span class="java&#45;quote">"P002&#45;C"</span>, <span class="java&#45;quote">"part 001, type C"</span>, nextPrice(), nextQuantity()))
+        allItems.add(<span class="java&#45;keyword">new</span> Item(<span class="java&#45;quote">"P002&#45;D"</span>, <span class="java&#45;quote">"part 001, type D"</span>, nextPrice(), nextQuantity()))
+        allItems.add(<span class="java&#45;keyword">new</span> Item(<span class="java&#45;quote">"P002&#45;E"</span>, <span class="java&#45;quote">"part 001, type E"</span>, nextPrice(), nextQuantity()))<p class="paragraph"/>        allItems.add(<span class="java&#45;keyword">new</span> Item(<span class="java&#45;quote">"P003&#45;A"</span>, <span class="java&#45;quote">"part 001, type A"</span>, nextPrice(), nextQuantity()))
+        allItems.add(<span class="java&#45;keyword">new</span> Item(<span class="java&#45;quote">"P003&#45;B"</span>, <span class="java&#45;quote">"part 001, type B"</span>, nextPrice(), nextQuantity()))
+        allItems.add(<span class="java&#45;keyword">new</span> Item(<span class="java&#45;quote">"P003&#45;C"</span>, <span class="java&#45;quote">"part 001, type C"</span>, nextPrice(), nextQuantity()))
+        allItems.add(<span class="java&#45;keyword">new</span> Item(<span class="java&#45;quote">"P003&#45;D"</span>, <span class="java&#45;quote">"part 001, type D"</span>, nextPrice(), nextQuantity()))
+        allItems.add(<span class="java&#45;keyword">new</span> Item(<span class="java&#45;quote">"P003&#45;E"</span>, <span class="java&#45;quote">"part 001, type E"</span>, nextPrice(), nextQuantity()))<p class="paragraph"/>        allItems.add(<span class="java&#45;keyword">new</span> Item(<span class="java&#45;quote">"P004&#45;A"</span>, <span class="java&#45;quote">"part 001, type A"</span>, nextPrice(), nextQuantity()))
+        allItems.add(<span class="java&#45;keyword">new</span> Item(<span class="java&#45;quote">"P004&#45;B"</span>, <span class="java&#45;quote">"part 001, type B"</span>, nextPrice(), nextQuantity()))
+        allItems.add(<span class="java&#45;keyword">new</span> Item(<span class="java&#45;quote">"P004&#45;C"</span>, <span class="java&#45;quote">"part 001, type C"</span>, nextPrice(), nextQuantity()))
+        allItems.add(<span class="java&#45;keyword">new</span> Item(<span class="java&#45;quote">"P004&#45;D"</span>, <span class="java&#45;quote">"part 001, type D"</span>, nextPrice(), nextQuantity()))
+        allItems.add(<span class="java&#45;keyword">new</span> Item(<span class="java&#45;quote">"P004&#45;E"</span>, <span class="java&#45;quote">"part 001, type E"</span>, nextPrice(), nextQuantity()))
+        allItems&#42;.save()
+    &#125;<p class="paragraph"/>    Random r = <span class="java&#45;keyword">new</span> Random(<span class="java&#45;object">System</span>.currentTimeMillis())<p class="paragraph"/>    <span class="java&#45;object">double</span> nextPrice() &#123;
+        <span class="java&#45;keyword">return</span> r.nextDouble() &#42; 300
+    &#125;<p class="paragraph"/>    <span class="java&#45;object">int</span> nextQuantity() &#123;
+        <span class="java&#45;keyword">return</span> r.nextInt(10)
+    &#125;<p class="paragraph"/>    def destroy = &#123;
+    &#125;
+&#125;</pre></div><p class="paragraph"/>
+<h3>More...</h3><p class="paragraph"/><a href="http://books.zkoss.org/wiki/Small_Talks/2011/November/MVVM_in_ZK_6_-_Design_your_first_MVVM_page" target="blank">Small Talks/2011/November/MVVM in ZK 6 - Design your first MVVM page</a><p class="paragraph"/>
+
+    </body>
+</html>

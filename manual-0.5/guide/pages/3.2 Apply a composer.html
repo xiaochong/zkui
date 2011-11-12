@@ -1,0 +1,17 @@
+<html>
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+        <title>3.2 Apply a composer</title>
+        <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen" title="Ref" charset="utf-8"/>
+    </head>
+    <body class="body">
+    Each component Taglib has a <code>apply</code> attribute,so you can place the composer here
+<div class="code"><pre><span class="xml&#45;tag">&#60;z:window id=<span class="xml&#45;quote">"myWindowComposer"</span> apply=<span class="xml&#45;quote">"package.WindowComposer"</span>&#62;</span>
+    &#8230;
+<span class="xml&#45;tag">&#60;/z:window&#62;</span></pre></div><p class="paragraph"/>In the WindowComposer side
+<div class="code"><pre>def afterCompose = &#123;Component comp &#45;&#62;
+    assert comp.id==<span class="java&#45;quote">"myWindowComposer"</span>
+    assert (comp <span class="java&#45;keyword">instanceof</span> org.zkoss.zul.Window)
+&#125;</pre></div>
+    </body>
+</html>

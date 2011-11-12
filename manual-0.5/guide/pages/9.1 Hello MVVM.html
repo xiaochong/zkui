@@ -1,0 +1,88 @@
+<html>
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+        <title>9.1 Hello MVVM</title>
+        <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen" title="Ref" charset="utf-8"/>
+    </head>
+    <body class="body">
+    <h3>The example - On Demand Hello World!</h3><p class="paragraph"/>The use case: Press a button on the screen and show on the screen a message provided by the Model, say, "Hello World!".<p class="paragraph"/><h3>MVP Implementation</h3>
+<img border="0" class="center" src="../img/MVP_HELLO_FLOW.png"></img>
+<ol>
+<li>A user push a button(an action) on the screen. A corresponding event is fired.</li>
+<li>An event listener on the back-end handles this event.</li>
+<li>Access data and so on.</li>
+<li>Then UI elements were changed accordingly to provide visual feedback to the user.</li>
+</ol><p class="paragraph"/><code>View</code>: helloMVP.gsp<p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;z:window apply=<span class="xml&#45;quote">"HelloComposer"</span>&#62;</span>
+    <span class="xml&#45;tag">&#60;z:label id=<span class="xml&#45;quote">"lbl"</span>/&#62;</span>
+    <span class="xml&#45;tag">&#60;z:button id=<span class="xml&#45;quote">"btn"</span> label=<span class="xml&#45;quote">"Show"</span>/&#62;</span>
+<span class="xml&#45;tag">&#60;/z:window&#62;</span></pre></div><p class="paragraph"/><code>Presenter</code>: HelloComposer.groovy<p class="paragraph"/><div class="code"><pre>class HelloComposer&#123;
+    def lbl<p class="paragraph"/>    def onClick_btn(Event event) &#123;
+        lbl.setValue(<span class="java&#45;quote">"Hello World!"</span>)
+    &#125;
+&#125;</pre></div><p class="paragraph"/>The Presenter was injected with the View components Label lbl and the event listener onClick_btn(). As shown above, the characteristics of a MVP design pattern is that the Presenter(the Controller) would need to hold references to the View layer UI components so that it can update the states of the View and generate visual feedback. As in this example, the value of the Label component lbl is updated with "Hello World" and provides visual feedback to the user.<p class="paragraph"/><h3>MVVM Implementation</h3>
+<img border="0" class="center" src="../img/MVVM_HELLO_FLOW.png"></img><p class="paragraph"/>As stated in the paragraph earlier, data binder plays the role of syncing data between UI and ViewModel.
+<ol>
+<li>A user presses a button on the screen.</li>
+<li>A corresponding event is fired to the binder.</li>
+<li>The binder finds the corresponding action logic in the ViewModel and calls it.</li>
+<li>The action logic accesses data from Model layer and updates corresponding properties of the ViewModel.</li>
+<li>ViewModel notify the binder that some properties have been changed.</li>
+<li>Per what properties have been changed, the binder loads data from the ViewModel.</li>
+<li>Binder then updates the corresponding UI controls to provide visual feedback to the user.</li>
+</ol><p class="paragraph"/>Apparently, UI designer has to tell binder at least the following things:
+<ul class="star">
+<li>Which UI event is used to proceed which action logic? (so binder knows what method to call).</li>
+<li>Which UI attribute is used to show which data? (so binder knows what to load and what to update).</li>
+<li>Which UI attribute is used to input into which data? (so binder knows what property to save).</li>
+</ul><p class="paragraph"/>In ZK Bind, ZK Annotation is utilized to do these jobs:
+<code>View</code>: helloMVVM.gsp
+<div class="code"><pre><span class="xml&#45;tag">&#60;z:window apply=<span class="xml&#45;quote">"org.zkoss.bind.BindComposer"</span> viewModel=<span class="xml&#45;quote">"@bind(vm='org.zkoss.mvvm.examples.hello.HelloViewModel')"</span>&#62;</span>
+    <span class="xml&#45;tag">&#60;z:label value=<span class="xml&#45;quote">"@bind(vm.message)"</span>/&#62;</span>
+    <span class="xml&#45;tag">&#60;z:button label=<span class="xml&#45;quote">"Show"</span> onClick=<span class="xml&#45;quote">"@bind('showHello')"</span>/&#62;</span>
+<span class="xml&#45;tag">&#60;/z:window&#62;</span></pre></div><p class="paragraph"/><code>ViewModel</code>: HelloViewModel.groovy
+<div class="code"><pre>class HelloViewModel &#123;
+    <span class="java&#45;keyword">private</span> <span class="java&#45;object">String</span> message
+    <span class="java&#45;keyword">public</span> <span class="java&#45;object">String</span> getMessage() &#123;
+        <span class="java&#45;keyword">return</span> message
+    &#125;<p class="paragraph"/>    @NotifyChange(<span class="java&#45;quote">"message"</span>)
+    <span class="java&#45;keyword">public</span> void showHello() &#123;
+        message = <span class="java&#45;quote">"Hello World!"</span>
+    &#125;
+&#125;</pre></div><p class="paragraph"/>Per this example, let's run through the program flow:
+<ol>
+<li>When end user press the "Show" button, the onClick event is fired to binder.</li>
+<li>The binder finds that the command name in the ViewModel which is "showHello" as specified in the ZK annotation @bind('showHello').</li>
+<li>The binder calls the showHello() method in the HelloViewModel and changes the message property. Note that the @NotifyChange("message") Java method annotation on showHello() method in HelloViewModel. It tells the binder that the property message in the HelloViewModel will be changed if this command is called.</li>
+<li>The binder then finds that the attribute value of component label is associated with the changed message property of the HelloViewModel(as specified in ZK annotation @bind(vm.message)). So it loads data from the property vm.message and updates the label's value attribute. The new message "Hello World!" is then shown on the screen and provides the visual feedback to the end user.</li>
+</ol><p class="paragraph"/>In this MVVM implementation with data binding system, the HelloViewModel is a simple POJO and refers none of the UI components. It only exposes the message contents via getMessage() and provides the necessary action logic showHello(). It does not know how these information or action logic will be used. It is the UI designer's job to decide which UI components are to be used in which layout as seen in HelloMVVM.gsp.<p class="paragraph"/><h3>The example revised -- Pop Up the Message</h3><p class="paragraph"/>Customers tend to change their minds when they see the real screen. Say, after you demonstrated the program to a customer and he/she said, "Well, I thought the Hello World! message should be in a pop up window...".
+No problem, let's prepare a modal window and put the message in the modal window. Easy.<p class="paragraph"/><h3>Revised MVP Implementation</h3><p class="paragraph"/>View: helloMVP2.gsp
+<div class="code"><pre><span class="xml&#45;tag">&#60;z:window apply=<span class="xml&#45;quote">"Hello2Composer"</span>&#62;</span>
+    <span class="xml&#45;tag">&#60;z:button id=<span class="xml&#45;quote">"btn"</span> label=<span class="xml&#45;quote">"Show"</span>/&#62;</span>
+    <span class="xml&#45;tag">&#60;z:window id=<span class="xml&#45;quote">"popwin"</span> title=<span class="xml&#45;quote">"Hello"</span> width=<span class="xml&#45;quote">"300px"</span> height=<span class="xml&#45;quote">"200px"</span> visible=<span class="xml&#45;quote">"false"</span>&#62;</span>
+        <span class="xml&#45;tag">&#60;z:hbox align=<span class="xml&#45;quote">"center"</span> pack=<span class="xml&#45;quote">"center"</span> hflex=<span class="xml&#45;quote">"true"</span> vflex=<span class="xml&#45;quote">"true"</span>&#62;</span>
+            <span class="xml&#45;tag">&#60;z:label id=<span class="xml&#45;quote">"lbl"</span>/&#62;</span>
+        <span class="xml&#45;tag">&#60;/z:hbox&#62;</span>
+    <span class="xml&#45;tag">&#60;/z:window&#62;</span>
+<span class="xml&#45;tag">&#60;/z:window&#62;</span></pre></div><p class="paragraph"/>Presenter: Hello2Composer.groovy
+<div class="code"><pre>class Hello2Composer extends GenericForwardComposer &#123;
+    private Label popwin_lbl
+    private Window popwin<p class="paragraph"/>    Hello2Composer() &#123;
+        super('_' as char)
+    &#125;<p class="paragraph"/>    public void onClick_btn(Event event) &#123;
+        popwin_lbl.setValue(<span class="xml&#45;quote">"Hello World!"</span>)
+        popwin.doModal()
+    &#125;
+&#125;</pre></div><p class="paragraph"/>The View gsp file has to be revised and the Presenter java file has to be totally rewritten. This time, it injects the pop up window popwin, the label popwin_lbl inside the pop up window and so on because the View has changed.<p class="paragraph"/><h3>Revised MVVM Implementation</h3><p class="paragraph"/>View: helloMVVM2.gsp
+<div class="code"><pre><span class="xml&#45;tag">&#60;z:window apply=<span class="xml&#45;quote">"org.zkoss.bind.BindComposer"</span> viewModel=<span class="xml&#45;quote">"@bind(vm='org.zkoss.mvvm.examples.hello.HelloViewModel')"</span>&#62;</span>
+    <span class="xml&#45;tag">&#60;z:button label=<span class="xml&#45;quote">"Show"</span> onClick=<span class="xml&#45;quote">"@bind('showHello')"</span>/&#62;</span>
+    <span class="xml&#45;tag">&#60;z:window title=<span class="xml&#45;quote">"Hello"</span> width=<span class="xml&#45;quote">"300px"</span> height=<span class="xml&#45;quote">"200px"</span> mode=<span class="xml&#45;quote">"modal"</span>
+        visible=<span class="xml&#45;quote">"@bind(not empty vm.message)"</span>&#62;</span>
+        <span class="xml&#45;tag">&#60;z:hbox align=<span class="xml&#45;quote">"center"</span> pack=<span class="xml&#45;quote">"center"</span> hflex=<span class="xml&#45;quote">"true"</span> vflex=<span class="xml&#45;quote">"true"</span>&#62;</span>
+            <span class="xml&#45;tag">&#60;z:label value=<span class="xml&#45;quote">"@bind(vm.message)"</span>/&#62;</span>
+        <span class="xml&#45;tag">&#60;/z:hbox&#62;</span>
+    <span class="xml&#45;tag">&#60;/z:window&#62;</span>
+<span class="xml&#45;tag">&#60;/z:window&#62;</span></pre></div><p class="paragraph"/>The advantages of using MVVM design pattern comes in when customers changes their requirements on the View. UI Designers can proceed the changes independently and the HelloViewModel java file does not have to be changed because what the customer required was to change the way how the message is presented not the message itself. Notice that here the show/hide of the modal window is controlled whether the message is empty or not(visible="@bind(not empty vm.message)").<p class="paragraph"/>
+<h3>See more</h3>
+<a href="http://books.zkoss.org/wiki/Small%20Talks/2011/November/Hello%20ZK%20MVVM" target="blank">Small Talks/2011/November/Hello ZK MVVM</a>
+    </body>
+</html>

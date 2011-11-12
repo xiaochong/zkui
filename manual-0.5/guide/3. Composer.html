@@ -1,0 +1,284 @@
+<html>
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+        <title>3. Composer</title>
+        <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen" title="Ref" charset="utf-8"/>
+    </head>
+    <body class="body">
+    <h1><a name="3. Composer">3. Composer</a></h1>A composer is responsible to initialize a component (or a component of tree) when ZK loader is composing a component. It is the controller in the MVC pattern, while the component is the view,which separate the code from the user interfaces.
+<h2><a name="3.1 Creating a composer">3.1 Creating a composer</a></h2>Composers can be created with the create-composer target. For example try running the following command from the root of a Grails project:
+<div class="code"><pre>grails create&#45;composer window</pre></div><p class="paragraph"/>The command will result in the creation of a composer at the location grails-app/composers/WindowComposer.groovy:
+<div class="code"><pre>class WindowComposer &#123;
+    def afterCompose = &#123;Component comp &#45;&#62;
+        // initialize components here
+    &#125;
+&#125;</pre></div>
+WindowComposer by default provide a <code>afterCompose</code> closure to initialize components.<p class="paragraph"/><blockquote class="note">
+The create-composer command is merely for convenience and you can just as easily create composers using your favorite text editor or IDE
+</blockquote><h2><a name="3.2 Apply a composer">3.2 Apply a composer</a></h2>Each component Taglib has a <code>apply</code> attribute,so you can place the composer here
+<div class="code"><pre><span class="xml&#45;tag">&#60;z:window id=<span class="xml&#45;quote">"myWindowComposer"</span> apply=<span class="xml&#45;quote">"package.WindowComposer"</span>&#62;</span>
+    &#8230;
+<span class="xml&#45;tag">&#60;/z:window&#62;</span></pre></div><p class="paragraph"/>In the WindowComposer side
+<div class="code"><pre>def afterCompose = &#123;Component comp &#45;&#62;
+    assert comp.id==<span class="java&#45;quote">"myWindowComposer"</span>
+    assert (comp <span class="java&#45;keyword">instanceof</span> org.zkoss.zul.Window)
+&#125;</pre></div><h2><a name="3.3 Auto-wired Component">3.3 Auto-wired Component</a></h2>If apply a <code>composer</code> to a Component that implement a <code>IdSpace</code> Interface,such as org.zkoss.zul.Window. The Component's children can be auto-wired to composer's fields<p class="paragraph"/>The following is an example. The onChange event received by Textbox <code>mytextbox</code> will be forwarded to target Window <code>mywin</code> as a new target event onChange_mytextbox and the Textbox component with id name "mytextbox" and Label with id name <code>mylabel</code> are injected into the "mytextbox" and "mylabel" fields respectively(so you can use mytextbox and mylabel variable directly in onChange_mytextbox without problem).<p class="paragraph"/>Composer
+<div class="code"><pre>class MyComposer&#123;
+    Textbox mytextbox
+    Window self //embeded object, the supervised window <span class="java&#45;quote">"mywin"</span>
+    Page page //the ZK page
+    Label mylabel<p class="paragraph"/>    def afterCompose = &#123;Component comp &#45;&#62;
+        assert mytextbox.id==<span class="java&#45;quote">"mytextbox"</span>
+        assert mylabel.id==<span class="java&#45;quote">"mylabel"</span>
+    &#125;<p class="paragraph"/>    def onChange_mytextbox(Event event) &#123;
+        mylabel.setValue(<span class="java&#45;quote">"You just entered: "</span>+ mytextbox.getValue())
+    &#125;
+&#125;</pre></div><p class="paragraph"/>View
+<div class="code"><pre><span class="xml&#45;tag">&#60;z:window id=<span class="xml&#45;quote">"mywin"</span> apply=<span class="xml&#45;quote">"MyComposer"</span>&#62;</span>
+    <span class="xml&#45;tag">&#60;z:textbox id=<span class="xml&#45;quote">"mytextbox"</span>/&#62;</span>
+    <span class="xml&#45;tag">&#60;z:label id=<span class="xml&#45;quote">"mylabel"</span>/&#62;</span>
+<span class="xml&#45;tag">&#60;/z:window&#62;</span></pre></div><h2><a name="3.4 Redirects">3.4 Redirects</a></h2>
+Actions can be redirected using the redirect method present in all composers<p class="paragraph"/>The parameters of <code>redirect</code> is same as controller's <code>redirect</code><p class="paragraph"/>Composer
+<div class="code"><pre>class MyComposer&#123;
+    Button mybutton<p class="paragraph"/>    def afterCompose = &#123;Component comp &#45;&#62;<p class="paragraph"/>    &#125;<p class="paragraph"/>    def onClick_mybutton(Event event) &#123;
+        redirect(controller: 'demo', action: 'index', id: 1)
+    &#125;
+&#125;</pre></div><p class="paragraph"/><blockquote class="note">
+following code same as <code>onClick_button</code> above<p class="paragraph"/><div class="code"><pre>def afterCompose = &#123;Component comp &#45;&#62;
+    mybutton.addEventListener('onClick')&#123;
+        redirect(controller: 'demo', action: 'index', id: 1)
+    &#125;
+&#125;</pre></div><p class="paragraph"/></blockquote><p class="paragraph"/>
+View
+<div class="code"><pre><span class="xml&#45;tag">&#60;z:window id=<span class="xml&#45;quote">"mywin"</span> apply=<span class="xml&#45;quote">"MyComposer"</span>&#62;</span>
+    <span class="xml&#45;tag">&#60;z:button label=<span class="xml&#45;quote">"mybutton"</span>/&#62;</span>
+<span class="xml&#45;tag">&#60;/z:window&#62;</span></pre></div><p class="paragraph"/><h2><a name="3.5 Data Binding">3.5 Data Binding</a></h2>
+To uses Grails' underlying data binding capability,<code>zkui</code> injection a <code>getParams</code> method to <a href="http://www.zkoss.org/javadoc/latest/zk/org/zkoss/zk/ui/Component.html" target="blank">Component</a>.<p class="paragraph"/>Domain Class
+<div class="code"><pre>class Person &#123;
+    <span class="java&#45;object">String</span> firstName
+    <span class="java&#45;object">String</span> lastName
+    <span class="java&#45;object">String</span> fullName
+    <span class="java&#45;keyword">static</span> constraints = &#123;
+    &#125;
+&#125;</pre></div><p class="paragraph"/>View
+<div class="code"><pre><span class="xml&#45;tag">&#60;z:window id=<span class="xml&#45;quote">"mywin"</span> apply=<span class="xml&#45;quote">"MyComposer"</span>&#62;</span>
+    <span class="xml&#45;tag">&#60;z:textbox name=<span class="xml&#45;quote">"firstName"</span>/&#62;</span>
+    <span class="xml&#45;tag">&#60;z:textbox name=<span class="xml&#45;quote">"lastName"</span>/&#62;</span>
+    <span class="xml&#45;tag">&#60;z:textbox name=<span class="xml&#45;quote">"fullName"</span>/&#62;</span>
+    <span class="xml&#45;tag">&#60;z:button label=<span class="xml&#45;quote">"submit"</span>/&#62;</span>
+<span class="xml&#45;tag">&#60;/z:window&#62;</span></pre></div><p class="paragraph"/>Composer
+<div class="code"><pre>class MyComposer&#123;
+    Button submit
+    def afterCompose = &#123;Component mywin &#45;&#62;
+        submit.addEventListener('onClick')&#123;
+            def person=<span class="java&#45;keyword">new</span> Person(mywin.params)
+            &#8230;
+        &#125;
+    &#125;
+&#125;</pre></div><p class="paragraph"/>A <code>bindData</code> method same as in <code>controller</code> also provide to Composer<p class="paragraph"/><div class="code"><pre>def p = <span class="java&#45;keyword">new</span> Person()
+bindData(p, mywin.params)</pre></div>
+<h2><a name="3.6 Unit Test">3.6 Unit Test</a></h2>When use <strong class="bold">grails create-composer</strong> create a composer,a unit class that is a sub-class of ComposerUnitTestCase also created<p class="paragraph"/>It provides a <code>mockComposer</code> methods for mocking zkui's  Selector,Builder and so on.<p class="paragraph"/><div class="code"><pre>mockComposer(MyComposer)
+def myComposer=<span class="java&#45;keyword">new</span> MyComposer
+...</pre></div>
+<h2><a name="3.7 Render Errors">3.7 Render Errors</a></h2><code>zkui</code> injection a <code>renderErrors</code> method to <a href="http://www.zkoss.org/javadoc/latest/zk/org/zkoss/zk/ui/Component.html" target="blank">Component</a>.<p class="paragraph"/>If you have Domain class
+<div class="code"><pre>class Book&#123;
+    <span class="java&#45;object">String</span> author
+    <span class="java&#45;object">String</span> title
+&#125;</pre></div><p class="paragraph"/>In View
+<div class="code"><pre><span class="xml&#45;tag">&#60;z:window id=<span class="xml&#45;quote">"formWindow"</span> title=<span class="xml&#45;quote">"demo"</span> apply=<span class="xml&#45;quote">"your.Composer"</span>&#62;</span>
+    <span class="xml&#45;tag">&#60;z:textbox name=<span class="xml&#45;quote">"author"</span>/&#62;</span>
+    <span class="xml&#45;tag">&#60;z:textbox name=<span class="xml&#45;quote">"title"</span>/&#62;</span>
+    &#8230;
+<span class="xml&#45;tag">&#60;/z:window&#62;</span></pre></div><p class="paragraph"/>Then in <code>your.Composer</code> use renderErrors<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">if</span> (!book.save()) &#123;
+            formWindow.renderErrors(bean: book)
+ &#125;</pre></div><p class="paragraph"/>
+In addition,you can also use grails's traditional <code>renderErrors</code><p class="paragraph"/>In <code>your.Composer</code>
+<div class="code"><pre><span class="java&#45;keyword">if</span> (!book.save()) &#123;
+    flash.book = book
+    redirect(controller: <span class="java&#45;quote">"book"</span>, action: <span class="java&#45;quote">"edit"</span>, id: book.id)
+ &#125;</pre></div><p class="paragraph"/>In your view
+<div class="code"><pre><span class="xml&#45;tag">&#60;g:hasErrors bean=<span class="xml&#45;quote">"$&#123;flash.book&#125;"</span>&#62;</span>
+<span class="xml&#45;tag">&#60;div class=<span class="xml&#45;quote">"errors"</span>&#62;</span>
+    <span class="xml&#45;tag">&#60;g:renderErrors bean=<span class="xml&#45;quote">"$&#123;flash.book&#125;"</span> as=<span class="xml&#45;quote">"list"</span> /&#62;</span>
+<span class="xml&#45;tag">&#60;/div&#62;</span>
+<span class="xml&#45;tag">&#60;/g:hasErrors&#62;</span></pre></div><p class="paragraph"/>
+<h2><a name="3.8 ZK's old Data Binding">3.8 ZK's old Data Binding</a></h2>Data binding is a mechanism that automates the data-copy plumbing code (CRUD) between UI components and the data source. Application developers only have to tell the data binding manager about the associations between UI components and the data source. Then, the data -binding manager will do all the loading (loading data from the data source to UI components) and saving (saving data from UI component into the data source) jobs automatically.<p class="paragraph"/><h3>Activates Data Binding Manager</h3>
+<div class="code"><pre><span class="xml&#45;tag">&#60;z:window  apply=<span class="xml&#45;quote">"org.zkoss.demo.MyComposer,org.zkoss.zkplus.databind.AnnotateDataBindingComposer"</span>&#62;</span>
+<span class="xml&#45;tag">&#60;/z:window&#62;</span></pre></div><p class="paragraph"/>For more information, please refer to the relative blog post <a href="http://blog.zkoss.org/index.php/2011/08/11/databinding-composer/" target="blank">Databinding Composer</a><p class="paragraph"/><h3>Associate UI Components with Data Source</h3>
+After activating the data-binding manager, you have to define the required UI objects and then associate them with the data source.<p class="paragraph"/>In the gsp view:
+<div class="code"><pre><span class="xml&#45;tag">&#60;z:window id=<span class="xml&#45;quote">"win"</span> apply=<span class="xml&#45;quote">"test.TestComposer,org.zkoss.zkplus.databind.AnnotateDataBindingComposer"</span>&#62;</span>
+    <span class="xml&#45;tag">&#60;z:textbox value=<span class="xml&#45;quote">"@&#123;win&#35;composer.username&#125;"</span>/&#62;</span>
+<span class="xml&#45;tag">&#60;z:/window&#62;</span></pre></div><p class="paragraph"/>In the test.TestComposer:
+<div class="code"><pre>class TestComposer&#123;<p class="paragraph"/>    def username=<span class="java&#45;quote">"test"</span><p class="paragraph"/>    def afterCompose = &#123;Component comp &#45;&#62;
+        &#8230;
+    &#125;
+&#125;</pre></div><p class="paragraph"/>See more <a href="http://books.zkoss.org/wiki/ZK%20Developer's%20Reference/Data%20Binding" target="blank">ZK Developer&#39;s Reference/Data Binding</a><p class="paragraph"/>
+<h2><a name="3.9 The Next Generation Data Binding System">3.9 The Next Generation Data Binding System</a></h2><h3>Introduction</h3>
+ZK Bind is a whole new data binding system with new specifications and implementations.<p class="paragraph"/><h3>Features</h3><p class="paragraph"/><h4>A whole new, clean annotation expression</h4>
+<ul class="star">
+<li>Same Java style annotation expression: The new ZK annotation is consistent with Java's annotation style. If you know the Java style, you know the ZK Style.</li>
+<li>A set of collaborated annotations: ZK Bind uses a set of annotations to make the use of data binding as intuitive and clear as possible.</li>
+<ul class="star">
+<li>@bind(...): used to bind data and command along with parameters</li>
+<li>@converter(...): used to specify converters along with parameters</li>
+<li>@valiator(...): used to specify validators along with parameters</li>
+<li>@form(...): used to bind a form.</li>
+</ul></ul><p class="paragraph"/><h4>EL 2.2 flexiable expressions</h4>
+<ul class="star">
+<li>ZK Bind accept EL 2.2 syntax expression that you can provide flexible operations easily.</li>
+<li>Bind to bean properties, indexed properties, Map keys seamlessly.</li>
+<li>Bind to component custom attributes automatically.</li>
+<li>Bind to Spring, CDI, and Seam managed bean automatically.</li>
+</ul><p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;z:image src=<span class="xml&#45;quote">"<code>bind(vm.person.boy ? 'boy.png' : 'girl.png')"</span>/&#62;</span><p class="paragraph"/><span class="xml&#45;tag">&#60;z:button onClick=<span class="xml&#45;quote">"</code>bind(vm.add ? 'add' : 'update')"</span> label=<span class="xml&#45;quote">"<code>bind(vm.add ? 'Add' : 'Update'"</span>/&#62;</span><p class="paragraph"/><span class="xml&#45;tag">&#60;z:button onClick=<span class="xml&#45;quote">"</code>bind('subscribe')"</span> disabled=<span class="xml&#45;quote">"@bind(empty vm.symbol)"</span> label=<span class="xml&#45;quote">"Subscribe"</span>/&#62;</span></pre></div><p class="paragraph"/><h4>One way load only data binding</h4>
+<ul class="star">
+<li>Load when bean property changes</li>
+<li>Conditional load <code>after</code>/<code>before</code> executing a command</li>
+<li>Multiple conditional load <code>before</code>/<code>after</code> executing different/same commands</li>
+</ul><p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;z:label value=<span class="xml&#45;quote">"<code>bind(load=vm.person.fullname)"</span>/&#62;</span><p class="paragraph"/><span class="xml&#45;tag">&#60;z:label value=<span class="xml&#45;quote">"</code>bind(load=vm.person.firstname after 'update')"</span>/&#62;</span><p class="paragraph"/><span class="xml&#45;tag">&#60;z:label value=<span class="xml&#45;quote">"<code>bind(load=vm.person.firstname before 'delete')"</span>/&#62;</span><p class="paragraph"/><span class="xml&#45;tag">&#60;z:label value=<span class="xml&#45;quote">"</code>bind(load=&#123;vm.person.firstname after 'update', vm.person.message after 'delete'&#125;)"</span>/&#62;</span></pre></div><p class="paragraph"/><h4>One way save only data binding</h4>
+<ul class="star">
+<li>Save when UI component attribute changes</li>
+<li>Multiple save to property of different target beans</li>
+<li>Conditional save before/after executing a command</li>
+<li>Multiple conditional save before/after executing different/same commands</li>
+</ul><p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;z:textbox value=<span class="xml&#45;quote">"<code>bind(save=vm.person.firstname)"</span>/&#62;</span><p class="paragraph"/><span class="xml&#45;tag">&#60;z:textbox value=<span class="xml&#45;quote">"</code>bind(save=&#123;vm.person.firstname, vm.tmpperson.firstname&#125;)"</span>/&#62;</span><p class="paragraph"/><span class="xml&#45;tag">&#60;z:textbox value=<span class="xml&#45;quote">"<code>bind(save=vm.person.firstname before 'update')"</span>/&#62;</span><p class="paragraph"/><span class="xml&#45;tag">&#60;z:textbox value=<span class="xml&#45;quote">"</code>bind(save=vm.person.firstname after 'delete'"</span>/&#62;</span><p class="paragraph"/><span class="xml&#45;tag">&#60;z:textbox value=<span class="xml&#45;quote">"@bind(save=&#123;vm.selected.firstname before 'update', vm.newperson.firstname before 'add'&#125;"</span>/&#62;</span></pre></div><p class="paragraph"/><h4>Initial data binding</h4>
+<ul class="star">
+<li>Load when UI components are first added into the binding system</li>
+</ul><p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;z:label value=<span class="xml&#45;quote">"@bind(init=vm.selected.firstname)"</span>/&#62;</span></pre></div><p class="paragraph"/><h4>Two way data binding</h4>
+<ul class="star">
+<li>Short expression of both save and load bindings</li>
+<li>Multiple conditional load and save on different back-end beans before/after executing different/same commands</li>
+</ul><p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;z:textbox value=<span class="xml&#45;quote">"<code>bind(vm.person.firstname)"</span>/&#62;</span><p class="paragraph"/><span class="xml&#45;tag">&#60;z:textbox value=<span class="xml&#45;quote">"</code>bind(load=vm.selected.firstname, save=&#123;vm.selected.firstname, vm.newperson.firstname before 'add'&#125;)"</span>/&#62;</span></pre></div><p class="paragraph"/><h4>Bind to any attributes of the UI components</h4>
+<ul class="star">
+<li>Bind symmetrically to all attributes of UI components</li>
+</ul><p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;z:textbox value=<span class="xml&#45;quote">"@bind(vm.symbol)"</span> instant=<span class="xml&#45;quote">"true"</span>/&#62;</span>
+<span class="xml&#45;tag">&#60;z:button onClick=<span class="xml&#45;quote">"<code>bind('subscribe')"</span> disabled=<span class="xml&#45;quote">"</code>bind(empty vm.symbol)"</span> label=<span class="xml&#45;quote">"Subscribe"</span> /&#62;</span></pre></div><p class="paragraph"/><h4>Event command binding</h4>
+<ul class="star">
+<li>Bridge ZK event to command</li>
+<li>Automatic event listener registration</li>
+<li>Simple command name invocation</li>
+</ul><p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;z:button onClick=<span class="xml&#45;quote">"<code>bind('subscribe')"</span> disabled=<span class="xml&#45;quote">"</code>bind(empty vm.symbol)"</span> label=<span class="xml&#45;quote">"Subscribe"</span> /&#62;</span></pre></div><p class="paragraph"/><h4>Template/Collection binding</h4>
+<ul class="star">
+<li>Binding on Listbox/Grid/Tree/Combobox</li>
+<li>Local variable scope is limited to the container component</li>
+<li>Support index property</li>
+</ul><p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;z:listbox width=<span class="xml&#45;quote">"300px"</span> model=<span class="xml&#45;quote">"<code>bind(vm.albumList)"</span> selectedItem=<span class="xml&#45;quote">"</code>bind(vm.selectedAlbum)"</span> vflex=<span class="xml&#45;quote">"true"</span>&#62;</span>
+    <span class="xml&#45;tag">&#60;z:template name=<span class="xml&#45;quote">"model"</span> var=<span class="xml&#45;quote">"a"</span>&#62;</span>
+        <span class="xml&#45;tag">&#60;listitem label=<span class="xml&#45;quote">"@bind(a.title)"</span>/&#62;</span>
+    <span class="xml&#45;tag">&#60;/z:template&#62;</span>
+<span class="xml&#45;tag">&#60;/z:listbox&#62;</span></pre></div><p class="paragraph"/><h4>Form binding</h4>
+<ul class="star">
+<li>Middle form binding to avoid affecting back-end data beans</li>
+<li>Submit a form in a whole</li>
+<li>Conditional save for different commands</li>
+</ul><p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;z:grid self=<span class="xml&#45;quote">"@form(id='fx', load=vm.selected, save=&#123;vm.selected before 'update', vm.newAlbum before 'add'&#125;)"</span>&#62;</span>
+    <span class="xml&#45;tag">&#60;z:row&#62;</span>Title: <span class="xml&#45;tag">&#60;z:textbox value=<span class="xml&#45;quote">"@bind(fx.title)"</span>/&#62;</span><span class="xml&#45;tag">&#60;/z:row&#62;</span>
+    <span class="xml&#45;tag">&#60;z:row&#62;</span>Artist: <span class="xml&#45;tag">&#60;z:textbox value=<span class="xml&#45;quote">"@bind(fx.artist)"</span>/&#62;</span><span class="xml&#45;tag">&#60;/z:row&#62;</span>
+    <span class="xml&#45;tag">&#60;z:row&#62;</span><span class="xml&#45;tag">&#60;z:checkbox checked=<span class="xml&#45;quote">"@bind(fx.classical)"</span>/&#62;</span> Classical<span class="xml&#45;tag">&#60;/z:row&#62;</span>
+    <span class="xml&#45;tag">&#60;z:row&#62;</span>Composer: <span class="xml&#45;tag">&#60;z:textbox value=<span class="xml&#45;quote">"@bind(fx.composer)"</span>/&#62;</span><span class="xml&#45;tag">&#60;/z:row&#62;</span>
+<span class="xml&#45;tag">&#60;/z:grid&#62;</span>
+<span class="xml&#45;tag">&#60;z:button onClick=<span class="xml&#45;quote">"@bind('add')"</span> label=<span class="xml&#45;quote">"Add"</span>/&#62;</span>
+<span class="xml&#45;tag">&#60;z:button onClick=<span class="xml&#45;quote">"@bind('update')"</span> label=<span class="xml&#45;quote">"Update"</span>/&#62;</span></pre></div><p class="paragraph"/><h4>Java annotated data dependency tracking</h4>
+<ul class="star">
+<li>Controllable load on save</li>
+<li>@NotifyChange to notify property changes</li>
+<li>@DependsOn to specify property change dependency</li>
+</ul><p class="paragraph"/><div class="code"><pre>@NotifyChange //notify firstname change
+<span class="java&#45;keyword">public</span> void setFirstname(<span class="java&#45;object">String</span> fn) &#123;
+    firstname = fn;
+&#125;<p class="paragraph"/>@NotifyChange //notify lastname change
+<span class="java&#45;keyword">public</span> void setLastname(<span class="java&#45;object">String</span> ln) &#123;
+    lastname = ln;
+&#125;<p class="paragraph"/>@DependsOn(&#123;<span class="java&#45;quote">"firstname"</span>,<span class="java&#45;quote">"lastname"</span>&#125;) //full name will change <span class="java&#45;keyword">if</span> either firstname and/or lastname change
+<span class="java&#45;keyword">public</span> <span class="java&#45;object">String</span> getFullname() &#123;
+    <span class="java&#45;keyword">return</span> firstname + <span class="java&#45;quote">" "</span> + lastname;
+&#125;</pre></div><p class="paragraph"/><h4>Embedded validation cycle</h4>
+<ul class="star">
+<li>Bind validator by name or by EL expression</li>
+<li>Embedded system Validator: provide commonly used validators that user can use directly by specifying only the name</li>
+<li>Validate a single property or a form</li>
+<li>Validate on a command</li>
+</ul><p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;z:textbox value=<span class="xml&#45;quote">"<code>bind(save=vm.selected.firstname) </code>validator('noEmpty')"</span>/&#62;</span>
+<span class="xml&#45;tag">&#60;z:grid self=<span class="xml&#45;quote">"<code>form(id='fx', load=vm.selected, save=vm.selected before 'update') </code>validator(vm.passwordValidator)"</span>&#62;</span>
+    <span class="xml&#45;tag">&#60;z:row&#62;</span>username<span class="xml&#45;tag">&#60;textbox value=<span class="xml&#45;quote">"@bind(fx.username)"</span>/&#62;</span><span class="xml&#45;tag">&#60;/z:row&#62;</span>
+    <span class="xml&#45;tag">&#60;z:row&#62;</span>password<span class="xml&#45;tag">&#60;textbox value=<span class="xml&#45;quote">"@bind(fx.password)"</span> type=<span class="xml&#45;quote">"password"</span>/&#62;</span><span class="xml&#45;tag">&#60;/z:row&#62;</span>
+    <span class="xml&#45;tag">&#60;z:row&#62;</span>retype password<span class="xml&#45;tag">&#60;textbox value=<span class="xml&#45;quote">"@bind(fx.retypePassword)"</span> type=<span class="xml&#45;quote">"password"</span>/&#62;</span><span class="xml&#45;tag">&#60;/z:row&#62;</span>
+<span class="xml&#45;tag">&#60;/z:grid&#62;</span></pre></div><p class="paragraph"/><h4>Enhanced converter mechanism</h4>
+<ul class="star">
+<li>Bind converter by name or by EL expression</li>
+<li>Embedded system Converters: provide commonly used converters that user can use directly by specifying only the name</li>
+</ul><p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;z:datebox value=<span class="xml&#45;quote">"<code>bind(vm.selected.birthday) </code>converter('formatedDate', format='yyyy/MM/dd')"</span>/&#62;</span></pre></div><p class="paragraph"/><h4>org.zkoss.bind.BindComposer</h4>
+<ul class="star">
+<li>Ease UI components, binder, and ViewModel association</li>
+<li>Each binder covers only the applied component tree</li>
+<li>Inter-binder communications</li>
+</ul><p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;z:window apply=<span class="xml&#45;quote">"org.zkoss.bind.BindComposer"</span> viewModel=<span class="xml&#45;quote">"@bind(vm='org.zkoss.mvvm.examples.album.AlbumViewModel')"</span>&#62;</span>
+    &#8230;
+<span class="xml&#45;tag">&#60;/z:window&#62;</span></pre></div><p class="paragraph"/><h4>Bind on demand</h4>
+<ul class="star">
+<li>Support dynamically add/remove bindings by API.</li>
+<li>Attached components with binding annotations are automatically managed by the existing binder if covered.</li>
+<li>Detached components that were managed by a binder are automatically removed from the binding management.</li>
+</ul><p class="paragraph"/><h4>Support seamless MVVM design pattern</h4>
+<ul class="star">
+<li>Utilize MVVM design pattern to achieve separation of data and logic from presentation easily.</li>
+<ul class="star">
+<li>UI Design and ViewModel can be implemented in parallel independently.</li>
+<li>Can add new Views or change current View easily.</li>
+<li>Different views for different devices with a common ViewModel.</li>
+<li>Allow unit-test ViewModel independently without UI environments.</li>
+</ul></ul><p class="paragraph"/><h4>For details</h4><p class="paragraph"/><a href="http://books.zkoss.org/wiki/Small_Talks/2011/October/Envisage_ZK_6:_The_Next_Generation_Data_Binding_System" target="blank">Envisage ZK 6: The Next Generation Data Binding System</a><p class="paragraph"/><p class="paragraph"/><p class="paragraph"/><p class="paragraph"/><p class="paragraph"/><h2><a name="3.10 An Annotation Based Composer For MVC">3.10 An Annotation Based Composer For MVC</a></h2><h3>The Story</h3><p class="paragraph"/>Think of an extremely ordinary scenario, where you want to clear all the texts in a form by clicking a button.<p class="paragraph"/><img border="0" class="center" src="../img/Selector_Demo_Form.png"></img><p class="paragraph"/>While you see the screen shot, you may have already come up with an implementation in mind. For example:<p class="paragraph"/><div class="code"><pre>class SomeFormComposer &#123;<p class="paragraph"/>    Textbox usenameTb
+    Textbox passwordTb
+    Textbox retypepwTb
+    // &#8230;
+    // &#8230;
+    Textbox memoTb<p class="paragraph"/>    def afterCompose = &#123;Component comp &#45;&#62;
+        // initialize components here
+    &#125;<p class="paragraph"/>    def onClick_clearBtn(Event event) &#123;
+        usenameTb.setValue(<span class="java&#45;quote">""</span>)
+        passwordTb.setValue(<span class="java&#45;quote">""</span>)
+        retypepwTb.setValue(<span class="java&#45;quote">""</span>)
+        // &#8230;
+        // &#8230;
+        memoTb.setValue(<span class="java&#45;quote">""</span>)
+    &#125;
+&#125;</pre></div><p class="paragraph"/>But wait, no.
+The unordinary part of the story is here: this feature is actually implemented by just 9 lines of code.<p class="paragraph"/><div class="code"><pre>class FormComposer &#123;
+    @Wire(<span class="java&#45;quote">"textbox, intbox, decimalbox, datebox"</span>)
+    List&#60;InputElement&#62; inputs<p class="paragraph"/>    @Listen(<span class="java&#45;quote">"onClick = button&#91;label='Clear'&#93;"</span>)
+    def onClear(MouseEvent event) &#123;
+        <span class="java&#45;keyword">for</span> (InputElement i: inputs) i.setText(<span class="java&#45;quote">""</span>)
+    &#125;
+&#125;</pre></div><p class="paragraph"/>These are what we foresee in ZK 6: leveraging Annotation power from Java 1.5, and introduction to some new techniques.<p class="paragraph"/><h3>The jQuery/CSS3-like Component Selector</h3><p class="paragraph"/>In the previous example, Selector is shown as a part of the parameters in Annotation <code>Wire and </code>Listen.<p class="paragraph"/><div class="code"><pre>@Wire(<span class="java&#45;quote">"textbox, intbox, decimalbox, datebox"</span>)
+@Listen(<span class="java&#45;quote">"onClick = button&#91;label='Clear'&#93;"</span>)</pre></div><p class="paragraph"/>The concept is simple: Selector is a pattern string that matches nodes in a Component tree.
+In other words, by giving a Selector string, you can specify a collection of Components from a gsp file.<p class="paragraph"/><div class="code"><pre>// Collects all the textboxes, intboxes, decimalboxes, and dateboxes as a List and wire to inputs
+@Wire(<span class="java&#45;quote">"textbox, intbox, decimalbox, datebox"</span>)
+List&#60;InputElement&#62; inputs<p class="paragraph"/>// Collects all the buttons whose label is <span class="java&#45;quote">"Clear"</span>, and adds EventListeners <span class="java&#45;keyword">for</span> them
+@Listen(<span class="java&#45;quote">"onClick = button&#91;label='Clear'&#93;"</span>)
+def onClear(MouseEvent event) &#123;
+    // &#8230;
+&#125;</pre></div><p class="paragraph"/>If you know jQuery or <a href="http://www.w3.org/TR/css3-selectors/" target="blank">CSS selector</a>, this is exactly their counterpart on server side.<p class="paragraph"/><h3>Syntax</h3>
+The syntax of Selector is closely analogous to CSS3 selector.
+Component type, class, attribute, pseudo class are used to describe properties of a component. For example:<p class="paragraph"/><div class="code"><pre>// Matches any Button component
+<span class="java&#45;quote">"button"</span><p class="paragraph"/>// Matches any Component with ID <span class="java&#45;quote">"btn"</span>
+<span class="java&#45;quote">"&#35;btn"</span><p class="paragraph"/>// Matches any Button with ID <span class="java&#45;quote">"btn"</span>
+<span class="java&#45;quote">"button&#35;btn"</span><p class="paragraph"/>// Matches any Button whose label is <span class="java&#45;quote">"Submit"</span>
+<span class="java&#45;quote">"button&#91;label='Submit'&#93;"</span></pre></div><p class="paragraph"/>
+Combinators are used to describe relations between components. For example:<p class="paragraph"/><div class="code"><pre>// Matches any Button who has a Window ancestor
+<span class="java&#45;quote">"window button"</span><p class="paragraph"/>// Matches any Button whose parent is a Window
+<span class="java&#45;quote">"window &#62; button"</span><p class="paragraph"/>// Matches any Button whose previous sibling is a Window
+<span class="java&#45;quote">"window + button"</span><p class="paragraph"/>// Matches any Button who has a Window as a senior sibling
+<span class="java&#45;quote">"window ~ button"</span><p class="paragraph"/>// Matches any Button whose parent is a Div and grandparent is a Window
+<span class="java&#45;quote">"window &#62; div &#62; button"</span></pre></div><p class="paragraph"/><h3>Comparison with CSS3 Selector</h3>
+<table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th><strong class="bold">Syntax</strong></th><th><strong class="bold">In CSS 3 Selector</strong></th><th><strong class="bold">In Component Selector</strong></th><th><strong class="bold">Comment</strong></th></tr><tr class="table-odd"><td>tagname</td><td>DOM element type</td><td>Component type</td><td>&#160;</td></tr><tr class="table-even"><td>#id</td><td>DOM ID</td><td>Component ID</td><td>&#160;</td></tr><tr class="table-odd"><td>.class</td><td>CSS class</td><td>SClass / ZClass</td><td>&#160;</td></tr><tr class="table-even"><td>attr='value'</td><td>DOM attribute</td><td>getAttr() or dynamic attribute</td><td>If getAttr() is not a method on such component, it is skipped</td></tr><tr class="table-odd"><td>:pseudo-class</td><td>Pseudo class</td><td>Pseudo class</td><td>:root, :empty, :first-child, :last-child, :only-child, :nth-child(), :nth-last-child()</td></tr><tr class="table-even"><td>::pseudo-element</td><td>Pseudo element</td><td>N/A</td><td>&#160;</td></tr><tr class="table-odd"><td>&#62; + ~</td><td>Combinator</td><td>Combinator</td><td>Identical to CSS 3 combinators</td></tr></table><p class="paragraph"/><h3>For more</h3>
+<a href="http://books.zkoss.org/wiki/Small%20Talks/2011/January/Envisage%20ZK%206:%20An%20Annotation%20Based%20Composer%20For%20MVC" target="blank">Envisage ZK 6: An Annotation Based Composer For MVC</a><p class="paragraph"/><h2><a name="3.11 Support extends GenericForwardComposer or other Composer">3.11 Support extends GenericForwardComposer or other Composer</a></h2>In Grails ZK UI 0.5,support extends GenericForwardComposer or other Composer,so can take advantage of the GenericForwardComposer<p class="paragraph"/>In grails-app/composers<p class="paragraph"/><div class="code"><pre>class TestComposer <span class="java&#45;keyword">extends</span> GenericForwardComposer &#123;<p class="paragraph"/>    TestComposer() &#123;
+        <span class="java&#45;keyword">super</span>('_' as <span class="java&#45;object">char</span>)
+    &#125;<p class="paragraph"/>    @Override
+    void doAfterCompose(Component comp) &#123;
+        <span class="java&#45;keyword">super</span>.doAfterCompose(comp)
+        // initialize components here
+    &#125;<p class="paragraph"/>&#125;</pre></div><p class="paragraph"/>Equivalent to the following<p class="paragraph"/><div class="code"><pre>class TestComposer &#123;<p class="paragraph"/>    def afterCompose = &#123;comp &#45;&#62;
+        // initialize components here
+    &#125;
+&#125;</pre></div>
+    </body>
+</html>

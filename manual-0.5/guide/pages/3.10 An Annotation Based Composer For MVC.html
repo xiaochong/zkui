@@ -1,0 +1,54 @@
+<html>
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+        <title>3.10 An Annotation Based Composer For MVC</title>
+        <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen" title="Ref" charset="utf-8"/>
+    </head>
+    <body class="body">
+    <h3>The Story</h3><p class="paragraph"/>Think of an extremely ordinary scenario, where you want to clear all the texts in a form by clicking a button.<p class="paragraph"/><img border="0" class="center" src="../img/Selector_Demo_Form.png"></img><p class="paragraph"/>While you see the screen shot, you may have already come up with an implementation in mind. For example:<p class="paragraph"/><div class="code"><pre>class SomeFormComposer &#123;<p class="paragraph"/>    Textbox usenameTb
+    Textbox passwordTb
+    Textbox retypepwTb
+    // &#8230;
+    // &#8230;
+    Textbox memoTb<p class="paragraph"/>    def afterCompose = &#123;Component comp &#45;&#62;
+        // initialize components here
+    &#125;<p class="paragraph"/>    def onClick_clearBtn(Event event) &#123;
+        usenameTb.setValue(<span class="java&#45;quote">""</span>)
+        passwordTb.setValue(<span class="java&#45;quote">""</span>)
+        retypepwTb.setValue(<span class="java&#45;quote">""</span>)
+        // &#8230;
+        // &#8230;
+        memoTb.setValue(<span class="java&#45;quote">""</span>)
+    &#125;
+&#125;</pre></div><p class="paragraph"/>But wait, no.
+The unordinary part of the story is here: this feature is actually implemented by just 9 lines of code.<p class="paragraph"/><div class="code"><pre>class FormComposer &#123;
+    @Wire(<span class="java&#45;quote">"textbox, intbox, decimalbox, datebox"</span>)
+    List&#60;InputElement&#62; inputs<p class="paragraph"/>    @Listen(<span class="java&#45;quote">"onClick = button&#91;label='Clear'&#93;"</span>)
+    def onClear(MouseEvent event) &#123;
+        <span class="java&#45;keyword">for</span> (InputElement i: inputs) i.setText(<span class="java&#45;quote">""</span>)
+    &#125;
+&#125;</pre></div><p class="paragraph"/>These are what we foresee in ZK 6: leveraging Annotation power from Java 1.5, and introduction to some new techniques.<p class="paragraph"/><h3>The jQuery/CSS3-like Component Selector</h3><p class="paragraph"/>In the previous example, Selector is shown as a part of the parameters in Annotation <code>Wire and </code>Listen.<p class="paragraph"/><div class="code"><pre>@Wire(<span class="java&#45;quote">"textbox, intbox, decimalbox, datebox"</span>)
+@Listen(<span class="java&#45;quote">"onClick = button&#91;label='Clear'&#93;"</span>)</pre></div><p class="paragraph"/>The concept is simple: Selector is a pattern string that matches nodes in a Component tree.
+In other words, by giving a Selector string, you can specify a collection of Components from a gsp file.<p class="paragraph"/><div class="code"><pre>// Collects all the textboxes, intboxes, decimalboxes, and dateboxes as a List and wire to inputs
+@Wire(<span class="java&#45;quote">"textbox, intbox, decimalbox, datebox"</span>)
+List&#60;InputElement&#62; inputs<p class="paragraph"/>// Collects all the buttons whose label is <span class="java&#45;quote">"Clear"</span>, and adds EventListeners <span class="java&#45;keyword">for</span> them
+@Listen(<span class="java&#45;quote">"onClick = button&#91;label='Clear'&#93;"</span>)
+def onClear(MouseEvent event) &#123;
+    // &#8230;
+&#125;</pre></div><p class="paragraph"/>If you know jQuery or <a href="http://www.w3.org/TR/css3-selectors/" target="blank">CSS selector</a>, this is exactly their counterpart on server side.<p class="paragraph"/><h3>Syntax</h3>
+The syntax of Selector is closely analogous to CSS3 selector.
+Component type, class, attribute, pseudo class are used to describe properties of a component. For example:<p class="paragraph"/><div class="code"><pre>// Matches any Button component
+<span class="java&#45;quote">"button"</span><p class="paragraph"/>// Matches any Component with ID <span class="java&#45;quote">"btn"</span>
+<span class="java&#45;quote">"&#35;btn"</span><p class="paragraph"/>// Matches any Button with ID <span class="java&#45;quote">"btn"</span>
+<span class="java&#45;quote">"button&#35;btn"</span><p class="paragraph"/>// Matches any Button whose label is <span class="java&#45;quote">"Submit"</span>
+<span class="java&#45;quote">"button&#91;label='Submit'&#93;"</span></pre></div><p class="paragraph"/>
+Combinators are used to describe relations between components. For example:<p class="paragraph"/><div class="code"><pre>// Matches any Button who has a Window ancestor
+<span class="java&#45;quote">"window button"</span><p class="paragraph"/>// Matches any Button whose parent is a Window
+<span class="java&#45;quote">"window &#62; button"</span><p class="paragraph"/>// Matches any Button whose previous sibling is a Window
+<span class="java&#45;quote">"window + button"</span><p class="paragraph"/>// Matches any Button who has a Window as a senior sibling
+<span class="java&#45;quote">"window ~ button"</span><p class="paragraph"/>// Matches any Button whose parent is a Div and grandparent is a Window
+<span class="java&#45;quote">"window &#62; div &#62; button"</span></pre></div><p class="paragraph"/><h3>Comparison with CSS3 Selector</h3>
+<table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th><strong class="bold">Syntax</strong></th><th><strong class="bold">In CSS 3 Selector</strong></th><th><strong class="bold">In Component Selector</strong></th><th><strong class="bold">Comment</strong></th></tr><tr class="table-odd"><td>tagname</td><td>DOM element type</td><td>Component type</td><td>&#160;</td></tr><tr class="table-even"><td>#id</td><td>DOM ID</td><td>Component ID</td><td>&#160;</td></tr><tr class="table-odd"><td>.class</td><td>CSS class</td><td>SClass / ZClass</td><td>&#160;</td></tr><tr class="table-even"><td>attr='value'</td><td>DOM attribute</td><td>getAttr() or dynamic attribute</td><td>If getAttr() is not a method on such component, it is skipped</td></tr><tr class="table-odd"><td>:pseudo-class</td><td>Pseudo class</td><td>Pseudo class</td><td>:root, :empty, :first-child, :last-child, :only-child, :nth-child(), :nth-last-child()</td></tr><tr class="table-even"><td>::pseudo-element</td><td>Pseudo element</td><td>N/A</td><td>&#160;</td></tr><tr class="table-odd"><td>&#62; + ~</td><td>Combinator</td><td>Combinator</td><td>Identical to CSS 3 combinators</td></tr></table><p class="paragraph"/><h3>For more</h3>
+<a href="http://books.zkoss.org/wiki/Small%20Talks/2011/January/Envisage%20ZK%206:%20An%20Annotation%20Based%20Composer%20For%20MVC" target="blank">Envisage ZK 6: An Annotation Based Composer For MVC</a><p class="paragraph"/>
+    </body>
+</html>

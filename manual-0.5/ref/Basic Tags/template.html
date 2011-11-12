@@ -1,0 +1,20 @@
+<html>
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+        <title>Grails ZK UI Plugin 0.5.M1 - Reference Documentation</title>
+        <link rel="stylesheet" href="../../css/ref.css" type="text/css" media="screen" title="Ref" charset="utf-8"/>
+    </head>
+    <body class="body">
+    <h1>attribute</h1><p class="paragraph"/><h2>Purpose</h2><p class="paragraph"/>Before ZK 6.0, <a href="http://books.zkoss.org/wiki/ZK_Developer%27s_Reference/MVC/View" target="blank">the custom renderer</a> must be implemented through Java. Although Java is very powerful and anything can be achieved with it, it is still tedious and not always the most feasible solution having to create and maintain an additional Java class every single time. Speaking in terms of the MVC concept, in many cases, it makes much more sense to place ZUL as it is closer to "View" rather than the "Control" in the Java code.<p class="paragraph"/>With ZK 6.0, a new concept called "template" is introduced. It allow UI designers to specify templates right in a ZUML page, the model can then be rendered based on the template without any Java code.<p class="paragraph"/>Grails ZK UI 0.5 also support the "template" concept.<p class="paragraph"/><h2>Examples</h2>
+<div class="code"><pre><span class="xml&#45;tag">&#60;z:listbox model=<span class="xml&#45;quote">"<code>bind(vm.items)"</span> selectedItem=<span class="xml&#45;quote">"</code>bind(vm.selected)"</span> hflex=<span class="xml&#45;quote">"true"</span> height=<span class="xml&#45;quote">"300px"</span>&#62;</span>
+    ...<p class="paragraph"/>    <span class="xml&#45;tag">&#60;z:template name=<span class="xml&#45;quote">"model"</span> var=<span class="xml&#45;quote">"item"</span>&#62;</span>
+        <span class="xml&#45;tag">&#60;listitem&#62;</span>
+            <span class="xml&#45;tag">&#60;listcell label=<span class="xml&#45;quote">"@bind(item.name)"</span>/&#62;</span>
+            <span class="xml&#45;tag">&#60;listcell label=<span class="xml&#45;quote">"<code>bind(item.price) </code>converter('formatedNumber', format='&#35;&#35;&#35;,&#35;&#35;0.00')"</span>/&#62;</span>
+            <span class="xml&#45;tag">&#60;listcell label=<span class="xml&#45;quote">"<code>bind(item.quantity)"</span> sclass=<span class="xml&#45;quote">"</code>bind(item.quantity lt 3 ?'red':'')"</span>/&#62;</span>
+        <span class="xml&#45;tag">&#60;/listitem&#62;</span>
+    <span class="xml&#45;tag">&#60;/z:template&#62;</span>
+<span class="xml&#45;tag">&#60;/z:listbox&#62;</span></pre></div><p class="paragraph"/><h2>Description</h2><p class="paragraph"/>Reference <a href="http://books.zkoss.org/wiki/Small%20Talks/2011/July/Envisage%20ZK%206.0:%20Rendering%20List%20and%20Tree%20Model%20with%20Templates" target="blank">Envisage ZK 6.0: Rendering List and Tree Model with Templates</a>
+
+    </body>
+</html>

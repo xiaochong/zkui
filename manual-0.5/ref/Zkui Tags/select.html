@@ -1,0 +1,43 @@
+<html>
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+        <title>Grails ZK UI Plugin 0.5.M1 - Reference Documentation</title>
+        <link rel="stylesheet" href="../../css/ref.css" type="text/css" media="screen" title="Ref" charset="utf-8"/>
+    </head>
+    <body class="body">
+    <h1>select</h1><p class="paragraph"/><h2>Purpose</h2><p class="paragraph"/>Helper tag for creating select component, same as the grails' <strong class="bold">select</strong> tag:<p class="paragraph"/><h2>Examples</h2>
+<div class="code"><pre>// create a select from a range
+&#60;z:select name=<span class="java&#45;quote">"user.age"</span> from=<span class="java&#45;quote">"$&#123;18..65&#125;"</span> value=<span class="java&#45;quote">"$&#123;age&#125;"</span>
+          noSelection=<span class="java&#45;quote">"&#91;'':'&#45;Choose your age&#45;'&#93;"</span>/&#62;
+// use a no selection with a nullable <span class="java&#45;object">Object</span> property (use '<span class="java&#45;keyword">null</span>' as key)
+ &#60;z:select id=<span class="java&#45;quote">"type"</span> name='type.id' value=<span class="java&#45;quote">"$&#123;person?.type?.id&#125;"</span>
+    noSelection=<span class="java&#45;quote">"$&#123;&#91;'<span class="java&#45;keyword">null</span>':'Select One...'&#93;&#125;"</span>
+    from='$&#123;PersonType.list()&#125;'
+    optionKey=<span class="java&#45;quote">"id"</span> optionValue=<span class="java&#45;quote">"name"</span>/&#62;<p class="paragraph"/>// create select from a list of companies
+// note the 'optionKey' is set to the id of each company element
+&#60;z:select name=<span class="java&#45;quote">"user.company.id"</span>
+          from=<span class="java&#45;quote">"$&#123;Company.list()&#125;"</span>
+          value=<span class="java&#45;quote">"$&#123;user?.company.id&#125;"</span>
+          optionKey=<span class="java&#45;quote">"id"</span> /&#62;<p class="paragraph"/>// create multiple select
+&#60;z:select name=<span class="java&#45;quote">"cars"</span>
+          from=<span class="java&#45;quote">"$&#123;Car.list()&#125;"</span>
+          value=<span class="java&#45;quote">"$&#123;person?.cars&#42;.id&#125;"</span>
+          optionKey=<span class="java&#45;quote">"id"</span>
+          multiple=<span class="java&#45;quote">"<span class="java&#45;keyword">true</span>"</span> /&#62;<p class="paragraph"/>// create select with internationalized labels (<span class="java&#45;keyword">this</span> is useful <span class="java&#45;keyword">for</span> small <span class="java&#45;keyword">static</span> lists and the inList constraint)
+// expected properties in messages.properties:
+// book.category.M=Mystery
+// book.category.T=Thriller
+// book.category.F=Fantasy
+&#60;z:select name=<span class="java&#45;quote">"book.category"</span> from=<span class="java&#45;quote">"$&#123;&#91;'M', 'T', 'F'&#93;&#125;"</span> valueMessagePrefix=<span class="java&#45;quote">"book.category"</span> /&#62;</pre></div><p class="paragraph"/><h2>Description</h2><p class="paragraph"/>Attributes
+<ul class="star">
+<li><code>from</code> (required) - The list or range to select from</li>
+<li><code>value</code> (optional) - The current selected value that evaluates equals() to true for one of the elements in the from list.</li>
+<li><code>optionKey</code> (optional) - By default value attribute of each &#60;option&#62; element will be the result of a "toString()" call on each element. Setting this allows the value to be a bean property of each element in the list.</li>
+<li><code>optionValue</code> (optional) - By default the body of each &#60;option&#62; element will be the result of a "toString()" call on each element in the "from" attribute list. Setting this allows the value to be a bean property of each element in the list.</li>
+<li><code>keys</code> (optional) - A list of values to be used for the value attribute of each "option" element.</li>
+<li><code>noSelection</code> (optional) - A single-entry map detailing the key and value to use for the "no selection made" choice in the select box. If there is no current selection this will be shown as it is first in the list, and if submitted with this selected, the key that you provide will be submitted. Typically this will be blank - but you can also use 'null' in the case that you're passing the ID of an object</li>
+<li><code>valueMessagePrefix</code> (Optional) - By default the value "option" element will be the result of a "toString()" call on each element in the "from" attribute list. Setting this allows the value to be resolved from the I18n messages. The valueMessagePrefix will be suffixed with a dot ('.') and then the value attribute of the option to resolve the message. If the message could not be resolved, the value is presented.</li>
+<li><code>multiple</code> (optional) - Set to "true" to generate a multi-select listbox rather than a dropdown list.</li>
+</ul><p class="paragraph"/>
+    </body>
+</html>

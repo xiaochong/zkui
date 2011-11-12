@@ -1,0 +1,23 @@
+<html>
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+        <title>Grails ZK UI Plugin 0.5.M1 - Reference Documentation</title>
+        <link rel="stylesheet" href="../../css/ref.css" type="text/css" media="screen" title="Ref" charset="utf-8"/>
+    </head>
+    <body class="body">
+    <h1>page</h1><p class="paragraph"/><h2>Purpose</h2><p class="paragraph"/>It specifies how a zk page should be handled. Currently the id and style arguments can be assigned.<p class="paragraph"/><h2>Examples</h2>
+<div class="code"><pre><span class="xml&#45;tag">&#60;z:page id=<span class="xml&#45;quote">"page_id_1"</span> style=<span class="xml&#45;quote">"width:100%;height:100%"</span>&#62;</span>
+    <span class="xml&#45;tag">&#60;z:window&#62;</span>
+        &#8230;
+    <span class="xml&#45;tag">&#60;/z:window&#62;</span>
+<span class="xml&#45;tag">&#60;/z:page&#62;</span><p class="paragraph"/><span class="xml&#45;tag">&#60;z:page id=<span class="xml&#45;quote">"page_id_2"</span>&#62;</span>
+    <span class="xml&#45;tag">&#60;z:window&#62;</span>
+        &#8230;
+    <span class="xml&#45;tag">&#60;/z:window&#62;</span>
+<span class="xml&#45;tag">&#60;/z:page&#62;</span></pre></div><p class="paragraph"/><h2>Description</h2><p class="paragraph"/>Attributes
+<ul class="star">
+<li><code>id</code> - Specifies the identifier of the page, such that we can retrieve it back.</li>
+<li><code>style</code> - Specifies the CSS style used to render the page. If not specified, it depends on the mold. The default mold uses width:100% as the default value.</li>
+</ul><p class="paragraph"/>
+    </body>
+</html>

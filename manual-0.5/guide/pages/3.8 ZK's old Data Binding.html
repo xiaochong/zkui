@@ -1,0 +1,21 @@
+<html>
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+        <title>3.8 ZK's old Data Binding</title>
+        <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen" title="Ref" charset="utf-8"/>
+    </head>
+    <body class="body">
+    Data binding is a mechanism that automates the data-copy plumbing code (CRUD) between UI components and the data source. Application developers only have to tell the data binding manager about the associations between UI components and the data source. Then, the data -binding manager will do all the loading (loading data from the data source to UI components) and saving (saving data from UI component into the data source) jobs automatically.<p class="paragraph"/><h3>Activates Data Binding Manager</h3>
+<div class="code"><pre><span class="xml&#45;tag">&#60;z:window  apply=<span class="xml&#45;quote">"org.zkoss.demo.MyComposer,org.zkoss.zkplus.databind.AnnotateDataBindingComposer"</span>&#62;</span>
+<span class="xml&#45;tag">&#60;/z:window&#62;</span></pre></div><p class="paragraph"/>For more information, please refer to the relative blog post <a href="http://blog.zkoss.org/index.php/2011/08/11/databinding-composer/" target="blank">Databinding Composer</a><p class="paragraph"/><h3>Associate UI Components with Data Source</h3>
+After activating the data-binding manager, you have to define the required UI objects and then associate them with the data source.<p class="paragraph"/>In the gsp view:
+<div class="code"><pre><span class="xml&#45;tag">&#60;z:window id=<span class="xml&#45;quote">"win"</span> apply=<span class="xml&#45;quote">"test.TestComposer,org.zkoss.zkplus.databind.AnnotateDataBindingComposer"</span>&#62;</span>
+    <span class="xml&#45;tag">&#60;z:textbox value=<span class="xml&#45;quote">"@&#123;win&#35;composer.username&#125;"</span>/&#62;</span>
+<span class="xml&#45;tag">&#60;z:/window&#62;</span></pre></div><p class="paragraph"/>In the test.TestComposer:
+<div class="code"><pre>class TestComposer&#123;<p class="paragraph"/>    def username=<span class="java&#45;quote">"test"</span><p class="paragraph"/>    def afterCompose = &#123;Component comp &#45;&#62;
+        &#8230;
+    &#125;
+&#125;</pre></div><p class="paragraph"/>See more <a href="http://books.zkoss.org/wiki/ZK%20Developer's%20Reference/Data%20Binding" target="blank">ZK Developer&#39;s Reference/Data Binding</a><p class="paragraph"/>
+
+    </body>
+</html>

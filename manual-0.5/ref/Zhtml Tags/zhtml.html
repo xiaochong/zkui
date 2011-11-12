@@ -1,0 +1,25 @@
+<html>
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+        <title>Grails ZK UI Plugin 0.5.M1 - Reference Documentation</title>
+        <link rel="stylesheet" href="../../css/ref.css" type="text/css" media="screen" title="Ref" charset="utf-8"/>
+    </head>
+    <body class="body">
+    <h1>Overview</h1><p class="paragraph"/>The ZHTML component set is a collection of components,which is designed to have rich features, each ZHTML component represents a HTML tag. For example, the following XML element will cause ZK Loader to create a component called Ul
+<div class="code"><pre><span class="xml&#45;tag">&#60;h:ul/&#62;</span></pre></div><p class="paragraph"/><h1>Dynamic Update</h1><p class="paragraph"/>Because Components are instantiated for XML elements specified with the ZHTML namespace, you could update its content dynamically on the server. For example, we could allow users to click a button to add a column as shown below.
+<div class="code"><pre><span class="xml&#45;tag">&#60;z:window title=<span class="xml&#45;quote">"mix HTML demo"</span>&#62;</span>
+    <span class="xml&#45;tag">&#60;h:table border=<span class="xml&#45;quote">"1"</span>&#62;</span>
+        <span class="xml&#45;tag">&#60;h:tr id=<span class="xml&#45;quote">"row1"</span>&#62;</span>
+            <span class="xml&#45;tag">&#60;h:td&#62;</span>column 1<span class="xml&#45;tag">&#60;/h:td&#62;</span>
+            <span class="xml&#45;tag">&#60;h:td&#62;</span>
+                <span class="xml&#45;tag">&#60;z:listbox id=<span class="xml&#45;quote">"list"</span> mold=<span class="xml&#45;quote">"select"</span>&#62;</span>
+                    <span class="xml&#45;tag">&#60;z:listitem label=<span class="xml&#45;quote">"AA"</span>/&#62;</span>
+                    <span class="xml&#45;tag">&#60;z:listitem label=<span class="xml&#45;quote">"BB"</span>/&#62;</span>
+                <span class="xml&#45;tag">&#60;/z:listbox&#62;</span>
+            <span class="xml&#45;tag">&#60;/h:td&#62;</span>
+        <span class="xml&#45;tag">&#60;/h:tr&#62;</span>
+    <span class="xml&#45;tag">&#60;/h:table&#62;</span>
+    <span class="xml&#45;tag">&#60;z:button label=<span class="xml&#45;quote">"add"</span> onClick=<span class="xml&#45;quote">"row1.appendChild(new org.zkoss.zhtml.Td())"</span>/&#62;</span>
+<span class="xml&#45;tag">&#60;/z:window&#62;</span></pre></div>
+    </body>
+</html>

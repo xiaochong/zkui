@@ -1,0 +1,39 @@
+<html>
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+        <title>5. Selector</title>
+        <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen" title="Ref" charset="utf-8"/>
+    </head>
+    <body class="body">
+    <h1><a name="5. Selector">5. Selector</a></h1><h2><a name="5.1 Selector overview">5.1 Selector overview</a></h2>jQuery &#38; CSS 3 style Server side selectors, that allows very powerful and robust queries.<p class="paragraph"/>The <code>select</code> method is injected to <a href="http://www.zkoss.org/javadoc/latest/zk/org/zkoss/zk/ui/Component.html" target="blank">Component</a>,which returns a list of Component.<p class="paragraph"/>View code
+<div class="code"><pre><span class="xml&#45;tag">&#60;z:window id=<span class="xml&#45;quote">"window"</span> apply=<span class="xml&#45;quote">"MyComposer"</span>&#62;</span>
+    <span class="xml&#45;tag">&#60;z:textbox name=<span class="xml&#45;quote">"t1"</span> value=<span class="xml&#45;quote">"value1"</span>/&#62;</span>
+    <span class="xml&#45;tag">&#60;z:textbox id=<span class="xml&#45;quote">"t2"</span> value=<span class="xml&#45;quote">"value2"</span>/&#62;</span>
+    <span class="xml&#45;tag">&#60;z:textbox value=<span class="xml&#45;quote">"value3"</span>/&#62;</span>
+<span class="xml&#45;tag">&#60;/z:window&#62;</span></pre></div><p class="paragraph"/>Composer code
+<div class="code"><pre>class MyComposer&#123;<p class="paragraph"/>    def afterCompose = &#123;Component window &#45;&#62;
+        assert 3 == window.select(<span class="java&#45;quote">"textbox"</span>).size() // select method returns List&#60;Component&#62;
+        assert <span class="java&#45;quote">"value2"</span> == window.select(<span class="java&#45;quote">"&#35;t2"</span>)&#91;0&#93;.value
+        assert <span class="java&#45;quote">"value1"</span> == window.select(<span class="java&#45;quote">"textbox&#91;name='t1'&#93;"</span>)&#91;0&#93;.value
+    &#125;<p class="paragraph"/>&#125;</pre></div>
+<h2><a name="5.2 Base Selector">5.2 Base Selector</a></h2><div class="code"><pre>// Matches any Button component
+<span class="java&#45;quote">"button"</span><p class="paragraph"/>// Matches any Component with ID <span class="java&#45;quote">"btn"</span>
+<span class="java&#45;quote">"&#35;btn"</span><p class="paragraph"/>// Matches any Button with ID <span class="java&#45;quote">"btn"</span>
+<span class="java&#45;quote">"button&#35;btn"</span><p class="paragraph"/>// Matches any Button whose label is <span class="java&#45;quote">"Submit"</span>
+<span class="java&#45;quote">"button&#91;label='Submit'&#93;"</span></pre></div><h2><a name="5.3 Selector combinations">5.3 Selector combinations</a></h2><div class="code"><pre>// Matches any Button who has a Window ancestor
+<span class="java&#45;quote">"window button"</span><p class="paragraph"/>// Matches any Button whose parent is a Window
+<span class="java&#45;quote">"window &#62; button"</span><p class="paragraph"/>// Matches any Button whose previous sibling is a Window
+<span class="java&#45;quote">"window + button"</span><p class="paragraph"/>// Matches any Button who has a Window as a senior sibling
+<span class="java&#45;quote">"window ~ button"</span><p class="paragraph"/>// Matches any Button whose parent is a Div and grandparent is a Window
+<span class="java&#45;quote">"window &#62; div &#62; button"</span></pre></div><h2><a name="5.4 Comparison with CSS3 Selector">5.4 Comparison with CSS3 Selector</a></h2><table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th><strong class="bold">Syntax</strong></th><th><strong class="bold">In CSS 3 Selector</strong></th><th><strong class="bold">In Component Selector</strong></th><th><strong class="bold">Comment</strong></th></tr><tr class="table-odd"><td>tagname</td><td>DOM element type</td><td>Component type</td><td>&#160;</td></tr><tr class="table-even"><td>#id</td><td>DOM ID</td><td>Component ID</td><td>&#160;</td></tr><tr class="table-odd"><td>.class</td><td>CSS class</td><td>SClass / ZClass</td><td>&#160;</td></tr><tr class="table-even"><td>attr='value'</td><td>DOM attribute</td><td>getAttr() or dynamic attribute</td><td>If getAttr() is not a method on such component, it is skipped</td></tr><tr class="table-odd"><td>:pseudo-class</td><td>Pseudo class</td><td>Pseudo class</td><td>:root, :empty, :first-child, :last-child, :only-child, :nth-child(), :nth-last-child()</td></tr><tr class="table-even"><td>::pseudo-element</td><td>Pseudo element</td><td>N/A</td><td>&#160;</td></tr><tr class="table-odd"><td>&#62; + ~</td><td>Combinator</td><td>Combinator</td><td>Identical to CSS 3 combinators</td></tr></table><h2><a name="5.5 More about Selector">5.5 More about Selector</a></h2>You can also use Selector independently.
+For example:<p class="paragraph"/><div class="code"><pre>Window win;<p class="paragraph"/>// returns a list of components, containing all labels in the page
+Selectors.find(page, <span class="java&#45;quote">"label"</span>);<p class="paragraph"/>// returns all components with id <span class="java&#45;quote">"myId"</span> under the Window win. (including itself)
+Selectors.find(win, <span class="java&#45;quote">"&#35;myId"</span>);<p class="paragraph"/>// returns all components whose .getLabel() value is <span class="java&#45;quote">"zk"</span> (<span class="java&#45;keyword">if</span> applicable)
+Selectors.find(page, <span class="java&#45;quote">"&#91;label='zk'&#93;"</span>);<p class="paragraph"/>// returns all captions whose parent is a window
+Selectors.find(win, <span class="java&#45;quote">"window &#62; caption"</span>);<p class="paragraph"/>// returns all buttons and toolbarbuttons
+Selectors.find(page, <span class="java&#45;quote">"button, toolbarbutton"</span>);<p class="paragraph"/>// you can assemble the criteria:
+// returns all labels, whose parent is a window of id <span class="java&#45;quote">"win"</span>, and whose value is <span class="java&#45;quote">"zk"</span>
+Selectors.find(page, <span class="java&#45;quote">"window&#35;win &#62; label&#91;value='zk'&#93;"</span>);</pre></div><p class="paragraph"/>
+
+    </body>
+</html>

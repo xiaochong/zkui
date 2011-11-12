@@ -1,0 +1,14 @@
+<html>
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+        <title>8.3 ZK Extensions Component</title>
+        <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen" title="Ref" charset="utf-8"/>
+    </head>
+    <body class="body">
+    You can extends the org.grails.plugins.zkui.AbstractTagLib implement the Extensions Component's Taglib same as:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> org.grails.plugins.zkui.AbstractTagLib<p class="paragraph"/>class CalendarsTagLib <span class="java&#45;keyword">extends</span> AbstractTagLib &#123;
+    <span class="java&#45;keyword">static</span> namespace = <span class="java&#45;quote">"z"</span><p class="paragraph"/>    def calendars = &#123; attrs, body &#45;&#62;
+        doTag(attrs, body, <span class="java&#45;quote">"calendars"</span>)
+    &#125;<p class="paragraph"/>&#125;</pre></div><p class="paragraph"/>
+and put the Calendar jar to <code>lib</code>
+    </body>
+</html>
