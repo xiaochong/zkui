@@ -212,7 +212,7 @@ The different is it more likely to use the Grails' infrastructures such as gsp, 
                 } else {
                     name = it.field
                 }
-                def selectedComponentList = delegate.select("[name=${name}]")
+                def selectedComponentList = delegate.select("[name='${name}']")
                 String errorMessage = gDispatcher.message(error: it)
                 if (selectedComponentList.size() > 0 && selectedComponentList[0] instanceof InputElement) {
                     selectedComponentList[0].setErrorMessage(errorMessage)
