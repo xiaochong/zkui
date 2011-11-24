@@ -15,6 +15,9 @@ class Item {
     double price
     int quantity
 
+    Item() {
+    }
+
     public Item(String name, String description, double price, int quantity) {
         this.name = name
         this.description = description
@@ -125,8 +128,8 @@ class SearchVM {
 }
 {code}
 
-SearchVM is created by grails command @create-view-model@ ,we need to notify ZK Bind that the properties of this @View Model@ were changed. In ZK Bind, it has the binder to help the binding between View and View Model. By adding @NotifyChange on a setter method of a property, after binder set the property, it is noticed to reload components that bind to this property. Add @NotifyChange on a command method, after Binder executes the method, it is noticed to reload components that bind to these properties.
-For example, I add @NotifyChange on setFilter, when binder sets the value by setFilter(), it is noticed to reload any binding that is related to filter property of the view model. I also added @NotifyChange(["items","selected"]) on doSearch(), that is because when doing the search, I will search by the filter and has a new item list and also reset selected to null, so I need to notify Binder this 2 properties was changed.
+SearchVM is created by grails command @create-view-model@ ,we need to notify ZK Bind that the properties of this @View Model@ were changed. In ZK Bind, it has the binder to help the binding between View and View Model. By adding \@NotifyChange on a setter method of a property, after binder set the property, it is noticed to reload components that bind to this property. Add \@NotifyChange on a command method, after Binder executes the method, it is noticed to reload components that bind to these properties.
+For example, I add \@NotifyChange on setFilter, when binder sets the value by setFilter(), it is noticed to reload any binding that is related to filter property of the view model. I also added \@NotifyChange(["items","selected"]) on doSearch(), that is because when doing the search, I will search by the filter and has a new item list and also reset selected to null, so I need to notify Binder this 2 properties was changed.
 With @NotifyChange, it let binder knows when to reload the view automatically.
 
 h3. Design a View with ZK Bind
@@ -140,13 +143,13 @@ Now, we have to create a ‘search.gsp’ and bind it to the View Model. To do t
 
 {code}
 <z:window title="Search Storage Item" border="normal" width="600px"
-    apply="org.zkoss.bind.BindComposer" viewModel="@bind(vm='demo.SearchVM')" >
+    apply="org.zkoss.bind.BindComposer" viewModel="\@bind(vm='demo.SearchVM')" >
 ...
 
 </z:window>
 {code}
 
-The @bind(name=expression) here, is the syntax to assign a View Model to the binder, ‘name’ is the name of the View Model which will be referenced in nested binding. ‘expression’ is an EL 2.2 expression and there are some rules about this expression; if the evaluated result is a ‘String’, it uses ‘String’ as a class name to create the view model whereas if the result is a ‘Class’, it creates the View Model by ‘Class.newInstance()’. Moreover, if the result is a non-primitive Object then it will use it directly, other-wise, it complains an exception.
+The \@bind(name=expression) here, is the syntax to assign a View Model to the binder, ‘name’ is the name of the View Model which will be referenced in nested binding. ‘expression’ is an EL 2.2 expression and there are some rules about this expression; if the evaluated result is a ‘String’, it uses ‘String’ as a class name to create the view model whereas if the result is a ‘Class’, it creates the View Model by ‘Class.newInstance()’. Moreover, if the result is a non-primitive Object then it will use it directly, other-wise, it complains an exception.
 
 h3. Binding the textbox with filter data
 
@@ -154,11 +157,11 @@ We need a textbox to represent the filter data, when user types in the textbox, 
 
 *View : search.gsp*
 {code}
-<z:textbox value="@bind(vm.filter)" instant="true"/>
-<z:button label="Search" disabled="@bind(empty vm.filter)"/>
+<z:textbox value="\@bind(vm.filter)" instant="true"/>
+<z:button label="Search" disabled="\@bind(empty vm.filter)"/>
 {code}
 
-The @bind(expression) here, is the two-way binding syntax to bind component’s attribute and the VM’s property together, it constructs a prompt binding, which means that the change of a component’s attribute caused by a user’s action will also be saved to the VM’s property. And any changed notification of the property will cause a reload of the component.
+The \@bind(expression) here, is the two-way binding syntax to bind component’s attribute and the VM’s property together, it constructs a prompt binding, which means that the change of a component’s attribute caused by a user’s action will also be saved to the VM’s property. And any changed notification of the property will cause a reload of the component.
 In the above example, I have binded the ‘vm.filter’ to the ‘value’ attribute of the textbox, and the ‘disabled’ attribute of the button. When editing the textbox, ‘vm.filter’ will be changed and the button will immediately be enabled or disabled depending on the value of ‘vm.filter’.
 
 h3. Binding the listbox with search result
@@ -167,7 +170,7 @@ In ZK 6, we introduce a new feature called ‘template’, it is a perfect match
 
 *View : search.gsp*
 {code}
-<z:listbox model="@bind(vm.items)" selectedItem="@bind(vm.selected)" hflex="true" height="300px">
+<z:listbox model="\@bind(vm.items)" selectedItem="\@bind(vm.selected)" hflex="true" height="300px">
     <z:listhead>
         <z:listheader label="Name"/>
         <z:listheader label="Price" align="center" width="80px"/>
@@ -175,24 +178,24 @@ In ZK 6, we introduce a new feature called ‘template’, it is a perfect match
     </z:listhead>
     <z:template name="model" var="item">
         <listitem>
-            <listcell label="@bind(item.name)"/>
-            <listcell label="@bind(item.price) @converter('formatedNumber', format='###,##0.00')"/>
-            <listcell label="@bind(item.quantity)" sclass="@bind(item.quantity lt 3 ?'red':'')"/>
+            <listcell label="\@bind(item.name)"/>
+            <listcell label="\@bind(item.price) \@converter('formatedNumber', format='###,##0.00')"/>
+            <listcell label="\@bind(item.quantity)" sclass="\@bind(item.quantity lt 3 ?'red':'')"/>
         </listitem>
     </z:template>
 </z:listbox>
 {code}
 
-The @bind(expression) can also apply to ‘model’ attribute of a component. When binding to a model, we have to provide a template, which name is ‘model’, to render each item in the model. In the template, we have to set the name of ‘var’, so we could use it as an item in the template. We also introduce the @converter(expression) syntax, so you can write a ‘Converter’ to convert data to attribute when loading to component, and convert back when saving to bean.
-In the above example, the ‘model’ of listbox binds to ‘vm.items’, and the ‘selectedItem’ binds to ‘vm.selected’ with a template that has responsibility to render each item of the ‘vm.items’. Of course, we could also use @bind in the template, even bind to a ‘sclass’ attribute of a listcell with a flexible expression ‘item.quantity lt 3?’red’:’’’. Look into ‘item.price’, it is a double, I want it to be shown with an expected format, therefore a built-in converter ‘formatedNumber’ and a format argument ‘###,##0.00’ are used.
+The \@bind(expression) can also apply to ‘model’ attribute of a component. When binding to a model, we have to provide a template, which name is ‘model’, to render each item in the model. In the template, we have to set the name of ‘var’, so we could use it as an item in the template. We also introduce the \@converter(expression) syntax, so you can write a ‘Converter’ to convert data to attribute when loading to component, and convert back when saving to bean.
+In the above example, the ‘model’ of listbox binds to ‘vm.items’, and the ‘selectedItem’ binds to ‘vm.selected’ with a template that has responsibility to render each item of the ‘vm.items’. Of course, we could also use \@bind in the template, even bind to a ‘sclass’ attribute of a listcell with a flexible expression ‘item.quantity lt 3?’red’:’’’. Look into ‘item.price’, it is a double, I want it to be shown with an expected format, therefore a built-in converter ‘formatedNumber’ and a format argument ‘###,##0.00’ are used.
 
 h3. Binding the selected item
 When binding the listbox, we also bind the ‘selectedItem’ of listbox to ‘selected’ property of View Model. You do not need to worry about selectedItem(in which its value type is a Listitem) of listbox being the incorrect data type of the model because binder will convert it to item automatically. By the binding of ‘selectedItem’, when selecting an item in the listbox, the ‘selected’ property will be updated to the selected item and displayed in detail.
 
 *View : search.gsp*
 {code}
-<z:groupbox visible="@bind(not empty vm.selected)" hflex="true" mold="3d">
-    <z:caption label="@bind(vm.selected.name)"/>
+<z:groupbox visible="\@bind(not empty vm.selected)" hflex="true" mold="3d">
+    <z:caption label="\@bind(vm.selected.name)"/>
     <z:grid hflex="true">
         <z:columns>
             <z:column width="120px"/>
@@ -200,22 +203,22 @@ When binding the listbox, we also bind the ‘selectedItem’ of listbox to ‘s
         </z:columns>
         <z:rows>
             <z:row>
-                Description <z:label value="@bind(vm.selected.description)"/>
+                Description <z:label value="\@bind(vm.selected.description)"/>
             </z:row>
             <z:row>
-                Price <z:label value="@bind(vm.selected.price) @converter('formatedNumber', format='###,##0.00')"/>
+                Price <z:label value="\@bind(vm.selected.price) \@converter('formatedNumber', format='###,##0.00')"/>
             </z:row>
             <z:row>
-                Quantity <z:label value="@bind(vm.selected.quantity)" sclass="@bind(vm.selected.quantity lt 3 ?'red':'')"/>
+                Quantity <z:label value="\@bind(vm.selected.quantity)" sclass="\@bind(vm.selected.quantity lt 3 ?'red':'')"/>
             </z:row>
             <z:row>
-                Total Price <z:label value="@bind(vm.selected.totalPrice) @converter(vm.totalPriceConverter)"/>
+                Total Price <z:label value="\@bind(vm.selected.totalPrice) \@converter(vm.totalPriceConverter)"/>
             </z:row>
         </z:rows>
     </z:grid>
 </z:groupbox>
 {code}
-In the example above, we bind ‘visible’ attribute of groupbox with the expression ‘not empty vm.selected’, so that the groupbox will only appear visible when user selects an item. Oppositely, if no item is selected, this groupbox will not show up. The @converter() is used again here but with some differences. The converter now comes from the View Model . Of course, a ‘getTotalPriceConverter’ method needs to be prepared in View Model and return a Converter.
+In the example above, we bind ‘visible’ attribute of groupbox with the expression ‘not empty vm.selected’, so that the groupbox will only appear visible when user selects an item. Oppositely, if no item is selected, this groupbox will not show up. The \@converter() is used again here but with some differences. The converter now comes from the View Model . Of course, a ‘getTotalPriceConverter’ method needs to be prepared in View Model and return a Converter.
 
 *ViewModel : SearchVM.groovy*
 {code}
@@ -240,10 +243,10 @@ In the example above, we bind ‘visible’ attribute of groupbox with the expre
 {code}
 
 h3. Binding the button action to a command
-Now, we have to perform a command of the View Model when clicking on the search button. To do so, add a @bind in the onClick event of the button.
+Now, we have to perform a command of the View Model when clicking on the search button. To do so, add a \@bind in the onClick event of the button.
 
 {code}
-<z:button label="Search" onClick="@bind('doSearch')" disabled="@bind(empty vm.filter)"/>
+<z:button label="Search" onClick="\@bind('doSearch')" disabled="\@bind(empty vm.filter)"/>
 {code}
 
 The @bind(expression) syntax in the event of a component represents the binding of an event to a command of the View Model. It has some rules.
@@ -270,14 +273,14 @@ h3. The all:*search.gsp*
 
 <body>
 <z:window title="Search Storage Item" border="normal" width="600px"
-          apply="org.zkoss.bind.BindComposer" viewModel="@bind(vm='zkui6demo.SearchVM')">
+          apply="org.zkoss.bind.BindComposer" viewModel="\@bind(vm='zkui6demo.SearchVM')">
     <z:vbox hflex="true">
         <z:hbox>
             Filter :
-            <z:textbox value="@bind(vm.filter)" instant="true"/>
-            <z:button label="Search" onClick="@bind('doSearch')" disabled="@bind(empty vm.filter)"/>
+            <z:textbox value="\@bind(vm.filter)" instant="true"/>
+            <z:button label="Search" onClick="\@bind('doSearch')" disabled="\@bind(empty vm.filter)"/>
         </z:hbox>
-        <z:listbox model="@bind(vm.items)" selectedItem="@bind(vm.selected)" hflex="true" height="300px">
+        <z:listbox model="\@bind(vm.items)" selectedItem="\@bind(vm.selected)" hflex="true" height="300px">
             <z:listhead>
                 <z:listheader label="Name"/>
                 <z:listheader label="Price" align="center" width="80px"/>
@@ -285,14 +288,14 @@ h3. The all:*search.gsp*
             </z:listhead>
             <z:template name="model" var="item">
                 <listitem>
-                    <listcell label="@bind(item.name)"/>
-                    <listcell label="@bind(item.price) @converter('formatedNumber', format='###,##0.00')"/>
-                    <listcell label="@bind(item.quantity)" sclass="@bind(item.quantity lt 3 ?'red':'')"/>
+                    <listcell label="\@bind(item.name)"/>
+                    <listcell label="\@bind(item.price) \@converter('formatedNumber', format='###,##0.00')"/>
+                    <listcell label="\@bind(item.quantity)" sclass="\@bind(item.quantity lt 3 ?'red':'')"/>
                 </listitem>
             </z:template>
         </z:listbox>
-        <z:groupbox visible="@bind(not empty vm.selected)" hflex="true" mold="3d">
-            <z:caption label="@bind(vm.selected.name)"/>
+        <z:groupbox visible="\@bind(not empty vm.selected)" hflex="true" mold="3d">
+            <z:caption label="\@bind(vm.selected.name)"/>
             <z:grid hflex="true">
                 <z:columns>
                     <z:column width="120px"/>
@@ -300,16 +303,16 @@ h3. The all:*search.gsp*
                 </z:columns>
                 <z:rows>
                     <z:row>
-                        Description <z:label value="@bind(vm.selected.description)"/>
+                        Description <z:label value="\@bind(vm.selected.description)"/>
                     </z:row>
                     <z:row>
-                        Price <z:label value="@bind(vm.selected.price) @converter('formatedNumber', format='###,##0.00')"/>
+                        Price <z:label value="\@bind(vm.selected.price) \@converter('formatedNumber', format='###,##0.00')"/>
                     </z:row>
                     <z:row>
-                        Quantity <z:label value="@bind(vm.selected.quantity)" sclass="@bind(vm.selected.quantity lt 3 ?'red':'')"/>
+                        Quantity <z:label value="\@bind(vm.selected.quantity)" sclass="\@bind(vm.selected.quantity lt 3 ?'red':'')"/>
                     </z:row>
                     <z:row>
-                        Total Price <z:label value="@bind(vm.selected.totalPrice) @converter(vm.totalPriceConverter)"/>
+                        Total Price <z:label value="\@bind(vm.selected.totalPrice) \@converter(vm.totalPriceConverter)"/>
                     </z:row>
                 </z:rows>
             </z:grid>
@@ -369,6 +372,12 @@ class BootStrap {
     }
 }
 {code}
+
+
+
+h3. Downloads ZK UI MVVM Demo
+
+https://github.com/downloads/xiaochong/zkui/zkui-mvvm-demo.zip
 
 
 h3. More...
