@@ -10,11 +10,12 @@ grails.project.dependency.resolution = {
     }
     log "warn" // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
     repositories {
+        mavenRepo "http://mavensync.zkoss.org/maven2/"
         grailsPlugins()
         grailsHome()
         grailsCentral()
         mavenCentral()
-        mavenRepo "http://mavensync.zkoss.org/maven2/"
+
         // uncomment the below to enable remote dependency resolution
         // from public Maven repositories
         //mavenLocal()
@@ -28,7 +29,7 @@ grails.project.dependency.resolution = {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
 
         // runtime 'mysql:mysql-connector-java:5.1.13'
-        def zkVersion="5.0.9"
+        def zkVersion="5.0.10"
         runtime "org.zkoss.zk:zk:${zkVersion}"
         runtime "org.zkoss.zk:zul:${zkVersion}"
         runtime "org.zkoss.zk:zkplus:${zkVersion}"
