@@ -77,7 +77,6 @@ elementMap.each {
 ${it.value.collect {"     * @attr ${it} "}.join("\n")}
      */
     def ${name == 'flash' ? 'flashes' : name} = { attrs, body ->
-        true || ${it.value.collect {'attrs.' + it}.join(' || ')}
         doTag(attrs, body, "$name")
     }
     """

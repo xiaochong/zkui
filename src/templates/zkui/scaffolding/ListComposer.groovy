@@ -38,7 +38,7 @@ class ListComposer {
         listModel.addAll(${propertyName}List.id)
     }
 
-    private rowRenderer = {Row row, Object id ->
+    private rowRenderer = {Row row, Object id, int i ->
         def ${propertyName} = ${className}.get(id)
         row << {
                 <%  excludedProps = Event.allEvents.toList() << 'version'

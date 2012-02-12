@@ -9,6 +9,7 @@ import org.zkoss.zk.ui.Component
 import org.zkoss.zk.ui.Execution
 import org.zkoss.zk.ui.Executions
 import org.zkoss.zk.ui.metainfo.PageDefinition
+import org.zkoss.zk.ui.util.Composer
 import org.zkoss.zk.ui.util.Template
 
 class BaseTagLib {
@@ -100,7 +101,7 @@ class BaseTagLib {
             this.body = body
         }
 
-        Component[] create(Component parent, Component insertBefore, VariableResolver resolver) {
+        Component[] create(Component parent, Component insertBefore, VariableResolver resolver, Composer composer) {
             final Execution exec = Executions.getCurrent()
             PageDefinition pageDef = pageDefCache.get(body.hashCode() as Integer)
             if (!pageDef) {

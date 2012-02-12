@@ -46,9 +46,9 @@ class ComponentUtil {
             String attval = value.toString();
             // test if this attribute is an annotation...
             if (isAnnotation(attval)) { //annotation
-                AnnotationHelper helper = new AnnotationHelper();
-                helper.addByCompoundValue(attval);
-                helper.applyAnnotations(target, "self".equals(attnm) ? null : attnm, true);
+                AnnotationHelper helper = new AnnotationHelper()
+                helper.addByCompoundValue(attval, null)
+                helper.applyAnnotations(target, "self".equals(attnm) ? null : attnm, true)
             }
             else if (target.getDefinition().isMacro())
                 ((DynamicPropertied) target).setDynamicProperty(attnm, value);
