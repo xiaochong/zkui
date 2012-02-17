@@ -1,0 +1,24 @@
+h3. Introduction
+MVVM is a variant of the Model/View/Controller(MVC) design pattern that helps achieve separation of data and logic from presentation easily. It isolates the View layer and the Model layer avoiding tight coupling between the View and Controller layer. UI designers and programmers can do their jobs in parallel and independently. Thus the productivity is enhanced and project schedule is on track.
+Here are some background information for users who are not familiar with the term MVVM. For those who are already familiar with what MVVM is, please skip this section.
+
+h3. What is MVVM?
+MVVM represents *Model*, *View*, and *ViewModel* which is identical to the [Presentation Model|http://martinfowler.com/eaaDev/PresentationModel.html] introduced by Martin Fowler, a special variant of the famous MVC pattern.
+The ViewModel in MVVM design pattern acts like a special Controller for View in MVC pattern which is responsible for exposing data objects from the data Model to the View and for providing required action and logic for user requests from the View. The ViewModel is kind of like an abstraction of a View, which contains a View's states and behaviors. From another angle, it can also be said that the View layer is kind of like an UI projection of the ViewModel.
+Up until now, you might start to wonder: "Isn't that just what Controller is in MVC? Are you just inventing a new term?". Of course not. Another and a more important feature of ViewModel in MVVM pattern is that a ViewModel '*knows nothing about View's visual elements*'. This is the key that makes MVVM design pattern different from other MVC variances.
+
+h3. Why MVVM?
+
+*Separation of data and logic from presentation*
+
+The key feature that the ViewModel knows nothing about View's visual elements guarantees the one way dependency from View to the ViewModel thus avoiding mutual programming ripple effects between UI and the ViewModel. Consequently, it brings the following advantages:
+
+* As long as the contract is set(what data to show and what actions to proceed), the UI design and coding of ViewModel can be implemented in parallel and independently. Either side will not block the other's way.
+* UI design can be easily changed from time to time without changing the ViewModel as long as the contract does not change.
+* It will be easier to design different views for different devices with a common ViewModel. For a desktop browser with a bigger screen, more information can be shown on one page; while for a smart phone with limited display space, designing a wizard-based step-by-step operation UI can be done without the need to change (much of) the ViewModel.
+* Since ViewModel does not "see" presentation layer, users can unit-test the ViewModel functions easily without UI elements.
+
+h3. What does this have to do with ZK Bind?
+Implementation-wise, no matter how, someone in the system has to help synchronizing data between View and ViewModel layers. Also, this someone has to accept the user request from the View layer and bridge the request to the action and logic provided by the ViewModel layer. This someone, the kernel part of the MVVM design pattern, is either data synchronising codes written by the application developers themselves or a data binding system provided by the framework. In ZK 6, ZK Bind is this key data binding infrastructure of the MVVM design pattern.
+It would be easier to explain the concept with an example which has two different implementations. One in Model-View-Presenter(MVP) design pattern and another in Model-View-ViewModel(MVVM).
+* Model-View-Presenter(MVP) is another variance of MVC design pattern. If you are not aware of what that is, don't worry, just view the example codes.

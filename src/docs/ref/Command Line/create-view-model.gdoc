@@ -1,0 +1,24 @@
+h1. create-view-model
+
+h2. Purpose
+
+The @create-view-model@ command will create a [View Model|http://en.wikipedia.org/wiki/Model_View_ViewModel] and associated integration test for the given base name.
+
+
+h2. Examples
+
+bc.
+grails create-view-model search
+
+h2. Description
+
+Creates a [View Model|http://en.wikipedia.org/wiki/Model_View_ViewModel] for the given base name. For example for a base name "search" a @View Model@ called @SearchVM@ will be created in the @grails-app/vms@ directory.
+
+The View-Model of [MVVM|http://martinfowler.com/eaaDev/PresentationModel.html] is a value converter meaning that the View-Model is responsible for exposing the data objects from the Model in such a way that those objects are easily managed and consumed. In this respect, the View-Model is more Model than View, and handles most if not all of the View’s display logic
+
+Note that this command is merely for convenience and you can also create @View Model@ in your favourite text editor or IDE if you choose.
+
+Usage:
+{code:java}
+grails create-view-model [name]
+{code}

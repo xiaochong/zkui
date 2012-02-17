@@ -142,14 +142,16 @@ class SelectTagLib {
     }
 
     class SelectComboitemRenderer implements ComboitemRenderer {
-        void render(Comboitem comboitem, Object o) {
+        @Override
+        void render(Comboitem comboitem, Object o, int i) {
             comboitem.label = o.key
             comboitem.value = o.value
         }
     }
 
     class SelectListitemRenderer implements ListitemRenderer {
-        void render(Listitem listitem, Object o) {
+        @Override
+        void render(Listitem listitem, Object o, int i) {
             listitem.label = o.key
             listitem.value = o.value
             listitem.selected = o.selected

@@ -1,4 +1,4 @@
-package org.grails.plugins.zkui.artefacts;
+package org.grails.plugins.zkui.artefacts.composer;
 
 import org.codehaus.groovy.grails.commons.AbstractInjectableGrailsClass;
 

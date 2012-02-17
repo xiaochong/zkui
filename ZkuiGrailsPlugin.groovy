@@ -6,17 +6,20 @@ import org.codehaus.groovy.grails.web.metaclass.BindDynamicMethod
 import org.codehaus.groovy.grails.web.pages.GroovyPage
 import org.codehaus.groovy.grails.web.pages.TagLibraryLookup
 import org.codehaus.groovy.grails.web.util.TypeConvertingMap
-import org.grails.plugins.zkui.artefacts.ComposerArtefactHandler
-import org.grails.plugins.zkui.jsoup.select.Selector
+import org.grails.plugins.zkui.artefacts.composer.ComposerArtefactHandler
+import org.grails.plugins.zkui.artefacts.vm.ViewModelArtefactHandler
 import org.grails.plugins.zkui.metaclass.RedirectDynamicMethod
 import org.grails.plugins.zkui.util.UriUtil
 import org.zkoss.zk.ui.Executions
+import org.zkoss.zk.ui.select.Selectors
 import org.zkoss.zul.Messagebox
 import org.zkoss.zul.impl.InputElement
+import org.zkoss.zk.ui.Component
+import org.zkoss.zk.ui.Page
 
 class ZkuiGrailsPlugin {
     // the plugin version
-    def version = "0.4.1"
+    def version = "0.5"
     // the version or versions of Grails the plugin is designed for
     def grailsVersion = "1.2 > *"
     // the other plugins this plugin depends on
@@ -25,12 +28,15 @@ class ZkuiGrailsPlugin {
     def loadAfter = ['core', 'hibernate', 'controllers']
 
     def artefacts = [
-            org.grails.plugins.zkui.artefacts.ComposerArtefactHandler
+            ComposerArtefactHandler, ViewModelArtefactHandler
     ]
 
     def watchedResources = [
             "file:./grails-app/composers/**/*Composer.groovy",
-            "file:./plugins/*/grails-app/composers/**/*Composer.groovy"]
+            "file:./plugins/*/grails-app/composers/**/*Composer.groovy",
+            "file:./grails-app/vms/**/*VM.groovy",
+            "file:./plugins/*/grails-app/vms/**/*VM.groovy"
+    ]
 
     // resources that are excluded from plugin packaging
     def pluginExcludes = [
@@ -53,8 +59,7 @@ The different is it more likely to use the Grails' infrastructures such as gsp, 
     // URL to the plugin's documentation
     def documentation = "http://grails.org/plugin/zkui"
 
-    static final String GOSIV_CLASS =
-    "org.grails.plugins.zkui.ZkuiGrailsOpenSessionInViewFilter"
+    static final String GOSIV_CLASS = "org.grails.plugins.zkui.ZkuiGrailsOpenSessionInViewFilter"
 
     def doWithWebDescriptor = { webXml ->
         def listenerElement = webXml.'listener'
@@ -112,8 +117,17 @@ The different is it more likely to use the Grails' infrastructures such as gsp, 
         "zkComponentBuilder"(org.grails.plugins.zkui.ZkComponentBuilder) { bean ->
             bean.scope = "prototype"
         }
+        "org.zkoss.bind.BindComposer"(org.grails.plugins.zkui.composer.BindComposer) {bean ->
+            bean.scope = "prototype"
+        }
         application.composerClasses.each { composerClass ->
             "${composerClass.clazz.name}"(composerClass.clazz) { bean ->
+                bean.scope = "prototype"
+                bean.autowire = "byName"
+            }
+        }
+        application.viewModelClasses.each { viewModelClass ->
+            "${viewModelClass.clazz.name}"(viewModelClass.clazz) { bean ->
                 bean.scope = "prototype"
                 bean.autowire = "byName"
             }
@@ -137,13 +151,18 @@ The different is it more likely to use the Grails' infrastructures such as gsp, 
             delegate.appendChild(value)
         }
         org.zkoss.zk.ui.Component.metaClass.select = {String query ->
-            return Selector.select(query, delegate)
+            return Selectors.find((Component)delegate, query)
+        }
+        org.zkoss.zk.ui.Page.metaClass.select = {String query ->
+            return Selectors.find((Page) delegate, query)
         }
         org.zkoss.zk.ui.Component.metaClass.addEventListener = {String eventName, Closure listenerClosure ->
             return delegate.addEventListener(eventName, listenerClosure as org.zkoss.zk.ui.event.EventListener)
         }
         org.zkoss.zk.ui.Component.metaClass.getParams = {
-            return delegate.select("[name]").inject(new TypeConvertingMap()) {s, c ->
+            return delegate.select("*").inject([:]) {s, c ->
+                if (!c.metaClass.respondsTo(c, 'getName')) return s
+                if (c.name == null) return s
                 def e = s.get(c.name)
                 def value
                 if (c instanceof org.zkoss.zul.Combobox) {
@@ -151,11 +170,13 @@ The different is it more likely to use the Grails' infrastructures such as gsp, 
                 } else if (c instanceof org.zkoss.zul.Checkbox) {
                     value = c.value ?: c.isChecked()
                 } else if (c instanceof org.zkoss.zul.Listbox) {
-                    value = c.getSelectedItems()?.value as String[]
+                    value = c.getSelectedItems()?.value
                 } else if (c instanceof org.zkoss.zul.Radiogroup) {
                     return s
-                } else {
+                } else if (c.metaClass.respondsTo(c, 'getValue')) {
                     value = c.value
+                } else {
+                    return s
                 }
                 if (value == null) {
                     value = ''
@@ -166,6 +187,13 @@ The different is it more likely to use the Grails' infrastructures such as gsp, 
                     e << value
                 } else {
                     s.put(c.name, [s.remove(c.name), value])
+                }
+                return s
+            }.inject(new TypeConvertingMap()) {s, e ->
+                if (e instanceof Collection) {
+                    s.put(e.key, e.value as String[])
+                } else {
+                    s.put(e.key, e.value)
                 }
                 return s
             }
@@ -188,7 +216,7 @@ The different is it more likely to use the Grails' infrastructures such as gsp, 
                 } else {
                     name = it.field
                 }
-                def selectedComponentList = delegate.select("[name=${name}]")
+                def selectedComponentList = delegate.select("[name='${name}']")
                 String errorMessage = gDispatcher.message(error: it)
                 if (selectedComponentList.size() > 0 && selectedComponentList[0] instanceof InputElement) {
                     selectedComponentList[0].setErrorMessage(errorMessage)
@@ -290,18 +318,24 @@ The different is it more likely to use the Grails' infrastructures such as gsp, 
     def onChange = { event ->
         // watching is modified and reloaded. The event contains: event.source,
         // event.application, event.manager, event.ctx, and event.plugin.
+        def artefactType = null
         if (application.isArtefactOfType(ComposerArtefactHandler.TYPE, event.source)) {
+            artefactType = ComposerArtefactHandler.TYPE
+        } else if (application.isArtefactOfType(ViewModelArtefactHandler.TYPE, event.source)) {
+            artefactType = ViewModelArtefactHandler.TYPE
+        }
+        if (artefactType) {
             def context = event.ctx
             if (!context) {
                 if (log.isDebugEnabled())
                     log.debug("Application context not found. Can't reload")
                 return
             }
-            def composerClass = application.addArtefact(ComposerArtefactHandler.TYPE, event.source)
-            def composerBeanName = composerClass.clazz.name
+            def artefactClass = application.addArtefact(artefactType, event.source)
+            def artefactBeanName = artefactClass.clazz.name
 
             def beans = beans {
-                "${composerBeanName}"(composerClass.clazz) { bean ->
+                "${artefactBeanName}"(artefactClass.clazz) { bean ->
                     bean.scope = "prototype"
                     bean.autowire = "byName"
                 }

@@ -1,8 +1,16 @@
 package org.grails.plugins.zkui
 
+import java.util.concurrent.ConcurrentHashMap
 import org.grails.plugins.zkui.util.Renders
+import org.zkoss.util.ArraysX
+import org.zkoss.xel.VariableResolver
 import org.zkoss.zk.fn.JspFns
 import org.zkoss.zk.ui.Component
+import org.zkoss.zk.ui.Execution
+import org.zkoss.zk.ui.Executions
+import org.zkoss.zk.ui.metainfo.PageDefinition
+import org.zkoss.zk.ui.util.Composer
+import org.zkoss.zk.ui.util.Template
 
 class BaseTagLib {
     static namespace = "z"
@@ -56,5 +64,66 @@ class BaseTagLib {
         out << b.call()
         request.removeAttribute('zk_page_id')
         request.removeAttribute('zk_page_style')
+    }
+
+    def template = {attrs, b ->
+        true || attrs.name || attrs.src
+        if (!attrs.name) {
+            throwTagError("template [name] must not be null")
+        }
+        final Map<String, String> _params = new LinkedHashMap<String, String>()
+        String name = null, src = null;
+        attrs.each {key, value ->
+            final String attnm = key
+            final String attval = value
+            if ("name".equals(attnm)) {
+                name = attval;
+            } else if ("src".equals(attnm)) {
+                src = attval;
+            } else {
+                _params.put(attnm, attval)
+            }
+        }
+        def comp = request['parents']?.last
+        def body = b()?.toString()?.replace('#{', '${')
+        comp.setTemplate(name, new TemplateImpl(_params, src, body))
+    }
+
+    private static class TemplateImpl implements Template, Serializable {
+        static ConcurrentHashMap<Integer, PageDefinition> pageDefCache = new ConcurrentHashMap()
+        final Map _params
+        final String src
+        final String body
+
+        TemplateImpl(Map _params, String src, String body) {
+            this._params = _params
+            this.src = src
+            this.body = body
+        }
+
+        Component[] create(Component parent, Component insertBefore, VariableResolver resolver, Composer composer) {
+            final Execution exec = Executions.getCurrent()
+            PageDefinition pageDef = pageDefCache.get(body.hashCode() as Integer)
+            if (!pageDef) {
+                pageDef = exec.getPageDefinitionDirectly(body, null)
+                pageDefCache.putIfAbsent(body.hashCode() as Integer, pageDef)
+            }
+            final Component[] cs = [exec.createComponents(pageDef, parent, insertBefore, resolver)] as Component[]
+            final Component c2 = src != null ? exec.createComponents(src, parent, insertBefore, resolver) : null
+            def components = merge(cs, c2)
+            return components
+        }
+
+        Map<String, Object> getParameters() {
+            return _params
+        }
+
+        private static Component[] merge(Component[] cs, Component c) {
+            if (c != null) {
+                cs = (Component[]) ArraysX.resize(cs, cs.length + 1)
+                cs[cs.length - 1] = c
+            }
+            return cs
+        }
     }
 }

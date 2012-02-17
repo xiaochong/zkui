@@ -10,13 +10,16 @@ import org.zkoss.zk.ui.event.EventListener
 import org.zkoss.zk.ui.event.Events
 import org.zkoss.zk.ui.event.ForwardEvent
 import org.zkoss.zk.ui.metainfo.ComponentInfo
+import org.zkoss.zk.ui.select.Selectors
 import org.zkoss.zk.ui.sys.ComponentsCtrl
 import org.zkoss.zk.ui.util.Composer
 import org.zkoss.zk.ui.util.ComposerExt
+import org.zkoss.zk.ui.util.ConventionWires
 
 class GrailsComposerWrapper implements Composer, ComposerExt, EventListener {
     public static final char SEPARATOR = '_' as char
     final controller
+    def private _self
 
     GrailsComposerWrapper(controller) {
         this.controller = controller
@@ -62,10 +65,32 @@ class GrailsComposerWrapper implements Composer, ComposerExt, EventListener {
     }
 
     void doAfterCompose(Component comp) {
-        Components.wireVariables(comp, controller,'#' as char )
+        Components.wireVariables(comp, controller, '#' as char)
         Components.addForwards(comp, controller, SEPARATOR)
         this.bindComponent(comp)
+
+        Selectors.wireComponents(comp, controller, false)
+        Selectors.wireEventListeners(comp, controller) // first event listener wiring
+
+        // register event to wire variables just before component onCreate
+        comp.addEventListener(1000, "onCreate", new BeforeCreateWireListener())
+        comp.addEventListener("onCreate", new AfterCreateWireListener())
+
         controller.afterCompose(comp)
+    }
+
+    private class BeforeCreateWireListener implements EventListener<Event> {
+        public void onEvent(Event event) throws Exception {
+            Selectors.wireComponents(event.getTarget(), controller, false)
+            _self.removeEventListener("onCreate", this)
+        }
+    }
+
+    private class AfterCreateWireListener implements EventListener<Event> {
+        public void onEvent(Event event) throws Exception {
+            Selectors.wireEventListeners(_self, controller)
+            _self.removeEventListener("onCreate", this)
+        }
     }
 
     public ComponentInfo doBeforeCompose(Page page, Component parent, ComponentInfo compInfo) {
@@ -74,11 +99,13 @@ class GrailsComposerWrapper implements Composer, ComposerExt, EventListener {
     }
 
     public void doBeforeComposeChildren(Component comp) throws Exception {
-        Components.wireController(comp, controller)
+        _self = comp
+//        Components.wireController(comp, controller)
+        ConventionWires.wireController(comp, controller, SEPARATOR)
     }
 
     public boolean doCatch(Throwable ex) throws Exception {
-        return false;
+        return false
     }
 
     public void doFinally() throws Exception {

@@ -2,10 +2,12 @@ package grails.test
 
 import org.codehaus.groovy.grails.plugins.testing.GrailsMockHttpServletRequest
 import org.codehaus.groovy.grails.web.metaclass.BindDynamicMethod
-import org.grails.plugins.zkui.ZkComponentBuilder
-import org.grails.plugins.zkui.jsoup.select.Selector
-import org.grails.plugins.zkui.util.UriUtil
 import org.codehaus.groovy.grails.web.util.TypeConvertingMap
+import org.grails.plugins.zkui.ZkComponentBuilder
+import org.grails.plugins.zkui.util.UriUtil
+import org.zkoss.zk.ui.Component
+import org.zkoss.zk.ui.select.Selectors
+import org.zkoss.zk.ui.Page
 
 class ComposerMockUtils {
 
@@ -25,13 +27,18 @@ class ComposerMockUtils {
             delegate.appendChild(value)
         }
         org.zkoss.zk.ui.Component.metaClass.select = {String query ->
-            return Selector.select(query, delegate)
+            return Selectors.find((Component) delegate, query)
+        }
+        org.zkoss.zk.ui.Page.metaClass.select = {String query ->
+            return Selectors.find((Page) delegate, query)
         }
         org.zkoss.zk.ui.Component.metaClass.addEventListener = {String eventName, Closure listenerClosure ->
             return delegate.addEventListener(eventName, listenerClosure as org.zkoss.zk.ui.event.EventListener)
         }
         org.zkoss.zk.ui.Component.metaClass.getParams = {
-            return delegate.select("[name]").inject(new TypeConvertingMap()) {s, c ->
+            return delegate.select("*").inject([:]) {s, c ->
+                if (!c.metaClass.respondsTo(c, 'getName')) return s
+                if (c.name == null) return s
                 def e = s.get(c.name)
                 def value
                 if (c instanceof org.zkoss.zul.Combobox) {
@@ -39,9 +46,16 @@ class ComposerMockUtils {
                 } else if (c instanceof org.zkoss.zul.Checkbox) {
                     value = c.value ?: c.isChecked()
                 } else if (c instanceof org.zkoss.zul.Listbox) {
-                    value = c.getSelectedItems()?.value as String[]
-                } else {
+                    value = c.getSelectedItems()?.value
+                } else if (c instanceof org.zkoss.zul.Radiogroup) {
+                    return s
+                } else if (c.metaClass.respondsTo(c, 'getValue')) {
                     value = c.value
+                } else {
+                    return s
+                }
+                if (value == null) {
+                    value = ''
                 }
                 if (e == null) {
                     s.put(c.name, value)
@@ -49,6 +63,13 @@ class ComposerMockUtils {
                     e << value
                 } else {
                     s.put(c.name, [s.remove(c.name), value])
+                }
+                return s
+            }.inject(new TypeConvertingMap()) {s, e ->
+                if (e instanceof Collection) {
+                    s.put(e.key, e.value as String[])
+                } else {
+                    s.put(e.key, e.value)
                 }
                 return s
             }

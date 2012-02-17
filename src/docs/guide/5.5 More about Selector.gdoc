@@ -1,0 +1,27 @@
+You can also use Selector independently.
+For example:
+
+{code}
+Window win;
+
+// returns a list of components, containing all labels in the page
+Selectors.find(page, "label");
+
+// returns all components with id "myId" under the Window win. (including itself)
+Selectors.find(win, "#myId");
+
+// returns all components whose .getLabel() value is "zk" (if applicable)
+Selectors.find(page, "[label='zk']");
+
+// returns all captions whose parent is a window
+Selectors.find(win, "window > caption");
+
+// returns all buttons and toolbarbuttons
+Selectors.find(page, "button, toolbarbutton");
+
+// you can assemble the criteria:
+// returns all labels, whose parent is a window of id "win", and whose value is "zk"
+Selectors.find(page, "window#win > label[value='zk']");
+{code}
+
+

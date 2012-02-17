@@ -1,6 +1,4 @@
-ZK UI Plugin support a CSS (or jquery) like selector syntax to find matching components, that allows very powerful and robust queries.
-
-It's inspired by the [jsoup|http://jsoup.org]
+jQuery & CSS 3 style Server side selectors, that allows very powerful and robust queries.
 
 The @select@ method is injected to [Component|http://www.zkoss.org/javadoc/latest/zk/org/zkoss/zk/ui/Component.html],which returns a list of Component.
 
@@ -20,7 +18,7 @@ class MyComposer{
     def afterCompose = {Component window ->
         assert 3 == window.select("textbox").size() // select method returns List<Component>
         assert "value2" == window.select("#t2")[0].value
-        assert "value1" == window.select("textbox[name=t1]")[0].value
+        assert "value1" == window.select("textbox[name='t1']")[0].value
     }
 
 }

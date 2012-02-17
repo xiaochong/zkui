@@ -1,0 +1,30 @@
+In Grails ZK UI 0.5,support extends GenericForwardComposer or other Composer,so can take advantage of the GenericForwardComposer
+
+In grails-app/composers
+
+{code}
+class TestComposer extends GenericForwardComposer {
+
+    TestComposer() {
+        super('_' as char)
+    }
+
+    @Override
+    void doAfterCompose(Component comp) {
+        super.doAfterCompose(comp)
+        // initialize components here
+    }
+
+}
+{code}
+
+Equivalent to the following
+
+{code}
+class TestComposer {
+
+    def afterCompose = {comp ->
+        // initialize components here
+    }
+}
+{code}

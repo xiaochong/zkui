@@ -1,0 +1,129 @@
+h3. The Story
+
+Think of an extremely ordinary scenario, where you want to clear all the texts in a form by clicking a button.
+
+!Selector_Demo_Form.png!
+
+While you see the screen shot, you may have already come up with an implementation in mind. For example:
+
+{code:groovy}
+class SomeFormComposer {
+
+    Textbox usenameTb
+    Textbox passwordTb
+    Textbox retypepwTb
+    // ...
+    // ...
+    Textbox memoTb
+
+    def afterCompose = {Component comp ->
+        // initialize components here
+    }
+
+    def onClick_clearBtn(Event event) {
+        usenameTb.setValue("")
+        passwordTb.setValue("")
+        retypepwTb.setValue("")
+        // ...
+        // ...
+        memoTb.setValue("")
+    }
+}
+{code}
+
+But wait, no.
+The unordinary part of the story is here: this feature is actually implemented by just 9 lines of code.
+
+{code:groovy}
+class FormComposer {
+    @Wire("textbox, intbox, decimalbox, datebox")
+    List<InputElement> inputs
+
+    @Listen("onClick = button[label='Clear']")
+    def onClear(MouseEvent event) {
+        for (InputElement i: inputs) i.setText("")
+    }
+}
+{code}
+
+These are what we foresee in ZK 6: leveraging Annotation power from Java 1.5, and introduction to some new techniques.
+
+h3. The jQuery/CSS3-like Component Selector
+
+In the previous example, Selector is shown as a part of the parameters in Annotation @Wire and @Listen.
+
+{code:groovy}
+@Wire("textbox, intbox, decimalbox, datebox")
+@Listen("onClick = button[label='Clear']")
+{code}
+
+The concept is simple: Selector is a pattern string that matches nodes in a Component tree.
+In other words, by giving a Selector string, you can specify a collection of Components from a gsp file.
+
+{code:groovy}
+// Collects all the textboxes, intboxes, decimalboxes, and dateboxes as a List and wire to inputs
+@Wire("textbox, intbox, decimalbox, datebox")
+List<InputElement> inputs
+
+// Collects all the buttons whose label is "Clear", and adds EventListeners for them
+@Listen("onClick = button[label='Clear']")
+def onClear(MouseEvent event) {
+    // ...
+}
+{code}
+
+If you know jQuery or [CSS selector|http://www.w3.org/TR/css3-selectors/], this is exactly their counterpart on server side.
+
+h3. Syntax
+The syntax of Selector is closely analogous to CSS3 selector.
+Component type, class, attribute, pseudo class are used to describe properties of a component. For example:
+
+{code}
+// Matches any Button component
+"button"
+
+// Matches any Component with ID "btn"
+"#btn"
+
+// Matches any Button with ID "btn"
+"button#btn"
+
+// Matches any Button whose label is "Submit"
+"button[label='Submit']"
+{code}
+
+
+Combinators are used to describe relations between components. For example:
+
+{code}
+// Matches any Button who has a Window ancestor
+"window button"
+
+// Matches any Button whose parent is a Window
+"window > button"
+
+// Matches any Button whose previous sibling is a Window
+"window + button"
+
+// Matches any Button who has a Window as a senior sibling
+"window ~ button"
+
+// Matches any Button whose parent is a Div and grandparent is a Window
+"window > div > button"
+{code}
+
+h3. Comparison with CSS3 Selector
+{table}
+*Syntax* | *In CSS 3 Selector* | *In Component Selector* | *Comment*
+tagname | DOM element type | Component type |
+#id | DOM ID | Component ID |
+.class |CSS class | SClass / ZClass |
+[attr='value'] | DOM attribute | getAttr() or dynamic attribute | If getAttr() is not a method on such component, it is skipped
+:pseudo-class | Pseudo class | Pseudo class | :root, :empty, :first-child, :last-child, :only-child, :nth-child(), :nth-last-child()
+::pseudo-element | Pseudo element | N/A |
+> + ~ | Combinator | Combinator | Identical to CSS 3 combinators
+{table}
+
+h3. For more
+[Envisage ZK 6: An Annotation Based Composer For MVC|http://books.zkoss.org/wiki/Small%20Talks/2011/January/Envisage%20ZK%206:%20An%20Annotation%20Based%20Composer%20For%20MVC]
+
