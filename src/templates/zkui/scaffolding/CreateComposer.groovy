@@ -11,7 +11,7 @@ class CreateComposer {
 
     void onClick_saveButton(Event e) {
         def ${propertyName} = new ${className}(self.params)
-        if (!${propertyName}.save() && ${propertyName}.hasErrors()) {
+        if (!${propertyName}.save(flush: true) && ${propertyName}.hasErrors()) {
             log.error ${propertyName}.errors
             self.renderErrors(bean: ${propertyName})
         } else {
