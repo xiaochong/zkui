@@ -10,14 +10,14 @@ Grails ZK UI 0.5 also support the "template" concept.
 
 h2. Examples
 {code:xml}
-<z:listbox model="@bind(vm.items)" selectedItem="@bind(vm.selected)" hflex="true" height="300px">
+<z:listbox model="\@bind(vm.items)" selectedItem="\@bind(vm.selected)" hflex="true" height="300px">
     ...
 
     <z:template name="model" var="item">
         <listitem>
-            <listcell label="@bind(item.name)"/>
-            <listcell label="@bind(item.price) @converter('formatedNumber', format='###,##0.00')"/>
-            <listcell label="@bind(item.quantity)" sclass="@bind(item.quantity lt 3 ?'red':'')"/>
+            <listcell label="\@bind(item.name)"/>
+            <listcell label="\@bind(item.price) \@converter('formatedNumber', format='###,##0.00')"/>
+            <listcell label="\@bind(item.quantity)" sclass="\@bind(item.quantity lt 3 ?'red':'')"/>
         </listitem>
     </z:template>
 </z:listbox>
