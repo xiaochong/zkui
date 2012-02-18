@@ -1,7 +1,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Grails ZK UI Plugin 0.5.M2 - Reference Documentation</title>
+        <title>Grails ZK UI Plugin 0.5 - Reference Documentation</title>
         <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen" title="Style" charset="utf-8"/>
         <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8" />
     </head>
@@ -17,7 +17,7 @@
             <div class="message">zkui</div>
             <h1>Grails ZK UI Plugin - Reference Documentation</h1>
             <p><strong>Authors:</strong> groovyquan</p>
-            <p><strong>Version:</strong> 0.5.M2</p>
+            <p><strong>Version:</strong> 0.5</p>
             <em>This document is licensed under GNU Free Documentation License,ZK UI Plugin is released under LGPL</em>
         </div>
 
@@ -248,119 +248,7 @@ After activating the data-binding manager, you have to define the required UI ob
     &#125;
 &#125;</pre></div><p class="paragraph"/>See more <a href="http://books.zkoss.org/wiki/ZK%20Developer's%20Reference/Data%20Binding" target="blank">ZK Developer&#39;s Reference/Data Binding</a><p class="paragraph"/>
 <h2><a name="3.9 The Next Generation Data Binding System">3.9 The Next Generation Data Binding System</a></h2><h3>Introduction</h3>
-ZK Bind is a whole new data binding system with new specifications and implementations.<p class="paragraph"/><h3>Features</h3><p class="paragraph"/><h4>A whole new, clean annotation expression</h4>
-<ul class="star">
-<li>Same Java style annotation expression: The new ZK annotation is consistent with Java's annotation style. If you know the Java style, you know the ZK Style.</li>
-<li>A set of collaborated annotations: ZK Bind uses a set of annotations to make the use of data binding as intuitive and clear as possible.</li>
-<ul class="star">
-<li>@bind(...): used to bind data and command along with parameters</li>
-<li>@converter(...): used to specify converters along with parameters</li>
-<li>@valiator(...): used to specify validators along with parameters</li>
-<li>@form(...): used to bind a form.</li>
-</ul></ul><p class="paragraph"/><h4>EL 2.2 flexiable expressions</h4>
-<ul class="star">
-<li>ZK Bind accept EL 2.2 syntax expression that you can provide flexible operations easily.</li>
-<li>Bind to bean properties, indexed properties, Map keys seamlessly.</li>
-<li>Bind to component custom attributes automatically.</li>
-<li>Bind to Spring, CDI, and Seam managed bean automatically.</li>
-</ul><p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;z:image src=<span class="xml&#45;quote">"<code>bind(vm.person.boy ? 'boy.png' : 'girl.png')"</span>/&#62;</span><p class="paragraph"/><span class="xml&#45;tag">&#60;z:button onClick=<span class="xml&#45;quote">"</code>bind(vm.add ? 'add' : 'update')"</span> label=<span class="xml&#45;quote">"<code>bind(vm.add ? 'Add' : 'Update'"</span>/&#62;</span><p class="paragraph"/><span class="xml&#45;tag">&#60;z:button onClick=<span class="xml&#45;quote">"</code>bind('subscribe')"</span> disabled=<span class="xml&#45;quote">"@bind(empty vm.symbol)"</span> label=<span class="xml&#45;quote">"Subscribe"</span>/&#62;</span></pre></div><p class="paragraph"/><h4>One way load only data binding</h4>
-<ul class="star">
-<li>Load when bean property changes</li>
-<li>Conditional load <code>after</code>/<code>before</code> executing a command</li>
-<li>Multiple conditional load <code>before</code>/<code>after</code> executing different/same commands</li>
-</ul><p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;z:label value=<span class="xml&#45;quote">"<code>bind(load=vm.person.fullname)"</span>/&#62;</span><p class="paragraph"/><span class="xml&#45;tag">&#60;z:label value=<span class="xml&#45;quote">"</code>bind(load=vm.person.firstname after 'update')"</span>/&#62;</span><p class="paragraph"/><span class="xml&#45;tag">&#60;z:label value=<span class="xml&#45;quote">"<code>bind(load=vm.person.firstname before 'delete')"</span>/&#62;</span><p class="paragraph"/><span class="xml&#45;tag">&#60;z:label value=<span class="xml&#45;quote">"</code>bind(load=&#123;vm.person.firstname after 'update', vm.person.message after 'delete'&#125;)"</span>/&#62;</span></pre></div><p class="paragraph"/><h4>One way save only data binding</h4>
-<ul class="star">
-<li>Save when UI component attribute changes</li>
-<li>Multiple save to property of different target beans</li>
-<li>Conditional save before/after executing a command</li>
-<li>Multiple conditional save before/after executing different/same commands</li>
-</ul><p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;z:textbox value=<span class="xml&#45;quote">"<code>bind(save=vm.person.firstname)"</span>/&#62;</span><p class="paragraph"/><span class="xml&#45;tag">&#60;z:textbox value=<span class="xml&#45;quote">"</code>bind(save=&#123;vm.person.firstname, vm.tmpperson.firstname&#125;)"</span>/&#62;</span><p class="paragraph"/><span class="xml&#45;tag">&#60;z:textbox value=<span class="xml&#45;quote">"<code>bind(save=vm.person.firstname before 'update')"</span>/&#62;</span><p class="paragraph"/><span class="xml&#45;tag">&#60;z:textbox value=<span class="xml&#45;quote">"</code>bind(save=vm.person.firstname after 'delete'"</span>/&#62;</span><p class="paragraph"/><span class="xml&#45;tag">&#60;z:textbox value=<span class="xml&#45;quote">"@bind(save=&#123;vm.selected.firstname before 'update', vm.newperson.firstname before 'add'&#125;"</span>/&#62;</span></pre></div><p class="paragraph"/><h4>Initial data binding</h4>
-<ul class="star">
-<li>Load when UI components are first added into the binding system</li>
-</ul><p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;z:label value=<span class="xml&#45;quote">"@bind(init=vm.selected.firstname)"</span>/&#62;</span></pre></div><p class="paragraph"/><h4>Two way data binding</h4>
-<ul class="star">
-<li>Short expression of both save and load bindings</li>
-<li>Multiple conditional load and save on different back-end beans before/after executing different/same commands</li>
-</ul><p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;z:textbox value=<span class="xml&#45;quote">"<code>bind(vm.person.firstname)"</span>/&#62;</span><p class="paragraph"/><span class="xml&#45;tag">&#60;z:textbox value=<span class="xml&#45;quote">"</code>bind(load=vm.selected.firstname, save=&#123;vm.selected.firstname, vm.newperson.firstname before 'add'&#125;)"</span>/&#62;</span></pre></div><p class="paragraph"/><h4>Bind to any attributes of the UI components</h4>
-<ul class="star">
-<li>Bind symmetrically to all attributes of UI components</li>
-</ul><p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;z:textbox value=<span class="xml&#45;quote">"@bind(vm.symbol)"</span> instant=<span class="xml&#45;quote">"true"</span>/&#62;</span>
-<span class="xml&#45;tag">&#60;z:button onClick=<span class="xml&#45;quote">"<code>bind('subscribe')"</span> disabled=<span class="xml&#45;quote">"</code>bind(empty vm.symbol)"</span> label=<span class="xml&#45;quote">"Subscribe"</span> /&#62;</span></pre></div><p class="paragraph"/><h4>Event command binding</h4>
-<ul class="star">
-<li>Bridge ZK event to command</li>
-<li>Automatic event listener registration</li>
-<li>Simple command name invocation</li>
-</ul><p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;z:button onClick=<span class="xml&#45;quote">"<code>bind('subscribe')"</span> disabled=<span class="xml&#45;quote">"</code>bind(empty vm.symbol)"</span> label=<span class="xml&#45;quote">"Subscribe"</span> /&#62;</span></pre></div><p class="paragraph"/><h4>Template/Collection binding</h4>
-<ul class="star">
-<li>Binding on Listbox/Grid/Tree/Combobox</li>
-<li>Local variable scope is limited to the container component</li>
-<li>Support index property</li>
-</ul><p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;z:listbox width=<span class="xml&#45;quote">"300px"</span> model=<span class="xml&#45;quote">"<code>bind(vm.albumList)"</span> selectedItem=<span class="xml&#45;quote">"</code>bind(vm.selectedAlbum)"</span> vflex=<span class="xml&#45;quote">"true"</span>&#62;</span>
-    <span class="xml&#45;tag">&#60;z:template name=<span class="xml&#45;quote">"model"</span> var=<span class="xml&#45;quote">"a"</span>&#62;</span>
-        <span class="xml&#45;tag">&#60;listitem label=<span class="xml&#45;quote">"@bind(a.title)"</span>/&#62;</span>
-    <span class="xml&#45;tag">&#60;/z:template&#62;</span>
-<span class="xml&#45;tag">&#60;/z:listbox&#62;</span></pre></div><p class="paragraph"/><h4>Form binding</h4>
-<ul class="star">
-<li>Middle form binding to avoid affecting back-end data beans</li>
-<li>Submit a form in a whole</li>
-<li>Conditional save for different commands</li>
-</ul><p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;z:grid self=<span class="xml&#45;quote">"@form(id='fx', load=vm.selected, save=&#123;vm.selected before 'update', vm.newAlbum before 'add'&#125;)"</span>&#62;</span>
-    <span class="xml&#45;tag">&#60;z:row&#62;</span>Title: <span class="xml&#45;tag">&#60;z:textbox value=<span class="xml&#45;quote">"@bind(fx.title)"</span>/&#62;</span><span class="xml&#45;tag">&#60;/z:row&#62;</span>
-    <span class="xml&#45;tag">&#60;z:row&#62;</span>Artist: <span class="xml&#45;tag">&#60;z:textbox value=<span class="xml&#45;quote">"@bind(fx.artist)"</span>/&#62;</span><span class="xml&#45;tag">&#60;/z:row&#62;</span>
-    <span class="xml&#45;tag">&#60;z:row&#62;</span><span class="xml&#45;tag">&#60;z:checkbox checked=<span class="xml&#45;quote">"@bind(fx.classical)"</span>/&#62;</span> Classical<span class="xml&#45;tag">&#60;/z:row&#62;</span>
-    <span class="xml&#45;tag">&#60;z:row&#62;</span>Composer: <span class="xml&#45;tag">&#60;z:textbox value=<span class="xml&#45;quote">"@bind(fx.composer)"</span>/&#62;</span><span class="xml&#45;tag">&#60;/z:row&#62;</span>
-<span class="xml&#45;tag">&#60;/z:grid&#62;</span>
-<span class="xml&#45;tag">&#60;z:button onClick=<span class="xml&#45;quote">"@bind('add')"</span> label=<span class="xml&#45;quote">"Add"</span>/&#62;</span>
-<span class="xml&#45;tag">&#60;z:button onClick=<span class="xml&#45;quote">"@bind('update')"</span> label=<span class="xml&#45;quote">"Update"</span>/&#62;</span></pre></div><p class="paragraph"/><h4>Java annotated data dependency tracking</h4>
-<ul class="star">
-<li>Controllable load on save</li>
-<li>@NotifyChange to notify property changes</li>
-<li>@DependsOn to specify property change dependency</li>
-</ul><p class="paragraph"/><div class="code"><pre>@NotifyChange //notify firstname change
-<span class="java&#45;keyword">public</span> void setFirstname(<span class="java&#45;object">String</span> fn) &#123;
-    firstname = fn;
-&#125;<p class="paragraph"/>@NotifyChange //notify lastname change
-<span class="java&#45;keyword">public</span> void setLastname(<span class="java&#45;object">String</span> ln) &#123;
-    lastname = ln;
-&#125;<p class="paragraph"/>@DependsOn(&#123;<span class="java&#45;quote">"firstname"</span>,<span class="java&#45;quote">"lastname"</span>&#125;) //full name will change <span class="java&#45;keyword">if</span> either firstname and/or lastname change
-<span class="java&#45;keyword">public</span> <span class="java&#45;object">String</span> getFullname() &#123;
-    <span class="java&#45;keyword">return</span> firstname + <span class="java&#45;quote">" "</span> + lastname;
-&#125;</pre></div><p class="paragraph"/><h4>Embedded validation cycle</h4>
-<ul class="star">
-<li>Bind validator by name or by EL expression</li>
-<li>Embedded system Validator: provide commonly used validators that user can use directly by specifying only the name</li>
-<li>Validate a single property or a form</li>
-<li>Validate on a command</li>
-</ul><p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;z:textbox value=<span class="xml&#45;quote">"<code>bind(save=vm.selected.firstname) </code>validator('noEmpty')"</span>/&#62;</span>
-<span class="xml&#45;tag">&#60;z:grid self=<span class="xml&#45;quote">"<code>form(id='fx', load=vm.selected, save=vm.selected before 'update') </code>validator(vm.passwordValidator)"</span>&#62;</span>
-    <span class="xml&#45;tag">&#60;z:row&#62;</span>username<span class="xml&#45;tag">&#60;textbox value=<span class="xml&#45;quote">"@bind(fx.username)"</span>/&#62;</span><span class="xml&#45;tag">&#60;/z:row&#62;</span>
-    <span class="xml&#45;tag">&#60;z:row&#62;</span>password<span class="xml&#45;tag">&#60;textbox value=<span class="xml&#45;quote">"@bind(fx.password)"</span> type=<span class="xml&#45;quote">"password"</span>/&#62;</span><span class="xml&#45;tag">&#60;/z:row&#62;</span>
-    <span class="xml&#45;tag">&#60;z:row&#62;</span>retype password<span class="xml&#45;tag">&#60;textbox value=<span class="xml&#45;quote">"@bind(fx.retypePassword)"</span> type=<span class="xml&#45;quote">"password"</span>/&#62;</span><span class="xml&#45;tag">&#60;/z:row&#62;</span>
-<span class="xml&#45;tag">&#60;/z:grid&#62;</span></pre></div><p class="paragraph"/><h4>Enhanced converter mechanism</h4>
-<ul class="star">
-<li>Bind converter by name or by EL expression</li>
-<li>Embedded system Converters: provide commonly used converters that user can use directly by specifying only the name</li>
-</ul><p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;z:datebox value=<span class="xml&#45;quote">"<code>bind(vm.selected.birthday) </code>converter('formatedDate', format='yyyy/MM/dd')"</span>/&#62;</span></pre></div><p class="paragraph"/><h4>org.zkoss.bind.BindComposer</h4>
-<ul class="star">
-<li>Ease UI components, binder, and ViewModel association</li>
-<li>Each binder covers only the applied component tree</li>
-<li>Inter-binder communications</li>
-</ul><p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;z:window apply=<span class="xml&#45;quote">"org.zkoss.bind.BindComposer"</span> viewModel=<span class="xml&#45;quote">"@bind(vm='org.zkoss.mvvm.examples.album.AlbumViewModel')"</span>&#62;</span>
-    &#8230;
-<span class="xml&#45;tag">&#60;/z:window&#62;</span></pre></div><p class="paragraph"/><h4>Bind on demand</h4>
-<ul class="star">
-<li>Support dynamically add/remove bindings by API.</li>
-<li>Attached components with binding annotations are automatically managed by the existing binder if covered.</li>
-<li>Detached components that were managed by a binder are automatically removed from the binding management.</li>
-</ul><p class="paragraph"/><h4>Support seamless MVVM design pattern</h4>
-<ul class="star">
-<li>Utilize MVVM design pattern to achieve separation of data and logic from presentation easily.</li>
-<ul class="star">
-<li>UI Design and ViewModel can be implemented in parallel independently.</li>
-<li>Can add new Views or change current View easily.</li>
-<li>Different views for different devices with a common ViewModel.</li>
-<li>Allow unit-test ViewModel independently without UI environments.</li>
-</ul></ul><p class="paragraph"/><h4>For details</h4><p class="paragraph"/><a href="http://books.zkoss.org/wiki/Small_Talks/2011/October/Envisage_ZK_6:_The_Next_Generation_Data_Binding_System" target="blank">Envisage ZK 6: The Next Generation Data Binding System</a><p class="paragraph"/><p class="paragraph"/><p class="paragraph"/><p class="paragraph"/><p class="paragraph"/><h2><a name="3.10 An Annotation Based Composer For MVC">3.10 An Annotation Based Composer For MVC</a></h2><h3>The Story</h3><p class="paragraph"/>Think of an extremely ordinary scenario, where you want to clear all the texts in a form by clicking a button.<p class="paragraph"/><img border="0" class="center" src="../img/Selector_Demo_Form.png"></img><p class="paragraph"/>While you see the screen shot, you may have already come up with an implementation in mind. For example:<p class="paragraph"/><div class="code"><pre>class SomeFormComposer &#123;<p class="paragraph"/>    Textbox usenameTb
+ZK Bind is a whole new data binding system with new specifications and implementations.<p class="paragraph"/>For details<p class="paragraph"/><a href="http://books.zkoss.org/wiki/Small_Talks/2011/October/Envisage_ZK_6:_The_Next_Generation_Data_Binding_System" target="blank">Envisage ZK 6: The Next Generation Data Binding System</a><p class="paragraph"/><p class="paragraph"/><p class="paragraph"/><p class="paragraph"/><p class="paragraph"/><h2><a name="3.10 An Annotation Based Composer For MVC">3.10 An Annotation Based Composer For MVC</a></h2><h3>The Story</h3><p class="paragraph"/>Think of an extremely ordinary scenario, where you want to clear all the texts in a form by clicking a button.<p class="paragraph"/><img border="0" class="center" src="../img/Selector_Demo_Form.png"></img><p class="paragraph"/>While you see the screen shot, you may have already come up with an implementation in mind. For example:<p class="paragraph"/><div class="code"><pre>class SomeFormComposer &#123;<p class="paragraph"/>    Textbox usenameTb
     Textbox passwordTb
     Textbox retypepwTb
     // &#8230;
@@ -682,25 +570,23 @@ It would be easier to explain the concept with an example which has two differen
 <li>Which UI attribute is used to input into which data? (so binder knows what property to save).</li>
 </ul><p class="paragraph"/>In ZK Bind, ZK Annotation is utilized to do these jobs:
 <code>View</code>: helloMVVM.gsp
-<div class="code"><pre><span class="xml&#45;tag">&#60;z:window apply=<span class="xml&#45;quote">"org.zkoss.bind.BindComposer"</span> viewModel=<span class="xml&#45;quote">"@bind(vm='org.zkoss.mvvm.examples.hello.HelloViewModel')"</span>&#62;</span>
-    <span class="xml&#45;tag">&#60;z:label value=<span class="xml&#45;quote">"@bind(vm.message)"</span>/&#62;</span>
-    <span class="xml&#45;tag">&#60;z:button label=<span class="xml&#45;quote">"Show"</span> onClick=<span class="xml&#45;quote">"@bind('showHello')"</span>/&#62;</span>
-<span class="xml&#45;tag">&#60;/z:window&#62;</span></pre></div><p class="paragraph"/><code>ViewModel</code>: HelloViewModel.groovy
-<div class="code"><pre>class HelloViewModel &#123;
-    <span class="java&#45;keyword">private</span> <span class="java&#45;object">String</span> message
-    <span class="java&#45;keyword">public</span> <span class="java&#45;object">String</span> getMessage() &#123;
+<div class="code"><pre><span class="xml&#45;tag">&#60;z:window apply=<span class="xml&#45;quote">"org.zkoss.bind.BindComposer"</span> viewModel=<span class="xml&#45;quote">"&#64;id('vm')&#64;init('demo.HelloVM')"</span>&#62;</span>
+    <span class="xml&#45;tag">&#60;z:label value=<span class="xml&#45;quote">"&#64;bind(vm.message)"</span>/&#62;</span>
+    <span class="xml&#45;tag">&#60;z:button label=<span class="xml&#45;quote">"Show"</span> onClick=<span class="xml&#45;quote">"&#64;command('showHello')"</span>/&#62;</span>
+<span class="xml&#45;tag">&#60;/z:window&#62;</span></pre></div><p class="paragraph"/><code>ViewModel</code>: HelloVM.groovy
+<div class="code"><pre>class HelloVM &#123;
+    <span class="java&#45;keyword">private</span> <span class="java&#45;object">String</span> message<p class="paragraph"/>    <span class="java&#45;keyword">public</span> <span class="java&#45;object">String</span> getMessage() &#123;
         <span class="java&#45;keyword">return</span> message
-    &#125;<p class="paragraph"/>    @NotifyChange(<span class="java&#45;quote">"message"</span>)
+    &#125;<p class="paragraph"/>    &#64;Command &#64;NotifyChange(<span class="java&#45;quote">"message"</span>)
     <span class="java&#45;keyword">public</span> void showHello() &#123;
         message = <span class="java&#45;quote">"Hello World!"</span>
-    &#125;
-&#125;</pre></div><p class="paragraph"/>Per this example, let's run through the program flow:
+    &#125;<p class="paragraph"/>&#125;</pre></div><p class="paragraph"/>Per this example, let's run through the program flow:
 <ol>
 <li>When end user press the "Show" button, the onClick event is fired to binder.</li>
-<li>The binder finds that the command name in the ViewModel which is "showHello" as specified in the ZK annotation @bind('showHello').</li>
-<li>The binder calls the showHello() method in the HelloViewModel and changes the message property. Note that the @NotifyChange("message") Java method annotation on showHello() method in HelloViewModel. It tells the binder that the property message in the HelloViewModel will be changed if this command is called.</li>
-<li>The binder then finds that the attribute value of component label is associated with the changed message property of the HelloViewModel(as specified in ZK annotation @bind(vm.message)). So it loads data from the property vm.message and updates the label's value attribute. The new message "Hello World!" is then shown on the screen and provides the visual feedback to the end user.</li>
-</ol><p class="paragraph"/>In this MVVM implementation with data binding system, the HelloViewModel is a simple POJO and refers none of the UI components. It only exposes the message contents via getMessage() and provides the necessary action logic showHello(). It does not know how these information or action logic will be used. It is the UI designer's job to decide which UI components are to be used in which layout as seen in HelloMVVM.gsp.<p class="paragraph"/><h3>The example revised -- Pop Up the Message</h3><p class="paragraph"/>Customers tend to change their minds when they see the real screen. Say, after you demonstrated the program to a customer and he/she said, "Well, I thought the Hello World! message should be in a pop up window...".
+<li>The binder finds that the command name in the ViewModel which is "showHello" as specified in the ZK annotation @command('showHello').</li>
+<li>The binder calls the showHello() method in the HelloVM and changes the message property. Note that the @NotifyChange("message") Java method annotation on showHello() method in HelloVM. It tells the binder that the property message in the HelloVM will be changed if this command is called.</li>
+<li>The binder then finds that the attribute value of component label is associated with the changed message property of the HelloVM(as specified in ZK annotation @bind(vm.message)). So it loads data from the property vm.message and updates the label's value attribute. The new message "Hello World!" is then shown on the screen and provides the visual feedback to the end user.</li>
+</ol><p class="paragraph"/>In this MVVM implementation with data binding system, the HelloVM is a simple POJO and refers none of the UI components. It only exposes the message contents via getMessage() and provides the necessary action logic showHello(). It does not know how these information or action logic will be used. It is the UI designer's job to decide which UI components are to be used in which layout as seen in HelloMVVM.gsp.<p class="paragraph"/><h3>The example revised -- Pop Up the Message</h3><p class="paragraph"/>Customers tend to change their minds when they see the real screen. Say, after you demonstrated the program to a customer and he/she said, "Well, I thought the Hello World! message should be in a pop up window...".
 No problem, let's prepare a modal window and put the message in the modal window. Easy.<p class="paragraph"/><h3>Revised MVP Implementation</h3><p class="paragraph"/>View: helloMVP2.gsp
 <div class="code"><pre><span class="xml&#45;tag">&#60;z:window apply=<span class="xml&#45;quote">"Hello2Composer"</span>&#62;</span>
     <span class="xml&#45;tag">&#60;z:button id=<span class="xml&#45;quote">"btn"</span> label=<span class="xml&#45;quote">"Show"</span>/&#62;</span>
@@ -719,25 +605,28 @@ No problem, let's prepare a modal window and put the message in the modal window
         popwin.doModal()
     &#125;
 &#125;</pre></div><p class="paragraph"/>The View gsp file has to be revised and the Presenter java file has to be totally rewritten. This time, it injects the pop up window popwin, the label popwin_lbl inside the pop up window and so on because the View has changed.<p class="paragraph"/><h3>Revised MVVM Implementation</h3><p class="paragraph"/>View: helloMVVM2.gsp
-<div class="code"><pre><span class="xml&#45;tag">&#60;z:window apply=<span class="xml&#45;quote">"org.zkoss.bind.BindComposer"</span> viewModel=<span class="xml&#45;quote">"@bind(vm='org.zkoss.mvvm.examples.hello.HelloViewModel')"</span>&#62;</span>
-    <span class="xml&#45;tag">&#60;z:button label=<span class="xml&#45;quote">"Show"</span> onClick=<span class="xml&#45;quote">"@bind('showHello')"</span>/&#62;</span>
+<div class="code"><pre><span class="xml&#45;tag">&#60;z:window apply=<span class="xml&#45;quote">"org.zkoss.bind.BindComposer"</span>
+          viewModel=<span class="xml&#45;quote">"&#64;id('vm')&#64;init('demo.HelloVM')"</span>&#62;</span>
+    <span class="xml&#45;tag">&#60;z:button label=<span class="xml&#45;quote">"Show"</span> onClick=<span class="xml&#45;quote">"&#64;command('showHello')"</span>/&#62;</span>
     <span class="xml&#45;tag">&#60;z:window title=<span class="xml&#45;quote">"Hello"</span> width=<span class="xml&#45;quote">"300px"</span> height=<span class="xml&#45;quote">"200px"</span> mode=<span class="xml&#45;quote">"modal"</span>
-        visible=<span class="xml&#45;quote">"@bind(not empty vm.message)"</span>&#62;</span>
+              visible=<span class="xml&#45;quote">"&#64;bind(not empty vm.message)"</span>&#62;</span>
         <span class="xml&#45;tag">&#60;z:hbox align=<span class="xml&#45;quote">"center"</span> pack=<span class="xml&#45;quote">"center"</span> hflex=<span class="xml&#45;quote">"true"</span> vflex=<span class="xml&#45;quote">"true"</span>&#62;</span>
-            <span class="xml&#45;tag">&#60;z:label value=<span class="xml&#45;quote">"@bind(vm.message)"</span>/&#62;</span>
+            <span class="xml&#45;tag">&#60;z:label value=<span class="xml&#45;quote">"&#64;bind(vm.message)"</span>/&#62;</span>
         <span class="xml&#45;tag">&#60;/z:hbox&#62;</span>
     <span class="xml&#45;tag">&#60;/z:window&#62;</span>
-<span class="xml&#45;tag">&#60;/z:window&#62;</span></pre></div><p class="paragraph"/>The advantages of using MVVM design pattern comes in when customers changes their requirements on the View. UI Designers can proceed the changes independently and the HelloViewModel java file does not have to be changed because what the customer required was to change the way how the message is presented not the message itself. Notice that here the show/hide of the modal window is controlled whether the message is empty or not(visible="@bind(not empty vm.message)").<p class="paragraph"/>
+<span class="xml&#45;tag">&#60;/z:window&#62;</span></pre></div><p class="paragraph"/>The advantages of using MVVM design pattern comes in when customers changes their requirements on the View. UI Designers can proceed the changes independently and the HelloVM java file does not have to be changed because what the customer required was to change the way how the message is presented not the message itself. Notice that here the show/hide of the modal window is controlled whether the message is empty or not(visible="@bind(not empty vm.message)").<p class="paragraph"/>
 <h3>See more</h3>
 <a href="http://books.zkoss.org/wiki/Small%20Talks/2011/November/Hello%20ZK%20MVVM" target="blank">Small Talks/2011/November/Hello ZK MVVM</a><h2><a name="9.2 Design your first MVVM page">9.2 Design your first MVVM page</a></h2><h3>Case scenario</h3>
 I will use a search example to show how you can archive MVVM design pattern in Grails ZK UI by using ZK Bind. Please imagine yourself creating a search page in which the searching of an item is done by a filter string; the search result of items is displayed in a list and when selecting on an item, it will also show the details of the selected item.<p class="paragraph"/><h3>Create Domain class</h3>
 <div class="code"><pre>grails create&#45;domain&#45;class item</pre></div><p class="paragraph"/>
 Modify the <code>Item</code> Domain class:
 <div class="code"><pre>class Item &#123;
+    <span class="java&#45;keyword">static</span> transients = &#91;'totalPrice'&#93;
     <span class="java&#45;object">String</span> name
     <span class="java&#45;object">String</span> description
     <span class="java&#45;object">double</span> price
-    <span class="java&#45;object">int</span> quantity<p class="paragraph"/>    <span class="java&#45;keyword">public</span> Item(<span class="java&#45;object">String</span> name, <span class="java&#45;object">String</span> description, <span class="java&#45;object">double</span> price, <span class="java&#45;object">int</span> quantity) &#123;
+    <span class="java&#45;object">int</span> quantity<p class="paragraph"/>    Item() &#123;
+    &#125;<p class="paragraph"/>    <span class="java&#45;keyword">public</span> Item(<span class="java&#45;object">String</span> name, <span class="java&#45;object">String</span> description, <span class="java&#45;object">double</span> price, <span class="java&#45;object">int</span> quantity) &#123;
         <span class="java&#45;keyword">this</span>.name = name
         <span class="java&#45;keyword">this</span>.description = description
         <span class="java&#45;keyword">this</span>.price = price
@@ -757,55 +646,58 @@ Follow the design concept of MVVM, we should design the view model first, we sho
 As you can see, I am defending a View Model and it is isolated from the View, which means that it is possible to be reused by another View and even tested by pure Java code. Following is the code of the View Model.<p class="paragraph"/><div class="code"><pre>grails create&#45;view&#45;model demo.search</pre></div><p class="paragraph"/>The above command will generate the ViewModel in grails-app/vms/SearchVM.groovy<p class="paragraph"/>Modify the ViewModel :
 <div class="code"><pre>class SearchVM &#123;
     //the search condition
-    <span class="java&#45;object">String</span> filter = <span class="java&#45;quote">"&#42;"</span><p class="paragraph"/>    //the search result
-    ListModelList&#60;Item&#62; items<p class="paragraph"/>    //the selected item
-    Item selected<p class="paragraph"/>    //inject the SearchService
-    def searchService<p class="paragraph"/>    <span class="java&#45;keyword">public</span> <span class="java&#45;object">String</span> getFilter() &#123;
-        <span class="java&#45;keyword">return</span> filter
-    &#125;<p class="paragraph"/>    @NotifyChange
-    <span class="java&#45;keyword">public</span> void setFilter(<span class="java&#45;object">String</span> filter) &#123;
-        <span class="java&#45;keyword">this</span>.filter = filter
-    &#125;<p class="paragraph"/>    <span class="java&#45;keyword">public</span> ListModel&#60;Item&#62; getItems() &#123;
-        <span class="java&#45;keyword">if</span> (items == <span class="java&#45;keyword">null</span>) &#123;
-            doSearch()
-        &#125;
-        <span class="java&#45;keyword">return</span> items
-    &#125;<p class="paragraph"/>    @NotifyChange(&#91;<span class="java&#45;quote">"items"</span>, <span class="java&#45;quote">"selected"</span>&#93;)
-    <span class="java&#45;keyword">public</span> void doSearch() &#123;
-        items = <span class="java&#45;keyword">new</span> ListModelList&#60;Item&#62;()
-        items.addAll(searchService.search(filter))
-        selected = <span class="java&#45;keyword">null</span>
-    &#125;<p class="paragraph"/>    <span class="java&#45;keyword">public</span> Item getSelected() &#123;
-        <span class="java&#45;keyword">return</span> selected
-    &#125;<p class="paragraph"/>    @NotifyChange
-    <span class="java&#45;keyword">public</span> void setSelected(Item selected) &#123;
-        <span class="java&#45;keyword">this</span>.selected = selected
-    &#125;<p class="paragraph"/>    Converter totalPriceConverter = <span class="java&#45;keyword">null</span><p class="paragraph"/>    <span class="java&#45;keyword">public</span> Converter getTotalPriceConverter() &#123;
-        <span class="java&#45;keyword">if</span> (totalPriceConverter != <span class="java&#45;keyword">null</span>) &#123;
-            <span class="java&#45;keyword">return</span> totalPriceConverter
-        &#125;
-        <span class="java&#45;keyword">return</span> totalPriceConverter = <span class="java&#45;keyword">new</span> Converter() &#123;
-            <span class="java&#45;keyword">public</span> <span class="java&#45;object">Object</span> coerceToBean(<span class="java&#45;object">Object</span> val, Component component, BindContext ctx) &#123;
-                <span class="java&#45;keyword">return</span> <span class="java&#45;keyword">null</span>//never called in <span class="java&#45;keyword">this</span> example
-            &#125;<p class="paragraph"/>            <span class="java&#45;keyword">public</span> <span class="java&#45;object">Object</span> coerceToUi(<span class="java&#45;object">Object</span> val, Component component, BindContext ctx) &#123;
-                <span class="java&#45;keyword">if</span> (val == <span class="java&#45;keyword">null</span>) <span class="java&#45;keyword">return</span> <span class="java&#45;keyword">null</span>
-                <span class="java&#45;object">String</span> str = <span class="java&#45;keyword">new</span> DecimalFormat('$ &#35;&#35;&#35;,&#35;&#35;&#35;,&#35;&#35;&#35;,&#35;&#35;0.00').format((<span class="java&#45;object">Double</span>) val)
-                <span class="java&#45;keyword">return</span> str
-            &#125;
-        &#125;
-    &#125;
-&#125;</pre></div><p class="paragraph"/>SearchVM is created by grails command <code>create-view-model</code> ,we need to notify ZK Bind that the properties of this <code>View Model</code> were changed. In ZK Bind, it has the binder to help the binding between View and View Model. By adding <code>NotifyChange on a setter method of a property, after binder set the property, it is noticed to reload components that bind to this property. Add </code>NotifyChange on a command method, after Binder executes the method, it is noticed to reload components that bind to these properties.
-For example, I add <code>NotifyChange on setFilter, when binder sets the value by setFilter(), it is noticed to reload any binding that is related to filter property of the view model. I also added </code>NotifyChange("items","selected") on doSearch(), that is because when doing the search, I will search by the filter and has a new item list and also reset selected to null, so I need to notify Binder this 2 properties was changed.
+   	<span class="java&#45;object">String</span> filter = <span class="java&#45;quote">"&#42;"</span>;
+   	//the search result
+   	ListModelList&#60;Item&#62; items;<p class="paragraph"/>   	//the selected item
+   	Item selected;<p class="paragraph"/>   	def searchService<p class="paragraph"/>
+   	<span class="java&#45;keyword">public</span> <span class="java&#45;object">String</span> getFilter() &#123;
+   		<span class="java&#45;keyword">return</span> filter;
+   	&#125;<p class="paragraph"/>   	&#64;NotifyChange
+   	<span class="java&#45;keyword">public</span> void setFilter(<span class="java&#45;object">String</span> filter) &#123;
+   		<span class="java&#45;keyword">this</span>.filter = filter;
+   	&#125;<p class="paragraph"/>   	<span class="java&#45;keyword">public</span> ListModel&#60;Item&#62; getItems() &#123;
+   		<span class="java&#45;keyword">if</span>(items==<span class="java&#45;keyword">null</span>)&#123;
+   			doSearch();
+   		&#125;
+   		<span class="java&#45;keyword">return</span> items;
+   	&#125;<p class="paragraph"/>    &#64;NotifyChange(&#91;<span class="java&#45;quote">"items"</span>, <span class="java&#45;quote">"selected"</span>&#93;)
+    &#64;Command
+   	<span class="java&#45;keyword">public</span> void doSearch()&#123;
+   		items = <span class="java&#45;keyword">new</span> ListModelList&#60;Item&#62;();
+   		items.addAll(searchService.search(filter));
+   		selected = <span class="java&#45;keyword">null</span>;
+   	&#125;<p class="paragraph"/>   	<span class="java&#45;keyword">public</span> Item getSelected() &#123;
+   		<span class="java&#45;keyword">return</span> selected;
+   	&#125;<p class="paragraph"/>   	&#64;NotifyChange
+   	<span class="java&#45;keyword">public</span> void setSelected(Item selected) &#123;
+   		<span class="java&#45;keyword">this</span>.selected = selected;
+   	&#125;<p class="paragraph"/>
+   	Converter totalPriceConverter = <span class="java&#45;keyword">null</span>;<p class="paragraph"/>   	<span class="java&#45;keyword">public</span> Converter getTotalPriceConverter()&#123;
+   		<span class="java&#45;keyword">if</span>(totalPriceConverter!=<span class="java&#45;keyword">null</span>)&#123;
+   			<span class="java&#45;keyword">return</span> totalPriceConverter;
+   		&#125;
+   		<span class="java&#45;keyword">return</span> totalPriceConverter = <span class="java&#45;keyword">new</span> Converter()&#123;
+   			<span class="java&#45;keyword">public</span> <span class="java&#45;object">Object</span> coerceToBean(<span class="java&#45;object">Object</span> val, Component component,
+   					BindContext ctx) &#123;
+   				<span class="java&#45;keyword">return</span> <span class="java&#45;keyword">null</span>;//never called in <span class="java&#45;keyword">this</span> example
+   			&#125;<p class="paragraph"/>   			<span class="java&#45;keyword">public</span> <span class="java&#45;object">Object</span> coerceToUi(<span class="java&#45;object">Object</span> val, Component component,
+   					BindContext ctx) &#123;
+   				<span class="java&#45;keyword">if</span>(val==<span class="java&#45;keyword">null</span>) <span class="java&#45;keyword">return</span> <span class="java&#45;keyword">null</span>;
+   				<span class="java&#45;object">String</span> str = <span class="java&#45;keyword">new</span> DecimalFormat('$ &#35;&#35;&#35;,&#35;&#35;&#35;,&#35;&#35;&#35;,&#35;&#35;0.00').format((<span class="java&#45;object">Double</span>)val);
+   				<span class="java&#45;keyword">return</span> str;
+   			&#125;<p class="paragraph"/>   		&#125;;
+   	&#125;<p class="paragraph"/>&#125;</pre></div><p class="paragraph"/>SearchVM is created by grails command <code>create-view-model</code> ,we need to notify ZK Bind that the properties of this <code>View Model</code> were changed. In ZK Bind, it has the binder to help the binding between View and View Model. By adding &#64;NotifyChange on a setter method of a property, after binder set the property, it is noticed to reload components that bind to this property. Add &#64;NotifyChange on a command method, after Binder executes the method, it is noticed to reload components that bind to these properties.
+For example, I add &#64;NotifyChange on setFilter, when binder sets the value by setFilter(), it is noticed to reload any binding that is related to filter property of the view model. I also added &#64;NotifyChange("items","selected") on doSearch(), that is because when doing the search, I will search by the filter and has a new item list and also reset selected to null, so I need to notify Binder this 2 properties was changed.
 With @NotifyChange, it let binder knows when to reload the view automatically.<p class="paragraph"/><h3>Design a View with ZK Bind</h3>
 After the View Mode is ready, we are now able to bind View to View Model, not only the data, but also the action, and reloading the changed data automatically (thanks the @NotifyChange in SearchVM).
 Here is the designed View that will be use in this article to bind with View Model:
 <img border="0" class="center" src="../img/mvvm-in-zk6-view-example.png"></img><p class="paragraph"/><h3>Apply the BindComposer</h3><p class="paragraph"/>Now, we have to create a ‘search.gsp’ and bind it to the View Model. To do this, set the ‘apply’ attribute to ‘org.zkoss.bind.BindComposer’ as the composer, and bind the ‘viewModel’ to ‘SearchVM’ that was just created. BindComposer will read all the ZK Bind syntax and create a binder to bind View and View Model.<p class="paragraph"/><div class="code"><pre>&#60;z:window title=<span class="java&#45;quote">"Search Storage Item"</span> border=<span class="java&#45;quote">"normal"</span> width=<span class="java&#45;quote">"600px"</span>
-    apply=<span class="java&#45;quote">"org.zkoss.bind.BindComposer"</span> viewModel=<span class="java&#45;quote">"@bind(vm='demo.SearchVM')"</span> &#62;
-...<p class="paragraph"/>&#60;/z:window&#62;</pre></div><p class="paragraph"/>The @bind(name=expression) here, is the syntax to assign a View Model to the binder, ‘name’ is the name of the View Model which will be referenced in nested binding. ‘expression’ is an EL 2.2 expression and there are some rules about this expression; if the evaluated result is a ‘String’, it uses ‘String’ as a class name to create the view model whereas if the result is a ‘Class’, it creates the View Model by ‘Class.newInstance()’. Moreover, if the result is a non-primitive Object then it will use it directly, other-wise, it complains an exception.<p class="paragraph"/><h3>Binding the textbox with filter data</h3><p class="paragraph"/>We need a textbox to represent the filter data, when user types in the textbox, the data will automatically update to ‘vm.filter’, and we also want the search button disabled if the value of ‘vm.filter’ is empty.<p class="paragraph"/><strong class="bold">View : search.gsp</strong>
-<div class="code"><pre>&#60;z:textbox value=<span class="java&#45;quote">"@bind(vm.filter)"</span> instant=<span class="java&#45;quote">"<span class="java&#45;keyword">true</span>"</span>/&#62;
-&#60;z:button label=<span class="java&#45;quote">"Search"</span> disabled=<span class="java&#45;quote">"<code>bind(empty vm.filter)"</span>/&#62;</pre></div><p class="paragraph"/>The </code>bind(expression) here, is the two-way binding syntax to bind component’s attribute and the VM’s property together, it constructs a prompt binding, which means that the change of a component’s attribute caused by a user’s action will also be saved to the VM’s property. And any changed notification of the property will cause a reload of the component.
+    apply=<span class="java&#45;quote">"org.zkoss.bind.BindComposer"</span> viewModel=<span class="java&#45;quote">"&#64;id('vm')&#64;init('zkui.mvvm.SearchVM')"</span> &#62;
+...<p class="paragraph"/>&#60;/z:window&#62;</pre></div><p class="paragraph"/>The &#64;bind(name=expression) here, is the syntax to assign a View Model to the binder, ‘name’ is the name of the View Model which will be referenced in nested binding. ‘expression’ is an EL 2.2 expression and there are some rules about this expression; if the evaluated result is a ‘String’, it uses ‘String’ as a class name to create the view model whereas if the result is a ‘Class’, it creates the View Model by ‘Class.newInstance()’. Moreover, if the result is a non-primitive Object then it will use it directly, other-wise, it complains an exception.<p class="paragraph"/><h3>Binding the textbox with filter data</h3><p class="paragraph"/>We need a textbox to represent the filter data, when user types in the textbox, the data will automatically update to ‘vm.filter’, and we also want the search button disabled if the value of ‘vm.filter’ is empty.<p class="paragraph"/><strong class="bold">View : search.gsp</strong>
+<div class="code"><pre>&#60;z:textbox value=<span class="java&#45;quote">"&#64;bind(vm.filter)"</span> instant=<span class="java&#45;quote">"<span class="java&#45;keyword">true</span>"</span>/&#62;
+&#60;z:button label=<span class="java&#45;quote">"Search"</span> disabled=<span class="java&#45;quote">"&#64;bind(empty vm.filter)"</span>/&#62;</pre></div><p class="paragraph"/>The &#64;bind(expression) here, is the two-way binding syntax to bind component’s attribute and the VM’s property together, it constructs a prompt binding, which means that the change of a component’s attribute caused by a user’s action will also be saved to the VM’s property. And any changed notification of the property will cause a reload of the component.
 In the above example, I have binded the ‘vm.filter’ to the ‘value’ attribute of the textbox, and the ‘disabled’ attribute of the button. When editing the textbox, ‘vm.filter’ will be changed and the button will immediately be enabled or disabled depending on the value of ‘vm.filter’.<p class="paragraph"/><h3>Binding the listbox with search result</h3><p class="paragraph"/>In ZK 6, we introduce a new feature called ‘template’, it is a perfect matching when binding a collection. We will have a listbox and a template to show the search result.<p class="paragraph"/><strong class="bold">View : search.gsp</strong>
-<div class="code"><pre>&#60;z:listbox model=<span class="java&#45;quote">"<code>bind(vm.items)"</span> selectedItem=<span class="java&#45;quote">"</code>bind(vm.selected)"</span> hflex=<span class="java&#45;quote">"<span class="java&#45;keyword">true</span>"</span> height=<span class="java&#45;quote">"300px"</span>&#62;
+<div class="code"><pre>&#60;z:listbox model=<span class="java&#45;quote">"&#64;bind(vm.items)"</span> selectedItem=<span class="java&#45;quote">"&#64;bind(vm.selected)"</span> hflex=<span class="java&#45;quote">"<span class="java&#45;keyword">true</span>"</span> height=<span class="java&#45;quote">"300px"</span>&#62;
     &#60;z:listhead&#62;
         &#60;z:listheader label=<span class="java&#45;quote">"Name"</span>/&#62;
         &#60;z:listheader label=<span class="java&#45;quote">"Price"</span> align=<span class="java&#45;quote">"center"</span> width=<span class="java&#45;quote">"80px"</span>/&#62;
@@ -813,16 +705,17 @@ In the above example, I have binded the ‘vm.filter’ to the ‘value’ attri
     &#60;/z:listhead&#62;
     &#60;z:template name=<span class="java&#45;quote">"model"</span> <span class="java&#45;keyword">var</span>=<span class="java&#45;quote">"item"</span>&#62;
         &#60;listitem&#62;
-            &#60;listcell label=<span class="java&#45;quote">"@bind(item.name)"</span>/&#62;
-            &#60;listcell label=<span class="java&#45;quote">"<code>bind(item.price) </code>converter('formatedNumber', format='&#35;&#35;&#35;,&#35;&#35;0.00')"</span>/&#62;
-            &#60;listcell label=<span class="java&#45;quote">"<code>bind(item.quantity)"</span> sclass=<span class="java&#45;quote">"</code>bind(item.quantity lt 3 ?'red':'')"</span>/&#62;
+            &#60;listcell label=<span class="java&#45;quote">"&#64;load(item.name)"</span>/&#62;
+            &#60;listcell label=<span class="java&#45;quote">"&#64;load(item.price) &#64;converter('formatedNumber', format='&#35;&#35;&#35;,&#35;&#35;0.00')"</span>/&#62;
+            &#60;listcell label=<span class="java&#45;quote">"&#64;load(item.quantity)"</span> sclass=<span class="java&#45;quote">"&#64;bind(item.quantity lt 3 ?'red':'')"</span>/&#62;
         &#60;/listitem&#62;
     &#60;/z:template&#62;
-&#60;/z:listbox&#62;</pre></div><p class="paragraph"/>The <code>bind(expression) can also apply to ‘model’ attribute of a component. When binding to a model, we have to provide a template, which name is ‘model’, to render each item in the model. In the template, we have to set the name of ‘var’, so we could use it as an item in the template. We also introduce the </code>converter(expression) syntax, so you can write a ‘Converter’ to convert data to attribute when loading to component, and convert back when saving to bean.
-In the above example, the ‘model’ of listbox binds to ‘vm.items’, and the ‘selectedItem’ binds to ‘vm.selected’ with a template that has responsibility to render each item of the ‘vm.items’. Of course, we could also use @bind in the template, even bind to a ‘sclass’ attribute of a listcell with a flexible expression ‘item.quantity lt 3?’red’:’’’. Look into ‘item.price’, it is a double, I want it to be shown with an expected format, therefore a built-in converter ‘formatedNumber’ and a format argument ‘###,##0.00’ are used.<p class="paragraph"/><h3>Binding the selected item</h3>
-When binding the listbox, we also bind the ‘selectedItem’ of listbox to ‘selected’ property of View Model. You do not need to worry about selectedItem(in which its value type is a Listitem) of listbox being the incorrect data type of the model because binder will convert it to item automatically. By the binding of ‘selectedItem’, when selecting an item in the listbox, the ‘selected’ property will be updated to the selected item and displayed in detail.<p class="paragraph"/><strong class="bold">View : search.gsp</strong>
-<div class="code"><pre>&#60;z:groupbox visible=<span class="java&#45;quote">"@bind(not empty vm.selected)"</span> hflex=<span class="java&#45;quote">"<span class="java&#45;keyword">true</span>"</span> mold=<span class="java&#45;quote">"3d"</span>&#62;
-    &#60;z:caption label=<span class="java&#45;quote">"@bind(vm.selected.name)"</span>/&#62;
+&#60;/z:listbox&#62;</pre></div><p class="paragraph"/>The &#64;load(expression) can also be applied to the model attribute of the listbox component. When binding to a model, we have to provide a template, which is named "model", to render each item in the model. In the template, we have to set the name "var", so we could use it as an item in the template. We also introduce the &#64;converter(expression) syntax, so you can write a "Converter" to convert data to attributes when loading to components, and convert back when saving to beans.
+In the above example, the model of the listbox binds to vm.items while the selectedItem binds to vm.selected with a template that has responsibility to render each entry of the items of vm.items. Of course, we can also use &#64;load() in the template, or even bind it to the sclass attribute of a listcell with a flexible expression item.quantity lt 3 ? 'red' : ''. Look into item.price. It is a double number. I want it to be shown with an expected format; therefore a built-in converter formatedNumber and a format argument of '###,##0.00' are used.<p class="paragraph"/>
+<h3>Binding the selected item</h3>
+When binding the listbox, we also bind the selectedItem of the listbox to selected property of the ViewModel. You do not need to worry about selectedItem (in which its value type is a Listitem) of listbox being the incorrect data type for the model because binder will convert it to item automatically. By the binding of selectedItem, when selecting an item in the listbox, the selected property will be updated to the selected item and displayed in detail.<p class="paragraph"/><strong class="bold">View : search.gsp</strong>
+<div class="code"><pre>&#60;z:groupbox visible=<span class="java&#45;quote">"&#64;load(not empty vm.selected)"</span> hflex=<span class="java&#45;quote">"<span class="java&#45;keyword">true</span>"</span> mold=<span class="java&#45;quote">"3d"</span>&#62;
+    &#60;z:caption label=<span class="java&#45;quote">"&#64;load(vm.selected.name)"</span>/&#62;
     &#60;z:grid hflex=<span class="java&#45;quote">"<span class="java&#45;keyword">true</span>"</span>&#62;
         &#60;z:columns&#62;
             &#60;z:column width=<span class="java&#45;quote">"120px"</span>/&#62;
@@ -830,21 +723,21 @@ When binding the listbox, we also bind the ‘selectedItem’ of listbox to ‘s
         &#60;/z:columns&#62;
         &#60;z:rows&#62;
             &#60;z:row&#62;
-                Description &#60;z:label value=<span class="java&#45;quote">"@bind(vm.selected.description)"</span>/&#62;
+                Description &#60;z:label value=<span class="java&#45;quote">"&#64;load(vm.selected.description)"</span>/&#62;
             &#60;/z:row&#62;
             &#60;z:row&#62;
-                Price &#60;z:label value=<span class="java&#45;quote">"<code>bind(vm.selected.price) </code>converter('formatedNumber', format='&#35;&#35;&#35;,&#35;&#35;0.00')"</span>/&#62;
+                Price &#60;z:label value=<span class="java&#45;quote">"&#64;load(vm.selected.price) &#64;converter('formatedNumber', format='&#35;&#35;&#35;,&#35;&#35;0.00')"</span>/&#62;
             &#60;/z:row&#62;
             &#60;z:row&#62;
-                Quantity &#60;z:label value=<span class="java&#45;quote">"<code>bind(vm.selected.quantity)"</span> sclass=<span class="java&#45;quote">"</code>bind(vm.selected.quantity lt 3 ?'red':'')"</span>/&#62;
+                Quantity &#60;z:label value=<span class="java&#45;quote">"&#64;load(vm.selected.quantity)"</span> sclass=<span class="java&#45;quote">"&#64;load(vm.selected.quantity lt 3 ?'red':'')"</span>/&#62;
             &#60;/z:row&#62;
             &#60;z:row&#62;
-                Total Price &#60;z:label value=<span class="java&#45;quote">"<code>bind(vm.selected.totalPrice) </code>converter(vm.totalPriceConverter)"</span>/&#62;
+                Total Price &#60;z:label value=<span class="java&#45;quote">"&#64;load(vm.selected.totalPrice) &#64;converter(vm.totalPriceConverter)"</span>/&#62;
             &#60;/z:row&#62;
         &#60;/z:rows&#62;
     &#60;/z:grid&#62;
 &#60;/z:groupbox&#62;</pre></div>
-In the example above, we bind ‘visible’ attribute of groupbox with the expression ‘not empty vm.selected’, so that the groupbox will only appear visible when user selects an item. Oppositely, if no item is selected, this groupbox will not show up. The @converter() is used again here but with some differences. The converter now comes from the View Model . Of course, a ‘getTotalPriceConverter’ method needs to be prepared in View Model and return a Converter.<p class="paragraph"/><strong class="bold">ViewModel : SearchVM.groovy</strong>
+In the example above, we bind visible attribute of groupbox with the expression not empty vm.selected, so that the groupbox will only be visible when user selects an item. Oppositely, if no item is selected, this groupbox will not show up. The &#64;converter() is used again here but with some differences. The converter now comes from the ViewModel . Of course, a getTotalPriceConverter method needs to be prepared in ViewModel and return a Converter.<p class="paragraph"/><strong class="bold">ViewModel : SearchVM.groovy</strong>
 <div class="code"><pre>Converter totalPriceConverter = <span class="java&#45;keyword">null</span><p class="paragraph"/> <span class="java&#45;keyword">public</span> Converter getTotalPriceConverter() &#123;
      <span class="java&#45;keyword">if</span> (totalPriceConverter != <span class="java&#45;keyword">null</span>) &#123;
          <span class="java&#45;keyword">return</span> totalPriceConverter
@@ -859,12 +752,12 @@ In the example above, we bind ‘visible’ attribute of groupbox with the expre
          &#125;
      &#125;
  &#125;</pre></div><p class="paragraph"/><h3>Binding the button action to a command</h3>
-Now, we have to perform a command of the View Model when clicking on the search button. To do so, add a @bind in the onClick event of the button.<p class="paragraph"/><div class="code"><pre>&#60;z:button label=<span class="java&#45;quote">"Search"</span> onClick=<span class="java&#45;quote">"@bind('doSearch')"</span> disabled=<span class="java&#45;quote">"<code>bind(empty vm.filter)"</span>/&#62;</pre></div><p class="paragraph"/>The </code>bind(expression) syntax in the event of a component represents the binding of an event to a command of the View Model. It has some rules.
+Now, we have to perform a command of the View Model when clicking on the search button. To do so, add a &#64;command in the onClick event of the button.<p class="paragraph"/><div class="code"><pre>&#60;z:button label=<span class="java&#45;quote">"Search"</span> onClick=<span class="java&#45;quote">"&#64;command('doSearch')"</span> disabled=<span class="java&#45;quote">"&#64;load(empty vm.filter)"</span>/&#62;</pre></div><p class="paragraph"/>The @command(expression) syntax in the event of a component represents the binding of an event to a command of the ViewModel. It has some rules.
 <ol>
-<li>The evaluation result of the expression result has to be a ‘String’,</li>
+<li>The evaluation result of the expression result has to be a 'String',</li>
 <li>The string must also be the name of the command</li>
-<li>View model must have an executable method that has the name of the command.</li>
-</ol><p class="paragraph"/>In the case above, onClick is binded with a ‘doSearch’ command. When clicking on the button, binder will go through the command lifecycle (we will talk about this in another smalltalk ,link when ready) and execute the doSearch method of view model.<p class="paragraph"/><h3>The all:<strong class="bold">search.gsp</strong></h3><p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;%@ page contentType=<span class="xml&#45;quote">"text/html;charset=UTF&#45;8"</span> %&#62;</span>
+<li>View model must have an executable method that has the annotation &#64;Command('commandName'), if value of @Command is empty, binder use the method name as command name by default.</li>
+</ol><p class="paragraph"/>In the case above, onClick is binded with a doSearch command. When clicking on the button, binder will go through the command lifecycle and then execute the doSearch method of the ViewModel.<p class="paragraph"/><h3>The all:<strong class="bold">search.gsp</strong></h3><p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;%@ page contentType=<span class="xml&#45;quote">"text/html;charset=UTF&#45;8"</span> %&#62;</span>
 <span class="xml&#45;tag">&#60;html&#62;</span>
 <span class="xml&#45;tag">&#60;head&#62;</span>
     <span class="xml&#45;tag">&#60;title&#62;</span>MVVM Demo<span class="xml&#45;tag">&#60;/title&#62;</span>
@@ -874,16 +767,17 @@ Now, we have to perform a command of the View Model when clicking on the search 
         color: red;
     &#125;
     <span class="xml&#45;tag">&#60;/style&#62;</span>
-<span class="xml&#45;tag">&#60;/head&#62;</span><p class="paragraph"/><span class="xml&#45;tag">&#60;body&#62;</span>
+<span class="xml&#45;tag">&#60;/head&#62;</span>
+<span class="xml&#45;tag">&#60;body&#62;</span>
 <span class="xml&#45;tag">&#60;z:window title=<span class="xml&#45;quote">"Search Storage Item"</span> border=<span class="xml&#45;quote">"normal"</span> width=<span class="xml&#45;quote">"600px"</span>
-          apply=<span class="xml&#45;quote">"org.zkoss.bind.BindComposer"</span> viewModel=<span class="xml&#45;quote">"@bind(vm='zkui6demo.SearchVM')"</span>&#62;</span>
+          apply=<span class="xml&#45;quote">"org.zkoss.bind.BindComposer"</span> viewModel=<span class="xml&#45;quote">"&#64;id('vm')&#64;init('zkui6demo.SearchVM')"</span>&#62;</span>
     <span class="xml&#45;tag">&#60;z:vbox hflex=<span class="xml&#45;quote">"true"</span>&#62;</span>
         <span class="xml&#45;tag">&#60;z:hbox&#62;</span>
             Filter :
-            <span class="xml&#45;tag">&#60;z:textbox value=<span class="xml&#45;quote">"@bind(vm.filter)"</span> instant=<span class="xml&#45;quote">"true"</span>/&#62;</span>
-            <span class="xml&#45;tag">&#60;z:button label=<span class="xml&#45;quote">"Search"</span> onClick=<span class="xml&#45;quote">"<code>bind('doSearch')"</span> disabled=<span class="xml&#45;quote">"</code>bind(empty vm.filter)"</span>/&#62;</span>
+            <span class="xml&#45;tag">&#60;z:textbox value=<span class="xml&#45;quote">"&#64;bind(vm.filter)"</span> instant=<span class="xml&#45;quote">"true"</span>/&#62;</span>
+            <span class="xml&#45;tag">&#60;z:button label=<span class="xml&#45;quote">"Search"</span> onClick=<span class="xml&#45;quote">"&#64;command('doSearch')"</span> disabled=<span class="xml&#45;quote">"&#64;load(empty vm.filter)"</span>/&#62;</span>
         <span class="xml&#45;tag">&#60;/z:hbox&#62;</span>
-        <span class="xml&#45;tag">&#60;z:listbox model=<span class="xml&#45;quote">"<code>bind(vm.items)"</span> selectedItem=<span class="xml&#45;quote">"</code>bind(vm.selected)"</span> hflex=<span class="xml&#45;quote">"true"</span> height=<span class="xml&#45;quote">"300px"</span>&#62;</span>
+        <span class="xml&#45;tag">&#60;z:listbox model=<span class="xml&#45;quote">"&#64;load(vm.items)"</span> selectedItem=<span class="xml&#45;quote">"&#64;bind(vm.selected)"</span> hflex=<span class="xml&#45;quote">"true"</span> height=<span class="xml&#45;quote">"300px"</span>&#62;</span>
             <span class="xml&#45;tag">&#60;z:listhead&#62;</span>
                 <span class="xml&#45;tag">&#60;z:listheader label=<span class="xml&#45;quote">"Name"</span>/&#62;</span>
                 <span class="xml&#45;tag">&#60;z:listheader label=<span class="xml&#45;quote">"Price"</span> align=<span class="xml&#45;quote">"center"</span> width=<span class="xml&#45;quote">"80px"</span>/&#62;</span>
@@ -891,32 +785,27 @@ Now, we have to perform a command of the View Model when clicking on the search 
             <span class="xml&#45;tag">&#60;/z:listhead&#62;</span>
             <span class="xml&#45;tag">&#60;z:template name=<span class="xml&#45;quote">"model"</span> var=<span class="xml&#45;quote">"item"</span>&#62;</span>
                 <span class="xml&#45;tag">&#60;listitem&#62;</span>
-                    <span class="xml&#45;tag">&#60;listcell label=<span class="xml&#45;quote">"@bind(item.name)"</span>/&#62;</span>
-                    <span class="xml&#45;tag">&#60;listcell label=<span class="xml&#45;quote">"<code>bind(item.price) </code>converter('formatedNumber', format='&#35;&#35;&#35;,&#35;&#35;0.00')"</span>/&#62;</span>
-                    <span class="xml&#45;tag">&#60;listcell label=<span class="xml&#45;quote">"<code>bind(item.quantity)"</span> sclass=<span class="xml&#45;quote">"</code>bind(item.quantity lt 3 ?'red':'')"</span>/&#62;</span>
+                    <span class="xml&#45;tag">&#60;listcell label=<span class="xml&#45;quote">"&#64;load(item.name)"</span>/&#62;</span>
+                    <span class="xml&#45;tag">&#60;listcell label=<span class="xml&#45;quote">"&#64;load(item.price) &#64;converter('formatedNumber', format='&#35;&#35;&#35;,&#35;&#35;0.00')"</span>/&#62;</span>
+                    <span class="xml&#45;tag">&#60;listcell label=<span class="xml&#45;quote">"&#64;load(item.quantity)"</span> sclass=<span class="xml&#45;quote">"&#64;bind(item.quantity lt 3 ?'red':'')"</span>/&#62;</span>
                 <span class="xml&#45;tag">&#60;/listitem&#62;</span>
             <span class="xml&#45;tag">&#60;/z:template&#62;</span>
         <span class="xml&#45;tag">&#60;/z:listbox&#62;</span>
-        <span class="xml&#45;tag">&#60;z:groupbox visible=<span class="xml&#45;quote">"@bind(not empty vm.selected)"</span> hflex=<span class="xml&#45;quote">"true"</span> mold=<span class="xml&#45;quote">"3d"</span>&#62;</span>
-            <span class="xml&#45;tag">&#60;z:caption label=<span class="xml&#45;quote">"@bind(vm.selected.name)"</span>/&#62;</span>
+        <span class="xml&#45;tag">&#60;z:groupbox visible=<span class="xml&#45;quote">"&#64;load(not empty vm.selected)"</span> hflex=<span class="xml&#45;quote">"true"</span> mold=<span class="xml&#45;quote">"3d"</span>&#62;</span>
+            <span class="xml&#45;tag">&#60;z:caption label=<span class="xml&#45;quote">"&#64;load(vm.selected.name)"</span>/&#62;</span>
             <span class="xml&#45;tag">&#60;z:grid hflex=<span class="xml&#45;quote">"true"</span>&#62;</span>
                 <span class="xml&#45;tag">&#60;z:columns&#62;</span>
                     <span class="xml&#45;tag">&#60;z:column width=<span class="xml&#45;quote">"120px"</span>/&#62;</span>
                     <span class="xml&#45;tag">&#60;z:column/&#62;</span>
                 <span class="xml&#45;tag">&#60;/z:columns&#62;</span>
                 <span class="xml&#45;tag">&#60;z:rows&#62;</span>
-                    <span class="xml&#45;tag">&#60;z:row&#62;</span>
-                        Description <span class="xml&#45;tag">&#60;z:label value=<span class="xml&#45;quote">"@bind(vm.selected.description)"</span>/&#62;</span>
-                    <span class="xml&#45;tag">&#60;/z:row&#62;</span>
-                    <span class="xml&#45;tag">&#60;z:row&#62;</span>
-                        Price <span class="xml&#45;tag">&#60;z:label value=<span class="xml&#45;quote">"<code>bind(vm.selected.price) </code>converter('formatedNumber', format='&#35;&#35;&#35;,&#35;&#35;0.00')"</span>/&#62;</span>
-                    <span class="xml&#45;tag">&#60;/z:row&#62;</span>
-                    <span class="xml&#45;tag">&#60;z:row&#62;</span>
-                        Quantity <span class="xml&#45;tag">&#60;z:label value=<span class="xml&#45;quote">"<code>bind(vm.selected.quantity)"</span> sclass=<span class="xml&#45;quote">"</code>bind(vm.selected.quantity lt 3 ?'red':'')"</span>/&#62;</span>
-                    <span class="xml&#45;tag">&#60;/z:row&#62;</span>
-                    <span class="xml&#45;tag">&#60;z:row&#62;</span>
-                        Total Price <span class="xml&#45;tag">&#60;z:label value=<span class="xml&#45;quote">"<code>bind(vm.selected.totalPrice) </code>converter(vm.totalPriceConverter)"</span>/&#62;</span>
-                    <span class="xml&#45;tag">&#60;/z:row&#62;</span>
+                    <span class="xml&#45;tag">&#60;z:row&#62;</span>Description <span class="xml&#45;tag">&#60;z:label value=<span class="xml&#45;quote">"&#64;load(vm.selected.description)"</span>/&#62;</span><span class="xml&#45;tag">&#60;/z:row&#62;</span>
+                    <span class="xml&#45;tag">&#60;z:row&#62;</span>Price <span class="xml&#45;tag">&#60;z:label
+                            value=<span class="xml&#45;quote">"&#64;load(vm.selected.price) &#64;converter('formatedNumber', format='&#35;&#35;&#35;,&#35;&#35;0.00')"</span>/&#62;</span><span class="xml&#45;tag">&#60;/z:row&#62;</span>
+                    <span class="xml&#45;tag">&#60;z:row&#62;</span>Quantity <span class="xml&#45;tag">&#60;z:label value=<span class="xml&#45;quote">"&#64;load(vm.selected.quantity)"</span>
+                                             sclass=<span class="xml&#45;quote">"&#64;load(vm.selected.quantity lt 3 ?'red':'')"</span>/&#62;</span><span class="xml&#45;tag">&#60;/z:row&#62;</span>
+                    <span class="xml&#45;tag">&#60;z:row&#62;</span>Total Price <span class="xml&#45;tag">&#60;z:label
+                            value=<span class="xml&#45;quote">"&#64;load(vm.selected.totalPrice) &#64;converter(vm.totalPriceConverter)"</span>/&#62;</span><span class="xml&#45;tag">&#60;/z:row&#62;</span>
                 <span class="xml&#45;tag">&#60;/z:rows&#62;</span>
             <span class="xml&#45;tag">&#60;/z:grid&#62;</span>
         <span class="xml&#45;tag">&#60;/z:groupbox&#62;</span>
@@ -949,7 +838,7 @@ Now, we have to perform a command of the View Model when clicking on the search 
         <span class="java&#45;keyword">return</span> r.nextInt(10)
     &#125;<p class="paragraph"/>    def destroy = &#123;
     &#125;
-&#125;</pre></div><p class="paragraph"/>
+&#125;</pre></div><p class="paragraph"/><p class="paragraph"/><h3>Downloads ZK UI MVVM Demo</h3><p class="paragraph"/><a href="../ref/Httpsgithubcomxiaochongzkuidownloads/https://github.com/xiaochong/zkui/downloads.html" class="https://github.com/xiaochong/zkui/downloads">https://github.com/xiaochong/zkui/downloads</a><p class="paragraph"/>
 <h3>More...</h3><p class="paragraph"/><a href="http://books.zkoss.org/wiki/Small_Talks/2011/November/MVVM_in_ZK_6_-_Design_your_first_MVVM_page" target="blank">Small Talks/2011/November/MVVM in ZK 6 - Design your first MVVM page</a><p class="paragraph"/>
 
         </div>
