@@ -53,34 +53,36 @@ Apparently, UI designer has to tell binder at least the following things:
 In ZK Bind, ZK Annotation is utilized to do these jobs:
 @View@: helloMVVM.gsp
 {code:xml}
-<z:window apply="org.zkoss.bind.BindComposer" viewModel="@bind(vm='org.zkoss.mvvm.examples.hello.HelloViewModel')">
-    <z:label value="@bind(vm.message)"/>
-    <z:button label="Show" onClick="@bind('showHello')"/>
+<z:window apply="org.zkoss.bind.BindComposer" viewModel="\@id('vm')\@init('demo.HelloVM')">
+    <z:label value="\@bind(vm.message)"/>
+    <z:button label="Show" onClick="\@command('showHello')"/>
 </z:window>
 {code}
 
-@ViewModel@: HelloViewModel.groovy
+@ViewModel@: HelloVM.groovy
 {code}
-class HelloViewModel {
+class HelloVM {
     private String message
+
     public String getMessage() {
         return message
     }
 
-    @NotifyChange("message")
+    \@Command \@NotifyChange("message")
     public void showHello() {
         message = "Hello World!"
     }
+
 }
 {code}
 
 Per this example, let's run through the program flow:
 # When end user press the "Show" button, the onClick event is fired to binder.
-# The binder finds that the command name in the ViewModel which is "showHello" as specified in the ZK annotation @bind('showHello').
-# The binder calls the showHello() method in the HelloViewModel and changes the message property. Note that the @NotifyChange("message") Java method annotation on showHello() method in HelloViewModel. It tells the binder that the property message in the HelloViewModel will be changed if this command is called.
-# The binder then finds that the attribute value of component label is associated with the changed message property of the HelloViewModel(as specified in ZK annotation @bind(vm.message)). So it loads data from the property vm.message and updates the label's value attribute. The new message "Hello World!" is then shown on the screen and provides the visual feedback to the end user.
+# The binder finds that the command name in the ViewModel which is "showHello" as specified in the ZK annotation @command('showHello').
+# The binder calls the showHello() method in the HelloVM and changes the message property. Note that the @NotifyChange("message") Java method annotation on showHello() method in HelloVM. It tells the binder that the property message in the HelloVM will be changed if this command is called.
+# The binder then finds that the attribute value of component label is associated with the changed message property of the HelloVM(as specified in ZK annotation @bind(vm.message)). So it loads data from the property vm.message and updates the label's value attribute. The new message "Hello World!" is then shown on the screen and provides the visual feedback to the end user.
 
-In this MVVM implementation with data binding system, the HelloViewModel is a simple POJO and refers none of the UI components. It only exposes the message contents via getMessage() and provides the necessary action logic showHello(). It does not know how these information or action logic will be used. It is the UI designer's job to decide which UI components are to be used in which layout as seen in HelloMVVM.gsp.
+In this MVVM implementation with data binding system, the HelloVM is a simple POJO and refers none of the UI components. It only exposes the message contents via getMessage() and provides the necessary action logic showHello(). It does not know how these information or action logic will be used. It is the UI designer's job to decide which UI components are to be used in which layout as seen in HelloMVVM.gsp.
 
 h3. The example revised -- Pop Up the Message
 
@@ -124,18 +126,19 @@ h3. Revised MVVM Implementation
 
 View: helloMVVM2.gsp
 {code:xml}
-<z:window apply="org.zkoss.bind.BindComposer" viewModel="@bind(vm='org.zkoss.mvvm.examples.hello.HelloViewModel')">
-    <z:button label="Show" onClick="@bind('showHello')"/>
+<z:window apply="org.zkoss.bind.BindComposer"
+          viewModel="\@id('vm')\@init('demo.HelloVM')">
+    <z:button label="Show" onClick="\@command('showHello')"/>
     <z:window title="Hello" width="300px" height="200px" mode="modal"
-        visible="@bind(not empty vm.message)">
+              visible="\@bind(not empty vm.message)">
         <z:hbox align="center" pack="center" hflex="true" vflex="true">
-            <z:label value="@bind(vm.message)"/>
+            <z:label value="\@bind(vm.message)"/>
         </z:hbox>
     </z:window>
 </z:window>
 {code}
 
-The advantages of using MVVM design pattern comes in when customers changes their requirements on the View. UI Designers can proceed the changes independently and the HelloViewModel java file does not have to be changed because what the customer required was to change the way how the message is presented not the message itself. Notice that here the show/hide of the modal window is controlled whether the message is empty or not(visible="@bind(not empty vm.message)").
+The advantages of using MVVM design pattern comes in when customers changes their requirements on the View. UI Designers can proceed the changes independently and the HelloVM java file does not have to be changed because what the customer required was to change the way how the message is presented not the message itself. Notice that here the show/hide of the modal window is controlled whether the message is empty or not(visible="@bind(not empty vm.message)").
 
 
 h3. See more
