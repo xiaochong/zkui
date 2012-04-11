@@ -128,6 +128,8 @@ public class BindComposer<T extends Component> implements Composer<T>, ComposerE
         ValidationMessages _vmsgs = initValidationMessages(evalx, comp, _binder);
 
         //wire before call init
+        Selectors.wireComponents(comp, _viewModel, true);
+        Selectors.wireEventListeners(comp, _viewModel);
         Selectors.wireVariables(comp, _viewModel, Selectors.newVariableResolvers(_viewModel.getClass(), null));
         if (_vmsgs != null) {
             ((BinderCtrl) _binder).setValidationMessages(_vmsgs);
