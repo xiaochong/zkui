@@ -10,12 +10,12 @@ import org.grails.plugins.zkui.artefacts.composer.ComposerArtefactHandler
 import org.grails.plugins.zkui.artefacts.vm.ViewModelArtefactHandler
 import org.grails.plugins.zkui.metaclass.RedirectDynamicMethod
 import org.grails.plugins.zkui.util.UriUtil
+import org.zkoss.zk.ui.Component
 import org.zkoss.zk.ui.Executions
+import org.zkoss.zk.ui.Page
 import org.zkoss.zk.ui.select.Selectors
 import org.zkoss.zul.Messagebox
 import org.zkoss.zul.impl.InputElement
-import org.zkoss.zk.ui.Component
-import org.zkoss.zk.ui.Page
 
 class ZkuiGrailsPlugin {
     // the plugin version
@@ -58,6 +58,15 @@ The different is it more likely to use the Grails' infrastructures such as gsp, 
 
     // URL to the plugin's documentation
     def documentation = "http://grails.org/plugin/zkui"
+
+    // License: one of 'APACHE', 'GPL2', 'GPL3'
+    def license = "LGPL"
+
+    // Location of the plugin's issue tracker.
+    def issueManagement = [system: "github", url: "https://github.com/xiaochong/zkui/issues"]
+
+    // Online location of the plugin's browseable source code.
+    def scm = [url: "https://github.com/xiaochong/zkui/"]
 
     static final String GOSIV_CLASS = "org.grails.plugins.zkui.ZkuiGrailsOpenSessionInViewFilter"
 
@@ -151,7 +160,7 @@ The different is it more likely to use the Grails' infrastructures such as gsp, 
             delegate.appendChild(value)
         }
         org.zkoss.zk.ui.Component.metaClass.select = {String query ->
-            return Selectors.find((Component)delegate, query)
+            return Selectors.find((Component) delegate, query)
         }
         org.zkoss.zk.ui.Page.metaClass.select = {String query ->
             return Selectors.find((Page) delegate, query)
