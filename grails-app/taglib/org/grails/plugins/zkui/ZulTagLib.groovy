@@ -503,6 +503,62 @@ class ZulTagLib extends AbstractTagLib {
 
     /**
      *
+     * @attr rows
+     * @attr cols
+     * @attr frozenCols
+     * @attr rowHeight
+     * @attr colWidth
+     * @attr maxtrixRenderer
+     * @attr model
+     * @attr sortAscending
+     * @attr sortDescending
+     * @attr oddRowSclass
+     * @attr onSelect
+     * @attr onScroll
+     * @attr onScrollX
+     * @attr onScrollY
+     * @attr onCellClick
+     * @attr onAfterRender
+     * @attr context
+     * @attr popup
+     * @attr tooltip
+     * @attr onCtrlKey
+     * @attr ctrlKeys
+     * @attr width
+     * @attr height
+     * @attr sclass
+     * @attr zclass
+     * @attr style
+     * @attr left
+     * @attr top
+     * @attr draggable
+     * @attr droppable
+     * @attr focus
+     * @attr tooltiptext
+     * @attr zindex
+     * @attr renderdefer
+     * @attr onCreate
+     * @attr onDrop
+     * @attr action
+     * @attr hflex
+     * @attr vflex
+     * @attr id
+     * @attr visible
+     * @attr mold
+     * @attr autag
+     * @attr onFulfill
+     * @attr auService
+     * @attr stubonly
+     * @attr apply
+     * @attr onBookmarkChange
+     * @attr onClientInfo
+     */
+    def biglistbox = { attrs, body ->
+        doTag(attrs, body, "biglistbox")
+    }
+
+    /**
+     *
      * @attr animationDisabled
      * @attr width
      * @attr height
@@ -592,6 +648,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr disabled
      * @attr autodisable
      * @attr tabindex
+     * @attr upload
      * @attr image
      * @attr imageContent
      * @attr hoverImage
@@ -983,6 +1040,51 @@ class ZulTagLib extends AbstractTagLib {
 
     /**
      *
+     * @attr creatable
+     * @attr createMessage
+     * @attr disabled
+     * @attr emptyMessage
+     * @attr model
+     * @attr name
+     * @attr noResultsText
+     * @attr open
+     * @attr tabindex
+     * @attr separator
+     * @attr width
+     * @attr height
+     * @attr sclass
+     * @attr zclass
+     * @attr style
+     * @attr left
+     * @attr top
+     * @attr draggable
+     * @attr droppable
+     * @attr focus
+     * @attr tooltiptext
+     * @attr zindex
+     * @attr renderdefer
+     * @attr onCreate
+     * @attr onDrop
+     * @attr action
+     * @attr hflex
+     * @attr vflex
+     * @attr id
+     * @attr visible
+     * @attr mold
+     * @attr autag
+     * @attr onFulfill
+     * @attr auService
+     * @attr stubonly
+     * @attr apply
+     * @attr onBookmarkChange
+     * @attr onClientInfo
+     */
+    def chosenbox = { attrs, body ->
+        doTag(attrs, body, "chosenbox")
+    }
+
+    /**
+     *
      * @attr color
      * @attr value
      * @attr disabled
@@ -1128,6 +1230,9 @@ class ZulTagLib extends AbstractTagLib {
      *
      * @attr sizable
      * @attr value
+     * @attr menupopup
+     * @attr columnshide
+     * @attr columnsgroup
      * @attr context
      * @attr popup
      * @attr tooltip
@@ -1500,6 +1605,7 @@ class ZulTagLib extends AbstractTagLib {
 
     /**
      *
+     * @attr align
      * @attr context
      * @attr popup
      * @attr tooltip
@@ -2322,6 +2428,7 @@ class ZulTagLib extends AbstractTagLib {
 
     /**
      *
+     * @attr valign
      * @attr spacing
      * @attr context
      * @attr popup
@@ -5481,6 +5588,8 @@ class ZulTagLib extends AbstractTagLib {
      * @attr value
      * @attr toolbar
      * @attr onSave
+     * @attr hflex
+     * @attr vflex
      * @attr customConfigurationsPath
      * @attr id
      * @attr visible

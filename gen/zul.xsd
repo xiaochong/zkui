@@ -533,6 +533,7 @@
 			<xs:element ref="anchorlayout"/>
 			<xs:element ref="audio" />
 			<xs:element ref="bandbox" />
+			<xs:element ref="biglistbox" />
 			<xs:element ref="borderlayout" />
 			<xs:element ref="box" />
 			<xs:element ref="button" />
@@ -542,6 +543,7 @@
 			<xs:element ref="chart" />
 			<xs:element ref="checkbox" />
 			<xs:element ref="ckeditor" />
+			<xs:element ref="chosenbox" />
 			<xs:element ref="colorbox" />
 			<xs:element ref="columnlayout" />
 			<xs:element ref="combobox" />
@@ -590,6 +592,7 @@
 			<xs:element ref="style" />
 			<xs:element ref="tabbox" />
 			<xs:element ref="tablelayout" />
+			<xs:element ref="template" />
 			<xs:element ref="textbox" />
 			<xs:element ref="timer" />
 			<xs:element ref="timebox" />
@@ -611,6 +614,7 @@
 				<xs:element ref="anchorlayout"/>
 				<xs:element ref="audio" />
 				<xs:element ref="bandbox" />
+				<xs:element ref="biglistbox" />
 				<xs:element ref="borderlayout" />
 				<xs:element ref="box" />
 				<xs:element ref="button" />
@@ -619,6 +623,7 @@
 				<xs:element ref="cell" />
 				<xs:element ref="chart" />
 				<xs:element ref="checkbox" />
+				<xs:element ref="chosenbox" />
 				<xs:element ref="ckeditor" />
 				<xs:element ref="colorbox" />
 				<xs:element ref="columnlayout" />
@@ -667,6 +672,7 @@
 				<xs:element ref="spinner" />
 				<xs:element ref="style" />
 				<xs:element ref="tabbox" />
+				<xs:element ref="template" />
 				<xs:element ref="textbox" />
 				<xs:element ref="timer" />
 				<xs:element ref="timebox" />
@@ -821,6 +827,29 @@
 		<xs:group ref="anyGroup" minOccurs="0" maxOccurs="unbounded" />
 		<xs:attributeGroup ref="xulElementAttrGroup" />
 	</xs:complexType>
+    <!-- biglistbox -->
+	<xs:element name="biglistbox" type="biglistboxType" />
+	<xs:complexType name="biglistboxType" mixed="true">
+		<xs:group ref="baseGroup" minOccurs="0" maxOccurs="unbounded" />
+		<xs:attributeGroup ref="xulElementAttrGroup" />
+		<xs:attribute name="rows" type="intType" use="optional" />
+		<xs:attribute name="cols" type="intType" use="optional" />
+		<xs:attribute name="frozenCols" type="intType" use="optional" />
+		<xs:attribute name="rowHeight" type="xs:string" use="optional" />
+		<xs:attribute name="colWidth" type="xs:string" use="optional" />
+		<xs:attribute name="maxtrixRenderer" type="xs:string" use="optional" />
+		<xs:attribute name="model" type="xs:string" use="optional" />
+		<xs:attribute name="sortAscending" type="xs:string" use="optional" />
+		<xs:attribute name="sortDescending" type="xs:string" use="optional" />
+		<xs:attribute name="oddRowSclass" type="xs:string" use="optional" />
+		<xs:attribute name="onSelect" type="xs:string" use="optional" />
+		<xs:attribute name="onScroll" type="xs:string" use="optional" />
+		<xs:attribute name="onScrollX" type="xs:string" use="optional" />
+		<xs:attribute name="onScrollY" type="xs:string" use="optional" />
+		<xs:attribute name="onCellClick" type="xs:string" use="optional" />
+		<xs:attribute name="onAfterRender" type="xs:string" use="optional" />
+		<xs:attributeGroup ref="rootAttrGroup" />
+	</xs:complexType>
     <!-- borderlayout -->
 	<xs:element name="borderlayout" type="borderlayoutType" />
 	<xs:complexType name="borderlayoutType" mixed="true">
@@ -867,6 +896,7 @@
 		<xs:attribute name="disabled" type="booleanType" use="optional" />
 		<xs:attribute name="autodisable" type="xs:string" use="optional" />
 		<xs:attribute name="tabindex" type="intType" use="optional" />
+		<xs:attribute name="upload" type="xs:string" use="optional" />
 		<xs:attributeGroup ref="rootAttrGroup" />
 	</xs:complexType>
     <!-- calendar -->
@@ -972,6 +1002,23 @@
 		<xs:attribute name="value" type="xs:string" use="optional" />
 		<xs:attributeGroup ref="rootAttrGroup" />
 	</xs:complexType>
+	<!-- chosenbox -->
+	<xs:element name="chosenbox" type="chosenboxType" />
+	<xs:complexType name="chosenboxType" mixed="true">
+		<xs:group ref="baseGroup" minOccurs="0" maxOccurs="unbounded" />
+		<xs:attributeGroup ref="htmlBasedComponentAttrGroup" />
+		<xs:attribute name="creatable" type="booleanType" use="optional" />
+		<xs:attribute name="createMessage" type="xs:string" use="optional" />
+		<xs:attribute name="disabled" type="booleanType" use="optional" />
+		<xs:attribute name="emptyMessage" type="xs:string" use="optional" />
+		<xs:attribute name="model" type="xs:string" use="optional" />
+		<xs:attribute name="name" type="xs:string" use="optional" />
+		<xs:attribute name="noResultsText" type="xs:string" use="optional" />
+		<xs:attribute name="open" type="booleanType" use="optional" />
+		<xs:attribute name="tabindex" type="intType" use="optional" />
+		<xs:attribute name="separator" type="xs:string" use="optional" />
+		<xs:attributeGroup ref="rootAttrGroup" />
+	</xs:complexType>
     <!-- colorbox -->
 	<xs:element name="colorbox" type="colorboxType" />
 	<xs:complexType name="colorboxType">
@@ -1022,6 +1069,9 @@
 		<xs:attributeGroup ref="xulElementAttrGroup" />
 		<xs:attribute name="sizable" type="xs:string" use="optional" />
 		<xs:attribute name="value" type="xs:string" use="optional" />
+		<xs:attribute name="menupopup" type="xs:string" use="optional" />
+		<xs:attribute name="columnshide" type="booleanType" use="optional" />
+		<xs:attribute name="columnsgroup" type="booleanType" use="optional" />
 	</xs:complexType>
     <!-- combobox -->
 	<xs:element name="combobox" type="comboboxType" />
@@ -1122,6 +1172,7 @@
 	<xs:element name="div" type="divType" />
 	<xs:complexType name="divType" mixed="true">
 		<xs:group ref="anyGroup" minOccurs="0" maxOccurs="unbounded" />
+		<xs:attribute name="align" type="gridAlignAttrType" use="optional" />
 		<xs:attributeGroup ref="xulElementAttrGroup" />
 		<xs:attributeGroup ref="mouseExtAttrGroup" />
 		<xs:attributeGroup ref="rootAttrGroup" />
@@ -1493,6 +1544,7 @@
 		</xs:choice>
 		<xs:attributeGroup ref="xulElementAttrGroup" />
 		<xs:attributeGroup ref="rootAttrGroup" />
+		<xs:attribute name="valign" type="valignAttrType" use="optional" />
 		<xs:attribute name="spacing" type="xs:string" use="optional" />
 	</xs:complexType>
     <!-- html -->
@@ -2235,6 +2287,15 @@
 		<xs:attribute name="columns" type="intType" use="optional" />
 		<xs:attributeGroup ref="xulElementAttrGroup" />
 	</xs:complexType>
+	<!-- template -->
+	<xs:element name="template" type="templateType" />
+	<xs:complexType name="templateType">
+		<xs:group ref="baseGroup" minOccurs="0" maxOccurs="unbounded" />
+		<xs:attribute name="name" type="xs:string" use="required" />
+		<xs:attribute name="src" type="xs:string" use="optional" />
+		<xs:attribute name="if" type="xs:string" use="optional" />
+		<xs:attributeGroup ref="rootAttrGroup" />
+	</xs:complexType>
     <!-- textbox -->
 	<xs:element name="textbox" type="textboxType" />
 	<xs:complexType name="textboxType">
@@ -2783,6 +2844,8 @@
 		<xs:attribute name="value" type="xs:string" use="optional" />
 		<xs:attribute name="toolbar" type="xs:string" use="optional" />
 		<xs:attribute name="onSave" type="xs:string" use="optional" />
+		<xs:attribute name="hflex" type="xs:string" use="optional" />
+		<xs:attribute name="vflex" type="xs:string" use="optional" />
 		<xs:attribute name="customConfigurationsPath" type="xs:string" use="optional" />
 	</xs:complexType>
     <!-- fckeditor -->

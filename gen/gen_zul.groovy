@@ -1,4 +1,4 @@
-def elementExclude = ['custom-attributes', 'attribute', 'variables', 'zk', 'zscript']
+def elementExclude = ['custom-attributes', 'attribute', 'variables', 'zk', 'zscript','template']
 def extElement = [
         span: ['apply', 'context', 'popup', 'ctrlKeys', 'tooltip', 'class', 'left', 'top', 'zIndex', 'zindex', 'height', 'tooltiptext', 'zclass', 'sclass', 'draggable', 'droppable', 'focus', 'renderdefer', 'vflex', 'hflex', 'width', 'style', 'action', 'id', 'mold', 'widgetClass', 'stubonly', 'definition', 'visible'],
         timeline: ['apply', 'orient', 'height', 'width', 'context', 'ctrlKeys', 'popup', 'tooltip', 'class', 'left', 'top', 'zIndex', 'zindex', 'tooltiptext', 'zclass', 'sclass', 'draggable', 'droppable', 'focus', 'renderdefer', 'vflex', 'hflex', 'style', 'action', 'widgetClass', 'id', 'stubonly', 'mold', 'definition', 'visible'],
