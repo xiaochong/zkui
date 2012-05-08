@@ -15,7 +15,7 @@ h4. Second,specify dependencies
 {code:groovy}
     dependencies {
         // there are three theme 'breeze', 'sapphire', 'silvertail'
-        def zkThemeVersion="5.0.9"
+        def zkThemeVersion="6.0.1"
         def zkTheme="breeze"
         runtime "org.zkoss.theme:${zkTheme}:${zkThemeVersion}"
     }
@@ -72,12 +72,6 @@ Themes.setTheme(Executions.getCurrent(), "silvertail")
 Executions.sendRedirect(null)
 {code}
 
-h4. Classic blue
-{code:groovy}
-Themes.setTheme(Executions.getCurrent(), "classicblue")
-Executions.sendRedirect(null)
-{code}
-
 h3. Dynamically switch themes using library property
 
 h4. Breeze
@@ -95,12 +89,6 @@ Executions.sendRedirect(null)
 h4. Silvertail
 {code:groovy}
 Library.setProperty("org.zkoss.theme.preferred", "silvertail")
-Executions.sendRedirect(null)
-{code}
-
-h4. Classic blue
-{code:groovy}
-Library.setProperty("org.zkoss.theme.preferred", "classicblue")
 Executions.sendRedirect(null)
 {code}
 

@@ -28,5 +28,6 @@ grails.doc.authors = "groovyquan"
 grails.doc.license = "GNU Free Documentation License"
 grails.doc.copyright = "This document is licensed under GNU Free Documentation License,ZK UI Plugin is released under LGPL"
 grails.doc.footer = "Grails ZK UI Plugin Project"
-grails.doc.logo = '<a href="http://grails.org" target="_blank"><img alt="ZK UI Logo" title="ZK UI Plugin for Grails Framework" src="../img/zkui_logo.png" border="0"/></a>'
+grails.doc.logo = '<a href="http://www.grails.org/plugin/zkui" target="_blank"><img alt="ZK UI Logo" title="ZK UI Plugin for Grails Framework" src="../img/zkui_logo.png" border="0"/></a>'
 grails.doc.sponsorLogo = '<a href="http://springsource.com" target="_blank"></a>'
+grails.doc.images = new File("src/docs/resources/img")

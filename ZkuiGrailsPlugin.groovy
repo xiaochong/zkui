@@ -51,7 +51,7 @@ class ZkuiGrailsPlugin {
     def author = "groovyquan"
     def authorEmail = "groovyquan[at]gmail[dot]com"
     def title = "Grails ZK UI Plugin"
-    def description = '''\\
+    def description = '''\
 ZK UI plugin,the same as the ZKGrails plugin, seamlessly integrates ZK with Grails' infrastructures.
 The different is it more likely to use the Grails' infrastructures such as gsp, controllers rather than zk's zul.
 '''
