@@ -66,7 +66,7 @@ class ComposerMockUtils {
                 }
                 return s
             }.inject(new TypeConvertingMap()) {s, e ->
-                if (e instanceof Collection) {
+                if (e.value instanceof Collection) {
                     s.put(e.key, e.value as String[])
                 } else {
                     s.put(e.key, e.value)
