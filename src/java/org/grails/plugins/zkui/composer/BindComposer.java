@@ -19,6 +19,7 @@ import org.zkoss.bind.AnnotateBinder;
 import org.zkoss.bind.Binder;
 import org.zkoss.bind.Converter;
 import org.zkoss.bind.Validator;
+import org.zkoss.bind.impl.AnnotationUtil;
 import org.zkoss.bind.impl.BindEvaluatorXUtil;
 import org.zkoss.bind.impl.ValidationMessagesImpl;
 import org.zkoss.bind.sys.BindEvaluatorX;
@@ -38,8 +39,11 @@ import org.zkoss.zk.ui.util.Composer;
 import org.zkoss.zk.ui.util.ComposerExt;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Map.Entry;
 
 /**
  * Base composer to apply ZK Bind.
@@ -48,6 +52,7 @@ import java.util.Map;
  * @since 6.0.0
  */
 public class BindComposer<T extends Component> implements Composer<T>, ComposerExt<T>, Serializable, ApplicationContextAware {
+
     private static final long serialVersionUID = 1463169907348730644L;
 
     private static final Log _log = Log.lookup(BindComposer.class);
@@ -64,6 +69,8 @@ public class BindComposer<T extends Component> implements Composer<T>, ComposerE
 
     private static final String ID_ANNO = "id";
     private static final String INIT_ANNO = "init";
+
+    private static final String VALUE_ANNO_ATTR = "value";
 
     private static final String COMPOSER_NAME_ATTR = "composerName";
     private static final String VIEW_MODEL_ATTR = "viewModel";
@@ -127,17 +134,46 @@ public class BindComposer<T extends Component> implements Composer<T>, ComposerE
         _binder = initBinder(evalx, comp);
         ValidationMessages _vmsgs = initValidationMessages(evalx, comp, _binder);
 
-        //wire before call init
+        // for issue #56
         Selectors.wireComponents(comp, _viewModel, true);
         Selectors.wireEventListeners(comp, _viewModel);
+        //wire before call init
         Selectors.wireVariables(comp, _viewModel, Selectors.newVariableResolvers(_viewModel.getClass(), null));
+
         if (_vmsgs != null) {
             ((BinderCtrl) _binder).setValidationMessages(_vmsgs);
         }
+
+        final Map<String, Object> initArgs = getViewModelInitArgs(evalx, comp);
         //init
-        _binder.init(comp, _viewModel);
+        _binder.init(comp, _viewModel, initArgs);
         //load data
         _binder.loadComponent(comp, true); //load all bindings
+    }
+
+    private Map<String, Object> getViewModelInitArgs(BindEvaluatorX evalx, Component comp) {
+        final ComponentCtrl compCtrl = (ComponentCtrl) comp;
+        final Collection<Annotation> anncol = compCtrl.getAnnotations(VIEW_MODEL_ATTR, INIT_ANNO);
+        if (anncol.size() == 0) return null;
+        final Annotation ann = anncol.iterator().next();
+
+        final Map<String, String[]> attrs = ann.getAttributes(); //(tag, tagExpr)
+        Map<String, String[]> args = null;
+
+        for (final Iterator<Entry<String, String[]>> it = attrs.entrySet().iterator(); it.hasNext(); ) {
+            final Entry<String, String[]> entry = it.next();
+            final String tag = entry.getKey();
+            final String[] tagExpr = entry.getValue();
+            if ("value".equals(tag)) {
+                //ignore
+            } else { //other unknown tag, keep as arguments
+                if (args == null) {
+                    args = new HashMap<String, String[]>();
+                }
+                args.put(tag, tagExpr);
+            }
+        }
+        return args == null ? null : BindEvaluatorXUtil.parseArgs(_binder.getEvaluatorX(), args);
     }
 
     private Object initViewModel(BindEvaluatorX evalx, Component comp) {
@@ -155,8 +191,10 @@ public class BindComposer<T extends Component> implements Composer<T>, ComposerE
             throw new IllegalSyntaxException("you have to use @init to assign the view model for " + comp);
         }
 
-        vmname = BindEvaluatorXUtil.eval(evalx, comp, idanno.getAttribute("value"), String.class);
-        vm = BindEvaluatorXUtil.eval(evalx, comp, initanno.getAttribute("value"), Object.class);
+        vmname = BindEvaluatorXUtil.eval(evalx, comp, AnnotationUtil.testString(idanno.getAttributeValues(VALUE_ANNO_ATTR),
+                comp, VALUE_ANNO_ATTR, ID_ANNO), String.class);
+        vm = BindEvaluatorXUtil.eval(evalx, comp, AnnotationUtil.testString(initanno.getAttributeValues(VALUE_ANNO_ATTR),
+                comp, VALUE_ANNO_ATTR, INIT_ANNO), Object.class);
 
         if (Strings.isEmpty(vmname)) {
             throw new UiException("name of view model is empty");
@@ -164,6 +202,7 @@ public class BindComposer<T extends Component> implements Composer<T>, ComposerE
 
         try {
             if (vm instanceof String) {
+                //-------  First search vm from applicationContext
                 if (applicationContext.containsBean((String) vm)) {
                     vm = applicationContext.getBean((String) vm);
                 } else {
@@ -195,7 +234,8 @@ public class BindComposer<T extends Component> implements Composer<T>, ComposerE
         String bname = null;
 
         if (idanno != null) {
-            bname = BindEvaluatorXUtil.eval(evalx, comp, idanno.getAttribute("value"), String.class);
+            bname = BindEvaluatorXUtil.eval(evalx, comp, AnnotationUtil.testString(idanno.getAttributeValues(VALUE_ANNO_ATTR),
+                    comp, VALUE_ANNO_ATTR, ID_ANNO), String.class);
         } else {
             bname = "binder";
         }
@@ -204,11 +244,13 @@ public class BindComposer<T extends Component> implements Composer<T>, ComposerE
         }
 
         if (initanno != null) {
-            binder = initanno.getAttribute("value");
+            binder = AnnotationUtil.testString(initanno.getAttributeValues(VALUE_ANNO_ATTR),
+                    comp, VALUE_ANNO_ATTR, INIT_ANNO);
+            String name = AnnotationUtil.testString(initanno.getAttributeValues(QUEUE_NAME_ANNO_ATTR),
+                    comp, QUEUE_NAME_ANNO_ATTR, INIT_ANNO);
+            String scope = AnnotationUtil.testString(initanno.getAttributeValues(QUEUE_SCOPE_ANNO_ATTR),
+                    comp, QUEUE_SCOPE_ANNO_ATTR, INIT_ANNO);
             if (binder != null) {
-                //no binder, create default binder with custom queue name and scope
-                Object name = initanno.getAttribute(QUEUE_NAME_ANNO_ATTR);
-                Object scope = initanno.getAttribute(QUEUE_SCOPE_ANNO_ATTR);
                 if (name != null) {
                     _log.warning(QUEUE_NAME_ANNO_ATTR + " is not available if you use custom binder");
                 }
@@ -233,21 +275,19 @@ public class BindComposer<T extends Component> implements Composer<T>, ComposerE
 
             } else {
                 //no binder, create default binder with custom queue name and scope
-                Object name = initanno.getAttribute(QUEUE_NAME_ANNO_ATTR);
-                Object scope = initanno.getAttribute(QUEUE_SCOPE_ANNO_ATTR);
                 if (name != null) {
-                    name = BindEvaluatorXUtil.eval(evalx, comp, initanno.getAttribute(QUEUE_NAME_ANNO_ATTR), String.class);
+                    name = BindEvaluatorXUtil.eval(evalx, comp, name, String.class);
                     if (name == null) {
-                        _log.warning("evaluated queue name is null, use default name. expression is " + initanno.getAttribute(QUEUE_NAME_ANNO_ATTR));
+                        _log.warning("evaluated queue name is null, use default name. expression is " + name);
                     }
                 }
                 if (scope != null) {
-                    scope = BindEvaluatorXUtil.eval(evalx, comp, initanno.getAttribute(QUEUE_SCOPE_ANNO_ATTR), String.class);
+                    scope = BindEvaluatorXUtil.eval(evalx, comp, scope, String.class);
                     if (scope == null) {
-                        _log.warning("evaluated queue scope is null, use default scope. expression is " + initanno.getAttribute(QUEUE_SCOPE_ANNO_ATTR));
+                        _log.warning("evaluated queue scope is null, use default scope. expression is " + scope);
                     }
                 }
-                binder = new AnnotateBinder((String) name, (String) scope);
+                binder = new AnnotateBinder(name, scope);
             }
         } else {
             binder = new AnnotateBinder();
@@ -268,7 +308,8 @@ public class BindComposer<T extends Component> implements Composer<T>, ComposerE
         String vname = null;
 
         if (idanno != null) {
-            vname = BindEvaluatorXUtil.eval(evalx, comp, idanno.getAttribute("value"), String.class);
+            vname = BindEvaluatorXUtil.eval(evalx, comp, AnnotationUtil.testString(idanno.getAttributeValues(VALUE_ANNO_ATTR),
+                    comp, VALUE_ANNO_ATTR, ID_ANNO), String.class);
         } else {
             return null;//validation messages is default null
         }
@@ -277,7 +318,8 @@ public class BindComposer<T extends Component> implements Composer<T>, ComposerE
         }
 
         if (initanno != null) {
-            vmessages = BindEvaluatorXUtil.eval(evalx, comp, initanno.getAttribute("value"), Object.class);
+            vmessages = BindEvaluatorXUtil.eval(evalx, comp, AnnotationUtil.testString(initanno.getAttributeValues(VALUE_ANNO_ATTR),
+                    comp, VALUE_ANNO_ATTR, INIT_ANNO), Object.class);
             try {
                 if (vmessages instanceof String) {
                     vmessages = comp.getPage().resolveClass((String) vmessages);
