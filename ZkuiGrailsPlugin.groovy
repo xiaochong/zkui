@@ -19,7 +19,7 @@ import org.zkoss.zul.impl.InputElement
 
 class ZkuiGrailsPlugin {
     // the plugin version
-    def version = "0.5"
+    def version = "0.5.1"
     // the version or versions of Grails the plugin is designed for
     def grailsVersion = "1.2 > *"
     // the other plugins this plugin depends on
