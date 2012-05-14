@@ -235,6 +235,21 @@ The different is it more likely to use the Grails' infrastructures such as gsp, 
             }
         }
 
+
+      /**
+      Allow the user of renderErrors but for non-domain classes.
+      **/
+      org.zkoss.zk.ui.Component.metaClass.renderErrorsAsMap = {Map args->
+         for(_error in args.bean.errors){
+            def name = _error.field
+
+            def selectedComponentList = delegate.select("[name='${name}']")
+            if(selectedComponentList.size() > 0 && selectedComponentList[0] instanceof InputElement){
+               selectedComponentList[0].setErrorMessage(_error.error)
+            }
+         }
+
+      }
         org.zkoss.zk.ui.Session.metaClass.getAt = { String name ->
             delegate.getAttribute(name)
         }
