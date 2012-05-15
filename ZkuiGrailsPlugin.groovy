@@ -237,7 +237,7 @@ The different is it more likely to use the Grails' infrastructures such as gsp, 
 
 
       /**
-      Allow the user of renderErrors but for non-domain classes.
+      Allow the use of renderErrors but for non-domain classes.
       **/
       org.zkoss.zk.ui.Component.metaClass.renderErrorsAsMap = {Map args->
          for(_error in args.bean.errors){
