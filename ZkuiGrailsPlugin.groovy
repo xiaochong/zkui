@@ -10,6 +10,7 @@ import org.grails.plugins.zkui.artefacts.composer.ComposerArtefactHandler
 import org.grails.plugins.zkui.artefacts.vm.ViewModelArtefactHandler
 import org.grails.plugins.zkui.metaclass.RedirectDynamicMethod
 import org.grails.plugins.zkui.util.UriUtil
+import org.grails.plugins.zkui.util.ComponentErrorRendererUtil
 import org.zkoss.zk.ui.Component
 import org.zkoss.zk.ui.Executions
 import org.zkoss.zk.ui.Page
@@ -235,21 +236,10 @@ The different is it more likely to use the Grails' infrastructures such as gsp, 
             }
         }
 
+      ComponentErrorRendererUtil errorRendererUtil = new ComponentErrorRendererUtil()
 
-      /**
-      Allow the use of renderErrors but for non-domain classes.
-      **/
-      org.zkoss.zk.ui.Component.metaClass.renderErrorsAsMap = {Map args->
-         for(_error in args.bean.errors){
-            def name = _error.field
+      errorRendererUtil.addRenderMapAsErrors()
 
-            def selectedComponentList = delegate.select("[name='${name}']")
-            if(selectedComponentList.size() > 0 && selectedComponentList[0] instanceof InputElement){
-               selectedComponentList[0].setErrorMessage(_error.error)
-            }
-         }
-
-      }
         org.zkoss.zk.ui.Session.metaClass.getAt = { String name ->
             delegate.getAttribute(name)
         }
