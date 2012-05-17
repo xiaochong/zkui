@@ -37,7 +37,7 @@ grails.project.dependency.resolution = {
         runtime "org.zkoss.zk:zkbind:${zkVersion}"
     }
     plugins {
-        build ":release:2.0.0", {
+        build ":release:2.0.2", {
             export = false
         }
     }
