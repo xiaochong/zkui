@@ -10,6 +10,7 @@ import org.grails.plugins.zkui.artefacts.composer.ComposerArtefactHandler
 import org.grails.plugins.zkui.artefacts.vm.ViewModelArtefactHandler
 import org.grails.plugins.zkui.metaclass.RedirectDynamicMethod
 import org.grails.plugins.zkui.util.UriUtil
+import org.grails.plugins.zkui.util.ComponentErrorRendererUtil
 import org.zkoss.zk.ui.Component
 import org.zkoss.zk.ui.Executions
 import org.zkoss.zk.ui.Page
@@ -234,6 +235,10 @@ The different is it more likely to use the Grails' infrastructures such as gsp, 
                 }
             }
         }
+
+      ComponentErrorRendererUtil errorRendererUtil = new ComponentErrorRendererUtil()
+
+      errorRendererUtil.addRenderMapAsErrors()
 
         org.zkoss.zk.ui.Session.metaClass.getAt = { String name ->
             delegate.getAttribute(name)
