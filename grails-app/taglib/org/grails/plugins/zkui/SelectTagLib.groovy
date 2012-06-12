@@ -33,7 +33,7 @@ class SelectTagLib {
         }
         def disabled = attrs.remove('disabled')
         if (disabled && Boolean.valueOf(disabled)) {
-            attrs.disabled = 'disabled'
+            attrs.disabled = true
         }
         if (from) {
             List<ItemObject> modelList = []
@@ -69,28 +69,28 @@ class SelectTagLib {
                 StringBuilder labelBuilder = new StringBuilder()
                 if (optionValue) {
                     if (optionValue instanceof Closure) {
-                        labelBuilder << optionValue(el).toString().encodeAsHTML()
+                        labelBuilder << optionValue(el).toString()
                     } else {
-                        labelBuilder << el[optionValue].toString().encodeAsHTML()
+                        labelBuilder << el[optionValue].toString()
                     }
                 } else if (el instanceof MessageSourceResolvable) {
                     labelBuilder << messageSource.getMessage(el, locale)
                 } else if (valueMessagePrefix) {
                     def message = messageSource.getMessage("${valueMessagePrefix}.${keyValue}", null, null, locale)
                     if (message != null) {
-                        labelBuilder << message.encodeAsHTML()
+                        labelBuilder << message
                     } else if (keyValue && keys) {
                         def s = el.toString()
-                        if (s) labelBuilder << s.encodeAsHTML()
+                        if (s) labelBuilder << s
                     } else if (keyValue) {
-                        labelBuilder << keyValue.encodeAsHTML()
+                        labelBuilder << keyValue
                     } else {
                         def s = el.toString()
-                        if (s) labelBuilder << s.encodeAsHTML()
+                        if (s) labelBuilder << s
                     }
                 } else {
                     def s = el.toString()
-                    if (s) labelBuilder << s.encodeAsHTML()
+                    if (s) labelBuilder << s
                 }
                 modelList << new ItemObject(labelBuilder.toString(), keyValue, selected)
             }
