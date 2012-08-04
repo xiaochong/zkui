@@ -1,8 +1,5 @@
 package org.grails.plugins.zkui
 
-import javax.servlet.ServletContext
-import javax.servlet.http.HttpServletRequest
-import javax.servlet.http.HttpServletResponse
 import org.grails.plugins.zkui.util.ComponentUtil
 import org.grails.plugins.zkui.util.InlineUtils
 import org.springframework.context.ApplicationContext
@@ -16,6 +13,11 @@ import org.zkoss.zk.ui.impl.RequestInfoImpl
 import org.zkoss.zk.ui.metainfo.EventHandler
 import org.zkoss.zk.ui.metainfo.PageDefinitions
 import org.zkoss.zk.ui.metainfo.ZScript
+
+import javax.servlet.ServletContext
+import javax.servlet.http.HttpServletRequest
+import javax.servlet.http.HttpServletResponse
+
 import org.zkoss.zk.ui.*
 import org.zkoss.zk.ui.sys.*
 
@@ -27,7 +29,6 @@ abstract class AbstractTagLib implements ApplicationContextAware {
         Component component = (Component) cls.newInstance()
         ComposerHandler composeHandle = applicationContext.getBean('composerHandler')
         composeHandle.handle(attrs.remove("apply"))
-        composeHandle.doBeforeComposeChildren(component)
         if (!request.getAttribute('parents')) {
             def parents = new LinkedList<Component>()
             parents.push(component)
@@ -42,6 +43,7 @@ abstract class AbstractTagLib implements ApplicationContextAware {
         request['parents'].last.appendChild(component)
         request['parents'].push(component)
         setAttrs(attrs, component, servletContext)
+        composeHandle.doBeforeComposeChildren(component)
         bodyCall(body, component, out, request)
         composeHandle.doAfterCompose(component)
         request['parents'].pop()
@@ -161,6 +163,7 @@ abstract class AbstractTagLib implements ApplicationContextAware {
         void service(Page page) {
             rootComp.setPage(page)
             setAttrs(attrs, rootComp, servletContext)
+            composeHandle.doBeforeComposeChildren(rootComp)
             bodyCall(body, rootComp, out, request)
             composeHandle.doAfterCompose(rootComp)
             ComponentUtil.sendOnCreateEvent(rootComp)

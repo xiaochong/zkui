@@ -1,6 +1,5 @@
 package org.grails.plugins.zkui.util
 
-import java.util.Map.Entry
 import org.codehaus.groovy.grails.web.util.StreamCharBuffer
 import org.zkoss.lang.reflect.Fields
 import org.zkoss.zk.ui.Component
@@ -12,6 +11,8 @@ import org.zkoss.zk.ui.metainfo.ComponentDefinition
 import org.zkoss.zk.ui.metainfo.LanguageDefinition
 import org.zkoss.zk.ui.metainfo.Property
 import org.zkoss.zk.ui.metainfo.impl.AnnotationHelper
+
+import java.util.Map.Entry
 
 class ComponentUtil {
     static Class getComponentClass(String tagName, String languageName) {
@@ -33,10 +34,10 @@ class ComponentUtil {
 
     static def evaluateDynaAttributes(Component target, Map attrs) {
         for (Iterator itor = attrs.entrySet().iterator(); itor.hasNext();) {
-            Map.Entry entry = (Entry) itor.next();
-            String attnm = (String) entry.getKey();
-            Object value = entry.getValue();
-            evaluateDynaAttribute(target, attnm, value);
+            Map.Entry entry = (Entry) itor.next()
+            String attnm = (String) entry.getKey()
+            Object value = entry.getValue()
+            evaluateDynaAttribute(target, attnm, value)
         }
     }
 
@@ -45,20 +46,20 @@ class ComponentUtil {
         if (value instanceof String || value instanceof StreamCharBuffer) {
             String attval = value.toString();
             // test if this attribute is an annotation...
-            if (isAnnotation(attval)) { //annotation
+            if (AnnotationHelper.isAnnotation(attval)) { //annotation
                 AnnotationHelper helper = new AnnotationHelper()
                 helper.addByCompoundValue(attval, null)
                 helper.applyAnnotations(target, "self".equals(attnm) ? null : attnm, true)
             }
             else if (target.getDefinition().isMacro())
-                ((DynamicPropertied) target).setDynamicProperty(attnm, value);
-            else Property.assign(target, attnm, value.toString());
+                ((DynamicPropertied) target).setDynamicProperty(attnm, value)
+            else Property.assign(target, attnm, value.toString())
         } else if (target.getDefinition().isMacro())
-            ((DynamicPropertied) target).setDynamicProperty(attnm, value);
-        else Fields.setByCompound(target, attnm, value, true);
+            ((DynamicPropertied) target).setDynamicProperty(attnm, value)
+        else Fields.setByCompound(target, attnm, value, true)
     }
 
     static boolean isAnnotation(String attval) {
-        return attval.startsWith('@');
+        return attval.startsWith('@')
     }
 }

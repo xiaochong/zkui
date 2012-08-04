@@ -19,18 +19,23 @@ import org.zkoss.bind.AnnotateBinder;
 import org.zkoss.bind.Binder;
 import org.zkoss.bind.Converter;
 import org.zkoss.bind.Validator;
+import org.zkoss.bind.annotation.AfterCompose;
+import org.zkoss.bind.impl.AbstractAnnotatedMethodInvoker;
 import org.zkoss.bind.impl.AnnotationUtil;
 import org.zkoss.bind.impl.BindEvaluatorXUtil;
 import org.zkoss.bind.impl.ValidationMessagesImpl;
 import org.zkoss.bind.sys.BindEvaluatorX;
-import org.zkoss.bind.sys.BinderCtrl;
 import org.zkoss.bind.sys.ValidationMessages;
 import org.zkoss.lang.Strings;
+import org.zkoss.util.CacheMap;
 import org.zkoss.util.IllegalSyntaxException;
 import org.zkoss.util.logging.Log;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Page;
 import org.zkoss.zk.ui.UiException;
+import org.zkoss.zk.ui.event.Event;
+import org.zkoss.zk.ui.event.EventListener;
+import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zk.ui.metainfo.Annotation;
 import org.zkoss.zk.ui.metainfo.ComponentInfo;
 import org.zkoss.zk.ui.select.Selectors;
@@ -39,10 +44,8 @@ import org.zkoss.zk.ui.util.Composer;
 import org.zkoss.zk.ui.util.ComposerExt;
 
 import java.io.Serializable;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.lang.reflect.Method;
+import java.util.*;
 import java.util.Map.Entry;
 
 /**
@@ -51,6 +54,7 @@ import java.util.Map.Entry;
  * @author henrichen
  * @since 6.0.0
  */
+@SuppressWarnings("rawtypes")
 public class BindComposer<T extends Component> implements Composer<T>, ComposerExt<T>, Serializable, ApplicationContextAware {
 
     private static final long serialVersionUID = 1463169907348730644L;
@@ -61,12 +65,13 @@ public class BindComposer<T extends Component> implements Composer<T>, ComposerE
     private static final String BINDER_ID = "$BINDER_ID$";
 
     private Object _viewModel;
-    private Binder _binder;
+    private AnnotateBinder _binder;
+
     private final Map<String, Converter> _converters;
     private final Map<String, Validator> _validators;
+    private final BindEvaluatorX evalx;
 
     private ApplicationContext applicationContext;
-
     private static final String ID_ANNO = "id";
     private static final String INIT_ANNO = "init";
 
@@ -80,11 +85,14 @@ public class BindComposer<T extends Component> implements Composer<T>, ComposerE
     private static final String QUEUE_NAME_ANNO_ATTR = "queueName";
     private static final String QUEUE_SCOPE_ANNO_ATTR = "queueScope";
 
+    private final static Map<Class<?>, List<Method>> _afterComposeMethodCache =
+            new CacheMap<Class<?>, List<Method>>(600, CacheMap.DEFAULT_LIFETIME);
 
     public BindComposer() {
         setViewModel(this);
         _converters = new HashMap<String, Converter>(8);
         _validators = new HashMap<String, Validator>(8);
+        evalx = BindEvaluatorXUtil.createEvaluator(null);
     }
 
     public Binder getBinder() {
@@ -121,34 +129,53 @@ public class BindComposer<T extends Component> implements Composer<T>, ComposerE
         _validators.put(name, validator);
     }
 
-    //--Composer--//
-    public void doAfterCompose(T comp) throws Exception {
-        BindEvaluatorX evalx = BindEvaluatorXUtil.createEvaluator(null);
+    //--ComposerExt//
+    public ComponentInfo doBeforeCompose(Page page, Component parent,
+                                         ComponentInfo compInfo) throws Exception {
+        return compInfo;
+    }
 
-        //name of this composer
-        String cname = (String) comp.getAttribute(COMPOSER_NAME_ATTR);
-        comp.setAttribute(cname != null ? cname : comp.getId() + "$composer", this);
 
+    public void doBeforeComposeChildren(Component comp) throws Exception {
         //init viewmodel first
         _viewModel = initViewModel(evalx, comp);
         _binder = initBinder(evalx, comp);
         ValidationMessages _vmsgs = initValidationMessages(evalx, comp, _binder);
 
-        // for issue #56
+        //---[zkui]--- for issue #56
         Selectors.wireComponents(comp, _viewModel, true);
         Selectors.wireEventListeners(comp, _viewModel);
+
         //wire before call init
         Selectors.wireVariables(comp, _viewModel, Selectors.newVariableResolvers(_viewModel.getClass(), null));
-
         if (_vmsgs != null) {
-            ((BinderCtrl) _binder).setValidationMessages(_vmsgs);
+            _binder.setValidationMessages(_vmsgs);
         }
 
-        final Map<String, Object> initArgs = getViewModelInitArgs(evalx, comp);
-        //init
-        _binder.init(comp, _viewModel, initArgs);
-        //load data
-        _binder.loadComponent(comp, true); //load all bindings
+        BinderKeeper keeper = BinderKeeper.getInstance(comp);
+        keeper.book(_binder, comp);
+
+        _binder.init(comp, _viewModel, getViewModelInitArgs(evalx, comp));
+    }
+
+    //--Composer--//
+    public void doAfterCompose(T comp) throws Exception {
+        String cname = (String) comp.getAttribute(COMPOSER_NAME_ATTR);
+        comp.setAttribute(cname != null ? cname : comp.getId() + "$composer", this);
+        _binder.initAnnotatedBindings();
+
+        // trigger ViewModel's @AfterCompose method.
+        new AbstractAnnotatedMethodInvoker<AfterCompose>(AfterCompose.class, _afterComposeMethodCache) {
+            protected boolean shouldLookupSuperclass(AfterCompose annotation) {
+                return annotation.superclass();
+            }
+        }.invokeMethod(_binder, getViewModelInitArgs(evalx, comp));
+
+        // call loadComponent
+        BinderKeeper keeper = BinderKeeper.getInstance(comp);
+        if (keeper.isRootBinder(_binder)) {
+            keeper.loadComponentForAllBinders();
+        }
     }
 
     private Map<String, Object> getViewModelInitArgs(BindEvaluatorX evalx, Component comp) {
@@ -202,7 +229,7 @@ public class BindComposer<T extends Component> implements Composer<T>, ComposerE
 
         try {
             if (vm instanceof String) {
-                //-------  First search vm from applicationContext
+                //---[zkui]---  First search vm from applicationContext
                 if (applicationContext.containsBean((String) vm)) {
                     vm = applicationContext.getBean((String) vm);
                 } else {
@@ -226,7 +253,7 @@ public class BindComposer<T extends Component> implements Composer<T>, ComposerE
         return vm;
     }
 
-    private Binder initBinder(BindEvaluatorX evalx, Component comp) {
+    private AnnotateBinder initBinder(BindEvaluatorX evalx, Component comp) {
         final ComponentCtrl compCtrl = (ComponentCtrl) comp;
         final Annotation idanno = compCtrl.getAnnotation(BINDER_ATTR, ID_ANNO);
         final Annotation initanno = compCtrl.getAnnotation(BINDER_ATTR, INIT_ANNO);
@@ -234,8 +261,11 @@ public class BindComposer<T extends Component> implements Composer<T>, ComposerE
         String bname = null;
 
         if (idanno != null) {
-            bname = BindEvaluatorXUtil.eval(evalx, comp, AnnotationUtil.testString(idanno.getAttributeValues(VALUE_ANNO_ATTR),
-                    comp, VALUE_ANNO_ATTR, ID_ANNO), String.class);
+            bname = BindEvaluatorXUtil.eval(evalx,
+                    comp,
+                    AnnotationUtil.testString(
+                            idanno.getAttributeValues(VALUE_ANNO_ATTR), comp, VALUE_ANNO_ATTR, ID_ANNO),
+                    String.class);
         } else {
             bname = "binder";
         }
@@ -269,7 +299,7 @@ public class BindComposer<T extends Component> implements Composer<T>, ComposerE
                 } catch (Exception e) {
                     throw new UiException(e.getMessage(), e);
                 }
-                if (!(binder instanceof Binder)) {
+                if (!(binder instanceof AnnotateBinder)) {
                     throw new UiException("evaluated binder is not a binder is " + binder);
                 }
 
@@ -297,7 +327,7 @@ public class BindComposer<T extends Component> implements Composer<T>, ComposerE
         comp.setAttribute(bname, binder);
         comp.setAttribute(BINDER_ID, bname);
 
-        return (Binder) binder;
+        return (AnnotateBinder) binder;
     }
 
     private ValidationMessages initValidationMessages(BindEvaluatorX evalx, Component comp, Binder binder) {
@@ -344,15 +374,6 @@ public class BindComposer<T extends Component> implements Composer<T>, ComposerE
     }
 
 
-    //--ComposerExt//
-    public ComponentInfo doBeforeCompose(Page page, Component parent,
-                                         ComponentInfo compInfo) throws Exception {
-        return compInfo;
-    }
-
-    public void doBeforeComposeChildren(Component comp) throws Exception {
-    }
-
     public boolean doCatch(Throwable ex) throws Exception {
         return false;
     }
@@ -369,4 +390,96 @@ public class BindComposer<T extends Component> implements Composer<T>, ComposerE
     public void setApplicationContext(ApplicationContext context) throws BeansException {
         applicationContext = context;
     }
-}
+
+    /**
+     * <p>A parsing scope context for storing Binders, and handle there loadComponent
+     * invocation properly.</p>
+     * <p/>
+     * <p>if component trees with bindings are totally separated( none of
+     * each contains another), then for each separated tree, there's only one keeper.</p>
+     *
+     * @author Ian Y.T Tsai(zanyking)
+     */
+    private static class BinderKeeper {
+        private static final String KEY_BINDER_KEEPER = "$BinderKeeper$";
+
+        /**
+         * get a Binder Keeper or create it by demand.
+         *
+         * @param comp
+         * @return
+         */
+        static BinderKeeper getInstance(Component comp) {
+            BinderKeeper keeper =
+                    (BinderKeeper) comp.getAttribute(KEY_BINDER_KEEPER, true);
+            if (keeper == null) {
+                comp.setAttribute(KEY_BINDER_KEEPER,
+                        keeper = new BinderKeeper(comp));
+            }
+            return keeper;
+        }
+
+        private final LinkedList<Loader> _queue;
+        private Component _host;
+
+        public BinderKeeper(final Component comp) {
+            _host = comp;
+            _queue = new LinkedList<Loader>();
+            // ensure the keeper will always cleaned up
+            Events.postEvent("onRootBinderHostDone", comp, null);
+            comp.addEventListener("onRootBinderHostDone", new EventListener<Event>() {
+                public void onEvent(Event event) throws Exception {
+                    //suicide first...
+                    _host.removeEventListener("onRootBinderHostDone", this);
+                    BinderKeeper keeper =
+                            (BinderKeeper) _host.getAttribute(KEY_BINDER_KEEPER);
+                    if (keeper == null) {
+                        // suppose to be null...
+                    } else {
+                        // The App is in trouble.
+                        // some error might happened during page processing
+                        // which cause loadComponent() never invoked.
+                        _host.removeAttribute(KEY_BINDER_KEEPER);
+                    }
+                }
+            });
+        }
+
+        public void book(Binder binder, Component comp) {
+            _queue.add(new Loader(binder, comp));
+        }
+
+        public boolean isRootBinder(Binder binder) {
+            return _queue.getFirst().binder == binder;
+        }
+
+        public void loadComponentForAllBinders() {
+            _host.removeAttribute(KEY_BINDER_KEEPER);
+            for (Loader loader : _queue) {
+                loader.load();
+            }
+        }
+
+        /**
+         * for Binder to load Component.
+         *
+         * @author Ian Y.T Tsai(zanyking)
+         */
+        private static class Loader {
+            Binder binder;
+            Component comp;
+
+            public Loader(Binder _binder, Component comp) {
+                super();
+                this.binder = _binder;
+                this.comp = comp;
+            }
+
+            public void load() {
+                //load data
+                binder.loadComponent(comp, true);//load all bindings
+            }
+        }//end of class...
+    }//end of class...
+
+}//end of class...
