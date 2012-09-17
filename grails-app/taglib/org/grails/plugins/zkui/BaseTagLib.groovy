@@ -1,6 +1,6 @@
 package org.grails.plugins.zkui
 
-import java.util.concurrent.ConcurrentHashMap
+import org.grails.plugins.zkui.util.AttributesInfo
 import org.grails.plugins.zkui.util.Renders
 import org.zkoss.util.ArraysX
 import org.zkoss.xel.VariableResolver
@@ -11,6 +11,8 @@ import org.zkoss.zk.ui.Executions
 import org.zkoss.zk.ui.metainfo.PageDefinition
 import org.zkoss.zk.ui.util.Composer
 import org.zkoss.zk.ui.util.Template
+
+import java.util.concurrent.ConcurrentHashMap
 
 class BaseTagLib {
     static namespace = "z"
@@ -64,6 +66,12 @@ class BaseTagLib {
         out << b.call()
         request.removeAttribute('zk_page_id')
         request.removeAttribute('zk_page_style')
+    }
+
+    def custom_attributes = {attrs, b ->
+        Component component = request['parents']?.last
+        AttributesInfo attrInfo = new AttributesInfo(attrs, attrs.scope)
+        attrInfo.apply(component)
     }
 
     def template = {attrs, b ->
