@@ -29,7 +29,7 @@ grails.project.dependency.resolution = {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
 
         // runtime 'mysql:mysql-connector-java:5.1.13'
-        def zkVersion = "6.0.2"
+        def zkVersion = "6.5.0.FL.20120911"
         runtime "org.zkoss.zk:zk:${zkVersion}"
         runtime "org.zkoss.zk:zul:${zkVersion}"
         runtime "org.zkoss.zk:zkplus:${zkVersion}"
