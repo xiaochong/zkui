@@ -38,7 +38,7 @@ grails.project.dependency.resolution = {
         runtime "org.zkoss.common:zel:${zkVersion}"
     }
     plugins {
-        build ":release:2.0.4", {
+        build(":tomcat:$grailsVersion", ":release:2.0.4", ":rest-client-builder:1.0.2") {
             export = false
         }
     }
