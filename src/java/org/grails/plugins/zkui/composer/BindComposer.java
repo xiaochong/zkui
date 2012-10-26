@@ -71,7 +71,7 @@ public class BindComposer<T extends Component> implements Composer<T>, ComposerE
     private final Map<String, Validator> _validators;
     private final BindEvaluatorX evalx;
 
-    private ApplicationContext applicationContext;
+    transient private ApplicationContext applicationContext;
     private static final String ID_ANNO = "id";
     private static final String INIT_ANNO = "init";
 
