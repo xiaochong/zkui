@@ -15,7 +15,7 @@ class SelectTagLib {
         def messageSource = grailsAttributes.getApplicationContext().getBean("messageSource")
         def locale = RCU.getLocale(request)
         attrs.id = attrs.id ?: attrs.name
-        def from = attrs.remove('from')
+        def from = attrs.remove('from') ?: []
         def keys = attrs.remove('keys')
         def optionKey = attrs.remove('optionKey')
         def optionValue = attrs.remove('optionValue')
@@ -35,81 +35,79 @@ class SelectTagLib {
         if (disabled && Boolean.valueOf(disabled)) {
             attrs.disabled = true
         }
-        if (from) {
-            List<ItemObject> modelList = []
-            Integer selectedIndex
-            from.eachWithIndex {el, i ->
-                Boolean selected
-                def keyValue = null
-                if (keys) {
-                    keyValue = keys[i]
-                    selected = isSelected(keyValue, value, null)
-                    if (!selectedIndex && selected) {
-                        selectedIndex = i
-                    }
-                } else if (optionKey) {
-                    if (optionKey instanceof Closure) {
-                        keyValue = optionKey(el)
-                    } else if (el != null && optionKey == 'id' && grailsApplication.getArtefact(DomainClassArtefactHandler.TYPE, el.getClass().name)) {
-                        keyValue = el.ident()
-                    } else {
-                        keyValue = el[optionKey]
-                    }
-                    selected = isSelected(keyValue, value, el)
-                    if (!selectedIndex && selected) {
-                        selectedIndex = i
-                    }
-                } else {
-                    keyValue = el
-                    selected = isSelected(keyValue, value, null)
-                    if (!selectedIndex && selected) {
-                        selectedIndex = i
-                    }
+        List<ItemObject> modelList = []
+        Integer selectedIndex
+        from.eachWithIndex {el, i ->
+            Boolean selected
+            def keyValue = null
+            if (keys) {
+                keyValue = keys[i]
+                selected = isSelected(keyValue, value, null)
+                if (!selectedIndex && selected) {
+                    selectedIndex = i
                 }
-                StringBuilder labelBuilder = new StringBuilder()
-                if (optionValue) {
-                    if (optionValue instanceof Closure) {
-                        labelBuilder << optionValue(el).toString()
-                    } else {
-                        labelBuilder << el[optionValue].toString()
-                    }
-                } else if (el instanceof MessageSourceResolvable) {
-                    labelBuilder << messageSource.getMessage(el, locale)
-                } else if (valueMessagePrefix) {
-                    def message = messageSource.getMessage("${valueMessagePrefix}.${keyValue}", null, null, locale)
-                    if (message != null) {
-                        labelBuilder << message
-                    } else if (keyValue && keys) {
-                        def s = el.toString()
-                        if (s) labelBuilder << s
-                    } else if (keyValue) {
-                        labelBuilder << keyValue
-                    } else {
-                        def s = el.toString()
-                        if (s) labelBuilder << s
-                    }
+            } else if (optionKey) {
+                if (optionKey instanceof Closure) {
+                    keyValue = optionKey(el)
+                } else if (el != null && optionKey == 'id' && grailsApplication.getArtefact(DomainClassArtefactHandler.TYPE, el.getClass().name)) {
+                    keyValue = el.ident()
+                } else {
+                    keyValue = el[optionKey]
+                }
+                selected = isSelected(keyValue, value, el)
+                if (!selectedIndex && selected) {
+                    selectedIndex = i
+                }
+            } else {
+                keyValue = el
+                selected = isSelected(keyValue, value, null)
+                if (!selectedIndex && selected) {
+                    selectedIndex = i
+                }
+            }
+            StringBuilder labelBuilder = new StringBuilder()
+            if (optionValue) {
+                if (optionValue instanceof Closure) {
+                    labelBuilder << optionValue(el).toString()
+                } else {
+                    labelBuilder << el[optionValue].toString()
+                }
+            } else if (el instanceof MessageSourceResolvable) {
+                labelBuilder << messageSource.getMessage(el, locale)
+            } else if (valueMessagePrefix) {
+                def message = messageSource.getMessage("${valueMessagePrefix}.${keyValue}", null, null, locale)
+                if (message != null) {
+                    labelBuilder << message
+                } else if (keyValue && keys) {
+                    def s = el.toString()
+                    if (s) labelBuilder << s
+                } else if (keyValue) {
+                    labelBuilder << keyValue
                 } else {
                     def s = el.toString()
                     if (s) labelBuilder << s
                 }
-                modelList << new ItemObject(labelBuilder.toString(), keyValue, selected)
-            }
-            if (attrs.multiple && attrs.multiple != 'false') {
-                attrs.width = attrs.width ?: "200px"
-                z.listbox([model: new ListModelList(modelList), itemRenderer: new SelectListitemRenderer()] + attrs)
             } else {
-                if (selectedIndex != null) {
-                    attrs.onCreate = "self.selectedIndex = ${selectedIndex}".toString()
-                } else if (noSelection != null) {
-                    def noSelectionKey = noSelection.key
-                    def noSelectionValue = noSelection.value
-                    modelList.add(0, new ItemObject(noSelectionValue, noSelectionKey))
-                    attrs.onCreate = "self.selectedIndex = 0"
-                }
-                z.combobox([model: new ListModelList(modelList), itemRenderer: new SelectComboitemRenderer(), readonly: true] + attrs)
+                def s = el.toString()
+                if (s) labelBuilder << s
             }
-            return
+            modelList << new ItemObject(labelBuilder.toString(), keyValue, selected)
         }
+        if (attrs.multiple && attrs.multiple != 'false') {
+            attrs.width = attrs.width ?: "200px"
+            z.listbox([model: new ListModelList(modelList), itemRenderer: new SelectListitemRenderer()] + attrs)
+        } else {
+            if (selectedIndex != null) {
+                attrs.onCreate = "self.selectedIndex = ${selectedIndex}".toString()
+            } else if (noSelection != null) {
+                def noSelectionKey = noSelection.key
+                def noSelectionValue = noSelection.value
+                modelList.add(0, new ItemObject(noSelectionValue, noSelectionKey))
+                attrs.onCreate = "self.selectedIndex = 0"
+            }
+            z.combobox([model: new ListModelList(modelList), itemRenderer: new SelectComboitemRenderer(), readonly: true] + attrs)
+        }
+        return
     }
 
 
