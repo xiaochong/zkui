@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletResponse
 
 import org.zkoss.zk.ui.*
 import org.zkoss.zk.ui.sys.*
+import org.zkoss.zkplus.spring.DelegatingVariableResolver
 
 abstract class AbstractTagLib implements ApplicationContextAware {
     ApplicationContext applicationContext
@@ -113,6 +114,7 @@ abstract class AbstractTagLib implements ApplicationContextAware {
             if (zkPageStyle) {
                 page.setStyle(zkPageStyle)
             }
+            page.addVariableResolver(new DelegatingVariableResolver())
             final Execution exec = new ExecutionImpl(servletContext, request, response, desktop, page)
             final boolean cacheable = exec.getDesktop().getDevice().isCacheable()
             if (!cacheable) {
