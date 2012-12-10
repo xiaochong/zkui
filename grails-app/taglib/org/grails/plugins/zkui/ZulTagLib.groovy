@@ -487,6 +487,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr readonly
      * @attr placeholder
      * @attr inplace
+     * @attr instant
      * @attr maxlength
      * @attr cols
      * @attr tabindex
@@ -1541,6 +1542,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr readonly
      * @attr placeholder
      * @attr inplace
+     * @attr instant
      * @attr maxlength
      * @attr cols
      * @attr tabindex
@@ -1732,6 +1734,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr readonly
      * @attr placeholder
      * @attr inplace
+     * @attr instant
      * @attr maxlength
      * @attr cols
      * @attr tabindex
@@ -1799,6 +1802,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr readonly
      * @attr placeholder
      * @attr inplace
+     * @attr instant
      * @attr maxlength
      * @attr cols
      * @attr tabindex
@@ -1964,6 +1968,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr readonly
      * @attr placeholder
      * @attr inplace
+     * @attr instant
      * @attr maxlength
      * @attr cols
      * @attr tabindex
@@ -2032,6 +2037,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr readonly
      * @attr placeholder
      * @attr inplace
+     * @attr instant
      * @attr maxlength
      * @attr cols
      * @attr tabindex
@@ -3216,6 +3222,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr readonly
      * @attr placeholder
      * @attr inplace
+     * @attr instant
      * @attr maxlength
      * @attr cols
      * @attr tabindex
@@ -3282,6 +3289,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr readonly
      * @attr placeholder
      * @attr inplace
+     * @attr instant
      * @attr maxlength
      * @attr cols
      * @attr tabindex
@@ -5141,6 +5149,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr readonly
      * @attr placeholder
      * @attr inplace
+     * @attr instant
      * @attr maxlength
      * @attr cols
      * @attr tabindex
@@ -5624,6 +5633,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr readonly
      * @attr placeholder
      * @attr inplace
+     * @attr instant
      * @attr maxlength
      * @attr cols
      * @attr tabindex
@@ -5737,6 +5747,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr readonly
      * @attr placeholder
      * @attr inplace
+     * @attr instant
      * @attr maxlength
      * @attr cols
      * @attr tabindex
@@ -5852,6 +5863,7 @@ class ZulTagLib extends AbstractTagLib {
      * @attr disabled
      * @attr mode
      * @attr checked
+     * @attr upload
      * @attr image
      * @attr imageContent
      * @attr hoverImage
