@@ -42,6 +42,7 @@ import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.sys.ComponentCtrl;
 import org.zkoss.zk.ui.util.Composer;
 import org.zkoss.zk.ui.util.ComposerExt;
+import org.zkoss.zk.ui.util.ConventionWires;
 
 import java.io.Serializable;
 import java.lang.reflect.Method;
@@ -156,12 +157,13 @@ public class BindComposer<T extends Component> implements Composer<T>, ComposerE
         keeper.book(_binder, comp);
 
         _binder.init(comp, _viewModel, getViewModelInitArgs(evalx, comp));
+
+        //to apply composer-name
+        ConventionWires.wireController(comp, this);
     }
 
     //--Composer--//
     public void doAfterCompose(T comp) throws Exception {
-        String cname = (String) comp.getAttribute(COMPOSER_NAME_ATTR);
-        comp.setAttribute(cname != null ? cname : comp.getId() + "$composer", this);
         _binder.initAnnotatedBindings();
 
         // trigger ViewModel's @AfterCompose method.
