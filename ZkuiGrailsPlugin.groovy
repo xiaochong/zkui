@@ -1,5 +1,3 @@
-import org.springframework.web.context.request.RequestContextHolder as RCH
-
 import org.codehaus.groovy.grails.commons.DomainClassArtefactHandler
 import org.codehaus.groovy.grails.commons.GrailsClassUtils
 import org.codehaus.groovy.grails.web.metaclass.BindDynamicMethod
@@ -9,8 +7,9 @@ import org.codehaus.groovy.grails.web.util.TypeConvertingMap
 import org.grails.plugins.zkui.artefacts.composer.ComposerArtefactHandler
 import org.grails.plugins.zkui.artefacts.vm.ViewModelArtefactHandler
 import org.grails.plugins.zkui.metaclass.RedirectDynamicMethod
-import org.grails.plugins.zkui.util.UriUtil
 import org.grails.plugins.zkui.util.ComponentErrorRendererUtil
+import org.grails.plugins.zkui.util.UriUtil
+import org.springframework.web.context.request.RequestContextHolder as RCH
 import org.zkoss.zk.ui.Component
 import org.zkoss.zk.ui.Executions
 import org.zkoss.zk.ui.Page
@@ -20,7 +19,7 @@ import org.zkoss.zul.impl.InputElement
 
 class ZkuiGrailsPlugin {
     // the plugin version
-    def version = "0.5.5"
+    def version = "0.5.5.1"
     // the version or versions of Grails the plugin is designed for
     def grailsVersion = "1.2 > *"
     // the other plugins this plugin depends on
@@ -127,7 +126,7 @@ The different is it more likely to use the Grails' infrastructures such as gsp, 
         "zkComponentBuilder"(org.grails.plugins.zkui.ZkComponentBuilder) { bean ->
             bean.scope = "prototype"
         }
-        "org.zkoss.bind.BindComposer"(org.grails.plugins.zkui.composer.BindComposer) {bean ->
+        "org.zkoss.bind.BindComposer"(org.grails.plugins.zkui.composer.BindComposer) { bean ->
             bean.scope = "prototype"
         }
         application.composerClasses.each { composerClass ->
@@ -148,29 +147,29 @@ The different is it more likely to use the Grails' infrastructures such as gsp, 
         //Inject taglib namespace to Composer
         TagLibraryLookup gspTagLibraryLookup = ctx.getBean("gspTagLibraryLookup")
 
-        CharSequence.metaClass.fixToZkUri = {String contextPath ->
+        CharSequence.metaClass.fixToZkUri = { String contextPath ->
             return UriUtil.fixToZk(delegate?.toString(), contextPath)
         }
 
-        org.zkoss.zk.ui.Component.metaClass.appendChild = {Closure closure ->
+        org.zkoss.zk.ui.Component.metaClass.appendChild = { Closure closure ->
             def builder = ctx.getBean('zkComponentBuilder')
             closure.resolveStrategy = Closure.DELEGATE_FIRST
             builder.build(delegate, closure)
         }
-        org.zkoss.zk.ui.Component.metaClass.leftShift = {Object value ->
+        org.zkoss.zk.ui.Component.metaClass.leftShift = { Object value ->
             delegate.appendChild(value)
         }
-        org.zkoss.zk.ui.Component.metaClass.select = {String query ->
+        org.zkoss.zk.ui.Component.metaClass.select = { String query ->
             return Selectors.find((Component) delegate, query)
         }
-        org.zkoss.zk.ui.Page.metaClass.select = {String query ->
+        org.zkoss.zk.ui.Page.metaClass.select = { String query ->
             return Selectors.find((Page) delegate, query)
         }
-        org.zkoss.zk.ui.Component.metaClass.addEventListener = {String eventName, Closure listenerClosure ->
+        org.zkoss.zk.ui.Component.metaClass.addEventListener = { String eventName, Closure listenerClosure ->
             return delegate.addEventListener(eventName, listenerClosure as org.zkoss.zk.ui.event.EventListener)
         }
         org.zkoss.zk.ui.Component.metaClass.getParams = {
-            return delegate.select("*").inject([:]) {s, c ->
+            return delegate.select("*").inject([:]) { s, c ->
                 if (!c.metaClass.respondsTo(c, 'getName')) return s
                 if (c.name == null) return s
                 def e = s.get(c.name)
@@ -199,7 +198,7 @@ The different is it more likely to use the Grails' infrastructures such as gsp, 
                     s.put(c.name, [s.remove(c.name), value])
                 }
                 return s
-            }.inject(new TypeConvertingMap()) {s, e ->
+            }.inject(new TypeConvertingMap()) { s, e ->
                 if (e.value instanceof Collection) {
                     s.put(e.key, e.value as String[])
                 } else {
@@ -210,7 +209,7 @@ The different is it more likely to use the Grails' infrastructures such as gsp, 
         }
 
         def gDispatcher = gspTagLibraryLookup.lookupNamespaceDispatcher(GroovyPage.DEFAULT_NAMESPACE)
-        org.zkoss.zk.ui.Component.metaClass.renderErrors = {Map args ->
+        org.zkoss.zk.ui.Component.metaClass.renderErrors = { Map args ->
             if (!args.bean) {
                 throw new IllegalArgumentException("[bean] attribute must be specified!")
             }
@@ -236,9 +235,9 @@ The different is it more likely to use the Grails' infrastructures such as gsp, 
             }
         }
 
-      ComponentErrorRendererUtil errorRendererUtil = new ComponentErrorRendererUtil()
+        ComponentErrorRendererUtil errorRendererUtil = new ComponentErrorRendererUtil()
 
-      errorRendererUtil.addRenderMapAsErrors()
+        errorRendererUtil.addRenderMapAsErrors()
 
         org.zkoss.zk.ui.Session.metaClass.getAt = { String name ->
             delegate.getAttribute(name)
@@ -256,24 +255,24 @@ The different is it more likely to use the Grails' infrastructures such as gsp, 
             delegate.setAttribute(name, value)
         }
 
-        Messagebox.metaClass.static.show = {int messageCode, int titleCode, int buttons, java.lang.String icon, int focus, Closure listener ->
+        Messagebox.metaClass.static.show = { int messageCode, int titleCode, int buttons, java.lang.String icon, int focus, Closure listener ->
             Messagebox.show(messageCode, titleCode, buttons, icon, focus, listener as org.zkoss.zk.ui.event.EventListener)
         }
-        Messagebox.metaClass.static.show = {int messageCode, java.lang.Object[] args, int titleCode, int buttons, String icon, int focus, Closure listener ->
+        Messagebox.metaClass.static.show = { int messageCode, java.lang.Object[] args, int titleCode, int buttons, String icon, int focus, Closure listener ->
             Messagebox.show(messageCode, args, titleCode, buttons, icon, focus, listener as org.zkoss.zk.ui.event.EventListener)
         }
-        Messagebox.metaClass.static.show = {int messageCode, java.lang.Object arg, int titleCode, int buttons, java.lang.String icon, int focus, Closure listener ->
+        Messagebox.metaClass.static.show = { int messageCode, java.lang.Object arg, int titleCode, int buttons, java.lang.String icon, int focus, Closure listener ->
             Messagebox.show(messageCode, arg, titleCode, buttons, icon, focus, listener as org.zkoss.zk.ui.event.EventListener)
         }
-        Messagebox.metaClass.static.show = {String message, java.lang.String title, int buttons, String icon, Closure listener ->
+        Messagebox.metaClass.static.show = { String message, java.lang.String title, int buttons, String icon, Closure listener ->
             Messagebox.show(message, title, buttons, icon, listener as org.zkoss.zk.ui.event.EventListener)
         }
-        Messagebox.metaClass.static.show = {String message, String title, int buttons, String icon, int focus, Closure listener ->
+        Messagebox.metaClass.static.show = { String message, String title, int buttons, String icon, int focus, Closure listener ->
             Messagebox.show(message, title, buttons, icon, focus, listener as org.zkoss.zk.ui.event.EventListener)
         }
 
         def redirect = new RedirectDynamicMethod(ctx)
-        def redirectObject = {Map args ->
+        def redirectObject = { Map args ->
             redirect.invoke(delegate, "redirect", args)
         }
         def bind = new BindDynamicMethod()
@@ -303,22 +302,22 @@ The different is it more likely to use the Grails' infrastructures such as gsp, 
                 // the flash object
                 mc.getFlash = flashObject
                 // the bindData method
-                mc.bindData = {Object target, Object args ->
+                mc.bindData = { Object target, Object args ->
                     bind.invoke(delegate, BindDynamicMethod.METHOD_SIGNATURE, [target, args] as Object[])
                 }
-                mc.bindData = {Object target, Object args, List disallowed ->
+                mc.bindData = { Object target, Object args, List disallowed ->
                     bind.invoke(delegate, BindDynamicMethod.METHOD_SIGNATURE, [target, args, [exclude: disallowed]] as Object[])
                 }
-                mc.bindData = {Object target, Object args, List disallowed, String filter ->
+                mc.bindData = { Object target, Object args, List disallowed, String filter ->
                     bind.invoke(delegate, BindDynamicMethod.METHOD_SIGNATURE, [target, args, [exclude: disallowed], filter] as Object[])
                 }
-                mc.bindData = {Object target, Object args, Map includeExclude ->
+                mc.bindData = { Object target, Object args, Map includeExclude ->
                     bind.invoke(delegate, BindDynamicMethod.METHOD_SIGNATURE, [target, args, includeExclude] as Object[])
                 }
-                mc.bindData = {Object target, Object args, Map includeExclude, String filter ->
+                mc.bindData = { Object target, Object args, Map includeExclude, String filter ->
                     bind.invoke(delegate, BindDynamicMethod.METHOD_SIGNATURE, [target, args, includeExclude, filter] as Object[])
                 }
-                mc.bindData = {Object target, Object args, String filter ->
+                mc.bindData = { Object target, Object args, String filter ->
                     bind.invoke(delegate, BindDynamicMethod.METHOD_SIGNATURE, [target, args, filter] as Object[])
                 }
             }
