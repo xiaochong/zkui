@@ -15,7 +15,6 @@ grails.project.dependency.resolution = {
         grailsCentral()
         mavenCentral()
         mavenRepo "http://mavensync.zkoss.org/maven2/"
-        grailsRepo "http://grails.org/plugins"
         // uncomment the below to enable remote dependency resolution
         // from public Maven repositories
         //mavenLocal()
