@@ -4,7 +4,9 @@ import org.grails.plugins.zkui.util.ComponentUtil
 import org.grails.plugins.zkui.util.InlineUtils
 import org.springframework.context.ApplicationContext
 import org.springframework.context.ApplicationContextAware
+import org.zkoss.lang.ImportedClassResolver
 import org.zkoss.web.servlet.http.Https
+import org.zkoss.zk.ui.*
 import org.zkoss.zk.ui.http.ExecutionImpl
 import org.zkoss.zk.ui.http.I18Ns
 import org.zkoss.zk.ui.http.WebManager
@@ -13,14 +15,12 @@ import org.zkoss.zk.ui.impl.RequestInfoImpl
 import org.zkoss.zk.ui.metainfo.EventHandler
 import org.zkoss.zk.ui.metainfo.PageDefinitions
 import org.zkoss.zk.ui.metainfo.ZScript
+import org.zkoss.zk.ui.sys.*
+import org.zkoss.zkplus.spring.DelegatingVariableResolver
 
 import javax.servlet.ServletContext
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
-
-import org.zkoss.zk.ui.*
-import org.zkoss.zk.ui.sys.*
-import org.zkoss.zkplus.spring.DelegatingVariableResolver
 
 abstract class AbstractTagLib implements ApplicationContextAware {
     ApplicationContext applicationContext
@@ -55,7 +55,7 @@ abstract class AbstractTagLib implements ApplicationContextAware {
     static def setAttrs(attrs, Component component, servletContext) {
         attrs.findAll {
             it.value != null
-        }.each {String attrName, value ->
+        }.each { String attrName, value ->
             if (attrName.startsWith("on")) {
                 if (ComponentUtil.isAnnotation(value)) {
                     ComponentUtil.evaluateDynaAttribute(component, attrName, value)
@@ -115,6 +115,13 @@ abstract class AbstractTagLib implements ApplicationContextAware {
                 page.setStyle(zkPageStyle)
             }
             page.addVariableResolver(new DelegatingVariableResolver())
+
+            //fix zk 6.5.1 bug of _impclss NullPointerException
+            def importedClassResolver = new ImportedClassResolver()
+            page.addClassResolver(importedClassResolver)
+            page._impclss = importedClassResolver.importedClasses
+
+
             final Execution exec = new ExecutionImpl(servletContext, request, response, desktop, page)
             final boolean cacheable = exec.getDesktop().getDevice().isCacheable()
             if (!cacheable) {
