@@ -36,14 +36,14 @@ class BaseTagLib {
     /**
      * render a zk style sheet and javascript resource.
      */
-    def resources = {attrs, b ->
+    def resources = { attrs, b ->
         out << '<meta http-equiv="Pragma" content="no-cache"/>'
         out << '<meta http-equiv="Expires" content="-1"/>'
         out << JspFns.outZkHtmlTags(servletContext, request, response, null)
     }
 
 
-    def attribute = {attrs, b ->
+    def attribute = { attrs, b ->
         if (!attrs.name) {
             throwTagError("Attribute [name] must not be null")
         }
@@ -54,7 +54,7 @@ class BaseTagLib {
         }
     }
 
-    def page = {attrs, b ->
+    def page = { attrs, b ->
         if (attrs.id) {
             request.setAttribute('zk_page_id', attrs.id)
         }
@@ -68,20 +68,20 @@ class BaseTagLib {
         request.removeAttribute('zk_page_style')
     }
 
-    def custom_attributes = {attrs, b ->
+    def custom_attributes = { attrs, b ->
         Component component = request['parents']?.last
         AttributesInfo attrInfo = new AttributesInfo(attrs, attrs.scope)
         attrInfo.apply(component)
     }
 
-    def template = {attrs, b ->
+    def template = { attrs, b ->
         true || attrs.name || attrs.src
         if (!attrs.name) {
             throwTagError("template [name] must not be null")
         }
         final Map<String, String> _params = new LinkedHashMap<String, String>()
         String name = null, src = null;
-        attrs.each {key, value ->
+        attrs.each { key, value ->
             final String attnm = key
             final String attval = value
             if ("name".equals(attnm)) {
@@ -96,42 +96,42 @@ class BaseTagLib {
         def body = b()?.toString()?.replace('#{', '${')
         comp.setTemplate(name, new TemplateImpl(_params, src, body))
     }
+}
 
-    private static class TemplateImpl implements Template, Serializable {
-        static ConcurrentHashMap<Integer, PageDefinition> pageDefCache = new ConcurrentHashMap()
-        final Map _params
-        final String src
-        final String body
+class TemplateImpl implements Template, Serializable {
+    static ConcurrentHashMap<Integer, PageDefinition> pageDefCache = new ConcurrentHashMap()
+    final Map _params
+    final String src
+    final String body
 
-        TemplateImpl(Map _params, String src, String body) {
-            this._params = _params
-            this.src = src
-            this.body = body
+    TemplateImpl(Map _params, String src, String body) {
+        this._params = _params
+        this.src = src
+        this.body = body
+    }
+
+    Component[] create(Component parent, Component insertBefore, VariableResolver resolver, Composer composer) {
+        final Execution exec = Executions.getCurrent()
+        PageDefinition pageDef = pageDefCache.get(body.hashCode() as Integer)
+        if (!pageDef) {
+            pageDef = exec.getPageDefinitionDirectly(body, null)
+            pageDefCache.putIfAbsent(body.hashCode() as Integer, pageDef)
         }
+        final Component[] cs = [exec.createComponents(pageDef, parent, insertBefore, resolver)] as Component[]
+        final Component c2 = src != null ? exec.createComponents(src, parent, insertBefore, resolver) : null
+        def components = merge(cs, c2)
+        return components
+    }
 
-        Component[] create(Component parent, Component insertBefore, VariableResolver resolver, Composer composer) {
-            final Execution exec = Executions.getCurrent()
-            PageDefinition pageDef = pageDefCache.get(body.hashCode() as Integer)
-            if (!pageDef) {
-                pageDef = exec.getPageDefinitionDirectly(body, null)
-                pageDefCache.putIfAbsent(body.hashCode() as Integer, pageDef)
-            }
-            final Component[] cs = [exec.createComponents(pageDef, parent, insertBefore, resolver)] as Component[]
-            final Component c2 = src != null ? exec.createComponents(src, parent, insertBefore, resolver) : null
-            def components = merge(cs, c2)
-            return components
-        }
+    Map<String, Object> getParameters() {
+        return _params
+    }
 
-        Map<String, Object> getParameters() {
-            return _params
+    private static Component[] merge(Component[] cs, Component c) {
+        if (c != null) {
+            cs = (Component[]) ArraysX.resize(cs, cs.length + 1)
+            cs[cs.length - 1] = c
         }
-
-        private static Component[] merge(Component[] cs, Component c) {
-            if (c != null) {
-                cs = (Component[]) ArraysX.resize(cs, cs.length + 1)
-                cs[cs.length - 1] = c
-            }
-            return cs
-        }
+        return cs
     }
 }

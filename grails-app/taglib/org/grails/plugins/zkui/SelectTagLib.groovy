@@ -1,11 +1,10 @@
 package org.grails.plugins.zkui
 
-import org.springframework.web.servlet.support.RequestContextUtils as RCU
-
 import org.codehaus.groovy.grails.commons.DomainClassArtefactHandler
 import org.codehaus.groovy.grails.web.util.StreamCharBuffer
 import org.springframework.beans.SimpleTypeConverter
 import org.springframework.context.MessageSourceResolvable
+import org.springframework.web.servlet.support.RequestContextUtils as RCU
 import org.zkoss.zul.*
 
 class SelectTagLib {
@@ -36,8 +35,8 @@ class SelectTagLib {
             attrs.disabled = true
         }
         List<ItemObject> modelList = []
-        Integer selectedIndex
-        from.eachWithIndex {el, i ->
+        Integer selectedIndex = null
+        from.eachWithIndex { el, i ->
             Boolean selected
             def keyValue = null
             if (keys) {
@@ -118,15 +117,13 @@ class SelectTagLib {
         def keyClass = keyValue?.getClass()
         if (keyClass.isInstance(value)) {
             selected = (keyValue == value)
-        }
-        else if (value instanceof Collection) {
+        } else if (value instanceof Collection) {
             // first try keyValue
             selected = value.contains(keyValue)
             if (!selected && el != null) {
                 selected = value.contains(el)
             }
-        }
-        else if (keyClass && value) {
+        } else if (keyClass && value) {
             try {
                 value = typeConverter.convertIfNecessary(value, keyClass)
                 selected = (keyValue == value)
@@ -138,33 +135,33 @@ class SelectTagLib {
         if (selected) return true
         return false
     }
+}
 
-    class SelectComboitemRenderer implements ComboitemRenderer {
-        @Override
-        void render(Comboitem comboitem, Object o, int i) {
-            comboitem.label = o.key
-            comboitem.value = o.value
-        }
+class SelectComboitemRenderer implements ComboitemRenderer {
+    @Override
+    void render(Comboitem comboitem, Object o, int i) {
+        comboitem.label = o.key
+        comboitem.value = o.value
     }
+}
 
-    class SelectListitemRenderer implements ListitemRenderer {
-        @Override
-        void render(Listitem listitem, Object o, int i) {
-            listitem.label = o.key
-            listitem.value = o.value
-            listitem.selected = o.selected
-        }
+class SelectListitemRenderer implements ListitemRenderer {
+    @Override
+    void render(Listitem listitem, Object o, int i) {
+        listitem.label = o.key
+        listitem.value = o.value
+        listitem.selected = o.selected
     }
+}
 
-    class ItemObject {
-        String key
-        Object value
-        Boolean selected
+class ItemObject {
+    String key
+    Object value
+    Boolean selected
 
-        ItemObject(String key, Object value, Boolean selected = false) {
-            this.key = key
-            this.value = value
-            this.selected = selected
-        }
+    ItemObject(String key, Object value, Boolean selected = false) {
+        this.key = key
+        this.value = value
+        this.selected = selected
     }
 }
