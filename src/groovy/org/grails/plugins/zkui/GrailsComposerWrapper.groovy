@@ -65,8 +65,8 @@ class GrailsComposerWrapper implements Composer, ComposerExt, EventListener {
     }
 
     void doAfterCompose(Component comp) {
-        Components.wireVariables(comp, controller, '#' as char)
-        Components.addForwards(comp, controller, SEPARATOR)
+        ConventionWires.wireVariables(comp, controller, '#' as char)
+        ConventionWires.addForwards(comp, controller, SEPARATOR)
         this.bindComponent(comp)
 
         Selectors.wireComponents(comp, controller, false)
