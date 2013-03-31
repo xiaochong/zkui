@@ -19,7 +19,7 @@ import org.zkoss.zul.impl.InputElement
 
 class ZkuiGrailsPlugin {
     // the plugin version
-    def version = "0.5.5.2"
+    def version = "0.5.6"
     // the version or versions of Grails the plugin is designed for
     def grailsVersion = "1.2 > *"
     // the other plugins this plugin depends on
@@ -47,9 +47,8 @@ class ZkuiGrailsPlugin {
             "gen/**"
     ]
 
-    // TODO Fill in these fields
     def author = "groovyquan"
-    def authorEmail = "groovyquan[at]gmail[dot]com"
+    def authorEmail = "groovyquan@gmail.com"
     def title = "Grails ZK UI Plugin"
     def description = '''\
 ZK UI plugin,the same as the ZKGrails plugin, seamlessly integrates ZK with Grails' infrastructures.
