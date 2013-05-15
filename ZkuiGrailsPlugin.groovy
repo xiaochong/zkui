@@ -10,6 +10,7 @@ import org.grails.plugins.zkui.metaclass.RedirectDynamicMethod
 import org.grails.plugins.zkui.util.ComponentErrorRendererUtil
 import org.grails.plugins.zkui.util.UriUtil
 import org.springframework.web.context.request.RequestContextHolder as RCH
+import org.zkoss.lang.Library
 import org.zkoss.zk.ui.Component
 import org.zkoss.zk.ui.Executions
 import org.zkoss.zk.ui.Page
@@ -324,7 +325,7 @@ The different is it more likely to use the Grails' infrastructures such as gsp, 
     }
 
     def doWithApplicationContext = { applicationContext ->
-        // TODO Implement post initialization spring config (optional)
+        Library.setProperty("org.zkoss.web.servlet.http.URLEncoder", "org.grails.plugins.zkui.encodes.URLEncoder")
     }
 
     def onChange = { event ->
