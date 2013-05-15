@@ -11,6 +11,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 
@@ -117,8 +118,8 @@ public class URLEncoder implements org.zkoss.web.servlet.http.Encodes.URLEncoder
             uri = encodeURI(uri.substring(0, j)) + uri.substring(j);
         }
         //encode
-//        if (response instanceof HttpServletResponse)
-//            uri = ((HttpServletResponse) response).encodeURL(uri);
+        if (response instanceof HttpServletResponse && !uri.contains("/static/")) //zkui fix #118,todo make it configurable
+            uri = ((HttpServletResponse) response).encodeURL(uri);
         return uri;
     }
 
