@@ -28,7 +28,7 @@ grails.project.dependency.resolution = {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
 
         // runtime 'mysql:mysql-connector-java:5.1.13'
-        def zkVersion = "6.5.2"
+        def zkVersion = "6.5.4"
         runtime "org.zkoss.zk:zk:${zkVersion}"
         runtime "org.zkoss.zk:zul:${zkVersion}"
         runtime "org.zkoss.zk:zkplus:${zkVersion}"
@@ -37,7 +37,7 @@ grails.project.dependency.resolution = {
         runtime "org.zkoss.common:zel:${zkVersion}"
     }
     plugins {
-        build(":tomcat:$grailsVersion", ":release:2.2.0", ":rest-client-builder:1.0.3") {
+        build(":tomcat:$grailsVersion", ":release:3.0.1", ":rest-client-builder:2.0.0") {
             export = false
         }
     }
