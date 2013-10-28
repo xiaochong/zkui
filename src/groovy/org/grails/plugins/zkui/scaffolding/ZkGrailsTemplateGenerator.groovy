@@ -340,18 +340,15 @@ class ZkGrailsTemplateGenerator implements GrailsTemplateGenerator, ResourceLoad
         return resources
     }
 
-    @Override
     void generateAsyncController(GrailsDomainClass domainClass, String destDir) throws IOException {
-        //To change body of implemented methods use File | Settings | File Templates.
+        //do nothing
     }
 
-    @Override
     void generateAsyncTest(GrailsDomainClass domainClass, String destDir) throws IOException {
-        //To change body of implemented methods use File | Settings | File Templates.
+        //do nothing
     }
 
-    @Override
     void generateTest(GrailsDomainClass domainClass, String destDir) throws IOException {
-        //To change body of implemented methods use File | Settings | File Templates.
+        //do nothing
     }
 }
